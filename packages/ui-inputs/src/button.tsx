@@ -1,4 +1,5 @@
-import * as React from 'react'
+import * as React from 'react';
+import {createUseStyles} from 'react-jss';
 import {Button as AntButton} from 'antd';
 
 
@@ -13,9 +14,17 @@ export interface ButtonProps {
     isCTA?: boolean;
 }
 
+const useStyles = createUseStyles({
+    btn: {
+        color: 'green',
+    }
+});
+
 export function Button(props: ButtonProps) {
+    const classes = useStyles();
+
     const {label, disabled, onClick} = props;
     return (
-        <AntButton disabled={disabled} onClick={onClick}>{label}</AntButton>
+        <AntButton className={classes.btn} disabled={disabled} onClick={onClick}>{label}</AntButton>
     )
 }
