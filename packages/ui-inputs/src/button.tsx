@@ -1,15 +1,21 @@
 import * as React from 'react'
-import { Button as AntButton } from 'antd';
+import {Button as AntButton} from 'antd';
 
 
 export interface ButtonProps {
-  label: string;
-  onClick: () => void
+    label?: string;
+    icon?: any;
+    disabled?: boolean;
+    borderless?: boolean;
+    isActive?: boolean;
+    onClick?: () => void;
+    isProcessing?: boolean;
+    isCTA?: boolean;
 }
 
 export function Button(props: ButtonProps) {
-    const { label, onClick } = props;
+    const {label, disabled, onClick} = props;
     return (
-      <AntButton onClick={onClick}>{label}</AntButton>
+        <AntButton disabled={disabled} onClick={onClick}>{label}</AntButton>
     )
 }

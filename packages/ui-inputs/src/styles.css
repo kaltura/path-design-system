@@ -1,8 +1,18 @@
 /* add css styles here (optional) */
-
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+.stories{
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.spacer{
+  margin-left: 24px;
 }
