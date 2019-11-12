@@ -2,16 +2,19 @@ import * as React from 'react';
 import {useTheme, createUseStyles} from './theme';
 
 import {Button as AntButton} from 'antd';
+import { CustomIconComponentProps } from 'antd/lib/icon';
+import { Theme } from '../../theme/theme';
+import { Icon } from '../../icons-antd';
 const classNames = require('classnames');
 export interface ButtonProps {
     label?: string;
-    icon?: any;
     disabled?: boolean;
     borderless?: boolean;
     isActive?: boolean;
     onClick?: () => void;
     isProcessing?: boolean;
     isCTA?: boolean;
+    icon?: React.FunctionComponent<CustomIconComponentProps>,
 }
 
 
@@ -182,7 +185,7 @@ const useStyles = createUseStyles({
 export function Button(props: ButtonProps) {
     const theme = useTheme();
     const classes: any = useStyles({...props, theme});
-    const {label, disabled, onClick} = props;
+    const {label, disabled, onClick, icon} = props;
 
     var btnClass = classNames({
         [classes.btn]: !props.isCTA && !props.isActive && !props.borderless,
@@ -192,7 +195,10 @@ export function Button(props: ButtonProps) {
         [classes.btnCTAActive]: props.isActive && props.isCTA,
     });
     return (
-        <AntButton className={btnClass} disabled={disabled} onClick={onClick}>{label}</AntButton>
+        <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
+            {icon ? <Icon icon={icon} spin style={{ color: theme.colorPrimary }}/> : null}
+            {label}
+        </AntButton>
     )
 }
 
