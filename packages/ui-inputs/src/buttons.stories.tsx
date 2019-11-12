@@ -4,7 +4,7 @@ import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
 import {ThemeProvider, theme} from './theme';
 import './styles.css';
-import { IconCalendar } from '../../icons-antd';
+import { IconRefresh } from '../../icons';
 
 export default {
     title: 'Button',

@@ -4,7 +4,7 @@ import {useTheme, createUseStyles} from './theme';
 import {Button as AntButton} from 'antd';
 import { CustomIconComponentProps } from 'antd/lib/icon';
 import { Theme } from '../../theme/theme';
-import { Icon } from '../../icons-antd';
+import { Icon } from '../../icons';
 const classNames = require('classnames');
 export interface ButtonProps {
     label?: string;
@@ -196,7 +196,7 @@ export function Button(props: ButtonProps) {
     });
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
-            {icon ? <Icon icon={icon} spin style={{ color: theme.colorPrimary }}/> : null}
+            {icon ? <Icon icon={icon} /> : null}
             {label}
         </AntButton>
     )
