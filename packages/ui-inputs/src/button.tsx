@@ -24,12 +24,36 @@ export interface ButtonProps {
 // }));
 
 const useStyles = createUseStyles({
-    btn: {
-        color: (theme: any) => theme.colorPrimary,
-        border: (props: ButtonProps) => props.borderless ? 'none' : '1px solid red'
-    },
-    label: {
-        fontWeight: 'bold'
+    'btn': {
+        color: '#ffffff',
+        backgroundColor: '#008297',
+        fontFamily: (themeWithProps: any) => themeWithProps.button.fontFamily,
+        fontSize: (themeWithProps: any) => themeWithProps.button.fontSize,
+        fontWeight: (themeWithProps: any) => themeWithProps.button.fontWeight,
+        border: (themeWithProps: any) => themeWithProps.borderless ? 'none' : `1px solid ${themeWithProps.colors.greyscale4}`,
+        borderRadius: (themeWithProps: any) => themeWithProps.button.borderRadius,
+        '&:hover': {
+            color: '#ffffff',
+            backgroundColor: '#006879',
+            border: (themeWithProps: any) => themeWithProps.borderless ? 'none' : `1px solid ${themeWithProps.colors.greyscale4}`,
+        },
+        '&:active': {
+            color: '#ffffff',
+            backgroundColor: '#004e5a',
+            border: (themeWithProps: any) => themeWithProps.borderless ? 'none' : `1px solid ${themeWithProps.colors.greyscale4}`,
+        },
+        '&:focus': {
+            backgroundColor: '#004e5a',
+            color: '#ffffff',
+            border: (themeWithProps: any) => themeWithProps.borderless ? 'none' : `1px solid ${themeWithProps.colors.greyscale4}`,
+        },
+        '&:disabled': {
+            backgroundColor: '#ffffff',
+            color: (themeWithProps: any) => themeWithProps.colors.greyscale4
+        },
+        '&:disabled:hover': {
+            backgroundColor: '#ffffff'
+        }
     }
 });
 
