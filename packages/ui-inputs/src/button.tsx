@@ -3,8 +3,8 @@ import {useTheme, createUseStyles} from './theme';
 
 import {Button as AntButton} from 'antd';
 import { CustomIconComponentProps } from 'antd/lib/icon';
-import { Theme } from '../../theme/theme';
-import { Icon } from '../../icons';
+import { Icon } from './icons';
+import { Theme } from './theme/theme';
 const classNames = require('classnames');
 export interface ButtonProps {
     label?: string;
