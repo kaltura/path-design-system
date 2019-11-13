@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {createUseStyles, useTheme} from 'react-jss'
+import {useTheme, createUseStyles} from './theme';
+
 import {Button as AntButton} from 'antd';
 
 export interface ButtonProps {
