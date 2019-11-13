@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { CustomIconComponentProps } from 'antd/lib/icon';
 
-export const IconPlus = () => (
-    <svg width="24px" height="24px" fill="currentColor" viewBox="0 0 1024 1024">
+export const IconPlus = (props: CustomIconComponentProps) => (
+    <svg className={props.className} style={props.style} width="24px" height="24px" fill="currentColor" viewBox="0 0 1024 1024">
         <path
             d="M554.667 469.333v-255.963c0-23.733-19.103-42.704-42.667-42.704-23.728 0-42.667 19.119-42.667 42.704v255.963h-255.963c-23.733 0-42.704 19.103-42.704 42.667 0 23.728 19.119 42.667 42.704 42.667h255.963v255.963c0 23.733 19.103 42.704 42.667 42.704 23.728 0 42.667-19.119 42.667-42.704v-255.963h255.963c23.733 0 42.704-19.103 42.704-42.667 0-23.728-19.119-42.667-42.704-42.667h-255.963z"/>
     </svg>
 );
 
 export const IconCalendar = (props: CustomIconComponentProps) => (
-    <svg className={props.className} width="24px" height="24px" fill="currentColor" viewBox="0 0 1024 1024">
+    <svg className={props.className} style={props.style} width="24px" height="24px" fill="currentColor" viewBox="0 0 1024 1024">
         <g>
             <path
                 d="M85.333 384h853.333v85.333h-853.333v-85.333zM725.333 128c23.564 0 42.667 19.103 42.667 42.667v85.333c0 23.564-19.103 42.667-42.667 42.667s-42.667-19.103-42.667-42.667v-85.333c0-23.564 19.103-42.667 42.667-42.667zM298.667 128c23.564 0 42.667 19.103 42.667 42.667v85.333c0 23.564-19.103 42.667-42.667 42.667s-42.667-19.103-42.667-42.667v-85.333c0-23.564 19.103-42.667 42.667-42.667z"></path>
@@ -20,7 +20,7 @@ export const IconCalendar = (props: CustomIconComponentProps) => (
 );
 
 export const IconRefresh = (props: CustomIconComponentProps) => (
-    <svg className={props.className} width="24px" height="24px" fill="currentColor" viewBox="0 0 1024 1024">
+    <svg className={props.className} style={props.style} width="24px" height="24px" fill="currentColor" viewBox="0 0 1024 1024">
         <g>
             <path
                 d="M243.22 617.452c19.064 13.851 45.746 9.625 59.597-9.439s9.625-45.746-9.439-59.597l-97.632-70.934c-19.064-13.851-45.746-9.625-59.597 9.439l-70.934 97.632c-13.851 19.064-9.625 45.746 9.439 59.597s45.746 9.625 59.597-9.439l45.855-63.114 63.114 45.855z"></path>
