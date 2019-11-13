@@ -1,4 +1,3 @@
-/* add css styles here (optional) */
 .stories{
   display: flex;
   flex-direction: column;
@@ -11,8 +10,9 @@
 .label {
   font-size: 14px;
   font-weight: bold;
-  margin-right: 8px;
+  width: 104px;
+  line-height: 48px;
 }
-.spacer{
-  margin-left: 24px;
+.spacer {
+  width: 16px;
 }
