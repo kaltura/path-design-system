@@ -26,7 +26,7 @@ export interface ButtonProps {
 const useStyles = createUseStyles({
     'btn': {
         color: (themeWithProps: any) => themeWithProps.isCTA ? '#ffffff' : '#434a4b',
-        backgroundColor: (themeWithProps: any) => themeWithProps.isCTA ? '#008297' : '#ffffff',
+        backgroundColor: (themeWithProps: any) => themeWithProps.isCTA ? (themeWithProps.isActive ? '#004e5a' : '#008297') : (themeWithProps.isActive ? themeWithProps.colors.greyscale5 : '#ffffff'),
         boxShadow: 'none',
         fontFamily: (themeWithProps: any) => themeWithProps.button.fontFamily,
         fontSize: (themeWithProps: any) => themeWithProps.button.fontSize,
@@ -37,7 +37,7 @@ const useStyles = createUseStyles({
         '&:hover': {
             boxShadow: 'none',
             color: (themeWithProps: any) => themeWithProps.isCTA ? '#ffffff' : '#434a4b',
-            backgroundColor: (themeWithProps: any) => themeWithProps.isCTA ? '#006879' : themeWithProps.colors.greyscale4,
+            backgroundColor: (themeWithProps: any) => themeWithProps.isCTA ? (themeWithProps.isActive ? '#004e5a' : '#006879') : (themeWithProps.isActive ? themeWithProps.colors.greyscale5 : themeWithProps.colors.greyscale4),
             border: (themeWithProps: any) => themeWithProps.borderless || themeWithProps.isCTA ? 'none' : `1px solid ${themeWithProps.colors.greyscale4}`,
         },
         '&:active': {
