@@ -34,5 +34,7 @@
     "ts-import-plugin": "^1.6.1",
     "typescript": "^3.7.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "classnames": "^2.2.6"
+  }
 }

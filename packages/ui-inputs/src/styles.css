@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 24px;
+  --antd-wave-shadow-color: '#ffffff',
 }
 .row {
   display: flex;
