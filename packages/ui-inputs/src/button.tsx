@@ -103,14 +103,34 @@ const useStyles = createUseStyles({
         }
     }),
     'btnActive': (props: ButtonProps & {theme: any}) => ({
-        color:  '#434a4b !important',
-        backgroundColor:  `${props.theme.colors.greyscale5} !important`,
-        border:  `1px solid ${props.theme.colors.greyscale5} !important`,
+        color:  '#434a4b',
+        backgroundColor:  props.theme.colors.greyscale5,
+        border:  `1px solid ${props.theme.colors.greyscale5}`,
+        '&:hover': {
+            color:  '#434a4b',
+            backgroundColor:  props.theme.colors.greyscale5,
+            border:  `1px solid ${props.theme.colors.greyscale5}`,
+        },
+        '&:focus': {
+            color:  '#434a4b',
+            backgroundColor:  props.theme.colors.greyscale5,
+            border:  `1px solid ${props.theme.colors.greyscale5}`,
+        },
     }),
     'btnCTAActive': {
-        color:  '#ffffff !important',
-        backgroundColor: '#004e5a !important',
-        border:  '1px solid #004e5a !important',
+        color:  '#ffffff',
+        backgroundColor: '#004e5a',
+        border:  '1px solid #004e5a',
+        '&:hover': {
+            color:  '#ffffff',
+            backgroundColor: '#004e5a',
+            border:  '1px solid #004e5a',
+        },
+        '&:focus': {
+            color:  '#ffffff',
+            backgroundColor: '#004e5a',
+            border:  '1px solid #004e5a',
+        },
     },
 });
 
