@@ -2,8 +2,7 @@ import * as React from 'react';
 import {action} from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
-import {ThemeProvider} from 'react-jss';
-import {theme} from '../../theme/theme';
+import {ThemeProvider, theme} from './theme';
 import './styles.css';
 
 export default {
