@@ -2,8 +2,7 @@ import * as React from 'react';
 import {useTheme, createUseStyles} from './theme';
 import {Button as AntButton} from 'antd';
 import { CustomIconComponentProps } from 'antd/lib/icon';
-import { Icon } from '@path-composer/ui-icons';
-import { IconRefresh } from '@path-composer/ui-icons';
+import { Icon, IconRefresh } from '@path-composer/ui-icons';
 const classNames = require('classnames');
 
 export interface ButtonProps {
