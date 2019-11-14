@@ -3,9 +3,10 @@ import {useTheme, createUseStyles} from './theme';
 
 import {Button as AntButton} from 'antd';
 import { CustomIconComponentProps } from 'antd/lib/icon';
-import { Icon } from './icons';
-import { Theme } from './theme/theme';
+import { Icon } from '@path-composer/ui-icons';
+import { IconRefresh } from '@path-composer/ui-icons';
 const classNames = require('classnames');
+
 export interface ButtonProps {
     label?: string;
     disabled?: boolean;
@@ -21,6 +22,7 @@ export interface ButtonProps {
 const useStyles = createUseStyles({
     'btn': (props: ButtonProps & {theme: any}) => ({
         height: '32px',
+        minWidth: '86px',
         boxShadow: 'none',
         fontFamily:  props.theme.button.fontFamily,
         fontSize:  props.theme.button.fontSize,
@@ -55,6 +57,7 @@ const useStyles = createUseStyles({
         }
     }),
     'btnCTA': {
+        minWidth: '86px',
         color:  '#ffffff',
         backgroundColor:  '#008297',
         border:  '1px solid #008297',
@@ -75,6 +78,7 @@ const useStyles = createUseStyles({
         },
     },
     'btnBorderless': (props: ButtonProps & {theme: any}) => ({
+        minWidth: '86px',
         color:  '#434a4b',
         backgroundColor:  '#ffffff',
         border:  '1px solid #ffffff',
@@ -106,6 +110,7 @@ const useStyles = createUseStyles({
         }
     }),
     'btnActive': (props: ButtonProps & {theme: any}) => ({
+        minWidth: '86px',
         color:  '#434a4b',
         backgroundColor:  props.theme.colors.greyscale5,
         border:  `1px solid ${props.theme.colors.greyscale5}`,
@@ -121,6 +126,7 @@ const useStyles = createUseStyles({
         },
     }),
     'btnCTAActive': {
+        minWidth: '86px',
         color:  '#ffffff',
         backgroundColor: '#004e5a',
         border:  '1px solid #004e5a',
@@ -134,6 +140,14 @@ const useStyles = createUseStyles({
             backgroundColor: '#004e5a',
             border:  '1px solid #004e5a',
         },
+    },
+    'btnContent': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    'btnWithIcon': {
+        padding: '0 8px',
     },
 });
 
@@ -184,20 +198,28 @@ const useStyles = createUseStyles({
 
 export function Button(props: ButtonProps) {
     const theme = useTheme();
-    const classes: any = useStyles({...props, theme});
-    const {label, disabled, onClick, icon} = props;
+    const classes = useStyles({...props, theme});
+    const {label, disabled, onClick, icon, isProcessing} = props;
 
-    var btnClass = classNames({
+    const btnClass = classNames({
         [classes.btn]: !props.isCTA && !props.isActive && !props.borderless,
         [classes.btnCTA]: props.isCTA,
         [classes.btnBorderless]: props.borderless,
         [classes.btnActive]: props.isActive && !props.isCTA,
         [classes.btnCTAActive]: props.isActive && props.isCTA,
+        [classes.btnWithIcon]: props.icon,
+    });
+    const btnContentClass = classNames({
+        [classes.btnContent]: true,
+        
     });
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
-            {icon ? <Icon icon={icon} /> : null}
-            {label}
+            <div className={btnContentClass}>
+                {icon && !isProcessing ? <Icon icon={icon} /> : null}
+                {isProcessing ? <Icon icon={IconRefresh} spin /> : null}
+                {icon || !isProcessing ? label : null}
+            </div>
         </AntButton>
     )
 }

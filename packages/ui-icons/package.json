@@ -1,10 +1,10 @@
 {
-  "name": "@path-composer/ui-inputs",
+  "name": "@path-composer/ui-icons",
   "version": "1.0.0",
   "description": "",
   "author": "esakal",
   "license": "MIT",
-  "repository": "esakal/ui-inputs",
+  "repository": "esakal/ui-icons",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -22,7 +22,6 @@
     "deploy": "gh-pages -d example/build"
   },
   "dependencies": {
-    "@path-composer/ui-icons": "^1.0.0",
     "react-jss": "^10.0.0"
   },
   "peerDependencies": {
