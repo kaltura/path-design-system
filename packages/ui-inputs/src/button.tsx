@@ -1,23 +1,25 @@
 import * as React from 'react';
 import {useTheme, createUseStyles} from './theme';
 import {Button as AntButton} from 'antd';
-
+import { CustomIconComponentProps } from 'antd/lib/icon';
+import { Icon, IconRefresh } from '@path-composer/ui-icons';
 const classNames = require('classnames');
 
 export interface ButtonProps {
     label?: string;
-    icon?: any;
     disabled?: boolean;
     borderless?: boolean;
     isActive?: boolean;
     onClick?: () => void;
     isProcessing?: boolean;
     isCTA?: boolean;
+    icon?: React.FunctionComponent<CustomIconComponentProps>,
 }
 
 const useStyles = createUseStyles({
     'btn': (props: ButtonProps & { theme: any }) => ({
         height: '32px',
+        minWidth: '86px',
         boxShadow: 'none',
         fontFamily: props.theme.button.fontFamily,
         fontSize: props.theme.button.fontSize,
@@ -59,6 +61,7 @@ const useStyles = createUseStyles({
         color: '#ffffff',
         backgroundColor: '#008297',
         border: '1px solid #008297',
+        minWidth: '86px',
         '&:hover': {
             color: '#ffffff',
             backgroundColor: '#006879',
@@ -86,6 +89,7 @@ const useStyles = createUseStyles({
         }
     }),
     'btnBorderless': (props: ButtonProps & { theme: any }) => ({
+        minWidth: '86px',
         color: '#434a4b',
         backgroundColor: '#ffffff',
         border: '1px solid #ffffff',
@@ -118,6 +122,7 @@ const useStyles = createUseStyles({
         }
     }),
     'btnActive': (props: ButtonProps & { theme: any }) => ({
+        minWidth: '86px',
         color: '#434a4b',
         backgroundColor: props.theme.colors.greyscale5,
         border: `1px solid ${props.theme.colors.greyscale5}`,
@@ -134,6 +139,7 @@ const useStyles = createUseStyles({
     }),
     'btnCTAActive': {
         color: '#ffffff',
+        minWidth: '86px',
         backgroundColor: '#004e5a',
         border: '1px solid #004e5a',
         '&:hover': {
@@ -147,23 +153,42 @@ const useStyles = createUseStyles({
             border: '1px solid #004e5a',
         },
     },
+    'btnContent': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    'btnWithIcon': {
+        padding: '0 8px',
+    },
 });
 
 export function Button(props: ButtonProps) {
     const theme = useTheme();
-    const classes: any = useStyles({...props, theme});
-    const {label, disabled, onClick} = props;
+    const classes = useStyles({...props, theme});
+    const {label, disabled, onClick, icon, isProcessing} = props;
     
-    var btnClass = classNames({
+    const btnClass = classNames({
         [classes.btn]: true,
         [classes.btnDefault]: !props.isCTA && !props.borderless && !props.isActive,
         [classes.btnCTA]: props.isCTA && !props.isActive,
         [classes.btnBorderless]: props.borderless && !props.isActive,
         [classes.btnActive]: props.isActive && !props.isCTA,
         [classes.btnCTAActive]: props.isActive && props.isCTA,
+        [classes.btnWithIcon]: props.icon,
+    });
+    const btnContentClass = classNames({
+        [classes.btnContent]: true,
+        
     });
     return (
-        <AntButton className={btnClass} disabled={disabled} onClick={onClick}>{label}</AntButton>
+        <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
+            <div className={btnContentClass}>
+                {icon && !isProcessing ? <Icon icon={icon} /> : null}
+                {isProcessing ? <Icon icon={IconRefresh} spin /> : null}
+                {icon || !isProcessing ? label : null}
+            </div>
+        </AntButton>
     )
 }
 
