@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {useTheme, createUseStyles} from './theme';
-
 import {Button as AntButton} from 'antd';
 import { CustomIconComponentProps } from 'antd/lib/icon';
 import { Icon } from '@path-composer/ui-icons';
@@ -18,127 +17,141 @@ export interface ButtonProps {
     icon?: React.FunctionComponent<CustomIconComponentProps>,
 }
 
-
 const useStyles = createUseStyles({
-    'btn': (props: ButtonProps & {theme: any}) => ({
+    'btn': (props: ButtonProps & { theme: any }) => ({
         height: '32px',
         minWidth: '86px',
         boxShadow: 'none',
-        fontFamily:  props.theme.button.fontFamily,
-        fontSize:  props.theme.button.fontSize,
-        fontWeight:  props.theme.button.fontWeight,
-        borderRadius:  props.theme.button.borderRadius,
+        fontFamily: props.theme.button.fontFamily,
+        fontSize: props.theme.button.fontSize,
+        fontWeight: props.theme.button.fontWeight,
+        borderRadius: props.theme.button.borderRadius,
+        '--antd-wave-shadow-color': 'transparent',
+    }),
+    'btnDefault': (props: ButtonProps & { theme: any }) => ({
         '&:hover': {
             boxShadow: 'none',
-            color:  '#434a4b',
-            backgroundColor:  props.theme.colors.greyscale4,
-            border:  `1px solid ${props.theme.colors.greyscale4}`,
+            color: '#434a4b',
+            backgroundColor: props.theme.colors.greyscale4,
+            border: `1px solid ${props.theme.colors.greyscale4}`,
         },
         '&:focus': {
             backgroundColor: '#ffffff',
-            border:  `1px solid ${props.theme.colors.greyscale4}`,
-            color:  '#434a4b',
+            border: `1px solid ${props.theme.colors.greyscale4}`,
+            color: '#434a4b',
         },
         '&:active': {
             boxShadow: 'none',
-            color:  '#434a4b',
-            backgroundColor:  props.theme.colors.greyscale5,
-            border:  `1px solid ${props.theme.colors.greyscale4}`,
+            color: '#434a4b',
+            backgroundColor: props.theme.colors.greyscale5,
+            border: `1px solid ${props.theme.colors.greyscale4}`,
         },
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border:  `1px solid ${props.theme.colors.greyscale4}`,
-            color:  props.theme.colors.greyscale4
+            border: `1px solid ${props.theme.colors.greyscale4}`,
+            color: props.theme.colors.greyscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
             backgroundColor: '#ffffff'
         }
     }),
-    'btnCTA': {
+    'btnCTA': (props: ButtonProps & { theme: any }) => ({
+        boxShadow: 'none',
+        color: '#ffffff',
+        backgroundColor: '#008297',
+        border: '1px solid #008297',
         minWidth: '86px',
-        color:  '#ffffff',
-        backgroundColor:  '#008297',
-        border:  '1px solid #008297',
         '&:hover': {
-            color:  '#ffffff',
-            backgroundColor:  '#006879',
-            border:  '1px solid #006879',
+            color: '#ffffff',
+            backgroundColor: '#006879',
+            border: '1px solid #006879',
         },
         '&:focus': {
-            backgroundColor:  '#008297',
-            border:  '1px solid #004e5a',
-            color:  '#ffffff',
+            backgroundColor: '#008297',
+            border: '1px solid #004e5a',
+            color: '#ffffff',
         },
         '&:active': {
-            color:  '#ffffff',
+            color: '#ffffff',
             backgroundColor: '#004e5a',
-            border:  '1px solid #004e5a',
-        },
-    },
-    'btnBorderless': (props: ButtonProps & {theme: any}) => ({
-        minWidth: '86px',
-        color:  '#434a4b',
-        backgroundColor:  '#ffffff',
-        border:  '1px solid #ffffff',
-        '&:hover': {
-            color:  '#434a4b',
-            backgroundColor:  props.theme.colors.greyscale4,
-            border:  `1px solid ${props.theme.colors.greyscale4}`,
-        },
-        '&:focus': {
-            color:  '#434a4b',
-            backgroundColor:  '#ffffff',
-            border:  '1px solid #ffffff',
-        },
-        '&:active': {
-            color:  '#434a4b',
-            backgroundColor:  props.theme.colors.greyscale5,
-            border:  `1px solid ${props.theme.colors.greyscale5}`,
+            border: '1px solid #004e5a',
         },
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border:  '1px solid #ffffff',
-            color:  props.theme.colors.greyscale4
+            border: `1px solid ${props.theme.colors.greyscale4}`,
+            color: props.theme.colors.greyscale4
+        },
+        '&:disabled:hover': {
+            boxShadow: 'none',
+            backgroundColor: '#ffffff'
+        }
+    }),
+    'btnBorderless': (props: ButtonProps & { theme: any }) => ({
+        minWidth: '86px',
+        color: '#434a4b',
+        backgroundColor: '#ffffff',
+        border: '1px solid #ffffff',
+        boxShadow: 'none',
+        '&:hover': {
+            color: '#434a4b',
+            backgroundColor: props.theme.colors.greyscale4,
+            border: `1px solid ${props.theme.colors.greyscale4}`,
+        },
+        '&:focus': {
+            color: '#434a4b',
+            backgroundColor: '#ffffff',
+            border: '1px solid #ffffff',
+        },
+        '&:active': {
+            color: '#434a4b',
+            backgroundColor: props.theme.colors.greyscale5,
+            border: `1px solid ${props.theme.colors.greyscale5}`,
+        },
+        '&:disabled': {
+            boxShadow: 'none',
+            backgroundColor: '#ffffff',
+            border: '1px solid #ffffff',
+            color: props.theme.colors.greyscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border:  '1px solid #ffffff',
+            border: '1px solid #ffffff',
         }
     }),
-    'btnActive': (props: ButtonProps & {theme: any}) => ({
+    'btnActive': (props: ButtonProps & { theme: any }) => ({
         minWidth: '86px',
-        color:  '#434a4b',
-        backgroundColor:  props.theme.colors.greyscale5,
-        border:  `1px solid ${props.theme.colors.greyscale5}`,
+        color: '#434a4b',
+        backgroundColor: props.theme.colors.greyscale5,
+        border: `1px solid ${props.theme.colors.greyscale5}`,
         '&:hover': {
-            color:  '#434a4b',
-            backgroundColor:  props.theme.colors.greyscale5,
-            border:  `1px solid ${props.theme.colors.greyscale5}`,
+            color: '#434a4b',
+            backgroundColor: props.theme.colors.greyscale5,
+            border: `1px solid ${props.theme.colors.greyscale5}`,
         },
         '&:focus': {
-            color:  '#434a4b',
-            backgroundColor:  props.theme.colors.greyscale5,
-            border:  `1px solid ${props.theme.colors.greyscale5}`,
+            color: '#434a4b',
+            backgroundColor: props.theme.colors.greyscale5,
+            border: `1px solid ${props.theme.colors.greyscale5}`,
         },
     }),
     'btnCTAActive': {
+        color: '#ffffff',
         minWidth: '86px',
-        color:  '#ffffff',
         backgroundColor: '#004e5a',
-        border:  '1px solid #004e5a',
+        border: '1px solid #004e5a',
         '&:hover': {
-            color:  '#ffffff',
+            color: '#ffffff',
             backgroundColor: '#004e5a',
-            border:  '1px solid #004e5a',
+            border: '1px solid #004e5a',
         },
         '&:focus': {
-            color:  '#ffffff',
+            color: '#ffffff',
             backgroundColor: '#004e5a',
-            border:  '1px solid #004e5a',
+            border: '1px solid #004e5a',
         },
     },
     'btnContent': {
@@ -151,60 +164,16 @@ const useStyles = createUseStyles({
     },
 });
 
-
-/*
-const useStyles = createUseStyles({
-    'btn': (props: ButtonProps & {theme: any}) => ({
-        height: '32px',
-        color:  props.isCTA ? '#ffffff' : '#434a4b',
-        backgroundColor:  props.isCTA ? (props.isActive ? '#004e5a' : '#008297') : (props.isActive ? props.theme.colors.greyscale5 : '#ffffff'),
-        boxShadow: 'none',
-        fontFamily:  props.theme.button.fontFamily,
-        fontSize:  props.theme.button.fontSize,
-        fontWeight:  props.theme.button.fontWeight,
-        border:  props.borderless || props.isCTA ? 'none' : `1px solid ${props.theme.colors.greyscale4}`,
-        borderRadius:  props.theme.button.borderRadius,
-        '--antd-wave-shadow-color': '#ffffff',
-        '&:hover': {
-            boxShadow: 'none',
-            color:  props.isCTA ? '#ffffff' : '#434a4b',
-            backgroundColor:  props.isCTA ? (props.isActive ? '#004e5a' : '#006879') : (props.isActive ? props.theme.colors.greyscale5 : props.theme.colors.greyscale4),
-            border:  props.borderless || props.isCTA ? 'none' : `1px solid ${props.theme.colors.greyscale4}`,
-        },
-        '&:focus': {
-            backgroundColor:  props.isCTA ? (props.isActive ? '#004e5a' : '#008297') : (props.isActive ? props.theme.colors.greyscale5 : '#ffffff'),
-            border:  props.borderless || props.isCTA ? 'none' : `1px solid ${props.theme.colors.greyscale4}`,
-            color:  props.isCTA ? '#ffffff' : '#434a4b',
-        },
-        '&:active': {
-            boxShadow: 'none',
-            color:  props.isCTA ? '#ffffff' : '#434a4b',
-            backgroundColor:  props.isCTA ? '#004e5a' : props.theme.colors.greyscale5,
-            border:  props.borderless || props.isCTA ? 'none' : `1px solid ${props.theme.colors.greyscale4}`,
-        },
-        '&:disabled': {
-            boxShadow: 'none',
-            backgroundColor: '#ffffff',
-            border:  props.borderless ? 'none' : `1px solid ${props.theme.colors.greyscale4}`,
-            color:  props.theme.colors.greyscale4
-        },
-        '&:disabled:hover': {
-            boxShadow: 'none',
-            backgroundColor: '#ffffff'
-        }
-    })
-});
-*/
-
 export function Button(props: ButtonProps) {
     const theme = useTheme();
     const classes = useStyles({...props, theme});
     const {label, disabled, onClick, icon, isProcessing} = props;
-
+    
     const btnClass = classNames({
-        [classes.btn]: !props.isCTA && !props.isActive && !props.borderless,
-        [classes.btnCTA]: props.isCTA,
-        [classes.btnBorderless]: props.borderless,
+        [classes.btn]: true,
+        [classes.btnDefault]: !props.isCTA && !props.borderless && !props.isActive,
+        [classes.btnCTA]: props.isCTA && !props.isActive,
+        [classes.btnBorderless]: props.borderless && !props.isActive,
         [classes.btnActive]: props.isActive && !props.isCTA,
         [classes.btnCTAActive]: props.isActive && props.isCTA,
         [classes.btnWithIcon]: props.icon,
