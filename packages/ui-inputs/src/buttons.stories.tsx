@@ -13,29 +13,32 @@ export default {
 
 export const DefaultButton = () =>
     <ThemeProvider theme={theme}>
-        <div className="stories">
-            <div className="row">
+        <div className="row">
+            <div className="col">
+                <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
-                <Button label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button label={text("Label", "Label")} icon={IconPlus} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-            </div>
-            <div className="row">
                 <span className="label">Disabled:</span>
-                <Button disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-            </div>
-            <div className="row">
                 <span className="label">Active:</span>
-                <Button isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Label</span>
+                <Button label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Icon + Label</span>
+                <Button label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button isActive={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Processing</span>
+                <Button label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
                 <Button isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
             </div>
         </div>
@@ -47,29 +50,32 @@ DefaultButton.story = {
 
 export const CTAButton = () =>
     <ThemeProvider theme={theme}>
-        <div className="stories">
-            <div className="row">
+        <div className="row">
+            <div className="col">
+                <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
-                <Button isCTA={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button isCTA={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button isCTA={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-            </div>
-            <div className="row">
                 <span className="label">Disabled:</span>
-                <Button isCTA={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button isCTA={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button isCTA={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-            </div>
-            <div className="row">
                 <span className="label">Active:</span>
-                <Button isCTA={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button isCTA={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Label</span>
+                <Button isCTA={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button isCTA={true} isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Icon + Label</span>
+                <Button isCTA={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button isCTA={true} isActive={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Processing</span>
+                <Button isCTA={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
                 <Button isCTA={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
             </div>
         </div>
@@ -81,29 +87,32 @@ CTAButton.story = {
 
 export const BorderlessButton = () =>
     <ThemeProvider theme={theme}>
-        <div className="stories">
-            <div className="row">
+        <div className="row">
+            <div className="col">
+                <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
-                <Button borderless={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button borderless={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button borderless={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-            </div>
-            <div className="row">
                 <span className="label">Disabled:</span>
-                <Button borderless={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button borderless={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button borderless={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-            </div>
-            <div className="row">
                 <span className="label">Active:</span>
-                <Button borderless={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
-                <Button borderless={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
-                <div className="spacer"></div>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Label</span>
+                <Button borderless={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button borderless={true} isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Icon + Label</span>
+                <Button borderless={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button borderless={true} isActive={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Processing</span>
+                <Button borderless={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
                 <Button borderless={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
             </div>
         </div>

@@ -19,13 +19,12 @@ export interface ButtonProps {
 const useStyles = createUseStyles({
     'btn': (props: ButtonProps & { theme: any }) => ({
         height: '32px',
-        minWidth: '86px',
         boxShadow: 'none',
+        padding: '0px 8px',
         fontFamily: props.theme.button.fontFamily,
         fontSize: props.theme.button.fontSize,
         fontWeight: props.theme.button.fontWeight,
         borderRadius: props.theme.button.borderRadius,
-        '--antd-wave-shadow-color': 'transparent',
     }),
     'btnDefault': (props: ButtonProps & { theme: any }) => ({
         '&:hover': {
@@ -61,7 +60,6 @@ const useStyles = createUseStyles({
         color: '#ffffff',
         backgroundColor: '#008297',
         border: '1px solid #008297',
-        minWidth: '86px',
         '&:hover': {
             color: '#ffffff',
             backgroundColor: '#006879',
@@ -89,7 +87,6 @@ const useStyles = createUseStyles({
         }
     }),
     'btnBorderless': (props: ButtonProps & { theme: any }) => ({
-        minWidth: '86px',
         color: '#434a4b',
         backgroundColor: '#ffffff',
         border: '1px solid #ffffff',
@@ -122,7 +119,6 @@ const useStyles = createUseStyles({
         }
     }),
     'btnActive': (props: ButtonProps & { theme: any }) => ({
-        minWidth: '86px',
         color: '#434a4b',
         backgroundColor: props.theme.colors.greyscale5,
         border: `1px solid ${props.theme.colors.greyscale5}`,
@@ -139,7 +135,6 @@ const useStyles = createUseStyles({
     }),
     'btnCTAActive': {
         color: '#ffffff',
-        minWidth: '86px',
         backgroundColor: '#004e5a',
         border: '1px solid #004e5a',
         '&:hover': {
@@ -153,14 +148,26 @@ const useStyles = createUseStyles({
             border: '1px solid #004e5a',
         },
     },
+    'btnIconOnly': {
+        padding: '0px 0px !important'
+    },
     'btnContent': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
     },
-    'btnWithIcon': {
-        padding: '0 8px',
+    'btnIcon': {
+        padding: '4px'
     },
+    'processingIcon':{
+        position: 'absolute'
+    },
+    'labelClass': {
+        padding: '4px'
+    },
+    'hideLabel': {
+        opacity: 0
+    }
 });
 
 export function Button(props: ButtonProps) {
@@ -169,24 +176,34 @@ export function Button(props: ButtonProps) {
     const {label, disabled, onClick, icon, isProcessing} = props;
     
     const btnClass = classNames({
+        'btn-leave': true, // hack to remove border glow on click
         [classes.btn]: true,
         [classes.btnDefault]: !props.isCTA && !props.borderless && !props.isActive,
         [classes.btnCTA]: props.isCTA && !props.isActive,
         [classes.btnBorderless]: props.borderless && !props.isActive,
         [classes.btnActive]: props.isActive && !props.isCTA,
         [classes.btnCTAActive]: props.isActive && props.isCTA,
-        [classes.btnWithIcon]: props.icon,
+        [classes.btnIconOnly]: props.icon && !props.label && !props.isProcessing,
     });
     const btnContentClass = classNames({
-        [classes.btnContent]: true,
-        
+        [classes.btnContent]: true
     });
+    const labelClass = classNames({
+        [classes.labelClass]: props.label && props.label.length,
+        [classes.hideLabel]: props.isProcessing
+    });
+    const iconClass = classNames({
+        [classes.btnIcon]: props.icon,
+        [classes.processingIcon]: props.isProcessing
+    });
+
+    
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>
-                {icon && !isProcessing ? <Icon icon={icon} /> : null}
-                {isProcessing ? <Icon icon={IconRefresh} spin /> : null}
-                {icon || !isProcessing ? label : null}
+                {icon && !isProcessing ? <Icon className={iconClass} icon={icon} /> : null}
+                {isProcessing ? <Icon className={iconClass} icon={IconRefresh} spin /> : null}
+                <span className={labelClass}>{label}</span>
             </div>
         </AntButton>
     )

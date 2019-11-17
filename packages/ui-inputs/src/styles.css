@@ -1,17 +1,19 @@
-.stories{
+.col{
   display: flex;
   flex-direction: column;
   padding: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 240px;
 }
 .row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .label {
   font-size: 14px;
   font-weight: bold;
-  width: 104px;
-  line-height: 48px;
+  width: 86px;
 }
 .spacer {
   width: 16px;
