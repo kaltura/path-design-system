@@ -19,6 +19,7 @@ export interface ButtonProps {
 const useStyles = createUseStyles({
     'btn': (props: ButtonProps & { theme: any }) => ({
         height: '32px',
+        minWidth: '34px',
         boxShadow: 'none',
         padding: '0px 8px',
         fontFamily: props.theme.button.fontFamily,
