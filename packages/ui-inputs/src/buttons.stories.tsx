@@ -7,7 +7,7 @@ import { IconPlus } from '@path-composer/ui-icons';
 import './styles.css';
 
 export default {
-    title: 'Button',
+    title: 'Action Buttons',
     decorators: [withKnobs]
 };
 

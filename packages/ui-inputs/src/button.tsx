@@ -31,7 +31,7 @@ const useStyles = createUseStyles({
         '&:hover': {
             boxShadow: 'none',
             color: '#434a4b',
-            backgroundColor: props.theme.colors.greyscale4,
+            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale4,
             border: `1px solid ${props.theme.colors.greyscale4}`,
         },
         '&:focus': {
@@ -42,7 +42,7 @@ const useStyles = createUseStyles({
         '&:active': {
             boxShadow: 'none',
             color: '#434a4b',
-            backgroundColor: props.theme.colors.greyscale5,
+            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale5,
             border: `1px solid ${props.theme.colors.greyscale4}`,
         },
         '&:disabled': {
@@ -63,7 +63,7 @@ const useStyles = createUseStyles({
         border: '1px solid #008297',
         '&:hover': {
             color: '#ffffff',
-            backgroundColor: '#006879',
+            backgroundColor: props.isProcessing ? '#008297' : '#006879',
             border: '1px solid #006879',
         },
         '&:focus': {
@@ -73,7 +73,7 @@ const useStyles = createUseStyles({
         },
         '&:active': {
             color: '#ffffff',
-            backgroundColor: '#004e5a',
+            backgroundColor: props.isProcessing ? '#008297' : '#004e5a',
             border: '1px solid #004e5a',
         },
         '&:disabled': {
@@ -94,8 +94,8 @@ const useStyles = createUseStyles({
         boxShadow: 'none',
         '&:hover': {
             color: '#434a4b',
-            backgroundColor: props.theme.colors.greyscale4,
-            border: `1px solid ${props.theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale4,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${props.theme.colors.greyscale4}`,
         },
         '&:focus': {
             color: '#434a4b',
@@ -104,8 +104,8 @@ const useStyles = createUseStyles({
         },
         '&:active': {
             color: '#434a4b',
-            backgroundColor: props.theme.colors.greyscale5,
-            border: `1px solid ${props.theme.colors.greyscale5}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale5,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${props.theme.colors.greyscale5}`,
         },
         '&:disabled': {
             boxShadow: 'none',
