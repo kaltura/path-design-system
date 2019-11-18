@@ -3,7 +3,7 @@ import {action} from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
 import {ThemeProvider, theme} from './theme';
-import { IconPlus } from '@path-composer/ui-icons';
+import { Plus24Icon } from '@kaltura-path/ui-icons';
 import './styles.css';
 
 export default {
@@ -30,9 +30,9 @@ export const DefaultButton = () =>
             <div className="spacer"></div>
             <div className="col">
                 <span className="label">Icon + Label</span>
-                <Button label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
-                <Button disabled={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
-                <Button isActive={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button isActive={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
             </div>
             <div className="spacer"></div>
             <div className="col">
@@ -67,9 +67,9 @@ export const CTAButton = () =>
             <div className="spacer"></div>
             <div className="col">
                 <span className="label">Icon + Label</span>
-                <Button isCTA={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
-                <Button isCTA={true} disabled={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
-                <Button isCTA={true} isActive={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button isCTA={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button isCTA={true} isActive={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
             </div>
             <div className="spacer"></div>
             <div className="col">
@@ -104,9 +104,9 @@ export const BorderlessButton = () =>
             <div className="spacer"></div>
             <div className="col">
                 <span className="label">Icon + Label</span>
-                <Button borderless={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
-                <Button borderless={true} disabled={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
-                <Button borderless={true} isActive={true} label={text("Label", "Label")} icon={IconPlus} onClick={action('clicked')}></Button>
+                <Button borderless={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button borderless={true} isActive={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
             </div>
             <div className="spacer"></div>
             <div className="col">

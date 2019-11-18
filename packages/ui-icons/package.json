@@ -1,12 +1,13 @@
 {
-  "name": "@kaltura-path/ui-inputs",
+  "name": "@kaltura-path/ui-icons",
   "version": "1.0.0",
   "description": "",
   "author": "esakal",
   "license": "MIT",
-  "repository": "esakal/ui-inputs",
+  "repository": "esakal/ui-icons",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
@@ -15,23 +16,27 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "rollup -c",
+    "build": "rimraf dist && rollup -c",
     "start": "rollup -c -w",
-    "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/build"
+    "src:icons": "rimraf src && npm run src:icons:flat && npm run src:icons:twoTones",
+    "src:icons:flat": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/flat --is-flat",
+    "src:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone"
   },
   "dependencies": {
-    "@path-composer/ui-icons": "^1.0.0",
     "react-jss": "^10.0.0"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0",
     "antd": "3.25.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@svgr/rollup": "^2.4.1",
     "@types/jest": "^23.1.5",
     "@types/react": "^16.3.13",
@@ -39,10 +44,15 @@
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
+    "fs-extra": "^8.1.0",
     "gh-pages": "^1.2.0",
+    "glob": "^7.1.6",
+    "mkdirp": "^0.5.1",
+    "mustache": "^3.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts-ts": "^2.16.0",
+    "rimraf": "^3.0.0",
     "rollup": "^0.62.0",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-commonjs": "^9.1.3",
@@ -52,7 +62,9 @@
     "rollup-plugin-postcss": "^1.6.2",
     "rollup-plugin-typescript2": "^0.17.0",
     "rollup-plugin-url": "^1.4.0",
-    "typescript": "^2.8.3"
+    "svgo": "^1.3.2",
+    "typescript": "^2.8.3",
+    "yargs": "^15.0.1"
   },
   "files": [
     "dist"

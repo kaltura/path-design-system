@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {useTheme, createUseStyles} from './theme';
 import {Button as AntButton} from 'antd';
-import { CustomIconComponentProps } from 'antd/lib/icon';
-import { Icon, IconRefresh } from '@path-composer/ui-icons';
+import { ReactNode } from 'react';
+import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
 const classNames = require('classnames');
 
 export interface ButtonProps {
@@ -13,7 +13,7 @@ export interface ButtonProps {
     onClick?: () => void;
     isProcessing?: boolean;
     isCTA?: boolean;
-    icon?: React.FunctionComponent<CustomIconComponentProps>,
+    icon?: ReactNode
 }
 
 const useStyles = createUseStyles({
@@ -175,7 +175,7 @@ export function Button(props: ButtonProps) {
     const theme = useTheme();
     const classes = useStyles({...props, theme});
     const {label, disabled, onClick, icon, isProcessing} = props;
-    
+
     const btnClass = classNames({
         'btn-leave': true, // hack to remove border glow on click
         [classes.btn]: true,
@@ -198,12 +198,16 @@ export function Button(props: ButtonProps) {
         [classes.processingIcon]: props.isProcessing
     });
 
-    
+
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>
-                {icon && !isProcessing ? <Icon className={iconClass} icon={icon} /> : null}
-                {isProcessing ? <Icon className={iconClass} icon={IconRefresh} spin /> : null}
+                {icon && !isProcessing ? icon : null}
+                {!isProcessing
+                    ? null
+                    : props.isCTA
+                        ? <SpinnerDark24Icon className={iconClass} spin />
+                        : <SpinnerBright24Icon className={iconClass} spin />}
                 <span className={labelClass}>{label}</span>
             </div>
         </AntButton>
