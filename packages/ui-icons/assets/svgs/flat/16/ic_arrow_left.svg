@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>ic_arrow_left</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ic_arrow_left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" x="0" y="0" width="16" height="16"></rect>
+        <path d="M7.5,8.08578644 L5.20710678,5.79289322 C4.81658249,5.40236893 4.18341751,5.40236893 3.79289322,5.79289322 C3.40236893,6.18341751 3.40236893,6.81658249 3.79289322,7.20710678 L6.79289322,10.2071068 C7.18341751,10.5976311 7.81658249,10.5976311 8.20710678,10.2071068 L11.2071068,7.20710678 C11.5976311,6.81658249 11.5976311,6.18341751 11.2071068,5.79289322 C10.8165825,5.40236893 10.1834175,5.40236893 9.79289322,5.79289322 L7.5,8.08578644 Z" id="Path-2" fill="#000000" fill-rule="nonzero" transform="translate(7.500000, 8.000000) scale(-1, 1) rotate(-90.000000) translate(-7.500000, -8.000000) "></path>
+    </g>
+</svg>
