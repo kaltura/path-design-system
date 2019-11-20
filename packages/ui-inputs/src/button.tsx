@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useTheme, createUseStyles} from './theme';
+import {useTheme, createUseStyles, theming} from './theme';
 import {Button as AntButton} from 'antd';
 import { ReactNode } from 'react';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
@@ -16,47 +16,47 @@ export interface ButtonProps {
     icon?: ReactNode
 }
 
-const useStyles = createUseStyles({
-    'btn': (props: ButtonProps & { theme: any }) => ({
+const useStyles = createUseStyles((theme: any) => ({
+    'btn': {
         height: '32px',
         minWidth: '34px',
         boxShadow: 'none',
         padding: '0px 8px',
-        fontFamily: props.theme.button.fontFamily,
-        fontSize: props.theme.button.fontSize,
-        fontWeight: props.theme.button.fontWeight,
-        borderRadius: props.theme.button.borderRadius,
-    }),
-    'btnDefault': (props: ButtonProps & { theme: any }) => ({
+        fontFamily: theme.button.fontFamily,
+        fontSize: theme.button.fontSize,
+        fontWeight: theme.button.fontWeight,
+        borderRadius: theme.button.borderRadius,
+    },
+    'btnDefault': (props: ButtonProps) => ({
         '&:hover': {
             boxShadow: 'none',
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale4,
-            border: `1px solid ${props.theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale4,
+            border: `1px solid ${theme.colors.greyscale4}`,
         },
         '&:focus': {
             backgroundColor: '#ffffff',
-            border: `1px solid ${props.theme.colors.greyscale4}`,
+            border: `1px solid ${theme.colors.greyscale4}`,
             color: '#434a4b',
         },
         '&:active': {
             boxShadow: 'none',
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale5,
-            border: `1px solid ${props.theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale5,
+            border: `1px solid ${theme.colors.greyscale4}`,
         },
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border: `1px solid ${props.theme.colors.greyscale4}`,
-            color: props.theme.colors.greyscale4
+            border: `1px solid ${theme.colors.greyscale4}`,
+            color: theme.colors.greyscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
             backgroundColor: '#ffffff'
         }
     }),
-    'btnCTA': (props: ButtonProps & { theme: any }) => ({
+    'btnCTA': (props: ButtonProps) => ({
         boxShadow: 'none',
         color: '#ffffff',
         backgroundColor: '#008297',
@@ -79,23 +79,23 @@ const useStyles = createUseStyles({
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border: `1px solid ${props.theme.colors.greyscale4}`,
-            color: props.theme.colors.greyscale4
+            border: `1px solid ${theme.colors.greyscale4}`,
+            color: theme.colors.greyscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
             backgroundColor: '#ffffff'
         }
     }),
-    'btnBorderless': (props: ButtonProps & { theme: any }) => ({
+    'btnBorderless': (props: ButtonProps) => ({
         color: '#434a4b',
         backgroundColor: '#ffffff',
         border: '1px solid #ffffff',
         boxShadow: 'none',
         '&:hover': {
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale4,
-            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${props.theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale4,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.greyscale4}`,
         },
         '&:focus': {
             color: '#434a4b',
@@ -104,14 +104,14 @@ const useStyles = createUseStyles({
         },
         '&:active': {
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : props.theme.colors.greyscale5,
-            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${props.theme.colors.greyscale5}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale5,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.greyscale5}`,
         },
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
             border: '1px solid #ffffff',
-            color: props.theme.colors.greyscale4
+            color: theme.colors.greyscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
@@ -119,21 +119,21 @@ const useStyles = createUseStyles({
             border: '1px solid #ffffff',
         }
     }),
-    'btnActive': (props: ButtonProps & { theme: any }) => ({
+    'btnActive': {
         color: '#434a4b',
-        backgroundColor: props.theme.colors.greyscale5,
-        border: `1px solid ${props.theme.colors.greyscale5}`,
+        backgroundColor: theme.colors.greyscale5,
+        border: `1px solid ${theme.colors.greyscale5}`,
         '&:hover': {
             color: '#434a4b',
-            backgroundColor: props.theme.colors.greyscale5,
-            border: `1px solid ${props.theme.colors.greyscale5}`,
+            backgroundColor: theme.colors.greyscale5,
+            border: `1px solid ${theme.colors.greyscale5}`,
         },
         '&:focus': {
             color: '#434a4b',
-            backgroundColor: props.theme.colors.greyscale5,
-            border: `1px solid ${props.theme.colors.greyscale5}`,
+            backgroundColor: theme.colors.greyscale5,
+            border: `1px solid ${theme.colors.greyscale5}`,
         },
-    }),
+    },
     'btnCTAActive': {
         color: '#ffffff',
         backgroundColor: '#004e5a',
@@ -169,11 +169,11 @@ const useStyles = createUseStyles({
     'hideLabel': {
         opacity: 0
     }
-});
+}), {theming});
 
 export function Button(props: ButtonProps) {
     const theme = useTheme();
-    const classes = useStyles({...props, theme});
+    const classes = useStyles({...props, theme});console.log({...props, theme});
     const {label, disabled, onClick, icon, isProcessing} = props;
 
     const btnClass = classNames({

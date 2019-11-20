@@ -7,4 +7,4 @@ const theming = createTheming(ThemeContext);
 
 const {ThemeProvider, useTheme} = theming;
 
-export { ThemeProvider, useTheme};
+export { ThemeProvider, useTheme, theming};
