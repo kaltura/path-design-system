@@ -1,0 +1,30 @@
+import * as React from 'react';
+import '../assets/css/styles.css';
+import * as IconsList from './index';
+
+export default {
+    title: 'Icon',
+};
+
+export const Icons = () => (
+    <main className="content">
+        <h1>Icons</h1>
+
+        <section className="icons-group">
+            <h2>16px</h2>
+            <div className="icons-group-content">
+                {{#icons16}}<IconsList.{{iconName}} className="icon"/>{{/icons16}}
+            </div>
+        </section>
+
+        <section className="icons-group">
+            <h2>24px</h2>
+            <div className="icons-group-content">
+                {{#icons24}}<IconsList.{{iconName}} className="icon"/>{{/icons24}}
+            </div>
+        </section>
+    </main>
+);
+Icons.story = {
+    title: 'Icons'
+};

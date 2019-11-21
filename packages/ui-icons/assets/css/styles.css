@@ -1,0 +1,18 @@
+.content {
+    padding: 24px;
+}
+
+.icons-group {
+    margin-bottom: 24px;
+}
+
+.icons-group-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.icon {
+    width: 35px;
+    margin: 25px;
+}
