@@ -24,6 +24,7 @@
     "src:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src"
   },
   "dependencies": {
+    "react-copy-to-clipboard": "^5.0.2",
     "react-jss": "^10.0.0"
   },
   "peerDependencies": {
