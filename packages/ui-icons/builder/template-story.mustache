@@ -14,6 +14,7 @@ export interface IconsComponentsList {
     name: string;
     copyText: string;
     component: IconComponent<IconProps>;
+    className: string;
 }
 
 const icons16List: string[] = [
@@ -27,17 +28,35 @@ const icons24List: string[] = [
     '{{iconName}}',
     {{/icons24}}
 ];
+const dartBackground = [
+    'SpinnerDark24Icon',
+];
 
 const { Search } = Input;
 
-const IconWrapper = (props: IconsComponentsList) => {
+const IconWrapper = (props: { component: IconComponent<IconProps> }) => {
     const Icon = props.component;
+    return <Icon className="icon"/>;
+};
+
+const IconsGroup = (props: { iconsList: IconsComponentsList[] }) => {
+    const { iconsList } = props;
     const copyIcon = (iconName: string) => message.success(`<${iconName}/> copied 🎉`);
+
     return (
-        <CopyToClipboard text={props.copyText} onCopy={() => copyIcon(props.name)}>
-            <Icon className="icon"/>
-        </CopyToClipboard>
-    )
+        <ul className="icons-group-content">
+            {iconsList.map((item: IconsComponentsList) => (
+                <li key={item.name} className={item.className}>
+                    <CopyToClipboard text={item.copyText} onCopy={() => copyIcon(item.name)}>
+                        <div className="icons-group-item">
+                            <IconWrapper key={item.name} component={item.component}/>
+                            <span className="icon-label">{item.name}</span>
+                        </div>
+                    </CopyToClipboard>
+                </li>
+            ))}
+        </ul>
+    );
 };
 
 export const Library = () => {
@@ -54,6 +73,7 @@ export const Library = () => {
             name: icon,
             copyText: `<${icon}/>`,
             component: IconsList[icon],
+            className: dartBackground.includes(icon) ? 'bg-dark' : ''
         }));
     };
 
@@ -72,16 +92,12 @@ export const Library = () => {
 
             <section className="icons-group">
                 <h2>16px</h2>
-                <div className="icons-group-content">
-                    {icons16.map((item: IconsComponentsList) => <IconWrapper key={item.name} {...item}/>)}
-                </div>
+                <IconsGroup iconsList={icons16}/>
             </section>
 
             <section className="icons-group">
                 <h2>24px</h2>
-                <div className="icons-group-content">
-                    {icons24.map((item: IconsComponentsList) => <IconWrapper key={item.name} {...item}/>)}
-                </div>
+                <IconsGroup iconsList={icons24}/>
             </section>
         </main>
     );
