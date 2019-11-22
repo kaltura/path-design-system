@@ -1,68 +1,97 @@
 import * as React from 'react';
-import '../assets/css/styles.css';
 import * as IconsList from './index';
-import { message } from 'antd';
+import { Input, message } from 'antd';
+import { IconComponent, IconProps } from 'antd/lib/icon';
 // @ts-ignore https://github.com/nkbt/react-copy-to-clipboard/issues/105
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import '../assets/css/styles.css';
 
 export default {
     title: 'Icons',
 };
 
-const copyIcon = (iconName: string) => {
-    message.success(`<${iconName}/> copied 🎉`);
+export interface IconsComponentsList {
+    name: string;
+    copyText: string;
+    component: IconComponent<IconProps>;
+}
+
+const icons16List: string[] = [
+    'ArrowLeft16Icon',
+];
+
+const icons24List: string[] = [
+    'Minus24Icon',
+    'Plus24Icon',
+    'Redo24Icon',
+    'Search24Icon',
+    'SpinnerBright24Icon',
+    'SpinnerDark24Icon',
+    'Target24Icon',
+    'Undo24Icon',
+    'Upload24Icon',
+    'Video24Icon',
+];
+
+const { Search } = Input;
+
+const IconWrapper = (props: IconsComponentsList) => {
+    const Icon = props.component;
+    const copyIcon = (iconName: string) => message.success(`<${iconName}/> copied 🎉`);
+    return (
+        <CopyToClipboard text={props.copyText} onCopy={() => copyIcon(props.name)}>
+            <Icon className="icon"/>
+        </CopyToClipboard>
+    )
 };
 
-export const Library = () => (
-    <main className="content">
-        <h1>Icons</h1>
+export const Library = () => {
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event?.target?.value || '');
+    };
+    const getFilteredIconsList = (list: string[]): IconsComponentsList[] => {
+        const result = !searchTerm
+            ? list
+            : list.filter(icon => icon.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
 
-        <section className="icons-group">
-            <h2>16px</h2>
-            <div className="icons-group-content">
-                <CopyToClipboard text="<ArrowLeft16Icon/>" onCopy={() => copyIcon('ArrowLeft16Icon')}>
-                    <IconsList.ArrowLeft16Icon className="icon"/>
-                </CopyToClipboard>
-            </div>
-        </section>
+        return result.map(icon => ({
+            name: icon,
+            copyText: `<${icon}/>`,
+            component: IconsList[icon],
+        }));
+    };
 
-        <section className="icons-group">
-            <h2>24px</h2>
-            <div className="icons-group-content">
-                <CopyToClipboard text="<Minus24Icon/>" onCopy={() => copyIcon('Minus24Icon')}>
-                    <IconsList.Minus24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Plus24Icon/>" onCopy={() => copyIcon('Plus24Icon')}>
-                    <IconsList.Plus24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Redo24Icon/>" onCopy={() => copyIcon('Redo24Icon')}>
-                    <IconsList.Redo24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Search24Icon/>" onCopy={() => copyIcon('Search24Icon')}>
-                    <IconsList.Search24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<SpinnerBright24Icon/>" onCopy={() => copyIcon('SpinnerBright24Icon')}>
-                    <IconsList.SpinnerBright24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<SpinnerDark24Icon/>" onCopy={() => copyIcon('SpinnerDark24Icon')}>
-                    <IconsList.SpinnerDark24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Target24Icon/>" onCopy={() => copyIcon('Target24Icon')}>
-                    <IconsList.Target24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Undo24Icon/>" onCopy={() => copyIcon('Undo24Icon')}>
-                    <IconsList.Undo24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Upload24Icon/>" onCopy={() => copyIcon('Upload24Icon')}>
-                    <IconsList.Upload24Icon className="icon"/>
-                </CopyToClipboard>
-                <CopyToClipboard text="<Video24Icon/>" onCopy={() => copyIcon('Video24Icon')}>
-                    <IconsList.Video24Icon className="icon"/>
-                </CopyToClipboard>
-            </div>
-        </section>
-    </main>
-);
+    const icons16 = getFilteredIconsList(icons16List);
+    const icons24 = getFilteredIconsList(icons24List);
+
+    return (
+        <main className="content">
+            <h1>Icons</h1>
+
+            <Search
+                    placeholder="Search icon here, click icon to copy code"
+                    onChange={handleChange}
+                    allowClear
+            />
+
+            <section className="icons-group">
+                <h2>16px</h2>
+                <div className="icons-group-content">
+                    {icons16.map((item: IconsComponentsList) => <IconWrapper key={item.name} {...item}/>)}
+                </div>
+            </section>
+
+            <section className="icons-group">
+                <h2>24px</h2>
+                <div className="icons-group-content">
+                    {icons24.map((item: IconsComponentsList) => <IconWrapper key={item.name} {...item}/>)}
+                </div>
+            </section>
+        </main>
+    );
+};
+
 Library.story = {
-    title: 'Library'
+    title: 'Library',
 };
