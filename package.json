@@ -28,11 +28,11 @@
     "antd": "^3.25.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "lerna": "^3.19.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "react-docgen-typescript-loader": "^3.3.0",
     "ts-import-plugin": "^1.6.1",
     "typescript": "^3.7.2"
-  },
-  "dependencies": {}
+  }
 }
