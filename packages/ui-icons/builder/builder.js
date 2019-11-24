@@ -88,7 +88,11 @@ async function generateIndex(options) {
   await fse.writeFile(path.join(options.outputDir, 'index.ts'), index);
 }
 
-const noises = [];
+const noises = [
+    ['<path transform="scale(Infinity, Infinity)" d="M0 0h16v16H0z" />', ''],
+    ['<path transform="scale(Infinity, Infinity)" d="M24 0H0v24h24z" />', ''],
+    ['<path transform="scale(Infinity, Infinity)" d="M0 0h24v24H0z" />', ''],
+];
 
 export async function cleanPaths({ svgPath, data, isFlat }) {
   // Remove hardcoded color fill before optimizing so that empty groups are removed
@@ -205,7 +209,7 @@ export async function main(options) {
 
     const [svgPaths, template] = await Promise.all([
       globAsync(path.join(options.svgDir, options.glob)),
-      fse.readFile(path.join(__dirname, 'template-icon.js'), {
+      fse.readFile(path.join(__dirname, 'template-icon.mustache'), {
         encoding: 'utf8',
       }),
     ]);

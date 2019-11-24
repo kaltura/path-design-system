@@ -24,17 +24,18 @@
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "rimraf dist && rollup -c",
     "start": "rollup -c -w",
-    "src:icons": "rimraf src && npm run src:icons:flat && npm run src:icons:twoTones",
+    "src:icons": "rimraf src && npm run src:icons:flat && npm run src:icons:twoTones && npm run src:icons:storybook",
     "src:icons:flat": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/flat --is-flat",
-    "src:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone"
+    "src:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone",
+    "src:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src"
   },
   "dependencies": {
-    "react-jss": "^10.0.0"
   },
   "peerDependencies": {
     "antd": "3.25.0",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "react-jss": "^10.0.0"
   },
   "files": [
     "dist",
