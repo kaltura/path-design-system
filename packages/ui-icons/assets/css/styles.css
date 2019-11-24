@@ -1,0 +1,59 @@
+.content {
+    padding: 24px;
+}
+
+.icons-group {
+    margin-top: 24px;
+}
+
+.icons-group-content {
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+}
+
+.icons-group-content li {
+    position: relative;
+    float: left;
+    text-align: center;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 3px;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    width: 130px;
+    cursor: pointer;
+}
+
+.icons-group-content li:hover {
+    color: #ffffff;
+    background-color: #01accd;
+}
+.icons-group-content li.bg-dark {
+    background-color: #999999;
+}
+
+.icons-group-content li.bg-dark:hover {
+    background-color: #1c4b98;
+}
+
+.icons-group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+}
+
+.icon {
+    margin: 8px 0;
+    transform: scale(2);
+}
+
+.icon-label {
+    margin-top: 8px;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    width: 120px;
+    overflow: hidden;
+}
