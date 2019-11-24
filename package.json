@@ -58,6 +58,7 @@
     "react": "^16.4.1",
     "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "^16.4.1",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-scripts-ts": "^2.16.0",
     "rimraf": "^3.0.0",
     "rollup": "^0.62.0",
