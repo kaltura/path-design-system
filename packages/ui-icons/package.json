@@ -1,10 +1,13 @@
 {
   "name": "@kaltura-path/ui-icons",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
-  "author": "esakal",
-  "license": "MIT",
-  "repository": "esakal/ui-icons",
+  "author": "Kaltura",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaltura/path-design-system"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -14,6 +17,9 @@
     "npm": ">=5"
   },
   "scripts": {
+    "clean": "rm -rf dist",
+    "reset": "npm run clean && rm -rf node_modules",
+    "analyze": "npm run build && npx source-map-explorer dist/index.js",
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "rimraf dist && rollup -c",
@@ -31,6 +37,8 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "CHANGELOG.md"
   ]
 }

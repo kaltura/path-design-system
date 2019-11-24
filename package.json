@@ -1,13 +1,14 @@
 {
   "name": "path-design-system",
-  "version": "1.0.0",
+  "private": true,
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "clean": "lerna run clean",
     "build": "lerna run build",
     "reset": "lerna run reset && rm -rf node_modules",
-    "setup": "npm i && lerna exec npm link",
+    "setup": "npm i && npm run build && lerna exec npm link",
     "lerna": "lerna",
     "deploy:prepare": "npm run clean && npm ci && npm run build && npm run lerna:lint && node scripts/bump-version.js",
     "deploy:publish-to-npm": "npm run clean && npm ci && npm run build && lerna publish from-package",
@@ -18,8 +19,8 @@
     "type": "git",
     "url": "git+https://github.com/kaltura/path-design-system.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Kaltura",
+  "license": "AGPL-3.0",
   "bugs": {
     "url": "https://github.com/kaltura/path-design-system/issues"
   },
