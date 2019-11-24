@@ -8,17 +8,17 @@ export default {
 };
 
 export const DefaultButton = () => <Button label={'Hi Amir!'} onClick={action('clicked')}></Button>;
-  DefaultButton.story = {
+(DefaultButton as any).story = {
     title: 'Default Button'
   }
 
 export const IconA = () => <Plus24Icon />;
-IconA.story = {
+(IconA as any).story = {
   title: 'Icon A'
 }
 
 
 export const IconB = () => <SpinnerBright24Icon spin />;
-IconA.story = {
-  title: 'Icon A'
+(IconB as any).story = {
+  title: 'Icon B'
 }
