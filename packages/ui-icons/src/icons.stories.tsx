@@ -67,7 +67,7 @@ const IconsGroup = (props: { iconsList: IconsComponentsList[] }) => {
 export const Library = () => {
     const [searchTerm, setSearchTerm] = React.useState('');
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(event?.target?.value || '');
+        setSearchTerm((event.target as any).value || '');
     };
     const getFilteredIconsList = (list: string[]): IconsComponentsList[] => {
         const result = !searchTerm
@@ -108,6 +108,6 @@ export const Library = () => {
     );
 };
 
-Library.story = {
+(Library as any).story = {
     title: 'Library',
 };
