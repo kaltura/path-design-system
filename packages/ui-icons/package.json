@@ -30,6 +30,8 @@
     "src:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
+    "@path-composer/ui-icons": "file:../ui-icons"
   },
   "peerDependencies": {
     "antd": "3.25.0",

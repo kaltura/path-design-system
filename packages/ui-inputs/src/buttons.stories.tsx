@@ -1,24 +1,123 @@
 import * as React from 'react';
-import { action } from '@storybook/addon-actions';
-import { Button } from './button';
-import { Plus24Icon, SpinnerBright24Icon } from '@kaltura-path/ui-icons';
+import {action} from '@storybook/addon-actions';
+import { withKnobs, text, boolean } from "@storybook/addon-knobs";
+import {Button} from './button';
+import {ThemeProvider, theme} from './theme';
+import { Plus24Icon } from '@kaltura-path/ui-icons';
+import './styles.css';
 
 export default {
-  title: 'Button',
+    title: 'Action Buttons',
+    decorators: [withKnobs]
 };
 
-export const DefaultButton = () => <Button label={'Hi Amir!'} onClick={action('clicked')}></Button>;
-(DefaultButton as any).story = {
-    title: 'Default Button'
-  }
+export const DefaultButton = () =>
+    <ThemeProvider theme={theme}>
+        <div className="row">
+            <div className="col">
+                <span className="label" style={{'color': 'white'}}>spacer</span>
+                <span className="label">Default:</span>
+                <span className="label">Disabled:</span>
+                <span className="label">Active:</span>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Label</span>
+                <Button label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Icon + Label</span>
+                <Button label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button isActive={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Processing</span>
+                <Button label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+            </div>
+        </div>
+    </ThemeProvider>
 
-export const IconA = () => <Plus24Icon />;
-(IconA as any).story = {
-  title: 'Icon A'
+DefaultButton.story = {
+    title: 'Default Button'
 }
 
+export const CTAButton = () =>
+    <ThemeProvider theme={theme}>
+        <div className="row">
+            <div className="col">
+                <span className="label" style={{'color': 'white'}}>spacer</span>
+                <span className="label">Default:</span>
+                <span className="label">Disabled:</span>
+                <span className="label">Active:</span>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Label</span>
+                <Button isCTA={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button isCTA={true} isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Icon + Label</span>
+                <Button isCTA={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button isCTA={true} isActive={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Processing</span>
+                <Button isCTA={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button isCTA={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button isCTA={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+            </div>
+        </div>
+    </ThemeProvider>
 
-export const IconB = () => <SpinnerBright24Icon spin />;
-(IconB as any).story = {
-  title: 'Icon B'
+CTAButton.story = {
+    title: 'CTA Button'
+}
+
+export const BorderlessButton = () =>
+    <ThemeProvider theme={theme}>
+        <div className="row">
+            <div className="col">
+                <span className="label" style={{'color': 'white'}}>spacer</span>
+                <span className="label">Default:</span>
+                <span className="label">Disabled:</span>
+                <span className="label">Active:</span>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Label</span>
+                <Button borderless={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                <Button borderless={true} isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Icon + Label</span>
+                <Button borderless={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+                <Button borderless={true} isActive={true} label={text("Label", "Label")} icon={<Plus24Icon />} onClick={action('clicked')}></Button>
+            </div>
+            <div className="spacer"></div>
+            <div className="col">
+                <span className="label">Processing</span>
+                <Button borderless={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button borderless={true} disabled={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+                <Button borderless={true} isActive={true} label={text("Label", "Label")} isProcessing={boolean("Processing", false)} onClick={action('clicked')}></Button>
+            </div>
+        </div>
+    </ThemeProvider>
+
+BorderlessButton.story = {
+    title: 'Borderless Button'
 }
