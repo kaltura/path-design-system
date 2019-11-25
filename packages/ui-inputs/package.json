@@ -34,6 +34,10 @@
     "react-dom": "^15.0.0 || ^16.0.0",
     "react-jss": "^10.0.0"
   },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "@kaltura-path/ui-icons": "file:../ui-icons"
+  },
   "files": [
     "dist",
     "LICENSE",

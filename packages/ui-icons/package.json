@@ -29,10 +29,7 @@
     "src:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone",
     "src:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src"
   },
-  "dependencies": {
-    "classnames": "^2.2.6",
-    "@path-composer/ui-icons": "file:../ui-icons"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "antd": "3.25.0",
     "react": "^15.0.0 || ^16.0.0",

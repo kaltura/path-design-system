@@ -76,6 +76,7 @@
     "yargs": "^15.0.1"
   },
   "dependencies": {
+    "react-jss": "^10.0.0",
     "@kaltura-path/ui-icons": "file:packages/ui-icons",
     "@kaltura-path/ui-inputs": "file:packages/ui-inputs"
   }
