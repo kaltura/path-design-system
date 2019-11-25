@@ -6,7 +6,6 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
-import less from 'rollup-plugin-less';
 
 
 import pkg from './package.json'
