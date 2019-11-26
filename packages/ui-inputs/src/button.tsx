@@ -166,8 +166,8 @@ const useStyles = createUseStyles((theme: any) => ({
     'labelClass': {
         padding: '4px'
     },
-    'hideLabel': {
-        opacity: 0
+    'hide': {
+        visibility: 'hidden'
     }
 }), {theming});
 
@@ -187,29 +187,28 @@ export function Button(props: ButtonProps) {
         [classes.btnIconOnly]: props.icon && !props.label && !props.isProcessing,
     });
     const btnContentClass = classNames({
-        [classes.btnContent]: true
+        [classes.btnContent]: true,
+        [classes.hide]: props.isProcessing,
     });
     const labelClass = classNames({
         [classes.labelClass]: props.label && props.label.length,
-        [classes.hideLabel]: props.isProcessing
     });
-    const iconClass = classNames({
+    const progressClass = classNames({
         [classes.btnIcon]: props.icon,
-        [classes.processingIcon]: props.isProcessing
     });
-
 
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>
-                {icon && !isProcessing ? icon : null}
-                {!isProcessing
-                    ? null
-                    : props.isCTA
-                        ? <SpinnerDark24Icon className={iconClass} spin />
-                        : <SpinnerBright24Icon className={iconClass} spin />}
+	            {icon}
                 <span className={labelClass}>{label}</span>
             </div>
+            {!isProcessing
+                    ? null
+		            : <div className={btnContentClass}>{props.isCTA && !disabled
+                    ? <SpinnerDark24Icon className={progressClass} spin />
+		            : <SpinnerBright24Icon className={progressClass} spin />}</div>
+            }
         </AntButton>
     )
 }
