@@ -3,6 +3,9 @@ import { Input } from 'antd';
 import { createUseStyles, theming, useTheme } from './theme';
 import { Theme } from './theme/theme';
 import classNames from 'classnames';
+import { SpinnerBright24Icon } from '@kaltura-path/ui-icons';
+
+export type AffixContent = React.ReactElement<any> | string;
 
 export interface InputFieldProps {
     value?: string;
@@ -10,8 +13,8 @@ export interface InputFieldProps {
     disabled?: boolean;
     placeholder?: string
     inputRef?: React.RefObject<any>;
-    preContent?: React.ReactElement<any>;
-    postContent?: React.ReactElement<any>;
+    preContent?: AffixContent;
+    postContent?: AffixContent;
     hasError?: boolean;
     isBusy?: boolean;
     supportBusy?: boolean;
@@ -76,15 +79,13 @@ const useStyles = createUseStyles((theme: Theme) => ({
         }
     }),
     inputWithBothAffix: {
-      padding: '0 40px 0 40px',
+        padding: '0 40px 0 40px',
     },
     inputWithPrefix: {
-        padding: 0,
-        paddingRight: '40px',
+        padding: '0 8px 0 40px',
     },
     inputWithSuffix: {
-        padding: 0,
-        paddingLeft: '40px',
+        padding: '0 40px 0 8px',
     },
     affixWrapper: {
         boxSizing: 'border-box',
@@ -110,33 +111,43 @@ const useStyles = createUseStyles((theme: Theme) => ({
     },
     postContent: {
         right: '8px',
+        color: theme.colors.greyscale2,
+        fontSize: theme.input.fontSize,
     },
 }), { theming });
 
-const renderAffix = (props: { element?: React.ReactElement<any>, className?: string }) => props.element
-    ? <span className={props.className}>{React.cloneElement(props.element)}</span>
-    : null;
+const renderAffix = (props: { element?: AffixContent, className?: string }) => {
+    if (!props.element) {
+        return null;
+    }
+    const content = typeof props.element === 'string' ? props.element : React.cloneElement(props.element);
+    return <span className={props.className}>{content}</span>;
+};
 
 export const TextInput = (props: InputFieldProps) => {
     const theme = useTheme();
     const classes = useStyles({ ...props, theme });
-    const { preContent, postContent, inputRef, disabled, hasError, ...rest } = props;
-    const hasAffix = !!preContent || !!postContent;
+    const { preContent, postContent, inputRef, disabled, hasError, isBusy, supportBusy, ...rest } = props;
+    const hasAffix = !!preContent || !!postContent || supportBusy;
     const inputClass = classNames({
         [classes.input]: true,
         [classes.inputDefault]: !hasError,
         [classes.inputError]: hasError,
-        [classes.inputWithBothAffix]: !!preContent && !!postContent,
-        [classes.inputWithPrefix]: !!preContent && !postContent,
-        [classes.inputWithSuffix]: !!postContent && !preContent,
+        [classes.inputWithPrefix]: !!(preContent || supportBusy) && !postContent,
+        [classes.inputWithSuffix]: !!postContent && !(!!preContent || supportBusy),
+        [classes.inputWithBothAffix]: !!(preContent || supportBusy) && !!postContent,
     });
     const affixWrapperClass = classNames({ [classes.affixWrapper]: true });
     const prefixClass = classNames({ [classes.affixContent]: true, [classes.preContent]: true });
     const suffixClass = classNames({ [classes.affixContent]: true, [classes.postContent]: true });
+    const canSetBusy = supportBusy && !disabled && !hasError;
     const renderInput = () => <Input className={inputClass} {...rest} disabled={disabled} ref={inputRef}/>;
     const renderWithAffix = () => (
         <span className={affixWrapperClass}>
-            {renderAffix({ element: preContent, className: prefixClass })}
+            {renderAffix({
+                element: isBusy && canSetBusy ? <SpinnerBright24Icon spin/> : preContent,
+                className: prefixClass
+            })}
             {renderInput()}
             {renderAffix({ element: postContent, className: suffixClass })}
         </span>
