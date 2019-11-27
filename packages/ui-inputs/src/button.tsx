@@ -3,7 +3,7 @@ import {useTheme, createUseStyles, theming} from './theme';
 import {Button as AntButton} from 'antd';
 import { ReactNode } from 'react';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
-const classNames = require('classnames');
+import classNames from 'classnames';
 
 export interface ButtonProps {
     label?: string;

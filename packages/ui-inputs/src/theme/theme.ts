@@ -19,13 +19,19 @@ export interface Theme {
         deepcyan: string;
         cyan: string;
         royalblue: string;
-    },
+    };
     button: {
         borderRadius: string;
         fontFamily: string;
         fontWeight: string;
         fontSize: string;
-    }
+    };
+    input: {
+        borderRadius: string;
+        fontFamily: string;
+        fontWeight: string;
+        fontSize: string;
+    };
 }
 
 export const theme: Theme = {
@@ -55,5 +61,11 @@ export const theme: Theme = {
         fontFamily: 'Lato, Arial, Helvetica',
         fontWeight: 'bold',
         fontSize: '14px'
+    },
+    input: {
+        borderRadius: '4px',
+        fontFamily: 'Lato, Arial, Helvetica',
+        fontWeight: 'normal',
+        fontSize: '14px',
     }
-}
+};

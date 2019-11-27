@@ -11,7 +11,7 @@ export default {
     decorators: [withKnobs]
 };
 
-export const DefaultButton = () => {
+export const DefaultButton: Story = () => {
     return <ThemeProvider theme={theme}>
         <div className="row">
             <div className="col">
@@ -48,14 +48,14 @@ export const DefaultButton = () => {
             </div>
         </div>
     </ThemeProvider>
-}
+};
 
 
-(DefaultButton as any).story = {
+DefaultButton.story = {
     title: 'Default Button'
-}
+};
 
-export const CTAButton = () => {
+export const CTAButton: Story = () => {
     return <ThemeProvider theme={theme}>
         <div className="row">
             <div className="col">
@@ -95,13 +95,13 @@ export const CTAButton = () => {
             </div>
         </div>
     </ThemeProvider>
-}
+};
 
-(CTAButton as any).story = {
+CTAButton.story = {
     title: 'CTA Button'
-}
+};
 
-export const BorderlessButton = () => {
+export const BorderlessButton: Story = () => {
     return <ThemeProvider theme={theme}>
         <div className="row">
             <div className="col">
@@ -141,8 +141,8 @@ export const BorderlessButton = () => {
             </div>
         </div>
     </ThemeProvider>
-}
+};
 
-(BorderlessButton as any).story = {
+BorderlessButton.story = {
     title: 'Borderless Button'
-}
+};
