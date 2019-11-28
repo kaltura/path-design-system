@@ -13,7 +13,7 @@ export interface InputFieldProps {
     defaultValue?: string;
     disabled?: boolean;
     placeholder?: string
-    inputRef?: React.RefObject<any>;
+    inputRef?: React.Ref<any>;
     preContent?: AffixContent;
     postContent?: AffixContent;
     hasError?: boolean;
@@ -129,11 +129,16 @@ const useStyles = createUseStyles((theme: Theme) => ({
         boxShadow: `0 0 0 1px ${theme.colors.danger}`,
     },
     preContent: {
+        color: theme.colors.greyscale3,
         margin: '0 0 0 8px',
+        height: '24px',
+        minWidth: '24px',
     },
     postContent: {
         margin: '0 8px 0 0',
         flex: '1 0 auto',
+        height: '24px',
+        minWidth: '24px',
         color: theme.colors.greyscale2,
         fontSize: theme.input.fontSize,
     },
@@ -144,7 +149,7 @@ const renderAffix = (props: { element?: AffixContent, className?: string, suppor
     if (!element && !supportBusy) {
         return null;
     }
-    return <span className={className} style={{ minWidth: '24px' }}>{element}</span>;
+    return <span className={className}>{element}</span>;
 };
 
 export const TextInput = (props: InputFieldProps) => {
