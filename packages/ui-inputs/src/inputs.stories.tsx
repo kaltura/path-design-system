@@ -12,7 +12,7 @@ export default {
 };
 
 export const DefaultInput: Story = () => {
-    const [value, setValue] = useState('test');
+    const [value, setValue] = useState('');
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         action('changed')(event);
         setValue(event.target.value);
@@ -24,7 +24,7 @@ export const DefaultInput: Story = () => {
                 <span className="label w150">With Icon:</span>
                 <span className="label w150">With Label:</span>
                 <span className="label w150">With Label and Icon:</span>
-                <span className="label w150">Without busy state:</span>
+                <span className="label w150">Toggle Support Busy:</span>
             </div>
             <div className="spacer"></div>
             <div className="col h300 w400">
@@ -61,7 +61,7 @@ export const DefaultInput: Story = () => {
                            disabled={boolean("Disabled", false)}
                            onChange={onChange}/>
                 <TextInput value={value}
-                           placeholder="Without busy state"
+                           placeholder="Toggle Support Busy"
                            supportBusy={boolean("Support Busy", false)}
                            isBusy={boolean("Is Busy", false)}
                            hasError={boolean("Has Error", false)}
