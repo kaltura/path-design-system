@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import { Input } from 'antd';
 import { createUseStyles, theming, useTheme } from './theme';
 import { Theme } from './theme/theme';
@@ -52,6 +53,31 @@ const useStyles = createUseStyles((theme: Theme) => ({
             boxShadow: 'none',
         }
     }),
+    inputBorderLess: () => ({
+        height: '32px',
+        border: 'none',
+        boxShadow: 'none',
+        '&:hover': {
+            border: 'none',
+            boxShadow: 'none',
+        },
+        '&:focus': {
+            border: 'none',
+            boxShadow: 'none',
+        },
+        '&:active': {
+            border: 'none',
+            boxShadow: 'none',
+        },
+        '&:disabled': {
+            border: 'none',
+            boxShadow: 'none',
+        },
+        '&:disabled:hover': {
+            border: 'none',
+            boxShadow: 'none',
+        }
+    }),
     inputError: () => ({
         border: `2px solid ${theme.colors.danger}`,
         '&:hover': {
@@ -76,77 +102,103 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled:hover': {
             boxShadow: 'none',
             border: `1px solid ${theme.colors.greyscale5}`,
-        }
+        },
     }),
-    inputWithBothAffix: {
-        padding: '0 40px 0 40px',
-    },
-    inputWithPrefix: {
-        padding: '0 8px 0 40px',
-    },
-    inputWithSuffix: {
-        padding: '0 40px 0 8px',
-    },
     affixWrapper: {
-        boxSizing: 'border-box',
-        margin: 0,
-        padding: 0,
-        lineHeight: '1.5',
-        position: 'relative',
-        display: 'inline-block',
         width: '100%',
-        textAlign: 'start',
-    },
-    affixContent: {
-        position: 'absolute',
-        top: '50%',
-        zIndex: 2,
         display: 'flex',
         alignItems: 'center',
-        lineHeight: 0,
-        transform: 'translateY(-50%)',
+        border: `1px solid ${theme.colors.greyscale4}`,
+        borderRadius: '4px',
+        '&:hover:not([aria-disabled=true]):not([has-error=true])': {
+            borderColor: theme.colors.cyan,
+            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
+        },
+    },
+    affixWrapper__focus: {
+        borderColor: `${theme.colors.cyan} !important`,
+        boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
+    },
+    affixWrapper__disabled: {
+        boxShadow: 'none',
+        backgroundColor: theme.colors.disabled,
+        border: `1px solid ${theme.colors.greyscale5}`,
+    },
+    affixWrapper__error: {
+        borderColor: theme.colors.danger,
+        boxShadow: `0 0 0 1px ${theme.colors.danger}`,
     },
     preContent: {
-        left: '8px',
+        margin: '0 0 0 8px',
     },
     postContent: {
-        right: '8px',
+        margin: '0 8px 0 0',
+        flex: '1 0 auto',
         color: theme.colors.greyscale2,
         fontSize: theme.input.fontSize,
     },
 }), { theming });
 
-const renderAffix = (props: { element?: AffixContent, className?: string }) => {
-    if (!props.element) {
+const renderAffix = (props: { element?: AffixContent, className?: string, supportBusy?: boolean }) => {
+    const { element, className, supportBusy } = props;
+    if (!element && !supportBusy) {
         return null;
     }
-    const content = typeof props.element === 'string' ? props.element : React.cloneElement(props.element);
-    return <span className={props.className}>{content}</span>;
+    return <span className={className} style={{ minWidth: '24px' }}>{element}</span>;
 };
 
 export const TextInput = (props: InputFieldProps) => {
+    const {
+        value,
+        defaultValue,
+        preContent,
+        postContent,
+        inputRef,
+        disabled,
+        isBusy,
+        supportBusy,
+        onChange,
+        placeholder,
+        hasError = false
+    } = props;
     const theme = useTheme();
     const classes = useStyles({ ...props, theme });
-    const { preContent, postContent, inputRef, disabled, hasError, isBusy, supportBusy, ...rest } = props;
     const hasAffix = !!preContent || !!postContent || supportBusy;
+    const canSetBusy = supportBusy && !disabled && !hasError;
+    
+    const [isInFocus, setIsInFocus] = useState(false);
+    
     const inputClass = classNames({
         [classes.input]: true,
-        [classes.inputDefault]: !hasError,
-        [classes.inputError]: hasError,
-        [classes.inputWithPrefix]: !!(preContent || supportBusy) && !postContent,
-        [classes.inputWithSuffix]: !!postContent && !(!!preContent || supportBusy),
-        [classes.inputWithBothAffix]: !!(preContent || supportBusy) && !!postContent,
+        [classes.inputDefault]: !hasError && !hasAffix,
+        [classes.inputError]: hasError && !hasAffix,
+        [classes.inputBorderLess]: hasAffix,
     });
-    const affixWrapperClass = classNames({ [classes.affixWrapper]: true });
-    const prefixClass = classNames({ [classes.affixContent]: true, [classes.preContent]: true });
-    const suffixClass = classNames({ [classes.affixContent]: true, [classes.postContent]: true });
-    const canSetBusy = supportBusy && !disabled && !hasError;
-    const renderInput = () => <Input className={inputClass} {...rest} disabled={disabled} ref={inputRef}/>;
+    const affixWrapperClass = classNames({
+        [classes.affixWrapper]: true,
+        [classes.affixWrapper__focus]: !hasError && isInFocus,
+        [classes.affixWrapper__disabled]: disabled,
+        [classes.affixWrapper__error]: !disabled && hasError,
+    });
+    const prefixClass = classNames({ [classes.preContent]: true });
+    const suffixClass = classNames({ [classes.postContent]: true });
+    const hasErrorAttribute = hasError ? "true" : "false"; // convert to string for a custom attribute
+    
+    const renderInput = () => <Input className={inputClass}
+                                     value={value}
+                                     defaultValue={defaultValue}
+                                     disabled={disabled}
+                                     ref={inputRef}
+                                     placeholder={placeholder}
+                                     onFocus={() => setIsInFocus(true)}
+                                     onBlur={() => setIsInFocus(false)}
+                                     onChange={onChange}/>;
     const renderWithAffix = () => (
-        <span className={affixWrapperClass}>
+        <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
             {renderAffix({
                 element: isBusy && canSetBusy ? <SpinnerBright24Icon spin/> : preContent,
-                className: prefixClass
+                className: prefixClass,
+                supportBusy,
             })}
             {renderInput()}
             {renderAffix({ element: postContent, className: suffixClass })}

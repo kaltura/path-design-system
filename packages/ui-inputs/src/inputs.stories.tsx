@@ -33,8 +33,9 @@ export const DefaultInput: Story = () => {
                            supportBusy={true}
                            isBusy={boolean("Is Busy", false)}
                            hasError={boolean("Has Error", false)}
-                           disabled={boolean("Disabled", false)} onChange={onChange}/>
-                <TextInput value={value}
+                           disabled={boolean("Disabled", false)}
+                           onChange={onChange}/>
+                <TextInput defaultValue={value}
                            placeholder="With Icon"
                            preContent={<Video24Icon/>}
                            supportBusy={true}
@@ -53,7 +54,7 @@ export const DefaultInput: Story = () => {
                 <TextInput value={value}
                            placeholder="With Label and Icon"
                            preContent={<Video24Icon/>}
-                           postContent="Label"
+                           postContent="Label that a bit longer"
                            supportBusy={true}
                            isBusy={boolean("Is Busy", false)}
                            hasError={boolean("Has Error", false)}
@@ -61,6 +62,7 @@ export const DefaultInput: Story = () => {
                            onChange={onChange}/>
                 <TextInput value={value}
                            placeholder="Without busy state"
+                           supportBusy={boolean("Support Busy", false)}
                            isBusy={boolean("Is Busy", false)}
                            hasError={boolean("Has Error", false)}
                            disabled={boolean("Disabled", false)}
