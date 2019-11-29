@@ -13,7 +13,7 @@ export interface InputFieldProps {
     defaultValue?: string;
     disabled?: boolean;
     placeholder?: string
-    inputRef?: React.RefObject<Input>;
+    inputRef?: React.RefObject<any>;
     preContent?: AffixContent;
     postContent?: AffixContent;
     hasError?: boolean;
