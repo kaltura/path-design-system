@@ -188,9 +188,16 @@ export const TextInput = (props: InputFieldProps) => {
     const prefixClass = classNames({ [classes.preContent]: true });
     const suffixClass = classNames({ [classes.postContent]: true });
     const hasErrorAttribute = hasError ? "true" : "false"; // convert to string for a custom attribute
-    
+    const values = {}; // fix antd input value/defaultValue issue
+    if (value !== undefined) {
+        values['value'] = value;
+    }
+    if (defaultValue !== undefined) {
+        values['defaultValue'] = defaultValue;
+    }
+
     const renderInput = () => <Input className={inputClass}
-                                     value={value}
+                                     {...values}
                                      defaultValue={defaultValue}
                                      disabled={disabled}
                                      ref={inputRef}
