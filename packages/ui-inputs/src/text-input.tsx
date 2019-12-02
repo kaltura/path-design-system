@@ -8,12 +8,12 @@ import { SpinnerBright24Icon } from '@kaltura-path/ui-icons';
 
 export type AffixContent = React.ReactElement<any> | string;
 
-export interface InputFieldProps {
+export interface TextInputProps {
     value?: string;
     defaultValue?: string;
     disabled?: boolean;
     placeholder?: string
-    inputRef?: React.RefObject<any>;
+    inputRef?: (ref: HTMLInputElement | null) => void;
     preContent?: AffixContent;
     postContent?: AffixContent;
     hasError?: boolean;
@@ -27,7 +27,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         height: '34px',
         width: '100%',
         padding: '8px',
-        lineHeight: '34px',
+        lineHeight: '32px',
         fontFamily: theme.input.fontFamily,
         fontSize: theme.input.fontSize,
         fontWeight: theme.input.fontWeight,
@@ -152,7 +152,7 @@ const renderAffix = (props: { element?: AffixContent, className?: string, suppor
     return <span className={className}>{element}</span>;
 };
 
-export const TextInput = (props: InputFieldProps) => {
+export const TextInput = (props: TextInputProps) => {
     const {
         value,
         defaultValue,
@@ -195,12 +195,17 @@ export const TextInput = (props: InputFieldProps) => {
     if (defaultValue !== undefined) {
         values['defaultValue'] = defaultValue;
     }
+    
+    const handleInputRef = (ref: Input | null) => {
+        if (inputRef) {
+            inputRef(ref ? ref.input : null);
+        }
+    };
 
     const renderInput = () => <Input className={inputClass}
                                      {...values}
-                                     defaultValue={defaultValue}
                                      disabled={disabled}
-                                     ref={inputRef}
+                                     ref={handleInputRef}
                                      placeholder={placeholder}
                                      onFocus={() => setIsInFocus(true)}
                                      onBlur={() => setIsInFocus(false)}

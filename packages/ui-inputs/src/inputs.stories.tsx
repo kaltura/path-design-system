@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { theme, ThemeProvider } from './theme';
-import { TextInput } from './input';
+import { TextInput } from './text-input';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Video24Icon } from '@kaltura-path/ui-icons';
@@ -35,7 +35,7 @@ export const DefaultInput: Story = () => {
                            hasError={boolean("Has Error", false)}
                            disabled={boolean("Disabled", false)}
                            onChange={onChange}/>
-                <TextInput defaultValue={value}
+                <TextInput value={value}
                            placeholder="With Icon"
                            preContent={<Video24Icon/>}
                            supportBusy={true}
