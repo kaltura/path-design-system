@@ -1,11 +1,13 @@
 import * as React from 'react'
 import { useState } from 'react'
 import { Input } from 'antd';
-import { createUseStyles, theming, useTheme } from './theme';
+import { createUseStyles, theming } from './theme';
 import { Theme } from './theme/theme';
 import classNames from 'classnames';
 import { SpinnerBright24Icon } from '@kaltura-path/ui-icons';
 
+export type InputElement = HTMLInputElement | null;
+export type InputRef = ((ref: InputElement) => void) | React.MutableRefObject<InputElement>;
 export type AffixContent = React.ReactElement<any> | string;
 
 export interface TextInputProps {
@@ -13,7 +15,7 @@ export interface TextInputProps {
     defaultValue?: string;
     disabled?: boolean;
     placeholder?: string
-    inputRef?: (ref: HTMLInputElement | null) => void;
+    inputRef?: InputRef;
     preContent?: AffixContent;
     postContent?: AffixContent;
     hasError?: boolean;
@@ -33,7 +35,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontWeight: theme.input.fontWeight,
         borderRadius: theme.input.borderRadius,
     },
-    inputDefault: () => ({
+    inputDefault: {
         '&:hover': {
             borderColor: theme.colors.cyan,
             boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
@@ -52,8 +54,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled:hover': {
             boxShadow: 'none',
         }
-    }),
-    inputBorderLess: () => ({
+    },
+    inputBorderLess: {
         height: '32px',
         border: 'none',
         boxShadow: 'none',
@@ -77,8 +79,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
             border: 'none',
             boxShadow: 'none',
         }
-    }),
-    inputError: () => ({
+    },
+    inputError: {
         border: `2px solid ${theme.colors.danger}`,
         '&:hover': {
             boxShadow: 'none',
@@ -103,7 +105,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             boxShadow: 'none',
             border: `1px solid ${theme.colors.greyscale5}`,
         },
-    }),
+    },
     affixWrapper: {
         width: '100%',
         display: 'flex',
@@ -166,10 +168,8 @@ export const TextInput = (props: TextInputProps) => {
         placeholder,
         hasError = false
     } = props;
-    const theme = useTheme();
-    const classes = useStyles({ ...props, theme });
+    const classes = useStyles(props);
     const hasAffix = !!preContent || !!postContent || supportBusy;
-    const canSetBusy = supportBusy && !disabled && !hasError;
     
     const [isInFocus, setIsInFocus] = useState(false);
     
@@ -183,7 +183,7 @@ export const TextInput = (props: TextInputProps) => {
         [classes.affixWrapper]: true,
         [classes.affixWrapper__focus]: !hasError && isInFocus,
         [classes.affixWrapper__disabled]: disabled,
-        [classes.affixWrapper__error]: !disabled && hasError,
+        [classes.affixWrapper__error]: hasError,
     });
     const prefixClass = classNames({ [classes.preContent]: true });
     const suffixClass = classNames({ [classes.postContent]: true });
@@ -196,9 +196,17 @@ export const TextInput = (props: TextInputProps) => {
         values['defaultValue'] = defaultValue;
     }
     
+    // proxy ref to hide antd input implementation from the end-user
     const handleInputRef = (ref: Input | null) => {
-        if (inputRef) {
-            inputRef(ref ? ref.input : null);
+        if (!inputRef) {
+            return;
+        }
+    
+        const current = ref ? ref.input : null;
+        if (typeof inputRef === 'function') {
+            inputRef(current);
+        } else {
+            inputRef.current = current;
         }
     };
 
@@ -213,7 +221,7 @@ export const TextInput = (props: TextInputProps) => {
     const renderWithAffix = () => (
         <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
             {renderAffix({
-                element: isBusy && canSetBusy ? <SpinnerBright24Icon spin/> : preContent,
+                element: isBusy && supportBusy ? <SpinnerBright24Icon spin/> : preContent,
                 className: prefixClass,
                 supportBusy,
             })}
