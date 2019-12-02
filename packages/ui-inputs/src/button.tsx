@@ -1,8 +1,10 @@
 import * as React from 'react';
-import {useTheme, createUseStyles, theming} from './theme';
-import {Button as AntButton} from 'antd';
 import { ReactNode } from 'react';
+import { createUseStyles, theming, useTheme } from './theme';
+import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
+import { Theme } from './theme/theme';
+
 const classNames = require('classnames');
 
 export interface ButtonProps {
@@ -16,7 +18,7 @@ export interface ButtonProps {
     icon?: ReactNode
 }
 
-const useStyles = createUseStyles((theme: any) => ({
+const useStyles = createUseStyles((theme: Theme) => ({
     'btn': {
         height: '32px',
         minWidth: '34px',
@@ -160,7 +162,7 @@ const useStyles = createUseStyles((theme: any) => ({
     'btnIcon': {
         padding: '4px'
     },
-    'processingIcon':{
+    'processingIcon': {
         position: 'absolute'
     },
     'labelClass': {
@@ -169,13 +171,13 @@ const useStyles = createUseStyles((theme: any) => ({
     'hideLabel': {
         opacity: 0
     }
-}), {theming});
+}), { theming });
 
 export function Button(props: ButtonProps) {
     const theme = useTheme();
-    const classes = useStyles({...props, theme});console.log({...props, theme});
-    const {label, disabled, onClick, icon, isProcessing} = props;
-
+    const classes = useStyles({ ...props, theme });
+    const { label, disabled, onClick, icon, isProcessing } = props;
+    
     const btnClass = classNames({
         'btn-leave': true, // hack to remove border glow on click
         [classes.btn]: true,
@@ -197,8 +199,7 @@ export function Button(props: ButtonProps) {
         [classes.btnIcon]: props.icon,
         [classes.processingIcon]: props.isProcessing
     });
-
-
+    
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>
@@ -206,8 +207,8 @@ export function Button(props: ButtonProps) {
                 {!isProcessing
                     ? null
                     : props.isCTA
-                        ? <SpinnerDark24Icon className={iconClass} spin />
-                        : <SpinnerBright24Icon className={iconClass} spin />}
+                        ? <SpinnerDark24Icon className={iconClass} spin/>
+                        : <SpinnerBright24Icon className={iconClass} spin/>}
                 <span className={labelClass}>{label}</span>
             </div>
         </AntButton>
