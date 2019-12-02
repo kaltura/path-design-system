@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ReactNode } from 'react';
 import { createUseStyles, theming, useTheme } from './theme';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
@@ -15,8 +14,12 @@ export interface ButtonProps {
     onClick?: () => void;
     isProcessing?: boolean;
     isCTA?: boolean;
-    icon?: ReactNode
+    icon?: React.ReactElement
 }
+
+const withClassName = (element: React.ReactElement, className: string = '') => {
+    return React.cloneElement(element, { className });
+};
 
 const useStyles = createUseStyles((theme: Theme) => ({
     'btn': {
@@ -168,9 +171,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
     'labelClass': {
         padding: '4px'
     },
-    'hideLabel': {
+    'fadeOut': {
         opacity: 0
-    }
+    },
 }), { theming });
 
 export function Button(props: ButtonProps) {
@@ -193,22 +196,25 @@ export function Button(props: ButtonProps) {
     });
     const labelClass = classNames({
         [classes.labelClass]: props.label && props.label.length,
-        [classes.hideLabel]: props.isProcessing
+        [classes.fadeOut]: props.isProcessing
     });
-    const iconClass = classNames({
+    const spinnerIconClass = classNames({
         [classes.btnIcon]: props.icon,
         [classes.processingIcon]: props.isProcessing
+    });
+    const iconClass = classNames({
+        [classes.fadeOut]: props.isProcessing,
     });
     
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>
-                {icon && !isProcessing ? icon : null}
+                {icon ? withClassName(icon, iconClass) : null}
                 {!isProcessing
                     ? null
                     : props.isCTA
-                        ? <SpinnerDark24Icon className={iconClass} spin/>
-                        : <SpinnerBright24Icon className={iconClass} spin/>}
+                        ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
+                        : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
                 <span className={labelClass}>{label}</span>
             </div>
         </AntButton>
