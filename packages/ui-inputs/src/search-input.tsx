@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { TextInput } from './text-input';
 import { Search24Icon, Undo24Icon } from '@kaltura-path/ui-icons';
 import { Theme } from './theme/theme';
-import { createUseStyles, theming, useTheme } from './theme';
+import { createUseStyles, theming } from './theme';
 import classNames from 'classnames';
 
 export interface SearchInputFieldProps {
@@ -26,16 +26,11 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
 export const SearchInput = (props: SearchInputFieldProps) => {
     const { value, defaultValue, disabled, placeholder, inputRef, hasError, isBusy, onChange } = props;
-    const theme = useTheme();
-    const classes = useStyles({ ...props, theme });
+    const classes = useStyles(props);
     const clearBtnClass = classNames({ [classes.clearBtn]: true });
     const [showClear, setShowClear] = useState(false);
     const toggleClear = (currentValue?: string) => {
-        if (currentValue !== undefined && currentValue !== null && currentValue !== '') {
-            setShowClear(true);
-        } else {
-            setShowClear(false);
-        }
+        setShowClear(!!currentValue);
     };
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         toggleClear(inputRef?.current?.input.value || event?.target?.value);
