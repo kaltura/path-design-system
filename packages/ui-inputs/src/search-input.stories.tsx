@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { theme, ThemeProvider } from './theme';
 import { action } from '@storybook/addon-actions';
 import { SearchInput } from './search-input';
+import { InputElement } from './text-input';
 
 export default {
     title: 'SearchInput',
@@ -10,10 +11,10 @@ export default {
 
 export const DefaultInput: Story = () => {
     const [value, setValue] = useState('');
-    const uncontrolledInput = useRef();
-    const onChange = (value: string) => {
-        action('changed')(value);
-        setValue(value);
+    const uncontrolledInput = useRef<InputElement>(null);
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        action('changed')(event);
+        setValue(event.target.value);
     };
     return <ThemeProvider theme={theme}>
         <div className="row">
