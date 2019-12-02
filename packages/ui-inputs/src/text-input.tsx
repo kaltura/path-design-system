@@ -8,7 +8,7 @@ import { SpinnerBright24Icon } from '@kaltura-path/ui-icons';
 
 export type InputElement = HTMLInputElement | null;
 export type InputRef = ((ref: InputElement) => void) | React.MutableRefObject<InputElement>;
-export type AffixContent = React.ReactElement<any> | string;
+export type AffixContent = React.ReactElement | string;
 
 export interface TextInputProps {
     value?: string;
@@ -21,7 +21,7 @@ export interface TextInputProps {
     hasError?: boolean;
     isBusy?: boolean;
     supportBusy?: boolean;
-    onChange?: any;
+    onChange?: (event: React.ChangeEvent<InputElement>) => void;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
