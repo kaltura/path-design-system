@@ -2,18 +2,20 @@ import * as React from 'react';
 import {action} from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
-import {ThemeProvider, theme} from './theme';
 import { Plus24Icon } from '@kaltura-path/ui-icons';
 import './styles.css';
+import { withThemeProvider } from '../storybook/with-theme-provider';
 
 export default {
     title: 'Action Buttons',
-    decorators: [withKnobs]
+    decorators: [
+        withKnobs,
+        withThemeProvider,
+    ]
 };
 
 export const DefaultButton = () => {
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
@@ -47,7 +49,6 @@ export const DefaultButton = () => {
                         onClick={action('clicked')}></Button>
             </div>
         </div>
-    </ThemeProvider>
 }
 
 
@@ -56,8 +57,7 @@ export const DefaultButton = () => {
 }
 
 export const CTAButton = () => {
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
@@ -94,7 +94,6 @@ export const CTAButton = () => {
                         isProcessing={true} onClick={action('clicked')}></Button>
             </div>
         </div>
-    </ThemeProvider>
 }
 
 (CTAButton as any).story = {
@@ -102,8 +101,7 @@ export const CTAButton = () => {
 }
 
 export const BorderlessButton = () => {
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
@@ -140,7 +138,6 @@ export const BorderlessButton = () => {
                         isProcessing={true} onClick={action('clicked')}></Button>
             </div>
         </div>
-    </ThemeProvider>
 }
 
 (BorderlessButton as any).story = {
