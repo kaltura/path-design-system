@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { InputElement, InputRef, TextInput } from './text-input';
-import { Search24Icon, Undo24Icon } from '@kaltura-path/ui-icons';
+import { Plus24Icon, Search24Icon } from '@kaltura-path/ui-icons';
 import { Theme } from './theme/theme';
 import { createUseStyles, theming } from './theme';
 import classNames from 'classnames';
@@ -20,7 +20,8 @@ export interface SearchInputFieldProps {
 const useStyles = createUseStyles((theme: Theme) => ({
     clearBtn: {
         cursor: 'pointer',
-        color: theme.colors.greyscale3,
+        color: theme.colors.grayscale3,
+        transform: 'rotate(45deg)',
     },
 }), { theming });
 
@@ -103,6 +104,6 @@ export const SearchInput = (props: SearchInputFieldProps) => {
                       isBusy={isBusy}
                       onChange={handleChange}
                       supportBusy={true}
-                      postContent={showClear ? <Undo24Icon className={clearBtnClass} onClick={clearInput}/> : undefined}
+                      postContent={showClear ? <Plus24Icon className={clearBtnClass} onClick={clearInput}/> : undefined}
                       preContent={<Search24Icon/>}/>;
 };
