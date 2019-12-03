@@ -53,9 +53,4 @@ module.exports = async ({config, mode}) => {
       ]
     }
   }
-  Object.assign(config, {
-
-  })
-  // Return the altered config
-  return config;
 };
