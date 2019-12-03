@@ -19,7 +19,7 @@ export interface Theme {
         deepcyan: string;
         cyan: string;
         royalblue: string;
-        disabled: string;
+        white: string;
     };
     button: {
         borderRadius: string;
@@ -56,7 +56,7 @@ export const theme: Theme = {
         deepcyan: '#00a784',
         cyan: '#01accd',
         royalblue: '#1c4b98',
-        disabled: '#F5F5F5',
+        white: '#FFFFFF',
     },
     button: {
         borderRadius: '4px',

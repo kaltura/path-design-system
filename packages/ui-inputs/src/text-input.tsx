@@ -53,7 +53,11 @@ const useStyles = createUseStyles((theme: Theme) => ({
         },
         '&:disabled': {
             color: theme.colors.grayscale4,
+            backgroundColor: theme.colors.white,
             boxShadow: 'none',
+            '&::placeholder': {
+                color: theme.colors.grayscale4,
+            },
         },
         '&:disabled:hover': {
             boxShadow: 'none',
@@ -78,6 +82,10 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled': {
             border: 'none',
             boxShadow: 'none',
+            backgroundColor: theme.colors.white,
+            '&::placeholder': {
+                color: theme.colors.grayscale4,
+            },
         },
         '&:disabled:hover': {
             border: 'none',
@@ -104,6 +112,10 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled': {
             boxShadow: 'none',
             border: `1px solid ${theme.colors.grayscale5}`,
+            backgroundColor: theme.colors.white,
+            '&::placeholder': {
+                color: theme.colors.grayscale4,
+            },
         },
         '&:disabled:hover': {
             boxShadow: 'none',
@@ -127,15 +139,18 @@ const useStyles = createUseStyles((theme: Theme) => ({
     },
     affixWrapper__disabled: {
         boxShadow: 'none',
-        backgroundColor: theme.colors.disabled,
+        backgroundColor: theme.colors.white,
         border: `1px solid ${theme.colors.grayscale5}`,
+        '&::placeholder': {
+            color: theme.colors.grayscale4,
+        },
     },
     affixWrapper__error: {
         borderColor: theme.colors.danger,
         boxShadow: `0 0 0 1px ${theme.colors.danger}`,
     },
     preContent: {
-        color: theme.colors.grayscale3,
+        color: theme.colors.grayscale2,
         margin: '0 0 0 8px',
         height: '24px',
         minWidth: '24px',
@@ -145,8 +160,12 @@ const useStyles = createUseStyles((theme: Theme) => ({
         flex: '1 0 auto',
         height: '24px',
         minWidth: '24px',
+        lineHeight: '24px',
         color: theme.colors.grayscale2,
         fontSize: theme.input.fontSize,
+    },
+    affixContent__disabled: {
+        color: theme.colors.grayscale4,
     },
 }), { theming });
 
@@ -189,8 +208,8 @@ export const TextInput = (props: TextInputProps) => {
         [classes.affixWrapper__disabled]: disabled,
         [classes.affixWrapper__error]: hasError,
     });
-    const prefixClass = classNames({ [classes.preContent]: true });
-    const suffixClass = classNames({ [classes.postContent]: true });
+    const prefixClass = classNames({ [classes.preContent]: true, [classes.affixContent__disabled]: disabled });
+    const suffixClass = classNames({ [classes.postContent]: true, [classes.affixContent__disabled]: disabled });
     const hasErrorAttribute = hasError ? "true" : "false"; // convert to string for a custom attribute
     const values = {}; // fix antd input value/defaultValue issue
     if (value !== undefined) {
