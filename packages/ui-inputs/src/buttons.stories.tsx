@@ -2,18 +2,20 @@ import * as React from 'react';
 import {action} from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
-import {ThemeProvider, theme} from './theme';
 import { Plus24Icon } from '@kaltura-path/ui-icons';
+import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/styles.css';
 
 export default {
     title: 'Action Buttons',
-    decorators: [withKnobs]
+    decorators: [
+        withKnobs,
+        withThemeProvider,
+    ]
 };
 
 export const DefaultButton: Story = () => {
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
@@ -47,8 +49,7 @@ export const DefaultButton: Story = () => {
                         onClick={action('clicked')}></Button>
             </div>
         </div>
-    </ThemeProvider>
-};
+}
 
 
 DefaultButton.story = {
@@ -56,8 +57,7 @@ DefaultButton.story = {
 };
 
 export const CTAButton: Story = () => {
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
@@ -94,16 +94,14 @@ export const CTAButton: Story = () => {
                         isProcessing={true} onClick={action('clicked')}></Button>
             </div>
         </div>
-    </ThemeProvider>
-};
+}
 
 CTAButton.story = {
     title: 'CTA Button'
 };
 
 export const BorderlessButton: Story = () => {
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
                 <span className="label">Default:</span>
@@ -140,8 +138,7 @@ export const BorderlessButton: Story = () => {
                         isProcessing={true} onClick={action('clicked')}></Button>
             </div>
         </div>
-    </ThemeProvider>
-};
+}
 
 BorderlessButton.story = {
     title: 'Borderless Button'
