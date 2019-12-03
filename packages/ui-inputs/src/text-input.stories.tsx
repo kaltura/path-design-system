@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { theme, ThemeProvider } from './theme';
 import { TextInput } from './text-input';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { Video24Icon } from '@kaltura-path/ui-icons';
+import { withThemeProvider } from '../storybook/with-theme-provider';
 
 export default {
     title: 'TextInput',
-    decorators: [withKnobs]
+    decorators: [
+        withKnobs,
+        withThemeProvider,
+    ]
 };
 
 export const DefaultInput: Story = () => {
@@ -17,8 +20,7 @@ export const DefaultInput: Story = () => {
         action('changed')(event);
         setValue(event.target.value);
     };
-    return <ThemeProvider theme={theme}>
-        <div className="row">
+    return <div className="row">
             <div className="col h300">
                 <span className="label w150">Default:</span>
                 <span className="label w150">With Icon:</span>
@@ -68,8 +70,7 @@ export const DefaultInput: Story = () => {
                            disabled={boolean("Disabled", false)}
                            onChange={onChange}/>
             </div>
-        </div>
-    </ThemeProvider>;
+        </div>;
 };
 
 DefaultInput.story = {
