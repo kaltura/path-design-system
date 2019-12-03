@@ -4,7 +4,7 @@ import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
 import { Plus24Icon } from '@kaltura-path/ui-icons';
 import './styles.css';
-import { withThemeProvider } from './with-theme-provider';
+import { withThemeProvider } from '../storybook/with-theme-provider';
 
 export default {
     title: 'Action Buttons',

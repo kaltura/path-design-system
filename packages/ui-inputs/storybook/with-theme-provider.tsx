@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { theme, ThemeProvider } from './theme';
+import { theme, ThemeProvider } from '../src/theme';
 import { StoryFn } from '@storybook/addons';
 
 export const withThemeProvider = (storyFn: StoryFn<React.ReactElement>) => (
