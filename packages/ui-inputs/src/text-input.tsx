@@ -34,6 +34,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontSize: theme.input.fontSize,
         fontWeight: theme.input.fontWeight,
         borderRadius: theme.input.borderRadius,
+        '&::placeholder': {
+            color: theme.colors.grayscale2,
+        }
     },
     inputDefault: {
         '&:hover': {
@@ -49,6 +52,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
         },
         '&:disabled': {
+            color: theme.colors.grayscale4,
             boxShadow: 'none',
         },
         '&:disabled:hover': {
@@ -99,18 +103,18 @@ const useStyles = createUseStyles((theme: Theme) => ({
         },
         '&:disabled': {
             boxShadow: 'none',
-            border: `1px solid ${theme.colors.greyscale5}`,
+            border: `1px solid ${theme.colors.grayscale5}`,
         },
         '&:disabled:hover': {
             boxShadow: 'none',
-            border: `1px solid ${theme.colors.greyscale5}`,
+            border: `1px solid ${theme.colors.grayscale5}`,
         },
     },
     affixWrapper: {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        border: `1px solid ${theme.colors.greyscale4}`,
+        border: `1px solid ${theme.colors.grayscale4}`,
         borderRadius: '4px',
         '&:hover:not([aria-disabled=true]):not([has-error=true])': {
             borderColor: theme.colors.cyan,
@@ -124,14 +128,14 @@ const useStyles = createUseStyles((theme: Theme) => ({
     affixWrapper__disabled: {
         boxShadow: 'none',
         backgroundColor: theme.colors.disabled,
-        border: `1px solid ${theme.colors.greyscale5}`,
+        border: `1px solid ${theme.colors.grayscale5}`,
     },
     affixWrapper__error: {
         borderColor: theme.colors.danger,
         boxShadow: `0 0 0 1px ${theme.colors.danger}`,
     },
     preContent: {
-        color: theme.colors.greyscale3,
+        color: theme.colors.grayscale3,
         margin: '0 0 0 8px',
         height: '24px',
         minWidth: '24px',
@@ -141,7 +145,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         flex: '1 0 auto',
         height: '24px',
         minWidth: '24px',
-        color: theme.colors.greyscale2,
+        color: theme.colors.grayscale2,
         fontSize: theme.input.fontSize,
     },
 }), { theming });
