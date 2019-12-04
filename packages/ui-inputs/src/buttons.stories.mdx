@@ -1,5 +1,4 @@
 import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
-import * as React from 'react';
 import {action} from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
@@ -12,43 +11,44 @@ import { withThemeProvider } from '../storybook/with-theme-provider';
 # Badge
 
 Let's define a story for our `Badge` component:
-
-<Story name="default">
-    <div className="row">
-            <div className="col">
-                <span className="label" style={{'color': 'white'}}>spacer</span>
-                <span className="label">Default:</span>
-                <span className="label">Disabled:</span>
-                <span className="label">Active:</span>
+<Preview>
+    <Story name="default">
+        <div className="row">
+                <div className="col">
+                    <span className="label" style={{'color': 'white'}}>spacer</span>
+                    <span className="label">Default:</span>
+                    <span className="label">Disabled:</span>
+                    <span className="label">Active:</span>
+                </div>
+                <div className="spacer"></div>
+                <div className="col">
+                    <span className="label">Label</span>
+                    <Button isProcessing={boolean("Processing", false)} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                    <Button isProcessing={boolean("Processing", false)} disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                    <Button isProcessing={boolean("Processing", false)} isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
+                </div>
+                <div className="spacer"></div>
+                <div className="col">
+                    <span className="label">Icon + Label</span>
+                    <Button isProcessing={boolean("Processing", false)} label={text("Label", "Label")} icon={<Plus24Icon/>} onClick={action('clicked')}></Button>
+                    <Button isProcessing={boolean("Processing", false)} disabled={true} label={text("Label", "Label")} icon={<Plus24Icon/>}
+                            onClick={action('clicked')}></Button>
+                    <Button isProcessing={boolean("Processing", false)} isActive={true} label={text("Label", "Label")} icon={<Plus24Icon/>}
+                            onClick={action('clicked')}></Button>
+                </div>
+                <div className="spacer"></div>
+                <div className="col">
+                    <span className="label">Processing</span>
+                    <Button label={text("Label", "Label")} isProcessing={true}
+                            onClick={action('clicked')}></Button>
+                    <Button disabled={true} label={text("Label", "Label")} isProcessing={true}
+                            onClick={action('clicked')}></Button>
+                    <Button label={text("Label", "Label")} isProcessing={true}
+                            onClick={action('clicked')}></Button>
+                </div>
             </div>
-            <div className="spacer"></div>
-            <div className="col">
-                <span className="label">Label</span>
-                <Button isProcessing={boolean("Processing", false)} label={text("Label", "Label")} onClick={action('clicked')}></Button>
-                <Button isProcessing={boolean("Processing", false)} disabled={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
-                <Button isProcessing={boolean("Processing", false)} isActive={true} label={text("Label", "Label")} onClick={action('clicked')}></Button>
-            </div>
-            <div className="spacer"></div>
-            <div className="col">
-                <span className="label">Icon + Label</span>
-                <Button isProcessing={boolean("Processing", false)} label={text("Label", "Label")} icon={<Plus24Icon/>} onClick={action('clicked')}></Button>
-                <Button isProcessing={boolean("Processing", false)} disabled={true} label={text("Label", "Label")} icon={<Plus24Icon/>}
-                        onClick={action('clicked')}></Button>
-                <Button isProcessing={boolean("Processing", false)} isActive={true} label={text("Label", "Label")} icon={<Plus24Icon/>}
-                        onClick={action('clicked')}></Button>
-            </div>
-            <div className="spacer"></div>
-            <div className="col">
-                <span className="label">Processing</span>
-                <Button label={text("Label", "Label")} isProcessing={true}
-                        onClick={action('clicked')}></Button>
-                <Button disabled={true} label={text("Label", "Label")} isProcessing={true}
-                        onClick={action('clicked')}></Button>
-                <Button label={text("Label", "Label")} isProcessing={true}
-                        onClick={action('clicked')}></Button>
-            </div>
-        </div>
-</Story>
+    </Story>
+</Preview>
 
 <Story name="cta">
     <div className="row">

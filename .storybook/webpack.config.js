@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const tsImportPluginFactory = require('ts-import-plugin');
+const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 module.exports = async ({config, mode}) => {
 
@@ -39,6 +40,24 @@ module.exports = async ({config, mode}) => {
         },
       ],
     },
+        {
+          test: /\.(stories|story)\.mdx$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              // may or may not need this line depending on your app's setup
+              options: {
+                plugins: ['@babel/plugin-transform-react-jsx'],
+              },
+            },
+            {
+              loader: '@mdx-js/loader',
+              options: {
+                compilers: [createCompiler({})],
+              },
+            },
+          ],
+        },
     {
       test: /\.less$/,
       use: [
