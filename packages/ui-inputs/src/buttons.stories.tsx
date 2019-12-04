@@ -3,8 +3,8 @@ import {action} from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 import {Button} from './button';
 import { Plus24Icon } from '@kaltura-path/ui-icons';
-import './styles.css';
 import { withThemeProvider } from '../storybook/with-theme-provider';
+import '../../../.storybook/styles.css';
 
 export default {
     title: 'Action Buttons',
@@ -14,7 +14,7 @@ export default {
     ]
 };
 
-export const DefaultButton = () => {
+export const DefaultButton: Story = () => {
     return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
@@ -52,11 +52,11 @@ export const DefaultButton = () => {
 }
 
 
-(DefaultButton as any).story = {
+DefaultButton.story = {
     title: 'Default Button'
-}
+};
 
-export const CTAButton = () => {
+export const CTAButton: Story = () => {
     return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
@@ -96,11 +96,11 @@ export const CTAButton = () => {
         </div>
 }
 
-(CTAButton as any).story = {
+CTAButton.story = {
     title: 'CTA Button'
-}
+};
 
-export const BorderlessButton = () => {
+export const BorderlessButton: Story = () => {
     return <div className="row">
             <div className="col">
                 <span className="label" style={{'color': 'white'}}>spacer</span>
@@ -140,6 +140,6 @@ export const BorderlessButton = () => {
         </div>
 }
 
-(BorderlessButton as any).story = {
+BorderlessButton.story = {
     title: 'Borderless Button'
-}
+};

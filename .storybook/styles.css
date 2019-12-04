@@ -13,8 +13,18 @@
 .label {
   font-size: 14px;
   font-weight: bold;
+  line-height: 34px;
   width: 86px;
 }
 .spacer {
   width: 16px;
+}
+.w150 {
+  width: 150px;
+}
+.w400 {
+  width: 400px;
+}
+.h300 {
+  height: 300px;
 }

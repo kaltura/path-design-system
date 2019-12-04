@@ -36,25 +36,25 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:hover': {
             boxShadow: 'none',
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale4,
-            border: `1px solid ${theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
+            border: `1px solid ${theme.colors.grayscale4}`,
         },
         '&:focus': {
             backgroundColor: '#ffffff',
-            border: `1px solid ${theme.colors.greyscale4}`,
+            border: `1px solid ${theme.colors.grayscale4}`,
             color: '#434a4b',
         },
         '&:active': {
             boxShadow: 'none',
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale5,
-            border: `1px solid ${theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale5,
+            border: `1px solid ${theme.colors.grayscale4}`,
         },
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border: `1px solid ${theme.colors.greyscale4}`,
-            color: theme.colors.greyscale4
+            border: `1px solid ${theme.colors.grayscale4}`,
+            color: theme.colors.grayscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
@@ -84,8 +84,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
-            border: `1px solid ${theme.colors.greyscale4}`,
-            color: theme.colors.greyscale4
+            border: `1px solid ${theme.colors.grayscale4}`,
+            color: theme.colors.grayscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
@@ -99,8 +99,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
         boxShadow: 'none',
         '&:hover': {
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale4,
-            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.greyscale4}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.grayscale4}`,
         },
         '&:focus': {
             color: '#434a4b',
@@ -109,14 +109,14 @@ const useStyles = createUseStyles((theme: Theme) => ({
         },
         '&:active': {
             color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.greyscale5,
-            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.greyscale5}`,
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale5,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.grayscale5}`,
         },
         '&:disabled': {
             boxShadow: 'none',
             backgroundColor: '#ffffff',
             border: '1px solid #ffffff',
-            color: theme.colors.greyscale4
+            color: theme.colors.grayscale4
         },
         '&:disabled:hover': {
             boxShadow: 'none',
@@ -126,17 +126,17 @@ const useStyles = createUseStyles((theme: Theme) => ({
     }),
     'btnActive': {
         color: '#434a4b',
-        backgroundColor: theme.colors.greyscale5,
-        border: `1px solid ${theme.colors.greyscale5}`,
+        backgroundColor: theme.colors.grayscale5,
+        border: `1px solid ${theme.colors.grayscale5}`,
         '&:hover': {
             color: '#434a4b',
-            backgroundColor: theme.colors.greyscale5,
-            border: `1px solid ${theme.colors.greyscale5}`,
+            backgroundColor: theme.colors.grayscale5,
+            border: `1px solid ${theme.colors.grayscale5}`,
         },
         '&:focus': {
             color: '#434a4b',
-            backgroundColor: theme.colors.greyscale5,
-            border: `1px solid ${theme.colors.greyscale5}`,
+            backgroundColor: theme.colors.grayscale5,
+            border: `1px solid ${theme.colors.grayscale5}`,
         },
     },
     'btnCTAActive': {
