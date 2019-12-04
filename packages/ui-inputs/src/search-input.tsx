@@ -4,7 +4,8 @@ import { InputElement, InputRef, TextInput } from './text-input';
 import { Plus24Icon, Search24Icon } from '@kaltura-path/ui-icons';
 import { Theme } from './theme/theme';
 import { createUseStyles, theming } from './theme';
-import classNames from 'classnames';
+
+const classNames = require('classnames');
 
 export interface SearchInputFieldProps {
     value?: string;

@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { Input } from 'antd';
 import { createUseStyles, theming } from './theme';
 import { Theme } from './theme/theme';
-import classNames from 'classnames';
 import { SpinnerBright24Icon } from '@kaltura-path/ui-icons';
+
+const classNames = require('classnames');
 
 export type InputElement = HTMLInputElement | null;
 export type InputRef = ((ref: InputElement) => void) | React.MutableRefObject<InputElement>;
