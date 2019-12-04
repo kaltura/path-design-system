@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {useTheme, createUseStyles, theming} from './theme';
-import {Button as AntButton} from 'antd';
-import { ReactNode } from 'react';
+import { createUseStyles, theming } from './theme';
+import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
-import classNames from 'classnames';
+import { Theme } from './theme/theme';
+
+const classNames = require('classnames');
 
 export interface ButtonProps {
     label?: string;
@@ -13,10 +14,14 @@ export interface ButtonProps {
     onClick?: () => void;
     isProcessing?: boolean;
     isCTA?: boolean;
-    icon?: ReactNode
+    icon?: React.ReactElement
 }
 
-const useStyles = createUseStyles((theme: any) => ({
+const withClassName = (element: React.ReactElement, className: string = '') => {
+    return React.cloneElement(element, { className });
+};
+
+const useStyles = createUseStyles((theme: Theme) => ({
     'btn': {
         height: '32px',
         minWidth: '34px',
@@ -150,32 +155,36 @@ const useStyles = createUseStyles((theme: any) => ({
         },
     },
     'btnIconOnly': {
-        padding: '0px 0px !important'
+        padding: '0px 0px !important',
     },
     'btnContent': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'relative',
     },
     'btnIcon': {
-        padding: '4px'
+        padding: '4px',
     },
-    'processingIcon':{
-        position: 'absolute'
+    'processingIcon': {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
     },
     'labelClass': {
-        padding: '4px'
+        padding: '0 4px',
+        lineHeight: '24px',
     },
-    'hideLabel': {
-        opacity: 0
-    }
-}), {theming});
+    'fadeOut': {
+        opacity: 0,
+    },
+}), { theming });
 
 export function Button(props: ButtonProps) {
-    const theme = useTheme();
-    const classes = useStyles({...props, theme});console.log({...props, theme});
-    const {label, disabled, onClick, icon, isProcessing} = props;
-
+    const classes = useStyles(props);
+    const { label, disabled, onClick, icon, isProcessing } = props;
+    
     const btnClass = classNames({
         'btn-leave': true, // hack to remove border glow on click
         [classes.btn]: true,
@@ -191,23 +200,25 @@ export function Button(props: ButtonProps) {
     });
     const labelClass = classNames({
         [classes.labelClass]: props.label && props.label.length,
-        [classes.hideLabel]: props.isProcessing
+        [classes.fadeOut]: props.isProcessing
     });
-    const iconClass = classNames({
+    const spinnerIconClass = classNames({
         [classes.btnIcon]: props.icon,
         [classes.processingIcon]: props.isProcessing
     });
-
-
+    const iconClass = classNames({
+        [classes.fadeOut]: props.isProcessing,
+    });
+    
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>
-                {icon && !isProcessing ? icon : null}
+                {icon ? withClassName(icon, iconClass) : null}
                 {!isProcessing
                     ? null
                     : props.isCTA
-                        ? <SpinnerDark24Icon className={iconClass} spin />
-                        : <SpinnerBright24Icon className={iconClass} spin />}
+                        ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
+                        : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
                 <span className={labelClass}>{label}</span>
             </div>
         </AntButton>
