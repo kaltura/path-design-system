@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createUseStyles, theming, useTheme } from './theme';
+import { createUseStyles, theming } from './theme';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
 import { Theme } from './theme/theme';
@@ -177,8 +177,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 }), { theming });
 
 export function Button(props: ButtonProps) {
-    const theme = useTheme();
-    const classes = useStyles({ ...props, theme });
+    const classes = useStyles(props);
     const { label, disabled, onClick, icon, isProcessing } = props;
     
     const btnClass = classNames({
