@@ -155,24 +155,29 @@ const useStyles = createUseStyles((theme: Theme) => ({
         },
     },
     'btnIconOnly': {
-        padding: '0px 0px !important'
+        padding: '0px 0px !important',
     },
     'btnContent': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'relative',
     },
     'btnIcon': {
-        padding: '4px'
+        padding: '4px',
     },
     'processingIcon': {
-        position: 'absolute'
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
     },
     'labelClass': {
-        padding: '4px'
+        padding: '0 4px',
+        lineHeight: '24px',
     },
     'fadeOut': {
-        opacity: 0
+        opacity: 0,
     },
 }), { theming });
 
