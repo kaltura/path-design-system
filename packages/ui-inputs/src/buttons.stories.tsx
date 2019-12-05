@@ -7,14 +7,14 @@ import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/styles.css';
 
 export default {
-    title: 'Action Buttons',
+    title: 'Button',
     component: Button,
     decorators: [
         withKnobs,
         withThemeProvider,
     ],
     parameters: {
-        componentSubtitle: 'Handy status label',
+        componentSubtitle: 'To trigger an operation.',
     },
 };
 
@@ -58,6 +58,15 @@ export const ActionButton: Story = () => {
     </div>
 };
 
+ActionButton.story = {
+    title: 'Button',
+    parameters: {
+        docs: {
+            storyDescription: ''
+        }
+    }
+};
+
 export const ButtonTypes: Story = () => {
     return <div className="row">
         <div className="col">
@@ -70,6 +79,14 @@ export const ButtonTypes: Story = () => {
             <Button label="Borderless" borderless={true} onClick={action('clicked')}></Button>
         </div>
     </div>;
+};
+
+ButtonTypes.story = {
+    parameters: {
+        docs: {
+            storyDescription: `There're 3 types of buttons: default, CTA and borderless. They all have the same behavior, the only difference is how they look on the screen. To change Button type to CTA you need to set <strong>isCTA</strong> prop to true, to change Button type to Borderless you need to set <strong>borderless</strong> prop to <strong>true</strong>. To set the default Button style set <strong>isCTA</strong> and <strong>borderless</strong> props to false.`
+        }
+    }
 };
 
 export const ButtonWithIcon: Story = () => {
@@ -94,6 +111,14 @@ export const ButtonWithIcon: Story = () => {
     </div>;
 };
 
+ButtonWithIcon.story = {
+    parameters: {
+        docs: {
+            storyDescription: 'Button component can contain an Icon. This is done by setting the <strong>icon</strong> property. The icon has to be a React element type.',
+        }
+    }
+};
+
 export const ButtonProcessing: Story = () => {
     return <div className="row">
         <div className="col">
@@ -114,4 +139,12 @@ export const ButtonProcessing: Story = () => {
                     onClick={action('clicked')}></Button>
         </div>
     </div>;
+};
+
+ButtonProcessing.story = {
+    parameters: {
+        docs: {
+            storyDescription: 'A loading indicator can be added to a button by setting the <strong>isProcessing</strong> property on the Button. Button will preserve the width after switching to the busy state.'
+        }
+    }
 };
