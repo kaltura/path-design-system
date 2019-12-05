@@ -7,21 +7,37 @@ import { Theme } from './theme/theme';
 const classNames = require('classnames');
 
 export interface ButtonProps {
-    /** Label of the button */
+    /** Label of the button
+     * @default undefined
+     * */
     label?: string;
-    /** Disables input and changes style of the button */
+    /** Disables input and changes style of the button
+     * @default false
+     * */
     disabled?: boolean;
-    /** Set button in a borderless mode and changes its style */
+    /** Set button in a borderless mode and changes its style
+     * @default false
+     * */
     borderless?: boolean;
-    /** Set button in an active mode and changes its style */
+    /** Set button in an active mode and changes its style
+     * @default false
+     * */
     isActive?: boolean;
-    /** A click event callback */
+    /** A click event callback
+     * @default undefined
+     * */
     onClick?: () => void;
-    /** Set button in a processing mode and shows animation indicating busy state */
+    /** Set button in a processing mode and shows animation indicating busy state
+     * @default false
+     * */
     isProcessing?: boolean;
-    /** Set button in an CTA mode and changes its style */
+    /** Set button in an CTA mode and changes its style
+     * @default false
+     * */
     isCTA?: boolean;
-    /** An icon element that is placed next to the label (on the left side) */
+    /** An icon element that is placed next to the label (on the left side)
+     * @default undefined
+     * */
     icon?: React.ReactElement
 }
 
