@@ -58,15 +58,6 @@ export const ActionButton: Story = () => {
     </div>
 };
 
-ActionButton.story = {
-    title: 'Button',
-    parameters: {
-        docs: {
-            storyDescription: ''
-        }
-    }
-};
-
 export const ButtonTypes: Story = () => {
     return <div className="row">
         <div className="col">
