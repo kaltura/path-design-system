@@ -120,6 +120,9 @@ const renderAffix = (props: { element?: AffixContent, className?: string, suppor
     return <span className={className}>{element}</span>;
 };
 
+/**
+ * TextInput description
+ */
 export const TextInput = (props: TextInputProps) => {
     const {
         value,

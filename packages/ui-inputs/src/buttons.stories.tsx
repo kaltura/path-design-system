@@ -12,7 +12,10 @@ export default {
     decorators: [
         withKnobs,
         withThemeProvider,
-    ]
+    ],
+    parameters: {
+        componentSubtitle: 'Handy status label',
+    },
 };
 
 const label = 'Type';

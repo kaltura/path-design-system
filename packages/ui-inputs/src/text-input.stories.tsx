@@ -8,6 +8,7 @@ import { withThemeProvider } from '../storybook/with-theme-provider';
 
 export default {
     title: 'TextInput',
+    component: TextInput,
     decorators: [
         withKnobs,
         withThemeProvider,
@@ -71,8 +72,4 @@ export const DefaultInput: Story = () => {
                            onChange={onChange}/>
             </div>
         </div>;
-};
-
-DefaultInput.story = {
-    title: 'Default TextInput',
 };

@@ -181,6 +181,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
     },
 }), { theming });
 
+/**
+ * Component description
+ */
 export function Button(props: ButtonProps) {
     const classes = useStyles(props);
     const { label, disabled, onClick, icon, isProcessing } = props;
