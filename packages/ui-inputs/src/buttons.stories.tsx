@@ -8,6 +8,7 @@ import '../../../.storybook/styles.css';
 
 export default {
     title: 'Action Buttons',
+    component: Button,
     decorators: [
         withKnobs,
         withThemeProvider,

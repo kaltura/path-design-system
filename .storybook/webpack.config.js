@@ -30,6 +30,7 @@ module.exports = async ({config, mode}) => {
         {
           loader: require.resolve('awesome-typescript-loader'),
           options: {
+            noUnusedLocals: false,
             getCustomTransformers: () => ({
               before: [ tsImportPluginFactory({libraryName: "antd", style: true}) ]
             }),
@@ -45,10 +46,6 @@ module.exports = async ({config, mode}) => {
           use: [
             {
               loader: 'babel-loader',
-              // may or may not need this line depending on your app's setup
-              options: {
-                plugins: ['@babel/plugin-transform-react-jsx'],
-              },
             },
             {
               loader: '@mdx-js/loader',
