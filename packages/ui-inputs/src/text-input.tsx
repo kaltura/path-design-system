@@ -27,7 +27,7 @@ export interface TextInputProps {
 
 const useStyles = createUseStyles((theme: Theme) => ({
     input: {
-        height: '34px',
+        height: '32px',
         width: '100%',
         padding: '8px',
         lineHeight: '32px',
@@ -35,39 +35,11 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontSize: theme.input.fontSize,
         fontWeight: theme.input.fontWeight,
         borderRadius: theme.input.borderRadius,
-        '&::placeholder': {
-            color: theme.colors.grayscale2,
-        }
-    },
-    inputDefault: {
-        '&:hover': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
-        },
-        '&:focus': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
-        },
-        '&:active': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
-        },
-        '&:disabled': {
-            color: theme.colors.grayscale4,
-            backgroundColor: theme.colors.white,
-            boxShadow: 'none',
-            '&::placeholder': {
-                color: theme.colors.grayscale4,
-            },
-        },
-        '&:disabled:hover': {
-            boxShadow: 'none',
-        }
-    },
-    inputBorderLess: {
-        height: '32px',
         border: 'none',
         boxShadow: 'none',
+        '&::placeholder': {
+            color: theme.colors.grayscale2,
+        },
         '&:hover': {
             border: 'none',
             boxShadow: 'none',
@@ -92,36 +64,6 @@ const useStyles = createUseStyles((theme: Theme) => ({
             border: 'none',
             boxShadow: 'none',
         }
-    },
-    inputError: {
-        border: `2px solid ${theme.colors.danger}`,
-        '&:hover': {
-            boxShadow: 'none',
-            border: `2px solid ${theme.colors.danger}`,
-            borderRightWidth: '2px !important',
-        },
-        '&:focus': {
-            boxShadow: 'none',
-            border: `2px solid ${theme.colors.danger}`,
-            borderRightWidth: '2px !important',
-        },
-        '&:active': {
-            boxShadow: 'none',
-            border: `2px solid ${theme.colors.danger}`,
-            borderRightWidth: '2px !important',
-        },
-        '&:disabled': {
-            boxShadow: 'none',
-            border: `1px solid ${theme.colors.grayscale5}`,
-            backgroundColor: theme.colors.white,
-            '&::placeholder': {
-                color: theme.colors.grayscale4,
-            },
-        },
-        '&:disabled:hover': {
-            boxShadow: 'none',
-            border: `1px solid ${theme.colors.grayscale5}`,
-        },
     },
     affixWrapper: {
         width: '100%',
@@ -193,16 +135,10 @@ export const TextInput = (props: TextInputProps) => {
         hasError = false
     } = props;
     const classes = useStyles(props);
-    const hasAffix = !!preContent || !!postContent || supportBusy;
     
     const [isInFocus, setIsInFocus] = useState(false);
     
-    const inputClass = classNames({
-        [classes.input]: true,
-        [classes.inputDefault]: !hasError && !hasAffix,
-        [classes.inputError]: hasError && !hasAffix,
-        [classes.inputBorderLess]: hasAffix,
-    });
+    const inputClass = classNames({ [classes.input]: true });
     const affixWrapperClass = classNames({
         [classes.affixWrapper]: true,
         [classes.affixWrapper__focus]: !hasError && isInFocus,
@@ -234,25 +170,22 @@ export const TextInput = (props: TextInputProps) => {
         }
     };
 
-    const renderInput = () => <Input className={inputClass}
-                                     {...values}
-                                     disabled={disabled}
-                                     ref={handleInputRef}
-                                     placeholder={placeholder}
-                                     onFocus={() => setIsInFocus(true)}
-                                     onBlur={() => setIsInFocus(false)}
-                                     onChange={onChange}/>;
-    const renderWithAffix = () => (
+    return (
         <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
             {renderAffix({
                 element: isBusy && supportBusy ? <SpinnerBright24Icon spin/> : preContent,
                 className: prefixClass,
                 supportBusy,
             })}
-            {renderInput()}
+            <Input className={inputClass}
+                   {...values}
+                   disabled={disabled}
+                   ref={handleInputRef}
+                   placeholder={placeholder}
+                   onFocus={() => setIsInFocus(true)}
+                   onBlur={() => setIsInFocus(false)}
+                   onChange={onChange}/>
             {renderAffix({ element: postContent, className: suffixClass })}
         </span>
     );
-    
-    return hasAffix ? renderWithAffix() : renderInput();
 };
