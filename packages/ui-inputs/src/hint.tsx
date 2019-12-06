@@ -58,8 +58,22 @@ const useStyles = createUseStyles((theme: Theme) => ({
         width: 0,
         height: 0,
         borderStyle: 'solid',
-        borderWidth: '0 6px 7px 6px',
+    },
+    arrowUp: {
+        borderWidth: '7px 6px 0 6px',
         borderColor: `transparent transparent ${theme.colors.grayscale1} transparent`,
+    },
+    arrowDown: {
+        borderWidth: '0 6px 7px 6px',
+        borderColor: `${theme.colors.grayscale1} transparent transparent transparent`,
+    },
+    arrowLeft: {
+        borderWidth: '6px 7px 6px 0',
+        borderColor: `transparent ${theme.colors.grayscale1} transparent transparent`,
+    },
+    arrowRight: {
+        borderWidth: '6px 0 6px 7px',
+        borderColor: `transparent transparent transparent ${theme.colors.grayscale1}`,
     },
 }), { theming });
 
@@ -71,9 +85,12 @@ export function Hint(props: HintProps) {
     const hintArrowClass = classNames({ [classes.arrow]: true });
     const getPopupElement = () => {
         return [
-            <div className={hintArrowClass}></div>,
-            <div className={hintContentClass}>{content}</div>
+            <div className={hintArrowClass} key="arrow"></div>,
+            <div className={hintContentClass} key="content">{content}</div>
         ];
+    };
+    const onPopupAlign = (e: any) => {
+        console.warn(e);
     };
     return (
         <Trigger
@@ -81,6 +98,7 @@ export function Hint(props: HintProps) {
             forceRender={true}
             popup={getPopupElement}
             popupAlign={getPlacement(direction)}
+            onPopupAlign={onPopupAlign}
         >
             <span>{children}</span>
         </Trigger>
