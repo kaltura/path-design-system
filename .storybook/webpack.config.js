@@ -41,20 +41,6 @@ module.exports = async ({config, mode}) => {
         },
       ],
     },
-        {
-          test: /\.(stories|story)\.mdx$/,
-          use: [
-            {
-              loader: 'babel-loader',
-            },
-            {
-              loader: '@mdx-js/loader',
-              options: {
-                compilers: [createCompiler({})],
-              },
-            },
-          ],
-        },
     {
       test: /\.less$/,
       use: [
