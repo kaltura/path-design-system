@@ -26,7 +26,7 @@ const options = {
 };
 const defaultValue = 'default';
 
-export const ActionButton: Story = () => {
+export const Default: Story = () => {
     return <div className="row">
         <div className="col">
             <Button label={text("Label", "Label")}
@@ -75,7 +75,7 @@ export const ButtonTypes: Story = () => {
 ButtonTypes.story = {
     parameters: {
         docs: {
-            storyDescription: `There're 3 types of buttons: default, CTA and borderless. They all have the same behavior, the only difference is how they look on the screen. To change Button type to CTA you need to set <strong>isCTA</strong> prop to true, to change Button type to Borderless you need to set <strong>borderless</strong> prop to <strong>true</strong>. To set the default Button style set <strong>isCTA</strong> and <strong>borderless</strong> props to false.`
+            storyDescription: `There're 3 types of buttons: default, CTA and borderless. They all have the same behavior, the only difference is how they look on the screen. To change Button type to CTA you need to set <code>isCTA</code> prop to true, to change Button type to Borderless you need to set <code>borderless</code> prop to <code>true</code>. To set the default Button style set <code>isCTA</code> and <code>borderless</code> props to false.`
         }
     }
 };
@@ -105,7 +105,7 @@ export const ButtonWithIcon: Story = () => {
 ButtonWithIcon.story = {
     parameters: {
         docs: {
-            storyDescription: 'Button component can contain an Icon. This is done by setting the <strong>icon</strong> property. The icon has to be a React element type.',
+            storyDescription: 'Button component can contain an Icon. This is done by setting the <code>icon</code> property. The icon has to be a React element type.',
         }
     }
 };
@@ -135,7 +135,7 @@ export const ButtonProcessing: Story = () => {
 ButtonProcessing.story = {
     parameters: {
         docs: {
-            storyDescription: 'A loading indicator can be added to a button by setting the <strong>isProcessing</strong> property on the Button. Button will preserve the width after switching to the busy state.'
+            storyDescription: 'A loading indicator can be added to a button by setting the <code>isProcessing</code> property on the Button. Button will preserve the width after switching to the busy state.'
         }
     }
 };
