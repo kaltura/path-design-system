@@ -8,13 +8,45 @@ import { createUseStyles, theming } from './theme';
 const classNames = require('classnames');
 
 export interface SearchInputFieldProps {
+    /**
+     * Initial value for controlled input
+     * @default undefined
+     * */
     value?: string;
+    /**
+     * Initial value for uncontrolled input
+     * @default undefined
+     * */
     defaultValue?: string;
+    /**
+     * Set input in disabled state which prevents user input and changes input style
+     * @default undefined
+     * */
     disabled?: boolean;
+    /**
+     * Placeholder text which is displayed when no initial value or user input provided
+     * @default undefined
+     * */
     placeholder?: string
+    /**
+     * Ref provides a way to access DOM nodes or React elements created in the render method
+     * @default undefined
+     * */
     inputRef?: InputRef;
+    /**
+     * Flag that indicates if input has an error, changes input style
+     * @default false
+     * */
     hasError?: boolean;
+    /**
+     * Sets input in busy state by displaying animation indicating busy state which replace the search icon
+     * @default false
+     * */
     isBusy?: boolean;
+    /**
+     * Event callback which is triggered after a user have typed something into an input field
+     * @default undefined
+     * */
     onChange?: (event: React.ChangeEvent<InputElement>) => void;
 }
 
@@ -57,6 +89,10 @@ const resolveOnChange = (
     }
 };
 
+/**
+ * Search input is an extension of TextInput component that provides additional ability to clear a user's input by clicking the clear button in the input.
+ * The clear button will appear once user input some value in the SearchInput.
+ */
 export const SearchInput = (props: SearchInputFieldProps) => {
     const { value, defaultValue, disabled, placeholder, inputRef, hasError, isBusy, onChange } = props;
     const classes = useStyles(props);
