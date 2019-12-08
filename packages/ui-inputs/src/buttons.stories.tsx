@@ -7,7 +7,7 @@ import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/styles.css';
 
 export default {
-    title: 'Button',
+    title: 'Inputs/Button',
     component: Button,
     decorators: [
         withKnobs,
@@ -54,7 +54,7 @@ export const Default: Story = () => {
                     borderless={select(label, options, defaultValue) === options.borderLess}
                     onClick={action('clicked')}></Button>
         </div>
-    
+
     </div>
 };
 
