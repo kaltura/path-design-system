@@ -24,7 +24,7 @@ export interface TextInputProps {
     defaultValue?: string;
     /**
      * Set input in disabled state which prevents user input and changes input style
-     * @default undefined
+     * @default false
      * */
     disabled?: boolean;
     /**
@@ -182,9 +182,9 @@ export const TextInput = (props: TextInputProps) => {
         hasError = false
     } = props;
     const classes = useStyles(props);
-    
+
     const [isInFocus, setIsInFocus] = useState(false);
-    
+
     const inputClass = classNames({ [classes.input]: true });
     const affixWrapperClass = classNames({
         [classes.affixWrapper]: true,
@@ -202,13 +202,13 @@ export const TextInput = (props: TextInputProps) => {
     if (defaultValue !== undefined) {
         values['defaultValue'] = defaultValue;
     }
-    
+
     // proxy ref to hide antd input implementation from the end-user
     const handleInputRef = (ref: Input | null) => {
         if (!inputRef) {
             return;
         }
-    
+
         const current = ref ? ref.input : null;
         if (typeof inputRef === 'function') {
             inputRef(current);

@@ -23,75 +23,6 @@ const useStyles = createUseStyles({
     }
 });
 
-/**
- * Workshop only stories
- */
-
-export const Workshop: Story = () => {
-    const [value, setValue] = useState('');
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        action('changed')(event);
-        setValue(event.target.value);
-    };
-    return <div className="row">
-        <div className="col h300">
-            <span className="label w150">Default:</span>
-            <span className="label w150">With Icon:</span>
-            <span className="label w150">With Label:</span>
-            <span className="label w150">With Label and Icon:</span>
-            <span className="label w150">Toggle Support Busy:</span>
-        </div>
-        <div className="spacer"></div>
-        <div className="col h300 w400">
-            <TextInput value={value}
-                       placeholder="Default"
-                       supportBusy={true}
-                       isBusy={boolean("Is Busy", false)}
-                       hasError={boolean("Has Error", false)}
-                       disabled={boolean("Disabled", false)}
-                       onChange={onChange}/>
-            <TextInput value={value}
-                       placeholder="With Icon"
-                       preContent={<Video24Icon/>}
-                       supportBusy={true}
-                       isBusy={boolean("Is Busy", false)}
-                       hasError={boolean("Has Error", false)}
-                       disabled={boolean("Disabled", false)}
-                       onChange={onChange}/>
-            <TextInput value={value}
-                       placeholder="With Label"
-                       postContent="Label"
-                       supportBusy={true}
-                       isBusy={boolean("Is Busy", false)}
-                       hasError={boolean("Has Error", false)}
-                       disabled={boolean("Disabled", false)}
-                       onChange={onChange}/>
-            <TextInput value={value}
-                       placeholder="With Label and Icon"
-                       preContent={<Video24Icon/>}
-                       postContent="Label that a bit longer"
-                       supportBusy={true}
-                       isBusy={boolean("Is Busy", false)}
-                       hasError={boolean("Has Error", false)}
-                       disabled={boolean("Disabled", false)}
-                       onChange={onChange}/>
-            <TextInput value={value}
-                       placeholder="Toggle Support Busy"
-                       supportBusy={boolean("Support Busy", false)}
-                       isBusy={boolean("Is Busy", false)}
-                       hasError={boolean("Has Error", false)}
-                       disabled={boolean("Disabled", false)}
-                       onChange={onChange}/>
-        </div>
-    </div>;
-};
-
-// Workshop.story = {
-//     parameters: {
-//         docs: { disable: true }
-//     }
-// }
-
 
 /**
  * Workshop & Documentation page stories
@@ -298,6 +229,89 @@ UncontrolledComponent.story = {
         }
     }
 };
+
+
+// TODO: should move this section to the top of the file.
+/**
+ * Workshop only stories
+ *
+ */
+
+export const Workshop: Story = () => {
+    const [value, setValue] = useState('');
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        action('changed')(event);
+        setValue(event.target.value);
+    };
+    return <div className="row">
+        <div className="col h300">
+            <span className="label w150">Default:</span>
+            <span className="label w150">With Icon:</span>
+            <span className="label w150">With Label:</span>
+            <span className="label w150">With Label and Icon:</span>
+            <span className="label w150">Toggle Support Busy:</span>
+        </div>
+        <div className="spacer"></div>
+        <div className="col h300 w400">
+            <TextInput value={value}
+                       placeholder="Default"
+                       supportBusy={true}
+                       isBusy={boolean("Is Busy", false)}
+                       hasError={boolean("Has Error", false)}
+                       disabled={boolean("Disabled", false)}
+                       onChange={onChange}/>
+            <TextInput value={value}
+                       placeholder="With Icon"
+                       preContent={<Video24Icon/>}
+                       supportBusy={true}
+                       isBusy={boolean("Is Busy", false)}
+                       hasError={boolean("Has Error", false)}
+                       disabled={boolean("Disabled", false)}
+                       onChange={onChange}/>
+            <TextInput value={value}
+                       placeholder="With Label"
+                       postContent="Label"
+                       supportBusy={true}
+                       isBusy={boolean("Is Busy", false)}
+                       hasError={boolean("Has Error", false)}
+                       disabled={boolean("Disabled", false)}
+                       onChange={onChange}/>
+            <TextInput value={value}
+                       placeholder="With Label and Icon"
+                       preContent={<Video24Icon/>}
+                       postContent="Label that a bit longer"
+                       supportBusy={true}
+                       isBusy={boolean("Is Busy", false)}
+                       hasError={boolean("Has Error", false)}
+                       disabled={boolean("Disabled", false)}
+                       onChange={onChange}/>
+            <TextInput value={value}
+                       placeholder="Toggle Support Busy"
+                       supportBusy={boolean("Support Busy", false)}
+                       isBusy={boolean("Is Busy", false)}
+                       hasError={boolean("Has Error", false)}
+                       disabled={boolean("Disabled", false)}
+                       onChange={onChange}/>
+        </div>
+    </div>;
+};
+
+
+Workshop.story = {
+    parameters: {
+        docs: {
+            disable: true,
+            storyDescription: `An example that includes all the features to be able to test them together.
+            It is here for internal use only and will be removed from the documentation soon.`,
+        }
+    }
+};
+
+// Workshop.story = {
+//     parameters: {
+//         docs: {  }
+//     }
+// }
 
 
 export default {

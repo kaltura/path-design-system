@@ -1,13 +1,13 @@
 export interface Theme {
     colors: {
-        greyscale1: string;
-        greyscale2: string;
-        greyscale3: string;
-        greyscale4: string;
-        greyscale5: string;
-        greyscale6: string;
-        greyscale7: string;
-        greyscale8: string;
+        grayscale1: string;
+        grayscale2: string;
+        grayscale3: string;
+        grayscale4: string;
+        grayscale5: string;
+        grayscale6: string;
+        grayscale7: string;
+        grayscale8: string;
         success: string;
         danger: string;
         acknowledgement: string;
@@ -19,8 +19,15 @@ export interface Theme {
         deepcyan: string;
         cyan: string;
         royalblue: string;
+        white: string;
     };
     button: {
+        borderRadius: string;
+        fontFamily: string;
+        fontWeight: string;
+        fontSize: string;
+    };
+    input: {
         borderRadius: string;
         fontFamily: string;
         fontWeight: string;
