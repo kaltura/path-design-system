@@ -12,16 +12,60 @@ export type InputRef = ((ref: InputElement) => void) | React.MutableRefObject<In
 export type AffixContent = React.ReactElement | string;
 
 export interface TextInputProps {
+    /**
+     * Initial value for controlled input
+     * @default undefined
+     * */
     value?: string;
+    /**
+     * Initial value for uncontrolled input
+     * @default undefined
+     * */
     defaultValue?: string;
+    /**
+     * Set input in disabled state which prevents user input and changes input style
+     * @default undefined
+     * */
     disabled?: boolean;
+    /**
+     * Placeholder text which is displayed when no initial value or user input provided
+     * @default undefined
+     * */
     placeholder?: string
+    /**
+     * Ref provides a way to access DOM nodes or React elements created in the render method
+     * @default undefined
+     * */
     inputRef?: InputRef;
+    /**
+     * Content that will be displayed to the left side inside an input. Can be either React component or string
+     * @default undefined
+     * */
     preContent?: AffixContent;
+    /**
+     * Content that will be displayed to the right side inside an input. Can be either React component or string
+     * @default undefined
+     * */
     postContent?: AffixContent;
+    /**
+     * Flag that indicates if input has an error, changes input style
+     * @default false
+     * */
     hasError?: boolean;
+    /**
+     * Sets input in busy state by displaying animation indicating busy state which replace 'preContent'. Can be set only if 'isBusy' prop is true otherwise nothing will happen
+     * @default false
+     * */
     isBusy?: boolean;
+    /**
+     * Flag that indicates if input can be put in a busy state which controlled by 'isBusy' prop
+     * @default false
+     * */
     supportBusy?: boolean;
+    /**
+     * Event callback which is triggered after a user have typed something into an input field
+     * @default undefined
+     * */
     onChange?: (event: React.ChangeEvent<InputElement>) => void;
 }
 
@@ -120,6 +164,9 @@ const renderAffix = (props: { element?: AffixContent, className?: string, suppor
     return <span className={className}>{element}</span>;
 };
 
+/**
+ * A basic widget for getting the user input is a text field. Keyboard and mouse (via screen keyboard) can be used for providing or changing data.
+ */
 export const TextInput = (props: TextInputProps) => {
     const {
         value,

@@ -57,6 +57,14 @@ async function worker({ iconsPaths, options, template }) {
     await fse.writeFile(absDestPath, fileString);
 }
 
+async function createMdx(options) {
+    const template = await fse.readFile(path.join(__dirname, 'template-story-mdx.mustache'), { encoding: 'utf8' });
+    const fileString = Mustache.render(template);
+    const absDestPath = path.join(options.outputDir, 'icons.stories.mdx');
+
+    await fse.writeFile(absDestPath, fileString);
+}
+
 export async function main(options) {
     try {
         let originalWrite;
@@ -94,6 +102,7 @@ export async function main(options) {
 
         queue.push([iconsPaths]);
         await queue.wait({ empty: true });
+        await createMdx(options);
 
         if (options.disableLog) {
             // bring back stdout
