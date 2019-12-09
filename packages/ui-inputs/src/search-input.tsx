@@ -97,7 +97,7 @@ export const SearchInput = (props: SearchInputFieldProps) => {
     const { value, defaultValue, disabled, placeholder, inputRef, hasError, isBusy, onChange } = props;
     const classes = useStyles(props);
     const clearBtnClass = classNames({ [classes.clearBtn]: true });
-    const [localValue, setLocalValue] = useState<string | undefined>('');
+    const [localValue, setLocalValue] = useState<string | undefined>(value ?? defaultValue);
     const [showClear, setShowClear] = useState(false);
     const [inputEl, setInputEl] = useState<InputElement>(null);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
