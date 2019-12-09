@@ -133,7 +133,6 @@ export const SearchInput = (props: SearchInputFieldProps) => {
     }, [localValue]);
     
     return <TextInput value={localValue}
-                      defaultValue={defaultValue}
                       disabled={disabled}
                       placeholder={placeholder}
                       inputRef={saveInput}

@@ -145,7 +145,7 @@ export const SearchInputRef: Story = () => {
 SearchInputRef.story = {
     parameters: {
         docs: {
-            storyDescription: `SearchInput supports React Refs (check out <a href="https://reactjs.org/docs/refs-and-the-dom.html" target="_blank">official docs</a> for more information). Provide function or reference object (<code>(ref: InputElement) => void | React.MutableRefObject</code>) to <code>inputRef</code> prop to connect it with SearchInput.`,
+            storyDescription: `SearchInput supports React Refs (check out <a href="https://reactjs.org/docs/refs-and-the-dom.html" target="_blank">official docs</a> for more information). Provide function or reference object (<code>(ref: HTMLInputElement) => void | React.MutableRefObject</code>) to <code>inputRef</code> prop to connect it with SearchInput.`,
         }
     }
 };
