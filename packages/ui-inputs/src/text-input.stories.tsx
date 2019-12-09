@@ -7,22 +7,17 @@ import { withThemeProvider } from '../storybook/with-theme-provider';
 import { Target24Icon, Upload24Icon, Video24Icon } from '@kaltura-path/ui-icons';
 import { createUseStyles } from './theme';
 
-
-
-
-
 const useStyles = createUseStyles({
     'table': {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
 
     },
     'row': {
         display: 'flex',
-        flexDirection: "column"
+        flexDirection: 'column',
     }
 });
-
 
 /**
  * Workshop & Documentation page stories
@@ -306,13 +301,6 @@ Workshop.story = {
         }
     }
 };
-
-// Workshop.story = {
-//     parameters: {
-//         docs: {  }
-//     }
-// }
-
 
 export default {
     title: 'Inputs/Text Input',
