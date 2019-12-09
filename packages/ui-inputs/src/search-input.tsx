@@ -97,7 +97,8 @@ export const SearchInput = (props: SearchInputFieldProps) => {
     const { value, defaultValue, disabled, placeholder, inputRef, hasError, isBusy, onChange } = props;
     const classes = useStyles(props);
     const clearBtnClass = classNames({ [classes.clearBtn]: true });
-    const [localValue, setLocalValue] = useState<string | undefined>(value ?? defaultValue);
+    const [isControlled] = useState<boolean>(value === '' || !!value);
+    const [localValue, setLocalValue] = useState<string>((value ?? defaultValue) || '');
     const [showClear, setShowClear] = useState(false);
     const [inputEl, setInputEl] = useState<InputElement>(null);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +106,9 @@ export const SearchInput = (props: SearchInputFieldProps) => {
         resolveOnChange(inputEl, event, onChange);
     };
     const clearInput = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        setLocalValue('');
+        if (!isControlled) {
+            setLocalValue('');
+        }
         inputEl?.focus();
         resolveOnChange(inputEl, event, onChange);
     };
@@ -125,8 +128,12 @@ export const SearchInput = (props: SearchInputFieldProps) => {
     };
     
     useEffect(() => {
-        setLocalValue(value ?? defaultValue);
-    }, [value, defaultValue]);
+        if (!isControlled) {
+            return;
+        }
+
+        setLocalValue(value || '');
+    }, [value]);
     
     useEffect(() => {
         setShowClear(!!localValue);
