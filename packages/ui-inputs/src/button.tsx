@@ -7,13 +7,37 @@ import { Theme } from './theme/theme';
 const classNames = require('classnames');
 
 export interface ButtonProps {
+    /** Label of the button
+     * @default undefined
+     * */
     label?: string;
+    /** Disables input and changes style of the button
+     * @default false
+     * */
     disabled?: boolean;
+    /** Set button in a borderless mode and changes its style
+     * @default false
+     * */
     borderless?: boolean;
+    /** Set button in an active mode and changes its style
+     * @default false
+     * */
     isActive?: boolean;
+    /** A click event callback
+     * @default undefined
+     * */
     onClick?: () => void;
+    /** Set button in a processing mode and shows animation indicating busy state
+     * @default false
+     * */
     isProcessing?: boolean;
+    /** Set button in an CTA mode and changes its style
+     * @default false
+     * */
     isCTA?: boolean;
+    /** An icon element that is placed next to the label (on the left side)
+     * @default undefined
+     * */
     icon?: React.ReactElement
 }
 
@@ -181,6 +205,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
     },
 }), { theming });
 
+/**
+ * A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
+ */
 export function Button(props: ButtonProps) {
     const classes = useStyles(props);
     const { label, disabled, onClick, icon, isProcessing } = props;

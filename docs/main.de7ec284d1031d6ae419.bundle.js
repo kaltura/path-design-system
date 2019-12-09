@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{0:function(n,o,e){e(506),e(619),n.exports=e(1090)},1:function(n,o){},619:function(n,o,e){"use strict";e.r(o);e(620),e(637),e(1014),e(1087);var t=e(78),s=e.n(t);setTimeout((function(){s.a.elements.panel["storybookjs/knobs/panel"].title="Properties"}))}},[[0,1,2]]]);

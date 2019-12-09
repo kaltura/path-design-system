@@ -12,22 +12,66 @@ export type InputRef = ((ref: InputElement) => void) | React.MutableRefObject<In
 export type AffixContent = React.ReactElement | string;
 
 export interface TextInputProps {
+    /**
+     * Initial value for controlled input
+     * @default undefined
+     * */
     value?: string;
+    /**
+     * Initial value for uncontrolled input
+     * @default undefined
+     * */
     defaultValue?: string;
+    /**
+     * Set input in disabled state which prevents user input and changes input style
+     * @default false
+     * */
     disabled?: boolean;
+    /**
+     * Placeholder text which is displayed when no initial value or user input provided
+     * @default undefined
+     * */
     placeholder?: string
+    /**
+     * Ref provides a way to access DOM nodes or React elements created in the render method
+     * @default undefined
+     * */
     inputRef?: InputRef;
+    /**
+     * Content that will be displayed to the left side inside an input. Can be either React component or string
+     * @default undefined
+     * */
     preContent?: AffixContent;
+    /**
+     * Content that will be displayed to the right side inside an input. Can be either React component or string
+     * @default undefined
+     * */
     postContent?: AffixContent;
+    /**
+     * Flag that indicates if input has an error, changes input style
+     * @default false
+     * */
     hasError?: boolean;
+    /**
+     * Sets input in busy state by displaying animation indicating busy state which replace 'preContent'. Can be set only if 'isBusy' prop is true otherwise nothing will happen
+     * @default false
+     * */
     isBusy?: boolean;
+    /**
+     * Flag that indicates if input can be put in a busy state which controlled by 'isBusy' prop
+     * @default false
+     * */
     supportBusy?: boolean;
+    /**
+     * Event callback which is triggered after a user have typed something into an input field
+     * @default undefined
+     * */
     onChange?: (event: React.ChangeEvent<InputElement>) => void;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
     input: {
-        height: '34px',
+        height: '32px',
         width: '100%',
         padding: '8px',
         lineHeight: '32px',
@@ -35,39 +79,11 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontSize: theme.input.fontSize,
         fontWeight: theme.input.fontWeight,
         borderRadius: theme.input.borderRadius,
-        '&::placeholder': {
-            color: theme.colors.grayscale2,
-        }
-    },
-    inputDefault: {
-        '&:hover': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
-        },
-        '&:focus': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
-        },
-        '&:active': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
-        },
-        '&:disabled': {
-            color: theme.colors.grayscale4,
-            backgroundColor: theme.colors.white,
-            boxShadow: 'none',
-            '&::placeholder': {
-                color: theme.colors.grayscale4,
-            },
-        },
-        '&:disabled:hover': {
-            boxShadow: 'none',
-        }
-    },
-    inputBorderLess: {
-        height: '32px',
         border: 'none',
         boxShadow: 'none',
+        '&::placeholder': {
+            color: theme.colors.grayscale2,
+        },
         '&:hover': {
             border: 'none',
             boxShadow: 'none',
@@ -92,36 +108,6 @@ const useStyles = createUseStyles((theme: Theme) => ({
             border: 'none',
             boxShadow: 'none',
         }
-    },
-    inputError: {
-        border: `2px solid ${theme.colors.danger}`,
-        '&:hover': {
-            boxShadow: 'none',
-            border: `2px solid ${theme.colors.danger}`,
-            borderRightWidth: '2px !important',
-        },
-        '&:focus': {
-            boxShadow: 'none',
-            border: `2px solid ${theme.colors.danger}`,
-            borderRightWidth: '2px !important',
-        },
-        '&:active': {
-            boxShadow: 'none',
-            border: `2px solid ${theme.colors.danger}`,
-            borderRightWidth: '2px !important',
-        },
-        '&:disabled': {
-            boxShadow: 'none',
-            border: `1px solid ${theme.colors.grayscale5}`,
-            backgroundColor: theme.colors.white,
-            '&::placeholder': {
-                color: theme.colors.grayscale4,
-            },
-        },
-        '&:disabled:hover': {
-            boxShadow: 'none',
-            border: `1px solid ${theme.colors.grayscale5}`,
-        },
     },
     affixWrapper: {
         width: '100%',
@@ -178,6 +164,9 @@ const renderAffix = (props: { element?: AffixContent, className?: string, suppor
     return <span className={className}>{element}</span>;
 };
 
+/**
+ * A basic widget for getting the user input is a text field. Keyboard and mouse (via screen keyboard) can be used for providing or changing data.
+ */
 export const TextInput = (props: TextInputProps) => {
     const {
         value,
@@ -193,16 +182,10 @@ export const TextInput = (props: TextInputProps) => {
         hasError = false
     } = props;
     const classes = useStyles(props);
-    const hasAffix = !!preContent || !!postContent || supportBusy;
-    
+
     const [isInFocus, setIsInFocus] = useState(false);
-    
-    const inputClass = classNames({
-        [classes.input]: true,
-        [classes.inputDefault]: !hasError && !hasAffix,
-        [classes.inputError]: hasError && !hasAffix,
-        [classes.inputBorderLess]: hasAffix,
-    });
+
+    const inputClass = classNames({ [classes.input]: true });
     const affixWrapperClass = classNames({
         [classes.affixWrapper]: true,
         [classes.affixWrapper__focus]: !hasError && isInFocus,
@@ -219,13 +202,13 @@ export const TextInput = (props: TextInputProps) => {
     if (defaultValue !== undefined) {
         values['defaultValue'] = defaultValue;
     }
-    
+
     // proxy ref to hide antd input implementation from the end-user
     const handleInputRef = (ref: Input | null) => {
         if (!inputRef) {
             return;
         }
-    
+
         const current = ref ? ref.input : null;
         if (typeof inputRef === 'function') {
             inputRef(current);
@@ -234,25 +217,22 @@ export const TextInput = (props: TextInputProps) => {
         }
     };
 
-    const renderInput = () => <Input className={inputClass}
-                                     {...values}
-                                     disabled={disabled}
-                                     ref={handleInputRef}
-                                     placeholder={placeholder}
-                                     onFocus={() => setIsInFocus(true)}
-                                     onBlur={() => setIsInFocus(false)}
-                                     onChange={onChange}/>;
-    const renderWithAffix = () => (
+    return (
         <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
             {renderAffix({
                 element: isBusy && supportBusy ? <SpinnerBright24Icon spin/> : preContent,
                 className: prefixClass,
                 supportBusy,
             })}
-            {renderInput()}
+            <Input className={inputClass}
+                   {...values}
+                   disabled={disabled}
+                   ref={handleInputRef}
+                   placeholder={placeholder}
+                   onFocus={() => setIsInFocus(true)}
+                   onBlur={() => setIsInFocus(false)}
+                   onChange={onChange}/>
             {renderAffix({ element: postContent, className: suffixClass })}
         </span>
     );
-    
-    return hasAffix ? renderWithAffix() : renderInput();
 };

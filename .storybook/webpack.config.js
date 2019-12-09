@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const tsImportPluginFactory = require('ts-import-plugin');
+const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
 module.exports = async ({config, mode}) => {
 
@@ -29,6 +30,7 @@ module.exports = async ({config, mode}) => {
         {
           loader: require.resolve('awesome-typescript-loader'),
           options: {
+            noUnusedLocals: false,
             getCustomTransformers: () => ({
               before: [ tsImportPluginFactory({libraryName: "antd", style: true}) ]
             }),

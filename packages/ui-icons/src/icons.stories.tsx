@@ -107,7 +107,3 @@ export const Library = () => {
         </main>
     );
 };
-
-(Library as any).story = {
-    title: 'Library',
-};
