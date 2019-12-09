@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Trigger from 'rc-trigger';
+import Trigger, { BuildInPlacements } from 'rc-trigger';
 import { createUseStyles, theming } from './theme';
 import { Theme } from './theme/theme';
 import 'rc-trigger/assets/index.css';
@@ -17,34 +17,34 @@ export interface HintProps {
     children?: React.ReactNode;
 }
 
-const placementMap: any = {
+const autoAdjustOverflow = { adjustX: true, adjustY: true };
+const targetOffset = [0, 0];
+
+const placementMap: BuildInPlacements = {
     left: {
         points: ['cr', 'cl'],
         offset: [-12, 0],
-        overflow: { adjustX: true, adjustY: true },
+        overflow: autoAdjustOverflow,
+        targetOffset,
     },
     right: {
         points: ['cl', 'cr'],
         offset: [12, 0],
-        overflow: { adjustX: true, adjustY: true }
+        overflow: autoAdjustOverflow,
+        targetOffset,
     },
     top: {
         points: ['bc', 'tc'],
         offset: [0, -12],
-        overflow: { adjustX: true, adjustY: true }
+        overflow: autoAdjustOverflow,
+        targetOffset,
     },
     bottom: {
         points: ['tc', 'bc'],
         offset: [0, 12],
-        overflow: { adjustX: true, adjustY: true }
+        overflow: autoAdjustOverflow,
+        targetOffset,
     },
-};
-
-const getPlacement = (direction: HintDirection) => {
-    if (placementMap.hasOwnProperty(direction)) {
-        return placementMap[direction];
-    }
-    return placementMap.top;
 };
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -75,30 +75,32 @@ const useStyles = createUseStyles((theme: Theme) => ({
         borderWidth: '6px 0 6px 7px',
         borderColor: `transparent transparent transparent ${theme.colors.grayscale1}`,
     },
+    hintContainer: {
+        position: 'relative',
+    }
 }), { theming });
 
 
 export function Hint(props: HintProps) {
     const { content, children, direction = 'top' } = props;
     const classes = useStyles(props);
-    const hintContentClass = classNames({ [classes.hintContent]: true });
     const hintArrowClass = classNames({ [classes.arrow]: true });
     const getPopupElement = () => {
-        return [
-            <div className={hintArrowClass} key="arrow"></div>,
-            <div className={hintContentClass} key="content">{content}</div>
-        ];
+        return <div className={classes.hintContainer}>
+            <div className={hintArrowClass} key="arrow"></div>
+            <div className={classes.hintContent} key="content">{content}</div>
+        </div>;
     };
-    const onPopupAlign = (e: any) => {
-        console.warn(e);
+    const getPopupClassNameFromAlign = (e: any) => {
+        console.dir(e);
     };
     return (
         <Trigger
-            action={['hover']}
-            forceRender={true}
+            action={['click']}
             popup={getPopupElement}
-            popupAlign={getPlacement(direction)}
-            onPopupAlign={onPopupAlign}
+            popupPlacement={direction}
+            builtinPlacements={placementMap}
+            getPopupClassNameFromAlign={getPopupClassNameFromAlign}
         >
             <span>{children}</span>
         </Trigger>
