@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/workshop",
+      "dest": "/public-workshop"
+    },
+    {
+      "src": "/.*",
+      "dest": "/public"
+    }
+  ]
+}
