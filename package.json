@@ -10,7 +10,7 @@
     "reset": "lerna run reset && rm -rf node_modules",
     "setup": "npm i && npm run build && lerna exec npm link",
     "lerna": "lerna",
-    "now-build": "npm run build && build-storybook --docs -o public && build-storybook -o public-workshop",
+    "now-build": "npm run build && build-storybook --docs -o public && build-storybook -o public/workshop",
     "deploy:prepare": "npm run clean && npm ci && npm run build && npm run lerna:lint && node scripts/bump-version.js",
     "deploy:publish-to-npm": "npm run clean && npm ci && npm run build && lerna publish from-package",
     "storybook": "start-storybook -p 6006",
