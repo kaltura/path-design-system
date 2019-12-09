@@ -139,3 +139,36 @@ ButtonProcessing.story = {
         }
     }
 };
+
+
+export const Workshop: Story = () => {
+    return <div className="row">
+        <div className="col">
+            <Button label={text("Label", "Label")}
+                    isCTA={select(label, options, defaultValue) === options.cta}
+                    isActive={boolean("Active", false)}
+                    disabled={boolean("Disabled", false)}
+                    borderless={select(label, options, defaultValue) === options.borderLess}
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button disabled={boolean("Disabled", false)}
+                    icon={<Plus24Icon/>}
+                    label={text("Label", "Label")}
+                    isCTA={select(label, options, defaultValue) === options.cta}
+                    borderless={select(label, options, defaultValue) === options.borderLess}
+                    isActive={boolean("Active", false)}
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button isProcessing={true}
+                    disabled={boolean("Disabled", false)}
+                    label={text("Label", "Label")}
+                    isCTA={select(label, options, defaultValue) === options.cta}
+                    isActive={boolean("Active", false)}
+                    borderless={select(label, options, defaultValue) === options.borderLess}
+                    onClick={action('clicked')}></Button>
+        </div>
+
+    </div>
+};
