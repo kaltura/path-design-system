@@ -307,13 +307,6 @@ Workshop.story = {
     }
 };
 
-// Workshop.story = {
-//     parameters: {
-//         docs: {  }
-//     }
-// }
-
-
 export default {
     title: 'Inputs/Text Input',
     component: TextInput,

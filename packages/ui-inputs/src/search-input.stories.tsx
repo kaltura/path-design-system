@@ -6,7 +6,7 @@ import { withThemeProvider } from '../storybook/with-theme-provider';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 
 export default {
-    title: 'Input/Search Input',
+    title: 'Inputs/Search Input',
     component: SearchInput,
     decorators: [
         withKnobs,

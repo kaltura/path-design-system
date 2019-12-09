@@ -23,6 +23,7 @@ interface Story {
     title?: string;
     parameters?: {
       docs?: {
+        disable?: boolean;
         storyDescription?: string
       };
     }
