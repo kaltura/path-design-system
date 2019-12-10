@@ -6,18 +6,6 @@ import { Plus24Icon, Target24Icon } from '@kaltura-path/ui-icons';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/styles.css';
 
-export default {
-    title: 'Inputs/Button',
-    component: Button,
-    decorators: [
-        withKnobs,
-        withThemeProvider,
-    ],
-    parameters: {
-        componentSubtitle: 'To trigger an operation.',
-    },
-};
-
 const label = 'Type';
 const options = {
     'default': 'default',
@@ -30,18 +18,16 @@ export const Default: Story = () => {
     return <div className="row">
         <div className="col">
             <Button label={text("Label", "Label")}
-                    isCTA={select(label, options, defaultValue) === options.cta}
+                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
                     isActive={boolean("Active", false)}
                     disabled={boolean("Disabled", false)}
-                    borderless={select(label, options, defaultValue) === options.borderLess}
                     onClick={action('clicked')}></Button>
         </div>
         <div className="col">
             <Button disabled={boolean("Disabled", false)}
                     icon={<Plus24Icon/>}
                     label={text("Label", "Label")}
-                    isCTA={select(label, options, defaultValue) === options.cta}
-                    borderless={select(label, options, defaultValue) === options.borderLess}
+                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
                     isActive={boolean("Active", false)}
                     onClick={action('clicked')}></Button>
         </div>
@@ -49,12 +35,11 @@ export const Default: Story = () => {
             <Button isProcessing={true}
                     disabled={boolean("Disabled", false)}
                     label={text("Label", "Label")}
-                    isCTA={select(label, options, defaultValue) === options.cta}
+                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
                     isActive={boolean("Active", false)}
-                    borderless={select(label, options, defaultValue) === options.borderLess}
                     onClick={action('clicked')}></Button>
         </div>
-
+    
     </div>
 };
 
@@ -64,10 +49,10 @@ export const ButtonTypes: Story = () => {
             <Button label="Default" onClick={action('clicked')}></Button>
         </div>
         <div className="col">
-            <Button label="CTA" isCTA={true} onClick={action('clicked')}></Button>
+            <Button label="CTA" type="cta" onClick={action('clicked')}></Button>
         </div>
         <div className="col">
-            <Button label="Borderless" borderless={true} onClick={action('clicked')}></Button>
+            <Button label="Borderless" type="borderless" onClick={action('clicked')}></Button>
         </div>
     </div>;
 };
@@ -90,13 +75,13 @@ export const ButtonWithIcon: Story = () => {
         <div className="col">
             <Button label="CTA With Icon"
                     icon={<Target24Icon/>}
-                    isCTA={true}
+                    type="cta"
                     onClick={action('clicked')}></Button>
         </div>
         <div className="col">
             <Button label="Borderless With Icon"
                     icon={<Target24Icon/>}
-                    borderless={true}
+                    type='borderless'
                     onClick={action('clicked')}></Button>
         </div>
     </div>;
@@ -120,13 +105,13 @@ export const ButtonProcessing: Story = () => {
         <div className="col">
             <Button label="Label"
                     isProcessing={true}
-                    isCTA={true}
+                    type="cta"
                     onClick={action('clicked')}></Button>
         </div>
         <div className="col">
             <Button label="Label"
                     isProcessing={true}
-                    borderless={true}
+                    type="borderless"
                     onClick={action('clicked')}></Button>
         </div>
     </div>;
@@ -149,13 +134,13 @@ export const ButtonIsActive: Story = () => {
         </div>
         <div className="col">
             <Button label="Label"
-                    isCTA={true}
+                    type="cta"
                     isActive={true}
                     onClick={action('clicked')}></Button>
         </div>
         <div className="col">
             <Button label="Label"
-                    borderless={true}
+                    type="borderless"
                     isActive={true}
                     onClick={action('clicked')}></Button>
         </div>
@@ -179,13 +164,13 @@ export const ButtonDisabled: Story = () => {
         </div>
         <div className="col">
             <Button label="Label"
-                    isCTA={true}
+                    type="cta"
                     disabled={true}
                     onClick={action('clicked')}></Button>
         </div>
         <div className="col">
             <Button label="Label"
-                    borderless={true}
+                    type="borderless"
                     disabled={true}
                     onClick={action('clicked')}></Button>
         </div>
@@ -205,18 +190,16 @@ export const Workshop: Story = () => {
     return <div className="row">
         <div className="col">
             <Button label={text("Label", "Label")}
-                    isCTA={select(label, options, defaultValue) === options.cta}
                     isActive={boolean("Active", false)}
                     disabled={boolean("Disabled", false)}
-                    borderless={select(label, options, defaultValue) === options.borderLess}
+                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
                     onClick={action('clicked')}></Button>
         </div>
         <div className="col">
             <Button disabled={boolean("Disabled", false)}
                     icon={<Plus24Icon/>}
                     label={text("Label", "Label")}
-                    isCTA={select(label, options, defaultValue) === options.cta}
-                    borderless={select(label, options, defaultValue) === options.borderLess}
+                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
                     isActive={boolean("Active", false)}
                     onClick={action('clicked')}></Button>
         </div>
@@ -224,11 +207,21 @@ export const Workshop: Story = () => {
             <Button isProcessing={true}
                     disabled={boolean("Disabled", false)}
                     label={text("Label", "Label")}
-                    isCTA={select(label, options, defaultValue) === options.cta}
+                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
                     isActive={boolean("Active", false)}
-                    borderless={select(label, options, defaultValue) === options.borderLess}
                     onClick={action('clicked')}></Button>
         </div>
-
     </div>
+};
+
+export default {
+    title: 'Inputs/Button',
+    component: Button,
+    decorators: [
+        withKnobs,
+        withThemeProvider,
+    ],
+    parameters: {
+        componentSubtitle: 'To trigger an operation.',
+    },
 };
