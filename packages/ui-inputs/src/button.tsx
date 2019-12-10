@@ -57,16 +57,16 @@ const useStyles = createUseStyles((theme: Theme) => ({
         borderRadius: theme.button.borderRadius,
     },
     'btnDefault': (props: ButtonProps) => ({
+        '&:focus': {
+            backgroundColor: '#ffffff',
+            border: `1px solid ${theme.colors.grayscale4}`,
+            color: '#434a4b',
+        },
         '&:hover': {
             boxShadow: 'none',
             color: '#434a4b',
             backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
             border: `1px solid ${theme.colors.grayscale4}`,
-        },
-        '&:focus': {
-            backgroundColor: '#ffffff',
-            border: `1px solid ${theme.colors.grayscale4}`,
-            color: '#434a4b',
         },
         '&:active': {
             boxShadow: 'none',
@@ -83,22 +83,22 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled:hover': {
             boxShadow: 'none',
             backgroundColor: '#ffffff'
-        }
+        },
     }),
     'btnCTA': (props: ButtonProps) => ({
         boxShadow: 'none',
         color: '#ffffff',
         backgroundColor: '#008297',
         border: '1px solid #008297',
-        '&:hover': {
-            color: '#ffffff',
-            backgroundColor: props.isProcessing ? '#008297' : '#006879',
-            border: '1px solid #006879',
-        },
         '&:focus': {
             backgroundColor: '#008297',
             border: '1px solid #004e5a',
             color: '#ffffff',
+        },
+        '&:hover': {
+            color: '#ffffff',
+            backgroundColor: props.isProcessing ? '#008297' : '#006879',
+            border: '1px solid #006879',
         },
         '&:active': {
             color: '#ffffff',
@@ -114,22 +114,22 @@ const useStyles = createUseStyles((theme: Theme) => ({
         '&:disabled:hover': {
             boxShadow: 'none',
             backgroundColor: '#ffffff'
-        }
+        },
     }),
     'btnBorderless': (props: ButtonProps) => ({
         color: '#434a4b',
         backgroundColor: '#ffffff',
         border: '1px solid #ffffff',
         boxShadow: 'none',
-        '&:hover': {
-            color: '#434a4b',
-            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
-            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.grayscale4}`,
-        },
         '&:focus': {
             color: '#434a4b',
             backgroundColor: '#ffffff',
             border: '1px solid #ffffff',
+        },
+        '&:hover': {
+            color: '#434a4b',
+            backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
+            border: props.isProcessing ? '1px solid #ffffff' : `1px solid ${theme.colors.grayscale4}`,
         },
         '&:active': {
             color: '#434a4b',
@@ -146,7 +146,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
             boxShadow: 'none',
             backgroundColor: '#ffffff',
             border: '1px solid #ffffff',
-        }
+        },
     }),
     'btnActive': {
         color: '#434a4b',

@@ -140,6 +140,66 @@ ButtonProcessing.story = {
     }
 };
 
+export const ButtonIsActive: Story = () => {
+    return <div className="row">
+        <div className="col">
+            <Button label="Label"
+                    isActive={true}
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button label="Label"
+                    isCTA={true}
+                    isActive={true}
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button label="Label"
+                    borderless={true}
+                    isActive={true}
+                    onClick={action('clicked')}></Button>
+        </div>
+    </div>;
+};
+
+ButtonIsActive.story = {
+    parameters: {
+        docs: {
+            storyDescription: 'To functionally set a Button in active state set <code>isActive</code> prop to <code>true</code>.'
+        }
+    }
+};
+
+export const ButtonDisabled: Story = () => {
+    return <div className="row">
+        <div className="col">
+            <Button label="Label"
+                    disabled={true}
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button label="Label"
+                    isCTA={true}
+                    disabled={true}
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button label="Label"
+                    borderless={true}
+                    disabled={true}
+                    onClick={action('clicked')}></Button>
+        </div>
+    </div>;
+};
+
+ButtonDisabled.story = {
+    parameters: {
+        docs: {
+            storyDescription: 'To disable button set <code>disabled</code> prop to <code>true</code>. It will prevent firing of <code>onClick</code> event and change Button style.'
+        }
+    }
+};
+
 
 export const Workshop: Story = () => {
     return <div className="row">
