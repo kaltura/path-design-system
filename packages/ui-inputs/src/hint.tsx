@@ -1,13 +1,32 @@
 import * as React from 'react';
 import { Tooltip } from 'antd';
-
-export type HintDirection = 'top' | 'bottom' | 'right' | 'left';
+import './hint.css';
 
 export interface HintProps {
-    direction?: HintDirection;
+    /**
+     * Position in which hit can be placed
+     * @default top
+     */
+    direction?: 'top' | 'bottom' | 'right' | 'left';
+    /**
+     * Max width of hint container. maxWidth: 0 means no restrictions
+     * @default 200
+     */
     maxWidth?: number;
+    /**
+     * Hint content. Can be string or ReactNode
+     * @default undefined
+     */
     content?: string | React.ReactNode;
+    /**
+     * Prevents hint from being shown
+     * @default false
+     */
     disabled?: boolean;
+    /**
+     * Children element that is a target for hint
+     * @default undefined
+     */
     children?: React.ReactNode;
 }
 
@@ -39,14 +58,14 @@ class EnhancedTooltip extends Tooltip {
             return;
         }
         
-        const targetOffset = offset(target);
-        const arrowOffset = offset(arrow);
+        const targetPageOffset = offset(target);
+        const arrowPageOffset = offset(arrow);
         
         if (
-            (this.props.placement === 'top' && targetOffset.top < arrowOffset.top)
-            || (this.props.placement === 'bottom' && targetOffset.top > arrowOffset.top)
-            || (this.props.placement === 'right' && targetOffset.left > arrowOffset.left)
-            || (this.props.placement === 'left' && targetOffset.left < arrowOffset.left)
+            (this.props.placement === 'top' && targetPageOffset.top < arrowPageOffset.top)
+            || (this.props.placement === 'bottom' && targetPageOffset.top > arrowPageOffset.top)
+            || (this.props.placement === 'right' && targetPageOffset.left > arrowPageOffset.left)
+            || (this.props.placement === 'left' && targetPageOffset.left < arrowPageOffset.left)
         ) {
             console.warn('Incorrect hint placement was provided. Hiding arrow.');
             arrow.style.display = 'none';
@@ -56,24 +75,31 @@ class EnhancedTooltip extends Tooltip {
         // Get the rect of the target element.
         const rect = target.getBoundingClientRect();
         
-        // Only the top/bottom/left/right placements should be handled
+        // Only the top/bottom placements should be handled
         if (/^(top|bottom)$/.test(placement)) {
             const { left, width } = rect;
             const arrowOffset = left + width / 2 - popup.offsetLeft;
             arrow.style.left = `${arrowOffset}px`;
-        } else if (/^(left|right)$/.test(placement)) {
-            const { top, height } = rect;
-            const arrowOffset = top + height / 2 - popup.offsetTop;
-            arrow.style.top = `${arrowOffset}px`;
         }
     };
 }
 
+/**
+ * The hint is shown on mouse enter, and is hidden on mouse leave
+ */
 export function Hint(props: HintProps) {
-    const { content, children, direction = 'top' } = props;
+    const { content, children, disabled = false, maxWidth = 200, direction = 'top' } = props;
+    const maxWithValue = !!maxWidth ? `${maxWidth}px` : 'auto';
+    
+    const getContent = () => <span style={{ display: 'inline-block', maxWidth: maxWithValue }}>{content}</span>;
     return (
-        <EnhancedTooltip title={content} placement={direction} autoAdjustOverflow={true} trigger='click'>
-            <span>{children}</span>
-        </EnhancedTooltip>
+        !disabled
+            ? <EnhancedTooltip overlay={getContent}
+                               overlayClassName='path'
+                               placement={direction}
+                               autoAdjustOverflow={true}>
+                <span>{children}</span>
+            </EnhancedTooltip>
+            : <span>{children}</span>
     );
 }
