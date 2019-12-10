@@ -1,108 +1,79 @@
 import * as React from 'react';
-import Trigger, { BuildInPlacements } from 'rc-trigger';
-import { createUseStyles, theming } from './theme';
-import { Theme } from './theme/theme';
-import 'rc-trigger/assets/index.css';
-
-const classNames = require('classnames');
+import { Tooltip } from 'antd';
 
 export type HintDirection = 'top' | 'bottom' | 'right' | 'left';
 
 export interface HintProps {
     direction?: HintDirection;
-    container?: any;
     maxWidth?: number;
     content?: string | React.ReactNode;
     disabled?: boolean;
     children?: React.ReactNode;
 }
 
-const autoAdjustOverflow = { adjustX: true, adjustY: true };
-const targetOffset = [0, 0];
+function offset(el: HTMLElement): { top: number, left: number } {
+    const rect = el.getBoundingClientRect();
+    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+}
 
-const placementMap: BuildInPlacements = {
-    left: {
-        points: ['cr', 'cl'],
-        offset: [-12, 0],
-        overflow: autoAdjustOverflow,
-        targetOffset,
-    },
-    right: {
-        points: ['cl', 'cr'],
-        offset: [12, 0],
-        overflow: autoAdjustOverflow,
-        targetOffset,
-    },
-    top: {
-        points: ['bc', 'tc'],
-        offset: [0, -12],
-        overflow: autoAdjustOverflow,
-        targetOffset,
-    },
-    bottom: {
-        points: ['tc', 'bc'],
-        offset: [0, 12],
-        overflow: autoAdjustOverflow,
-        targetOffset,
-    },
-};
-
-const useStyles = createUseStyles((theme: Theme) => ({
-    hintContent: {
-        backgroundColor: theme.colors.grayscale1,
-        color: theme.colors.white,
-        borderRadius: '4px',
-        padding: '5px 8px',
-    },
-    arrow: {
-        width: 0,
-        height: 0,
-        borderStyle: 'solid',
-    },
-    arrowUp: {
-        borderWidth: '7px 6px 0 6px',
-        borderColor: `transparent transparent ${theme.colors.grayscale1} transparent`,
-    },
-    arrowDown: {
-        borderWidth: '0 6px 7px 6px',
-        borderColor: `${theme.colors.grayscale1} transparent transparent transparent`,
-    },
-    arrowLeft: {
-        borderWidth: '6px 7px 6px 0',
-        borderColor: `transparent ${theme.colors.grayscale1} transparent transparent`,
-    },
-    arrowRight: {
-        borderWidth: '6px 0 6px 7px',
-        borderColor: `transparent transparent transparent ${theme.colors.grayscale1}`,
-    },
-    hintContainer: {
-        position: 'relative',
-    }
-}), { theming });
-
+class EnhancedTooltip extends Tooltip {
+    onPopupAlign = (popup: HTMLElement, align: any) => {
+        const placements = this.getPlacements();
+        // Get the current placement
+        const placement = Object.keys(placements).filter(
+            key =>
+                placements[key].points[0] === align.points[0] &&
+                placements[key].points[1] === align.points[1]
+        )[0];
+        if (!placement) {
+            return;
+        }
+        
+        //@ts-ignore
+        const target = this.tooltip.trigger.getRootDomNode();
+        const arrow = popup.querySelector('.ant-tooltip-arrow') as HTMLElement;
+        
+        if (!arrow || !target) {
+            return;
+        }
+        
+        const targetOffset = offset(target);
+        const arrowOffset = offset(arrow);
+        
+        if (
+            (this.props.placement === 'top' && targetOffset.top < arrowOffset.top)
+            || (this.props.placement === 'bottom' && targetOffset.top > arrowOffset.top)
+            || (this.props.placement === 'right' && targetOffset.left > arrowOffset.left)
+            || (this.props.placement === 'left' && targetOffset.left < arrowOffset.left)
+        ) {
+            console.warn('Incorrect hint placement was provided. Hiding arrow.');
+            arrow.style.display = 'none';
+            return;
+        }
+        
+        // Get the rect of the target element.
+        const rect = target.getBoundingClientRect();
+        
+        // Only the top/bottom/left/right placements should be handled
+        if (/^(top|bottom)$/.test(placement)) {
+            const { left, width } = rect;
+            const arrowOffset = left + width / 2 - popup.offsetLeft;
+            arrow.style.left = `${arrowOffset}px`;
+        } else if (/^(left|right)$/.test(placement)) {
+            const { top, height } = rect;
+            const arrowOffset = top + height / 2 - popup.offsetTop;
+            arrow.style.top = `${arrowOffset}px`;
+        }
+    };
+}
 
 export function Hint(props: HintProps) {
     const { content, children, direction = 'top' } = props;
-    const classes = useStyles(props);
-    const hintArrowClass = classNames({ [classes.arrow]: true });
-    const getPopupElement = () => {
-        return <div className={classes.hintContainer}>
-            <div className={hintArrowClass} key="arrow"></div>
-            <div className={classes.hintContent} key="content">{content}</div>
-        </div>;
-    };
-    const getPopupClassNameFromAlign = (e: any) => {
-        console.dir(e);
-    };
     return (
-        <Trigger
-            action={['click']}
-            popup={getPopupElement}
-            popupPlacement={direction}
-            builtinPlacements={placementMap}
-            getPopupClassNameFromAlign={getPopupClassNameFromAlign}
-        >
+        <EnhancedTooltip title={content} placement={direction} autoAdjustOverflow={true} trigger='click'>
             <span>{children}</span>
-        </Trigger>
+        </EnhancedTooltip>
     );
 }
