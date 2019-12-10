@@ -154,9 +154,9 @@ const options = {
 export const Workshop: Story = () => {
     const classes = useStyles();
     return (
-        <div className={classes.row}>
+        <div className={classes.row} style={{minHeight: '200px'}}>
             <div className={classes.absoluteHint} style={{ top: '50%', left: '50%' }}>
-                <Hint direction={select(label, options, 'left') as 'top' | 'bottom' | 'left' | 'right'}
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
                       disabled={boolean('Disabled', false)}
                       maxWidth={number('Max Width', 200)}
                       content={text('Hint content', 'Content')}>
