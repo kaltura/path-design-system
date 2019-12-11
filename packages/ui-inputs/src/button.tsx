@@ -15,10 +15,10 @@ export interface ButtonProps {
      * @default false
      * */
     disabled?: boolean;
-    /** Set button in a borderless mode and changes its style
+    /** Set button in one of 3 state: default, cta and borderless. Each type has own style
      * @default false
      * */
-    borderless?: boolean;
+    type?: 'default' | 'cta' | 'borderless'
     /** Set button in an active mode and changes its style
      * @default false
      * */
@@ -31,10 +31,6 @@ export interface ButtonProps {
      * @default false
      * */
     isProcessing?: boolean;
-    /** Set button in an CTA mode and changes its style
-     * @default false
-     * */
-    isCTA?: boolean;
     /** An icon element that is placed next to the label (on the left side)
      * @default undefined
      * */
@@ -210,16 +206,18 @@ const useStyles = createUseStyles((theme: Theme) => ({
  */
 export function Button(props: ButtonProps) {
     const classes = useStyles(props);
-    const { label, disabled, onClick, icon, isProcessing } = props;
+    const { label, disabled, onClick, icon, isProcessing, type = 'default' } = props;
+    const isCTA = type === 'cta';
+    const isBorderLess = type === 'borderless';
     
     const btnClass = classNames({
         'btn-leave': true, // hack to remove border glow on click
         [classes.btn]: true,
-        [classes.btnDefault]: !props.isCTA && !props.borderless && !props.isActive,
-        [classes.btnCTA]: props.isCTA && !props.isActive,
-        [classes.btnBorderless]: props.borderless && !props.isActive,
-        [classes.btnActive]: props.isActive && !props.isCTA,
-        [classes.btnCTAActive]: props.isActive && props.isCTA,
+        [classes.btnDefault]: !isCTA && !isBorderLess && !props.isActive,
+        [classes.btnCTA]: isCTA && !props.isActive,
+        [classes.btnBorderless]: isBorderLess && !props.isActive,
+        [classes.btnActive]: props.isActive && !isCTA,
+        [classes.btnCTAActive]: props.isActive && isCTA,
         [classes.btnIconOnly]: props.icon && !props.label && !props.isProcessing,
     });
     const btnContentClass = classNames({
@@ -243,7 +241,7 @@ export function Button(props: ButtonProps) {
                 {icon ? withClassName(icon, iconClass) : null}
                 {!isProcessing
                     ? null
-                    : props.isCTA
+                    : isCTA
                         ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
                         : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
                 <span className={labelClass}>{label}</span>
