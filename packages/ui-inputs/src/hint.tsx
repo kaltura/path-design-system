@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Tooltip } from 'antd';
 import './hint.css';
+import { Theme } from './theme/theme';
+import { createUseStyles, theming } from './theme';
 
 export interface HintProps {
     /**
@@ -84,14 +86,25 @@ class EnhancedTooltip extends Tooltip {
     };
 }
 
+const useStyles = createUseStyles((theme: Theme) => ({
+    'hintContent': {
+        fontFamily: theme.hint.fontFamily,
+        fontSize: theme.hint.fontSize,
+        fontWeight: theme.hint.fontWeight,
+        lineHeight: theme.hint.lineHeight,
+        display: 'inline-block',
+    },
+}), { theming });
+
 /**
  * The hint is shown on mouse enter, and is hidden on mouse leave
  */
 export function Hint(props: HintProps) {
     const { content, children, disabled = false, maxWidth = 200, direction = 'top' } = props;
     const maxWithValue = !!maxWidth ? `${maxWidth}px` : 'auto';
+    const classes = useStyles(props);
     
-    const getContent = () => <span style={{ display: 'inline-block', maxWidth: maxWithValue }}>{content}</span>;
+    const getContent = () => <span className={classes.hintContent} style={{ maxWidth: maxWithValue }}>{content}</span>;
     return (
         !disabled
             ? <EnhancedTooltip overlay={getContent}
