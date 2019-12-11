@@ -2,7 +2,7 @@ import * as React from 'react';
 import '../../../.storybook/styles.css';
 import { Hint } from './hint';
 import { withThemeProvider } from '../storybook/with-theme-provider';
-import { Search24Icon } from '@kaltura-path/ui-icons';
+import { Search24Icon, Undo24Icon } from '@kaltura-path/ui-icons';
 import { createUseStyles } from './theme';
 import { boolean, number, select, text, withKnobs } from '@storybook/addon-knobs';
 
@@ -143,6 +143,37 @@ HintCustomTarget.story = {
     }
 };
 
+export const HintCustomContent: Story = () => {
+    const classes = useStyles();
+    return (
+        <div className={classes.row}>
+            <div className={classes.hint}>
+                <Hint content={<Search24Icon/>}>Search</Hint>
+            </div>
+            
+            <div className={classes.hint}>
+                <Hint content={
+                    <div style={{ width: '50px', height: '24px', backgroundColor: 'red', borderRadius: '4px' }}></div>
+                }>Red</Hint>
+            </div>
+            
+            <div className={classes.hint}>
+                <Hint content={<span>Undo<br/>⌘ ⇧ Z</span>}>
+                    <Undo24Icon/>
+                </Hint>
+            </div>
+        </div>
+    );
+};
+
+HintCustomContent.story = {
+    parameters: {
+        docs: {
+            storyDescription: `The <code>content</code> of Hint can be any React component or HTML element as well as plain string.`,
+        }
+    }
+};
+
 const label = 'Direction';
 const options = {
     'top': 'top',
@@ -154,7 +185,7 @@ const options = {
 export const Workshop: Story = () => {
     const classes = useStyles();
     return (
-        <div className={classes.row} style={{minHeight: '200px'}}>
+        <div className={classes.row} style={{ minHeight: '200px' }}>
             <div className={classes.absoluteHint} style={{ top: '50%', left: '50%' }}>
                 <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
                       disabled={boolean('Disabled', false)}
@@ -166,15 +197,15 @@ export const Workshop: Story = () => {
             <div className={classes.absoluteHint} style={{ top: 0, left: 0 }}>
                 <Hint direction="bottom" content="Top Left Hint">Top Left</Hint>
             </div>
-    
+            
             <div className={classes.absoluteHint} style={{ top: 0, left: '50%' }}>
                 <Hint direction="bottom" content="Top Center Hint">Top Center</Hint>
             </div>
-    
+            
             <div className={classes.absoluteHint} style={{ top: '50%', left: 0 }}>
                 <Hint direction="right" content="Center Left Hint">Center Left</Hint>
             </div>
-    
+            
             <div className={classes.absoluteHint} style={{ top: '50%', right: 0 }}>
                 <Hint direction="left" content="Center Right Hint">Center Right</Hint>
             </div>
@@ -186,11 +217,11 @@ export const Workshop: Story = () => {
             <div className={classes.absoluteHint} style={{ bottom: 0, left: 0 }}>
                 <Hint direction="top" content="Bottom Left Hint">Bottom Left</Hint>
             </div>
-    
+            
             <div className={classes.absoluteHint} style={{ bottom: 0, left: '50%' }}>
                 <Hint direction="top" content="Bottom Center Hint">Bottom Center</Hint>
             </div>
-    
+            
             <div className={classes.absoluteHint} style={{ bottom: 0, right: 0 }}>
                 <Hint direction="top" content="Bottom Right Hint">Bottom Right</Hint>
             </div>
