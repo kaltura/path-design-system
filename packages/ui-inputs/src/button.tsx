@@ -20,7 +20,7 @@ export interface ButtonProps {
      * */
     type?: 'default' | 'cta' | 'borderless'
     /** Set button in an active mode and changes its style
-     * @default default
+     * @default false
      * */
     isActive?: boolean;
     /** A click event callback
