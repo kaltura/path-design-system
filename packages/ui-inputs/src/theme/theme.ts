@@ -33,6 +33,12 @@ export interface Theme {
         fontWeight: string;
         fontSize: string;
     };
+    hint: {
+        fontFamily: string;
+        fontWeight: string;
+        fontSize: string;
+        lineHeight: string;
+    };
 }
 
 export const theme: Theme = {
@@ -69,5 +75,11 @@ export const theme: Theme = {
         fontFamily: 'Lato, Arial, Helvetica',
         fontWeight: 'normal',
         fontSize: '14px',
+    },
+    hint: {
+        fontFamily: 'Lato, Arial, Helvetica',
+        fontWeight: 'bold',
+        fontSize: '12px',
+        lineHeight: '18px',
     }
 };
