@@ -1,14 +1,21 @@
 {
-    "extends": "./tsconfig.build.json",
-
-    "compilerOptions": {
-        "baseUrl": "./packages",
-        "paths": {
-            "@kaltura-path/ui-icons": ["ui-icons/src"],
-            "@kaltura-path/ui-inputs": ["ui-inputs/src"]
-        }
-    },
-    "awesomeTypescriptLoaderOptions": {
-        "ignoreDiagnostics": [7005]
-    }
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "exclude": ["node_modules", "tmp"]
 }
