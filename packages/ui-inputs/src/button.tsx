@@ -255,3 +255,11 @@ export function Button(props: ButtonProps) {
         </AntButton>
     )
 }
+
+Button.defaultProps = {
+    disabled: false,
+    type: 'default',
+    isActive: false,
+    isProcessing:false,
+    layout:'horizontal'
+};
