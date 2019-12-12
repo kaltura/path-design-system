@@ -233,7 +233,7 @@ export const Workshop: Story = () => {
     return <div className="row">
         <div className="col">
             <Button
-                isProcessing={false}
+                isProcessing={boolean('isProcessing',false)}
                 label={text("Label", "Label")}
                 isActive={boolean("Active", false)}
                 disabled={boolean("Disabled", false)}
@@ -243,7 +243,7 @@ export const Workshop: Story = () => {
         </div>
         <div className="col">
             <Button
-                isProcessing={false}
+                isProcessing={boolean('isProcessing',false)}
                 disabled={boolean("Disabled", false)}
                 icon={<Plus24Icon/>}
                 label={text("Label", "Label")}
@@ -254,7 +254,7 @@ export const Workshop: Story = () => {
         </div>
         <div className="col">
             <Button
-                isProcessing={true}
+                isProcessing={boolean('isProcessing',true)}
                 disabled={boolean("Disabled", false)}
                 label={text("Label", "Label")}
                 type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
