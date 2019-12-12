@@ -247,7 +247,7 @@ export function Button(props: ButtonProps) {
                 {icon ? withClassName(icon, iconClass) : null}
                 {!isProcessing
                     ? null
-                    : isCTA
+                    : isCTA && !disabled
                         ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
                         : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
                 <span className={labelClass}>{label}</span>
