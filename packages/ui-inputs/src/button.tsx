@@ -34,7 +34,12 @@ export interface ButtonProps {
     /** An icon element that is placed next to the label (on the left side)
      * @default undefined
      * */
-    icon?: React.ReactElement
+    icon?: React.ReactElement;
+    /**
+     * Button's content layout. Can be horizontal or vertical
+     * @default horizontal
+     */
+    layout?: 'horizontal' | 'vertical';
 }
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
@@ -42,16 +47,16 @@ const withClassName = (element: React.ReactElement, className: string = '') => {
 };
 
 const useStyles = createUseStyles((theme: Theme) => ({
-    'btn': {
-        height: '32px',
-        minWidth: '34px',
+    'btn': (props: ButtonProps) => ({
+        height: props.layout === 'vertical' ? '60px' : '32px',
+        minWidth: props.layout === 'vertical' ? '80px' : '34px',
         boxShadow: 'none',
         padding: '0px 8px',
         fontFamily: theme.button.fontFamily,
         fontSize: theme.button.fontSize,
         fontWeight: theme.button.fontWeight,
         borderRadius: theme.button.borderRadius,
-    },
+    }),
     'btnDefault': (props: ButtonProps) => ({
         '&:focus': {
             backgroundColor: '#ffffff',
@@ -177,12 +182,13 @@ const useStyles = createUseStyles((theme: Theme) => ({
     'btnIconOnly': {
         padding: '0px 0px !important',
     },
-    'btnContent': {
+    'btnContent': (props: ButtonProps) => ({
         display: 'flex',
+        flexDirection: props.layout === 'vertical' ? 'column' : 'row',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-    },
+    }),
     'btnIcon': {
         padding: '4px',
     },
@@ -206,7 +212,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
  */
 export function Button(props: ButtonProps) {
     const classes = useStyles(props);
-    const { label, disabled, onClick, icon, isProcessing, type = 'default' } = props;
+    const { label, disabled, onClick, icon, isProcessing, type = 'default'} = props;
     const isCTA = type === 'cta';
     const isBorderLess = type === 'borderless';
     
@@ -241,7 +247,7 @@ export function Button(props: ButtonProps) {
                 {icon ? withClassName(icon, iconClass) : null}
                 {!isProcessing
                     ? null
-                    : isCTA
+                    : isCTA && !disabled
                         ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
                         : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
                 <span className={labelClass}>{label}</span>
@@ -249,3 +255,11 @@ export function Button(props: ButtonProps) {
         </AntButton>
     )
 }
+
+Button.defaultProps = {
+    disabled: false,
+    type: 'default',
+    isActive: false,
+    isProcessing:false,
+    layout:'horizontal'
+};

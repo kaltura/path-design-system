@@ -6,19 +6,27 @@ import { Plus24Icon, Target24Icon } from '@kaltura-path/ui-icons';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/styles.css';
 
-const label = 'Type';
-const options = {
+const typeLabel = 'Type';
+const typeOptions = {
     'default': 'default',
     'cta': 'cta',
     'borderLess': 'borderless',
 };
-const defaultValue = 'default';
+const typeDefaultValue = 'default';
+
+const layoutLabel = 'Layout';
+const layoutOptions = {
+    'vertical': 'vertical',
+    'horizontal': 'horizontal'
+};
+const layoutDefaultValue = 'horizontal';
 
 export const Default: Story = () => {
     return <div className="row">
         <div className="col">
             <Button label={text("Label", "Label")}
-                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
+                    type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
+                    layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
                     isActive={boolean("Active", false)}
                     disabled={boolean("Disabled", false)}
                     onClick={action('clicked')}></Button>
@@ -27,7 +35,8 @@ export const Default: Story = () => {
             <Button disabled={boolean("Disabled", false)}
                     icon={<Plus24Icon/>}
                     label={text("Label", "Label")}
-                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
+                    type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
+                    layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
                     isActive={boolean("Active", false)}
                     onClick={action('clicked')}></Button>
         </div>
@@ -35,11 +44,12 @@ export const Default: Story = () => {
             <Button isProcessing={true}
                     disabled={boolean("Disabled", false)}
                     label={text("Label", "Label")}
-                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
+                    type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
+                    layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
                     isActive={boolean("Active", false)}
                     onClick={action('clicked')}></Button>
         </div>
-    
+
     </div>
 };
 
@@ -91,6 +101,39 @@ ButtonWithIcon.story = {
     parameters: {
         docs: {
             storyDescription: 'Button component can contain an Icon. This is done by setting the <code>icon</code> property. The icon has to be a React element type.',
+        }
+    }
+};
+
+export const VerticalLayoutButtonWithIcon: Story = () => {
+    return <div className="row">
+        <div className="col">
+            <Button label="Default"
+                    icon={<Target24Icon/>}
+                    layout='vertical'
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button label="CTA"
+                    icon={<Target24Icon/>}
+                    layout='vertical'
+                    type="cta"
+                    onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+            <Button label="Borderless"
+                    icon={<Target24Icon/>}
+                    layout='vertical'
+                    type='borderless'
+                    onClick={action('clicked')}></Button>
+        </div>
+    </div>;
+};
+
+VerticalLayoutButtonWithIcon.story = {
+    parameters: {
+        docs: {
+            storyDescription: 'Button component has a layout. The button layout can be set using the <code>layout</code> property. There are two types of layouts: horizontal and vertical.',
         }
     }
 };
@@ -189,27 +232,35 @@ ButtonDisabled.story = {
 export const Workshop: Story = () => {
     return <div className="row">
         <div className="col">
-            <Button label={text("Label", "Label")}
-                    isActive={boolean("Active", false)}
-                    disabled={boolean("Disabled", false)}
-                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
-                    onClick={action('clicked')}></Button>
+            <Button
+                isProcessing={boolean('isProcessing',false)}
+                label={text("Label", "Label")}
+                isActive={boolean("Active", false)}
+                disabled={boolean("Disabled", false)}
+                type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
+                layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
+                onClick={action('clicked')}></Button>
         </div>
         <div className="col">
-            <Button disabled={boolean("Disabled", false)}
-                    icon={<Plus24Icon/>}
-                    label={text("Label", "Label")}
-                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
-                    isActive={boolean("Active", false)}
-                    onClick={action('clicked')}></Button>
+            <Button
+                isProcessing={boolean('isProcessing',false)}
+                disabled={boolean("Disabled", false)}
+                icon={<Plus24Icon/>}
+                label={text("Label", "Label")}
+                type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
+                layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
+                isActive={boolean("Active", false)}
+                onClick={action('clicked')}></Button>
         </div>
         <div className="col">
-            <Button isProcessing={true}
-                    disabled={boolean("Disabled", false)}
-                    label={text("Label", "Label")}
-                    type={select(label, options, defaultValue) as 'default' | 'cta' | 'borderless'}
-                    isActive={boolean("Active", false)}
-                    onClick={action('clicked')}></Button>
+            <Button
+                isProcessing={boolean('isProcessing',true)}
+                disabled={boolean("Disabled", false)}
+                label={text("Label", "Label")}
+                type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
+                layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
+                isActive={boolean("Active", false)}
+                onClick={action('clicked')}></Button>
         </div>
     </div>
 };
