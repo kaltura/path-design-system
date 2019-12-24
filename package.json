@@ -5,7 +5,11 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
-    "build": "nx build",
+    "setup": "npm i && npm run link && npm run build",
+    "build": "npm run build:ui-icons && npm run build:ui-inputs",
+    "link": "node tools/link-libs.js",
+    "build:ui-inputs": "npm run build --prefix libs/ui-inputs",
+    "build:ui-icons": "npm run build --prefix libs/ui-icons",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
@@ -22,18 +26,45 @@
     "format:check": "nx format:check",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook --docs -o public",
+    "now-build": "npm run build && build-storybook --docs -o public && build-storybook -o public/workshop"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "antd": "^3.26.2",
+    "classnames": "^2.2.6",
+    "react": "^16.12.0",
+    "react-copy-to-clipboard": "^5.0.2",
+    "react-dom": "^16.12.0",
+    "react-jss": "^10.0.0"
+  },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-docs": "^5.2.8",
+    "@storybook/addon-knobs": "^5.2.6",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "^5.2.6",
     "@nrwl/workspace": "8.9.0",
+    "@svgr/rollup": "^4.3.3",
     "@types/node": "~8.9.4",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "dotenv": "6.2.0",
+    "eslint": "6.1.0",
+    "prettier": "1.18.2",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.27.11",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "rollup-plugin-url": "^3.0.1",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "eslint": "6.1.0",
-    "typescript": "~3.5.3",
-    "prettier": "1.18.2"
+    "typescript": "^3.7.3"
   }
 }

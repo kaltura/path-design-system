@@ -1,0 +1,8 @@
+{
+    "extends": "./tsconfig.react.build.json",
+    "compilerOptions": {
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "ignoreDiagnostics": [7005]
+    }
+}

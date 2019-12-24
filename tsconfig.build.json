@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+
+    "paths": {
+      "@kaltura-path/ui-inputs": ["libs/ui-inputs/dist/index.js"],
+      "@kaltura-path/ui-icons": ["libs/ui-icons/dist/index.js"]
+    }
+  },
+}

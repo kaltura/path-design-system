@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../react-scripts/tsconfig.react.json",
   "compilerOptions": {
     "outDir": "build"
   },

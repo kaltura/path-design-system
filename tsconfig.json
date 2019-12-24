@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@kaltura-path/ui-inputs": ["libs/ui-inputs/src/index.ts"],
+      "@kaltura-path/ui-icons": ["libs/ui-icons/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
