@@ -10,6 +10,7 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
@@ -21,8 +22,10 @@
     "analyze": "npm run build && npx source-map-explorer dist/index.js",
     "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
     "test:watch": "react-scripts-ts test --env=jsdom",
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "build": "rimraf dist && rollup -c",
+    "start": "rollup -c -w",
+    "lint:js": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
+    "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"
   },
   "peerDependencies": {
     "antd": "3.25.0",

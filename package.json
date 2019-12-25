@@ -14,7 +14,12 @@
     "deploy:prepare": "npm run clean && npm ci && npm run build && npm run lerna:lint && node scripts/bump-version.js",
     "deploy:publish-to-npm": "npm run clean && npm ci && npm run build && lerna publish from-package",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook --docs -o public"
+    "build-storybook": "build-storybook --docs -o public",
+    "lerna:lint:fix": "lerna run lint:js:fix",
+    "lerna:lint": "lerna run lint:js",
+    "lint:fix": "eslint --fix",
+    "husky:pre-commit": "lint-staged",
+    "husky:commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
   },
   "repository": {
     "type": "git",
@@ -51,11 +56,14 @@
     "cross-env": "^5.1.4",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
+    "husky": "^3.1.0",
     "lerna": "^3.19.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "lint-staged": "^9.5.0",
     "mkdirp": "^0.5.1",
     "mustache": "^3.1.0",
+    "prettier": "^1.19.1",
     "react": "^16.4.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-docgen-typescript-loader": "^3.3.0",
@@ -70,15 +78,35 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-typescript2": "^0.25.2",
     "rollup-plugin-url": "^3.0.0",
     "svgo": "^1.3.2",
     "ts-import-plugin": "^1.6.1",
     "typescript": "^3.7.2",
-    "yargs": "^15.0.1"
+    "yargs": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0"
   },
   "dependencies": {
     "@kaltura-path/ui-icons": "file:packages/ui-icons",
     "@kaltura-path/ui-inputs": "file:packages/ui-inputs"
+  },
+  "lint-staged": {
+    "packages/**/*.{ts,tsx}": [
+      "npm run --silent lint:fix",
+      "git add"
+    ]
   }
 }

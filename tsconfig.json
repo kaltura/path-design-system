@@ -1,11 +1,11 @@
 {
-    "extends": "./tsconfig.build.json",
+    "extends": "./tsconfig.base.json",
 
     "compilerOptions": {
-        "baseUrl": "./packages",
+        "baseUrl": ".",
         "paths": {
-            "@kaltura-path/ui-icons": ["ui-icons/src"],
-            "@kaltura-path/ui-inputs": ["ui-inputs/src"]
+            "@kaltura-path/ui-icons": ["packages/ui-icons/src"],
+            "@kaltura-path/ui-inputs": ["packages/ui-inputs/src"]
         }
     },
     "awesomeTypescriptLoaderOptions": {

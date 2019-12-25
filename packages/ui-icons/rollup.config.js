@@ -1,12 +1,11 @@
 import typescript from 'rollup-plugin-typescript2'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
-// import postcss from 'rollup-plugin-postcss-modules'
 import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
-
+import path from 'path';
 
 import pkg from './package.json'
 
@@ -21,7 +20,7 @@ export default {
     },
     {
       file: pkg.module,
-      format: 'es',
+      format: 'esm',
       exports: 'named',
       sourcemap: true
     }
@@ -33,10 +32,15 @@ export default {
     }),
     url(),
     svgr(),
-    resolve(),
+    resolve(
+      {
+        browser: true
+      }
+    ),
     typescript({
       rollupCommonJSResolveHack: true,
-      clean: true
+      clean: true,
+      tsconfig: path.resolve(__dirname, 'tsconfig.build.json')
     }),
     commonjs(),
   ]
