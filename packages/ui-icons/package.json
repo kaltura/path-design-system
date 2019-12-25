@@ -1,6 +1,6 @@
 {
   "name": "@kaltura-path/ui-icons",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "",
   "author": "Kaltura",
   "license": "AGPL-3.0",
@@ -27,7 +27,6 @@
     "src:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone",
     "src:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src"
   },
-  "dependencies": {},
   "peerDependencies": {
     "antd": "3.25.0",
     "react": "^15.0.0 || ^16.0.0",
