@@ -36,5 +36,8 @@
     "dist",
     "LICENSE",
     "CHANGELOG.md"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
