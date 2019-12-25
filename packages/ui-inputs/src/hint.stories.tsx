@@ -119,13 +119,13 @@ export const HintCustomTarget: Story = () => {
             <div className={classes.hint}>
                 <Hint content="Search"><Search24Icon/></Hint>
             </div>
-            
+
             <div className={classes.hint}>
                 <Hint content="Red">
                     <div style={{ width: '50px', height: '24px', backgroundColor: 'red', borderRadius: '4px' }}></div>
                 </Hint>
             </div>
-            
+
             <div className={classes.hint}>
                 <Hint content="Hint">
                     Text
@@ -150,13 +150,13 @@ export const HintCustomContent: Story = () => {
             <div className={classes.hint}>
                 <Hint content={<Search24Icon/>}>Search</Hint>
             </div>
-            
+
             <div className={classes.hint}>
                 <Hint content={
                     <div style={{ width: '50px', height: '24px', backgroundColor: 'red', borderRadius: '4px' }}></div>
                 }>Red</Hint>
             </div>
-            
+
             <div className={classes.hint}>
                 <Hint content={<span>Undo<br/>⌘ ⇧ Z</span>}>
                     <Undo24Icon/>
@@ -190,40 +190,76 @@ export const Workshop: Story = () => {
                 <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
                       disabled={boolean('Disabled', false)}
                       maxWidth={number('Max Width', 200)}
-                      content={text('Hint content', 'Content')}>
-                    {text('Target', 'Target')}
+                      content={text('Hint Content', 'This is the hint content')}>
+                    {text('Target Content', '') || 'Center'}
                 </Hint>
             </div>
             <div className={classes.absoluteHint} style={{ top: 0, left: 0 }}>
-                <Hint direction="bottom" content="Top Left Hint">Top Left</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Top-Left'}</Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ top: 0, left: '50%' }}>
-                <Hint direction="bottom" content="Top Center Hint">Top Center</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Top-Center'}
+                </Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ top: '50%', left: 0 }}>
-                <Hint direction="right" content="Center Left Hint">Center Left</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Center-Left'}
+                </Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ top: '50%', right: 0 }}>
-                <Hint direction="left" content="Center Right Hint">Center Right</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Center-Right'}
+                  </Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ top: 0, right: 0 }}>
-                <Hint direction="bottom" content="Top Right Hint">Top Right</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Top-Right'}
+                  </Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ bottom: 0, left: 0 }}>
-                <Hint direction="top" content="Bottom Left Hint">Bottom Left</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Bottom-Left'}
+                  </Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ bottom: 0, left: '50%' }}>
-                <Hint direction="top" content="Bottom Center Hint">Bottom Center</Hint>
+                <Hint direction={select(label, options, 'top') as 'top' | 'bottom' | 'left' | 'right'}
+                      disabled={boolean('Disabled', false)}
+                      maxWidth={number('Max Width', 200)}
+                      content={text('Hint Content', 'This is the hint content')}>
+                  {text('Target Content', '') || 'Bottom-Center'}
+                </Hint>
             </div>
-            
+
             <div className={classes.absoluteHint} style={{ bottom: 0, right: 0 }}>
-                <Hint direction="top" content="Bottom Right Hint">Bottom Right</Hint>
+                <Hint direction="top" content="Bottom Right Hint">
+                  {text('Target Content', '') || 'Bottom-Right'}
+                  </Hint>
             </div>
         </div>
     );
