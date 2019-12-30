@@ -6,6 +6,7 @@ import { Plus24Icon, Target24Icon } from '@kaltura-path/ui-icons';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/obslete-styles.css'; // TODO move styles internally
 
+
 const typeLabel = 'Type';
 const typeOptions = {
     'default': 'default',
