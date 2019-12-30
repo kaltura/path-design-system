@@ -1,58 +1,31 @@
 const path = require('path');
-const glob = require('glob');
-const tsImportPluginFactory = require('ts-import-plugin');
-const createCompiler = require('@storybook/addon-docs/mdx-compiler-plugin');
 
-module.exports = async ({config, mode}) => {
-
-  const babelLoader = config.module.rules[0];
-
-  glob.sync('./packages/*/node_modules').forEach(match => {
-    babelLoader.exclude.push(path.resolve(match));
-  });
-
-  return {
-    ...config,
-    resolve: {
-      ...config.resolve,
-      extensions: [
-        ...config.resolve.extensions,
-        '.ts', '.tsx', '.less', '.css']
-    },
-    module: {
-      ...config.module,
-      rules: [
-        ...config.module.rules,
-    {
-      test: /\.(ts|tsx)$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: require.resolve('awesome-typescript-loader'),
-          options: {
-            noUnusedLocals: false,
-            getCustomTransformers: () => ({
-              before: [ tsImportPluginFactory({libraryName: "antd", style: true}) ]
-            }),
-          },
-        },
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-        },
-      ],
-    },
-    {
-      test: /\.less$/,
-      use: [
-        "style-loader",
-        "css-loader",
-        {
-          loader: "less-loader",
-          options: { javascriptEnabled : true }
+module.exports = ({ config }) => {
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    use: [
+      {
+        loader: require.resolve("babel-loader"),
+        options: {
+          plugins: [["import", {libraryName: "antd", style: 'css', libraryDirectory: 'es'}]],
+          presets: [
+            require.resolve("@babel/preset-env"),
+            require.resolve("@babel/preset-react"),
+          ]
         }
-      ],
-    }
-      ]
-    }
+      },
+      {
+        loader: require.resolve("ts-loader"),
+        options: {
+          configFile: path.resolve(__dirname,'./tsconfig.json')
+        }
+      },
+      require.resolve("react-docgen-typescript-loader"),
+    ]
   }
+    );
+
+  config.resolve.extensions.push(".ts", ".tsx");
+
+  return config;
 };

@@ -1,10 +1,11 @@
 import * as React from 'react';
-import '../../../.storybook/styles.css';
+
 import { Hint } from './hint';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import { Search24Icon, Undo24Icon } from '@kaltura-path/ui-icons';
 import { createUseStyles } from './theme';
 import { boolean, number, select, text, withKnobs } from '@storybook/addon-knobs';
+import '../../../.storybook/obslete-styles.css'; // TODO move styles internally
 
 const useStyles = createUseStyles({
     'row': {
