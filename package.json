@@ -20,8 +20,8 @@
     "lint:fix": "eslint --fix",
     "husky:pre-commit": "lint-staged",
     "husky:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-    "cypress:open": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" \"npm run storybook\" \"wait-on :6020 && cypress open\"",
-    "cypress:run": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" \"npm run storybook\" \"wait-on :6020 && cypress run\""
+    "cypress:open": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" \"npm run storybook\" \"wait-on tcp:6020 && cypress open\"",
+    "cypress:run": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" \"npm run storybook\" \"wait-on tcp:6020 && cypress run\""
   },
   "repository": {
     "type": "git",
@@ -48,6 +48,8 @@
     "@storybook/addon-knobs": "^5.3.0-rc.4",
     "@storybook/addon-links": "^5.3.0-rc.4",
     "@storybook/addons": "^5.3.0-rc.4",
+    "@storybook/preset-ant-design": "0.0.1",
+    "@storybook/preset-typescript": "^1.2.0",
     "@storybook/react": "^5.3.0-rc.4",
     "@storybook/theming": "^5.3.0-rc.4",
     "@svgr/rollup": "^2.4.1",
