@@ -4,6 +4,7 @@
     "baseUrl": "../packages"
   },
   "include": [
+    "../typings.d.ts",
     "../packages/**/*"
   ]
 

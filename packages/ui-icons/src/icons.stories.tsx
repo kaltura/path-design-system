@@ -8,6 +8,7 @@ import '../assets/css/styles.css';
 
 export default {
     title: 'Icons',
+
 };
 
 export interface IconsComponentsList {
