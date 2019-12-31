@@ -215,7 +215,7 @@ export function Button(props: ButtonProps) {
     const { label, disabled, onClick, icon, isProcessing, type = 'default'} = props;
     const isCTA = type === 'cta';
     const isBorderLess = type === 'borderless';
-    
+
     const btnClass = classNames({
         'btn-leave': true, // hack to remove border glow on click
         [classes.btn]: true,
@@ -240,7 +240,7 @@ export function Button(props: ButtonProps) {
     const iconClass = classNames({
         [classes.fadeOut]: props.isProcessing,
     });
-    
+
     return (
         <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
             <div className={btnContentClass}>

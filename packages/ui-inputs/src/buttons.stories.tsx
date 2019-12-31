@@ -4,7 +4,8 @@ import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { Button } from './button';
 import { Plus24Icon, Target24Icon } from '@kaltura-path/ui-icons';
 import { withThemeProvider } from '../storybook/with-theme-provider';
-import '../../../.storybook/styles.css';
+import '../../../.storybook/obslete-styles.css'; // TODO move styles internally
+
 
 const typeLabel = 'Type';
 const typeOptions = {
@@ -19,7 +20,6 @@ const layoutOptions = {
     'vertical': 'vertical',
     'horizontal': 'horizontal'
 };
-const layoutDefaultValue = 'horizontal';
 
 export const Default: Story = () => {
     return <div className="row">
