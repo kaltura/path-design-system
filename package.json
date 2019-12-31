@@ -21,7 +21,7 @@
     "husky:pre-commit": "lint-staged",
     "husky:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
     "cypress:open": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" \"npm run storybook\" \"wait-on tcp:6020 && cypress open\"",
-    "cypress:run": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" \"npm run storybook\" \"wait-on tcp:6020 && cypress run\""
+    "cypress:run": "concurrently -k -n \"DESIGN SYSTEM,CYPRESS\" -c \"blue,magenta\" --success first \"npm run storybook\" \"wait-on tcp:6020 && cypress run\""
   },
   "repository": {
     "type": "git",
