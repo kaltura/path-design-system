@@ -1,4 +1,4 @@
-name: Automations
+name: Design System Automations
 
 on: [push]
 
@@ -8,8 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Run npm install
-      run: npm install
-
-    - name: Run cypress
-      run: npm run cypress:run
+    - name: Cypress run
+      uses: cypress-io/github-action@v1
+      with:
+        start: npm run storybook
+        wait-on: http://localhost:6020
