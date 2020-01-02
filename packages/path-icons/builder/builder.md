@@ -1,8 +1,8 @@
 # Path Design System Icons Builder
 
-> The concept, design and most of the implementation were taken from [material-ui/material-ui-icons repository](https://github.com/mui-org/material-ui/tree/master/packages/material-ui-icons).
+> The concept, design and most of the implementation were taken from [material-ui/material-path-icons repository](https://github.com/mui-org/material-ui/tree/master/packages/material-path-icons).
 >
-> So Credits and our love are reserved to them! 
+> So Credits and our love are reserved to them!
 
 This tool generates Ant-Design Icon components for a set of svg icons.
 

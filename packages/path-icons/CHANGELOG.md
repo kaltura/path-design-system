@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.1.2](https://github.com/kaltura/path-design-system/compare/v0.1.1...v0.1.2) (2019-12-25)
 
-**Note:** Version bump only for package @kaltura-path/ui-inputs
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-icons
 
 
 
@@ -13,4 +13,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.1.1](https://github.com/kaltura/path-design-system/compare/v1.0.0-alpha.1...v0.1.1) (2019-12-25)
 
-**Note:** Version bump only for package @kaltura-path/ui-inputs
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-icons

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { Button } from './button';
-import { Plus24Icon, Target24Icon } from '@kaltura-path/ui-icons';
+import { Plus24Icon, Target24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import '../../../.storybook/obslete-styles.css'; // TODO move styles internally
 

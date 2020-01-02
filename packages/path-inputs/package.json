@@ -1,5 +1,5 @@
 {
-  "name": "@kaltura-path/ui-inputs",
+  "name": "@kaltura-react-ui-kits/path-inputs",
   "version": "0.1.2",
   "description": "",
   "author": "Kaltura",
@@ -33,7 +33,7 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "@kaltura-path/ui-icons": "file:../ui-icons",
+    "@kaltura-react-ui-kits/path-icons": "file:../path-icons",
     "classnames": "^2.2.6",
     "react-jss": "^10.0.0"
   },

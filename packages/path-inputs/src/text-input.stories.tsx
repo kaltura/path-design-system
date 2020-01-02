@@ -4,7 +4,7 @@ import { TextInput } from './text-input';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withThemeProvider } from '../storybook/with-theme-provider';
-import { Target24Icon, Upload24Icon, Video24Icon } from '@kaltura-path/ui-icons';
+import { Target24Icon, Upload24Icon, Video24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { createUseStyles } from './theme';
 
 const useStyles = createUseStyles({

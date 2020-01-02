@@ -106,8 +106,8 @@
     "yargs": "^15.0.1"
   },
   "dependencies": {
-    "@kaltura-path/ui-icons": "file:packages/ui-icons",
-    "@kaltura-path/ui-inputs": "file:packages/ui-inputs",
+    "@kaltura-react-ui-kits/path-icons": "file:packages/path-icons",
+    "@kaltura-react-ui-kits/path-inputs": "file:packages/path-inputs",
     "cypress": "^3.8.1"
   }
 }

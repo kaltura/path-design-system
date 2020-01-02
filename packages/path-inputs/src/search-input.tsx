@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { InputElement, InputRef, TextInput } from './text-input';
-import { Plus24Icon, Search24Icon } from '@kaltura-path/ui-icons';
+import { Plus24Icon, Search24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { Theme } from './theme/theme';
 import { createUseStyles, theming } from './theme';
 
@@ -112,21 +112,21 @@ export const SearchInput = (props: SearchInputFieldProps) => {
         inputEl?.focus();
         resolveOnChange(inputEl, event, onChange);
     };
-    
+
     const saveInput = (el: InputElement) => {
         setInputEl(el);
-        
+
         if (!inputRef) {
             return;
         }
-        
+
         if (typeof inputRef === 'function') {
             inputRef(el);
         } else {
             inputRef.current = el;
         }
     };
-    
+
     useEffect(() => {
         if (!isControlled) {
             return;
@@ -134,11 +134,11 @@ export const SearchInput = (props: SearchInputFieldProps) => {
 
         setLocalValue(value || '');
     }, [value]);
-    
+
     useEffect(() => {
         setShowClear(!!localValue);
     }, [localValue]);
-    
+
     return <TextInput value={localValue}
                       disabled={disabled}
                       placeholder={placeholder}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createUseStyles, theming } from './theme';
 import { Button as AntButton } from 'antd';
-import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-path/ui-icons';
+import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { Theme } from './theme/theme';
 
 const classNames = require('classnames');
