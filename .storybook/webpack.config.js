@@ -2,21 +2,6 @@ const path = require('path');
 const { lstatSync, readdirSync } = require('fs');
 const { join } = require('path');
 
-// const isDirectory = (source, name) => lstatSync(source).isDirectory()
-// const getDirectories = source =>
-//   readdirSync(source).filter(name => isDirectory(source, name))
-//
-const getLibsResolve = () => {
-  const libs = ['path-icons', 'path-inputs'];
-  //const libs = return getDirectories(path.resolve(__dirname, "../libs"))
-  return libs.reduce((acc, lib) => {
-       acc[`@kaltura-react-ui-kits/${lib}`] = path.resolve(__dirname, `../packages/${lib}`);
-       return acc;
-     }, {});
-
-
-}
-
 module.exports = ({ config }) => {
   config.module.rules.push({
     test: /\.tsx?$/,
@@ -47,12 +32,6 @@ module.exports = ({ config }) => {
 
 // resolve peerDependencies import with local path ui-kit
   config.resolve.modules.unshift(path.resolve(__dirname,"../node_modules"));
-  config.resolve.alias = {
-    ...config.resolve.alias || {},
-    ...getLibsResolve()
-  }
 
-
-  console.dir(config.resolve.alias);
   return config;
 };
