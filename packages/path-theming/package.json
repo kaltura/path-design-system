@@ -1,0 +1,46 @@
+{
+  "name": "@kaltura-react-ui-kits/path-theming",
+  "version": "0.1.2",
+  "description": "",
+  "author": "Kaltura",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaltura/path-design-system"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "jsnext:main": "dist/index.es.js",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "reset": "npm run clean && rm -rf node_modules",
+    "analyze": "npm run build && npx source-map-explorer dist/index.js",
+    "test": "cross-env CI=1 react-scripts-ts test --env=jsdom",
+    "test:watch": "react-scripts-ts test --env=jsdom",
+    "build": "rimraf dist && rollup -c",
+    "start": "rollup -c -w",
+    "lint:js": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
+    "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"
+  },
+  "peerDependencies": {
+    "antd": "3.25.0",
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
+  },
+  "dependencies": {
+    "react-jss": "^10.0.0"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

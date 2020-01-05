@@ -1,11 +1,27 @@
 const { addons } = require('@storybook/addons');
 const path = require('path');
-const tsImportPluginFactory = require('ts-import-plugin')
+const tsImportPluginFactory = require('ts-import-plugin');
 
 module.exports = {
   stories: ['../packages/**/*.stories.(tsx|mdx)'],
   presets: [
+
     {
+      name: '@storybook/addon-docs/preset',
+      options: {
+      }
+    }],
+  addons: [
+    '@storybook/addon-docs/register',
+    '@storybook/addon-knobs/register',
+    '@storybook/addon-actions/register',
+    '@storybook/addon-links/register'
+  ],
+};
+
+
+/*
+{
       name: '@storybook/preset-typescript',
       options: {
         tsLoaderOptions: {
@@ -30,16 +46,5 @@ module.exports = {
         include: [path.resolve(__dirname, "../packages")]
       },
     },
-    {
-      name: '@storybook/addon-docs/preset',
-      options: {
-      }
-    }],
-  addons: [
-    '@storybook/addon-docs/register',
-    '@storybook/addon-knobs/register',
-    '@storybook/addon-actions/register',
-    '@storybook/addon-links/register'
-  ],
-};
+ */
 

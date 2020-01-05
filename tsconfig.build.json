@@ -3,8 +3,9 @@
     "compilerOptions": {
       "baseUrl": "./packages",
       "paths": {
-            "@kaltura-path/ui-icons": ["ui-icons"],
-            "@kaltura-path/ui-inputs": ["ui-inputs"]
+        "@kaltura-react-ui-kits/path-icons": ["path-icons"],
+        "@kaltura-react-ui-kits/path-inputs": ["path-inputs"],
+        "@kaltura-react-ui-kits/path-theming": ["path-theming"]
         }
     }
 }

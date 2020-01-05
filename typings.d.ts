@@ -18,7 +18,7 @@ declare module '*.svg' {
 
 interface Story {
   (): JSX.Element;
-  
+
   story?: {
     title?: string;
     parameters?: {
