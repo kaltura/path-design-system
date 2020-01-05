@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Hint } from './hint';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import { Search24Icon, Undo24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { createUseStyles } from './theme';
+import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
 import { boolean, number, select, text, withKnobs } from '@storybook/addon-knobs';
 import '../../../.storybook/obslete-styles.css'; // TODO move styles internally
 

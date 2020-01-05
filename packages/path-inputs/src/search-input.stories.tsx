@@ -4,12 +4,12 @@ import { action } from '@storybook/addon-actions';
 import { SearchInput } from './search-input';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
-import { createUseStyles } from './theme';
+import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
 
 const useStyles = createUseStyles({
     'table': {
         display: 'flex',
-        
+
     },
     'row': {
         display: 'flex',
@@ -34,7 +34,7 @@ export const Default: Story = () => {
             <SearchInput value={value}
                          placeholder="Type value here"
                          onChange={onChange}/>
-        
+
         </div>
         <div className={classes.row}>
             <div>With busy mode</div>
@@ -42,7 +42,7 @@ export const Default: Story = () => {
                          isBusy={true}
                          placeholder="Type value here"
                          onChange={onChange}/>
-        
+
         </div>
     </div>;
 };
@@ -53,7 +53,7 @@ export const SearchInputValue: Story = () => {
         action('changed')(event);
         setValue(event.target.value);
     };
-    
+
     return (
         <div className='row'>
             <div className='col w400'>
@@ -185,7 +185,7 @@ export const Workshop: Story = () => {
                              onChange={onChange}/>
             </div>
         </div>
-    
+
         <div className="row">
             <div className="col w400">
                 Uncontrolled

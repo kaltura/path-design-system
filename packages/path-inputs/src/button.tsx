@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { createUseStyles, theming } from './theme';
+import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { Theme } from './theme/theme';
 
 const classNames = require('classnames');
 
@@ -45,6 +44,8 @@ export interface ButtonProps {
 const withClassName = (element: React.ReactElement, className: string = '') => {
     return React.cloneElement(element, { className });
 };
+
+
 
 const useStyles = createUseStyles((theme: Theme) => ({
     'btn': (props: ButtonProps) => ({

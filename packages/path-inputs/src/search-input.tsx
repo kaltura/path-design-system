@@ -2,8 +2,8 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { InputElement, InputRef, TextInput } from './text-input';
 import { Plus24Icon, Search24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { Theme } from './theme/theme';
-import { createUseStyles, theming } from './theme';
+import { Theme } from '@kaltura-react-ui-kits/path-theming';
+import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 
 const classNames = require('classnames');
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Tooltip } from 'antd';
 import './hint.css';
-import { Theme } from './theme/theme';
-import { createUseStyles, theming } from './theme';
+import { Theme } from '@kaltura-react-ui-kits/path-theming';
+import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 
 export interface HintProps {
     /**
@@ -51,18 +51,18 @@ class EnhancedTooltip extends Tooltip {
         if (!placement) {
             return;
         }
-        
+
         //@ts-ignore
         const target = this.tooltip.trigger.getRootDomNode();
         const arrow = popup.querySelector('.ant-tooltip-arrow') as HTMLElement;
-        
+
         if (!arrow || !target) {
             return;
         }
-        
+
         const targetPageOffset = offset(target);
         const arrowPageOffset = offset(arrow);
-        
+
         if (
             (this.props.placement === 'top' && targetPageOffset.top < arrowPageOffset.top)
             || (this.props.placement === 'bottom' && targetPageOffset.top > arrowPageOffset.top)
@@ -73,10 +73,10 @@ class EnhancedTooltip extends Tooltip {
             arrow.style.display = 'none';
             return;
         }
-        
+
         // Get the rect of the target element.
         const rect = target.getBoundingClientRect();
-        
+
         // Only the top/bottom placements should be handled
         if (/^(top|bottom)$/.test(placement)) {
             const { left, width } = rect;
@@ -103,7 +103,7 @@ export function Hint(props: HintProps) {
     const { content, children, disabled = false, maxWidth = 200, direction = 'top' } = props;
     const maxWithValue = !!maxWidth ? `${maxWidth}px` : 'auto';
     const classes = useStyles(props);
-    
+
     const getContent = () => <span className={classes.hintContent} style={{ maxWidth: maxWithValue }}>{content}</span>;
     return (
         !disabled

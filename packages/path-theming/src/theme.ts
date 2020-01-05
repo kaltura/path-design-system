@@ -68,7 +68,7 @@ export const theme: Theme = {
         borderRadius: '4px',
         fontFamily: 'Lato, Arial, Helvetica',
         fontWeight: 'bold',
-        fontSize: '14px'
+        fontSize: '24px'
     },
     input: {
         borderRadius: '4px',

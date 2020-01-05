@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useState } from 'react'
 import { Input } from 'antd';
-import { createUseStyles, theming } from './theme';
-import { Theme } from './theme/theme';
+import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
+import { Theme } from '@kaltura-react-ui-kits/path-theming';
 import { SpinnerBright24Icon } from '@kaltura-react-ui-kits/path-icons';
 
 const classNames = require('classnames');
