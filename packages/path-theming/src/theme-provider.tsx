@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {createTheming} from 'react-jss'
-import { theme } from './theme';
+import { getPathTheme } from './get-path-theme';
 
-const ThemeContext = React.createContext(theme);
+const ThemeContext = React.createContext(getPathTheme());
 
 const theming = createTheming(ThemeContext);
 

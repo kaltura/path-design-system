@@ -1,47 +1,6 @@
-export interface Theme {
-    colors: {
-        grayscale1: string;
-        grayscale2: string;
-        grayscale3: string;
-        grayscale4: string;
-        grayscale5: string;
-        grayscale6: string;
-        grayscale7: string;
-        grayscale8: string;
-        success: string;
-        danger: string;
-        acknowledgement: string;
-        red: string;
-        orange: string;
-        yellow: string;
-        lime: string;
-        green: string;
-        deepcyan: string;
-        cyan: string;
-        royalblue: string;
-        white: string;
-    };
-    button: {
-        borderRadius: string;
-        fontFamily: string;
-        fontWeight: string;
-        fontSize: string;
-    };
-    input: {
-        borderRadius: string;
-        fontFamily: string;
-        fontWeight: string;
-        fontSize: string;
-    };
-    hint: {
-        fontFamily: string;
-        fontWeight: string;
-        fontSize: string;
-        lineHeight: string;
-    };
-}
+import { Theme } from './theme.type';
 
-export const theme: Theme = {
+export const getPathTheme = () : Theme => ({
     colors: {
         grayscale1: '#333333',
         grayscale2: '#888888',
@@ -82,4 +41,4 @@ export const theme: Theme = {
         fontSize: '12px',
         lineHeight: '18px',
     }
-};
+});
