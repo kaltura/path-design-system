@@ -27,7 +27,7 @@ export const getPathTheme = () : Theme => ({
         borderRadius: '4px',
         fontFamily: 'Lato, Arial, Helvetica',
         fontWeight: 'bold',
-        fontSize: '24px'
+        fontSize: '14px'
     },
     input: {
         borderRadius: '4px',
