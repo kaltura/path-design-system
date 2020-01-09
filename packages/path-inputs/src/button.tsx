@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
+import { CSSProperties } from 'react';
 
 const classNames = require('classnames');
 
@@ -39,13 +40,23 @@ export interface ButtonProps {
      * @default horizontal
      */
     layout?: 'horizontal' | 'vertical';
+
+    /**
+     * Optional class names of the button
+     * @default ''
+     */
+    className?: string;
+
+    /**
+     * Optional styles of the button
+     * @default undefined
+     */
+    style?: CSSProperties;
 }
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
     return React.cloneElement(element, { className });
 };
-
-
 
 const useStyles = createUseStyles((theme: Theme) => ({
     'btn': (props: ButtonProps) => ({
@@ -213,7 +224,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
  */
 export function Button(props: ButtonProps) {
     const classes = useStyles(props);
-    const { label, disabled, onClick, icon, isProcessing, type = 'default'} = props;
+    const { label, disabled, onClick, icon, isProcessing, className, style, type } = props;
     const isCTA = type === 'cta';
     const isBorderLess = type === 'borderless';
 
@@ -226,6 +237,7 @@ export function Button(props: ButtonProps) {
         [classes.btnActive]: props.isActive && !isCTA,
         [classes.btnCTAActive]: props.isActive && isCTA,
         [classes.btnIconOnly]: props.icon && !props.label && !props.isProcessing,
+        [className || '']: true,
     });
     const btnContentClass = classNames({
         [classes.btnContent]: true
@@ -243,7 +255,7 @@ export function Button(props: ButtonProps) {
     });
 
     return (
-        <AntButton className={btnClass} disabled={disabled} onClick={onClick}>
+        <AntButton className={btnClass} disabled={disabled} style={style} onClick={onClick}>
             <div className={btnContentClass}>
                 {icon ? withClassName(icon, iconClass) : null}
                 {!isProcessing
@@ -262,5 +274,6 @@ Button.defaultProps = {
     type: 'default',
     isActive: false,
     isProcessing:false,
-    layout:'horizontal'
+    layout:'horizontal',
+    className: '',
 };
