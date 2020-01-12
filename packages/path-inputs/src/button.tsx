@@ -237,7 +237,7 @@ export function Button(props: ButtonProps) {
         [classes.btnActive]: props.isActive && !isCTA,
         [classes.btnCTAActive]: props.isActive && isCTA,
         [classes.btnIconOnly]: props.icon && !props.label && !props.isProcessing,
-        [className || '']: true,
+        className,
     });
     const btnContentClass = classNames({
         [classes.btnContent]: true
