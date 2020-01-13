@@ -39,7 +39,7 @@ export interface ButtonProps {
      * Button's content layout. Can be horizontal or vertical
      * @default horizontal
      */
-    layout?: 'horizontal' | 'vertical';
+    layout: 'horizontal' | 'vertical';
 
     /**
      * Optional class names of the button
@@ -237,8 +237,7 @@ export function Button(props: ButtonProps) {
         [classes.btnActive]: props.isActive && !isCTA,
         [classes.btnCTAActive]: props.isActive && isCTA,
         [classes.btnIconOnly]: props.icon && !props.label && !props.isProcessing,
-        className,
-    });
+    }, className);
     const btnContentClass = classNames({
         [classes.btnContent]: true
     });
@@ -275,5 +274,4 @@ Button.defaultProps = {
     isActive: false,
     isProcessing:false,
     layout:'horizontal',
-    className: '',
 };
