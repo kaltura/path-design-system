@@ -1,5 +1,10 @@
 export { ArrowLeft16Icon } from './arrowLeft16';
+export { Close24Icon } from './close24';
+export { Gear24Icon } from './gear24';
+export { Home16Icon } from './home16';
+export { Image24Icon } from './image24';
 export { Minus24Icon } from './minus24';
+export { Plus16Icon } from './plus16';
 export { Plus24Icon } from './plus24';
 export { Redo24Icon } from './redo24';
 export { Search24Icon } from './search24';

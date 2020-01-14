@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>ic_plus</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ic_plus" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" x="0" y="0" width="16" height="16"></rect>
+        <path d="M8,3 C8.55228475,3 9,3.44771525 9,4 L9,7 L12,7 C12.5522847,7 13,7.44771525 13,8 C13,8.55228475 12.5522847,9 12,9 L9,9 L9,12 C9,12.5522847 8.55228475,13 8,13 C7.44771525,13 7,12.5522847 7,12 L7,9 L4,9 C3.44771525,9 3,8.55228475 3,8 C3,7.44771525 3.44771525,7 4,7 L7,7 L7,4 C7,3.44771525 7.44771525,3 8,3 Z" id="Combined-Shape" fill="#000000"></path>
+    </g>
+</svg>
