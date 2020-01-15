@@ -67,6 +67,12 @@ export interface TextInputProps {
      * @default undefined
      * */
     onChange?: (event: React.ChangeEvent<InputElement>) => void;
+
+    /**
+     * HTML input type
+     * @default undefined
+     */
+    htmlType?: string;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -179,6 +185,7 @@ export const TextInput = (props: TextInputProps) => {
         supportBusy,
         onChange,
         placeholder,
+        htmlType,
         hasError = false
     } = props;
     const classes = useStyles(props);
@@ -226,6 +233,7 @@ export const TextInput = (props: TextInputProps) => {
             })}
             <Input className={inputClass}
                    {...values}
+                   type={htmlType}
                    disabled={disabled}
                    ref={handleInputRef}
                    placeholder={placeholder}
