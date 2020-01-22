@@ -112,6 +112,7 @@
     "@kaltura-react-ui-kits/path-icons": "file:packages/path-icons",
     "@kaltura-react-ui-kits/path-inputs": "file:packages/path-inputs",
     "@kaltura-react-ui-kits/path-theming": "file:packages/path-theming",
+    "@kaltura-react-ui-kits/path-kaltura": "file:packages/path-kaltura",
     "cypress": "^3.8.1"
   }
 }

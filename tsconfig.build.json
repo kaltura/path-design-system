@@ -5,7 +5,8 @@
       "paths": {
         "@kaltura-react-ui-kits/path-icons": ["path-icons"],
         "@kaltura-react-ui-kits/path-inputs": ["path-inputs"],
-        "@kaltura-react-ui-kits/path-theming": ["path-theming"]
+        "@kaltura-react-ui-kits/path-theming": ["path-theming"],
+        "@kaltura-react-ui-kits/path-kaltura": ["path-kaltura"]
         }
     }
 }
