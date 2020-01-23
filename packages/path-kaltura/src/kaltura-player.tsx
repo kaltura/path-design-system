@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useContext, useEffect, useState} from 'react';
 import {KalturaPlayerCtx} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
-import {KalturaPlayerLoadingStatuses, KalturaPlayerProps} from "./definitions";
+import {PlayerLoadingStatuses, KalturaPlayerProps} from "./definitions";
 
 const useStyles = createUseStyles({
   kalturaPlayer: {
@@ -38,7 +38,7 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
   };
 
   useEffect(() => {
-    if(kalturaPlayer.state.status === KalturaPlayerLoadingStatuses.Loaded) {
+    if(kalturaPlayer.state.status === PlayerLoadingStatuses.Loaded){
       loadPlayer();
     }
     return () => {

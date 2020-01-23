@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect, useMemo, useReducer} from "react";
 import {
   KalturaPlayerCtxValue,
-  KalturaPlayerLoadingStatuses, KalturaPlayerManagerProps,
+  PlayerLoadingStatuses, KalturaPlayerManagerProps,
 } from "./definitions";
 import {loadPlaykitScript, reducer} from "./utils";
 
@@ -10,7 +10,7 @@ import {loadPlaykitScript, reducer} from "./utils";
 const initalCtxState: KalturaPlayerCtxValue =
   {
     state: {
-      status: KalturaPlayerLoadingStatuses.Initial,
+      status: PlayerLoadingStatuses.Initial,
       config: {}
     },
     dispatch: null
@@ -22,35 +22,35 @@ export const KalturaPlayerManager = (props: KalturaPlayerManagerProps) => {
 
   const {autoLoad, config, children} = props;
   const [state, dispatch] =
-    useReducer(reducer, { status: KalturaPlayerLoadingStatuses.Initial, config});
+    useReducer(reducer, { status: PlayerLoadingStatuses.Initial, config});
 
   useEffect(() => {
 
     if(!config || !config.partnerId || ! config.uiConfId || !config.playkitUrl) {
-      dispatch({type: KalturaPlayerLoadingStatuses.Error});
+      dispatch({type: PlayerLoadingStatuses.Error});
       return;
     }
 
     // if there is no need to load player scripts
-    if (state.status === KalturaPlayerLoadingStatuses.Error
-      || state.status === KalturaPlayerLoadingStatuses.Loaded) {
+    if (state.status === PlayerLoadingStatuses.Error
+      || state.status === PlayerLoadingStatuses.Loaded) {
       return;
     }
 
     // hot loading player scripts
-    if (state.status === KalturaPlayerLoadingStatuses.Initial && autoLoad) {
-      dispatch({type: KalturaPlayerLoadingStatuses.Loading});
+    if (state.status === PlayerLoadingStatuses.Initial && autoLoad) {
+      dispatch({type: PlayerLoadingStatuses.Loading});
       return;
     }
 
     const loadPlayer =  (): void => {
-      if (state.status !== KalturaPlayerLoadingStatuses.Loading) {
+      if (state.status !== PlayerLoadingStatuses.Loading) {
         return;
       }
       loadPlaykitScript(config.playkitUrl, dispatch);
     };
 
-    if(state.status === KalturaPlayerLoadingStatuses.Loading) {
+    if(state.status === PlayerLoadingStatuses.Loading) {
       loadPlayer();
     }
 

@@ -1,4 +1,4 @@
-export const enum KalturaPlayerLoadingStatuses {
+export const enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
   Loading = 'Loading',
   Error = 'Error',
@@ -6,12 +6,12 @@ export const enum KalturaPlayerLoadingStatuses {
 }
 
 export interface KalturaPlayerState {
-  status: KalturaPlayerLoadingStatuses;
+  status: PlayerLoadingStatuses;
   config: PlayerConfig;
 }
 
 export interface KalturaPlayerActions {
-  type: KalturaPlayerLoadingStatuses;
+  type: PlayerLoadingStatuses;
 }
 
 export interface PlayerConfig {
