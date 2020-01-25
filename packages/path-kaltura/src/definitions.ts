@@ -34,6 +34,7 @@ export interface KalturaPlayerManagerProps {
 export interface KalturaPlayerProps {
   playerId: string;
   entryId: string;
-  onMediaLoaded: (entryId: string) => void
+  onMediaLoaded?: (entryId: string) => void
+  onError?: (error: string) => void; //todo use KalturaPlayer Error codes / enums
   ks: string;
 }

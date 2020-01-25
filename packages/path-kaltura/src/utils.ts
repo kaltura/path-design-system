@@ -21,5 +21,8 @@ export const loadPlaykitScript = (script: string | undefined, dispatch: any) => 
   scriptElement.onload = () => {
     dispatch({type: PlayerLoadingStatuses.Loaded})
   };
+  scriptElement.onerror = () => {
+    dispatch({type: PlayerLoadingStatuses.Error});
+  };
   head.appendChild(scriptElement);
 };

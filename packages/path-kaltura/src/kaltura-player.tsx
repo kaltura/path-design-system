@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useContext, useEffect, useState} from 'react';
 import {KalturaPlayerCtx} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
-import {PlayerLoadingStatuses, KalturaPlayerProps} from "./definitions";
+import {KalturaPlayerProps, PlayerLoadingStatuses} from "./definitions";
 
 const useStyles = createUseStyles({
   kalturaPlayer: {
@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   const classes = useStyles();
-  const {playerId, entryId, ks, onMediaLoaded} = props;
+  const {playerId, entryId, ks, onMediaLoaded, onError} = props;
   const kalturaPlayer = useContext(KalturaPlayerCtx);
   const [kPlayer, setKPlayer] = useState({});
 
@@ -29,8 +29,10 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
         }});
     player['loadMedia']( {entryId});
     player.addEventListener('changesourceended', () => {
-      onMediaLoaded(entryId);
+      if(onMediaLoaded)
+        onMediaLoaded(entryId);
     });
+    // todo look for media loading error in playkit repo
     setKPlayer(player);
   };
 
@@ -41,8 +43,14 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
   };
 
   useEffect(() => {
-    if(kalturaPlayer.state.status === PlayerLoadingStatuses.Loaded){
-      loadPlayer();
+    switch (kalturaPlayer.state.status) {
+      case PlayerLoadingStatuses.Loaded:
+        loadPlayer();
+      break;
+      case PlayerLoadingStatuses.Error:
+        if(onError)
+          onError('Script loading error');
+        break;
     }
     return () => {
       destroyPlayer();
