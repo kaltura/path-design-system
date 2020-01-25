@@ -5,15 +5,15 @@ import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 
 const useStyle = createUseStyles({
   playerContainer: {
-    width: '500px',
-    height: '300px'
+    width: '360px',
+    height: '213px'
   }
 });
 
 export const Default: Story = () => {
 
   const classes = useStyle();
-  const ks = "djJ8MTgyNzU1MXwIZrIZ55zBGlJiyntQLSy1Nd9aizmFHNxWId9u4G2wz2aOtTiNdQ-tecmziY8bnIRV7scs10xf301uh6SHQ1obgSUx2AjmGrzH500SbZcC1q4f8m0g41wPH9XFMwmqsfTfaB2MA1NuDu7uN65_FXaOrNYqKNxY6Ga8GpgRwLuxpQ==";
+  const ks = "djJ8MTgyNzU1MXwAJe7NTMERgw7OXAHmKd223WMron3KPt5pyRjmXSZXwYrTChjmVjqoIjAjFSMeu13WlHE_cxqYvF6Zzg-NfMck-6V61A_hK_tgxztQosznBYbsS5h-FKJY_g1XZU_WzJO1kGq_pu6OAf6eRm7ipltnupNe6frD7vnd5jVyxuGfuw==";
   const partnerId = '1827551';
   const uiConfId = '44400392';
   const playkitUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
@@ -27,7 +27,10 @@ export const Default: Story = () => {
                             playkitUrl: playkitUrl
                           }}>
       <div className={classes.playerContainer}>
-        <KalturaPlayer entryId={entryId} playerId={playerId} ks={ks}/>
+        <KalturaPlayer entryId={entryId} playerId={playerId} ks={ks} onMediaLoaded={(entryId) => console.log(entryId)}/>
+
+        <KalturaPlayer entryId={entryId} playerId={'22222'} ks={ks} onMediaLoaded={(entryId) => console.log(entryId)}/>
+
       </div>
     </KalturaPlayerManager>
 

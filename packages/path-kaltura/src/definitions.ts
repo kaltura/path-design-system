@@ -34,5 +34,6 @@ export interface KalturaPlayerManagerProps {
 export interface KalturaPlayerProps {
   playerId: string;
   entryId: string;
+  onMediaLoaded: (entryId: string) => void
   ks: string;
 }

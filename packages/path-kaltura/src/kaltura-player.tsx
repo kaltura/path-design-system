@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   const classes = useStyles();
-  const {playerId, entryId, ks} = props;
+  const {playerId, entryId, ks, onMediaLoaded} = props;
   const kalturaPlayer = useContext(KalturaPlayerCtx);
   const [kPlayer, setKPlayer] = useState({});
 
@@ -28,6 +28,9 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
           ks: ks
         }});
     player['loadMedia']( {entryId});
+    player.addEventListener('changesourceended', () => {
+      onMediaLoaded(entryId);
+    });
     setKPlayer(player);
   };
 
