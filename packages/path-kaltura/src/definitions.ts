@@ -7,6 +7,8 @@ export const initalCtxState: KalturaPlayerCtxValue =
     dispatch: null
   };
 
+export const ladingScriptsErrorMsg = 'Oops, failed to load kaltura player scripts';
+
 export const enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
   Loading = 'Loading',

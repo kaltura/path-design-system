@@ -1,15 +1,35 @@
 import * as React from 'react';
 import {useContext, useEffect, useState} from 'react';
 import {KalturaPlayerCtx} from "./kaltura-player-manager";
-import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
-import {KalturaPlayerProps, PlayerLoadingStatuses} from "./definitions";
+import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
+import {KalturaPlayerProps, ladingScriptsErrorMsg, PlayerLoadingStatuses} from "./definitions";
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme: Theme) => ({
   kalturaPlayer: {
     height: '100%',
     width: '100%'
+  },
+  scriptErrorContainer: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: theme.colors.grayscale4,
+    position: 'relative'
+  },
+  scriptsErrorMsg: {
+    position: 'absolute',
+    top: 'calc(50% - 1em)',
+    width: '100%',
+    height: '1em',
+    fontSize: '15px',
+    fontWeight: 'normal',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 'normal',
+    letterSpacing: 'normal',
+    textAlign: 'center',
+    color: '#434a4b'
   }
-});
+}),  { theming });
 
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
@@ -53,7 +73,7 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
     switch (state.status) {
       case PlayerLoadingStatuses.Loaded:
         loadPlayer();
-      break;
+        break;
       case PlayerLoadingStatuses.Error:
         if(onError)
           onError('Script loading error');
@@ -65,8 +85,15 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
   }, [state.status]);
 
   return (
-    <div id={playerId} className={classes.kalturaPlayer}></div>
-  )
+    <>
+      {state.status === PlayerLoadingStatuses.Loaded
+        && <div id={playerId} className={classes.kalturaPlayer}></div>}
+      {state.status === PlayerLoadingStatuses.Error
+      && <div className={classes.scriptErrorContainer}>
+        <div className={classes.scriptsErrorMsg}>{ladingScriptsErrorMsg}</div>
+      </div> }
+    </>
+)
 
 };
 
