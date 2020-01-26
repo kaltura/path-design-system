@@ -1,12 +1,22 @@
 import * as React from 'react';
 import {KalturaPlayer} from "./kaltura-player";
-import {KalturaPlayerManager} from "./kaltura-player-manager";
+import {KalturaPlayerCtx, KalturaPlayerManager} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
+import { withKnobs } from '@storybook/addon-knobs';
+import {Button} from "@kaltura-react-ui-kits/path-inputs";
+import {PlayerLoadingStatuses} from "./definitions";
+import {useContext} from "react";
+
 
 const useStyle = createUseStyles({
   playerContainer: {
     width: '360px',
     height: '213px'
+  },
+  loadScriptsButton: {
+    position: 'absolute',
+    left: '400px',
+    top: '100px'
   }
 });
 
@@ -22,12 +32,11 @@ export const Default: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
-                            partnerId: partnerId,
-                            uiConfId: uiConfId,
-                            playkitUrl: playkitUrl
-                          }}>
+    <KalturaPlayerManager config={{
+      partnerId: partnerId,
+      uiConfId: uiConfId,
+      playkitUrl: playkitUrl
+    }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
                        playerId={playerId}
@@ -48,7 +57,7 @@ Default.story = {
   }
 };
 
-export const DisplayKalturaPlayer: Story = () => {
+export const KalturaPlayerAutoPlay: Story = () => {
   const classes = useStyle();
 
   return (
@@ -70,13 +79,45 @@ export const DisplayKalturaPlayer: Story = () => {
   )
 };
 
-DisplayKalturaPlayer.story = {
+KalturaPlayerAutoPlay.story = {
   parameters: {
     docs: {
-      storyDescription: `Kaltura Player`
+      storyDescription: `Kaltura Player auto play media`
     }
   }
 };
+
+export const KalturaPlayerWithoutAutoPlay: Story = () => {
+  const classes = useStyle();
+
+  return (
+    <KalturaPlayerManager autoLoad={true}
+                          config={{
+                            partnerId: partnerId,
+                            uiConfId: uiConfId,
+                            playkitUrl: playkitUrl
+                          }}>
+      <div className={classes.playerContainer}>
+        <KalturaPlayer entryId={entryId}
+                       playerId={playerId}
+                       autoplay={false}
+                       ks={ks}
+                       onMediaLoaded={(entryId) => console.log(entryId)}
+                       onError={(error => console.log(error))}
+        />
+      </div>
+    </KalturaPlayerManager>
+  )
+};
+
+KalturaPlayerWithoutAutoPlay.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Kaltura Player with no auto play media`
+    }
+  }
+};
+
 
 
 export const kalturaPlayerErrorLoadingScripts: Story = () => {
@@ -151,13 +192,65 @@ MultiplePlayersInPage.story = {
   }
 };
 
+const LoadPlayerScriptsComponent = () => {
+
+  const classes = useStyle();
+
+  const kalturaPlayer = useContext(KalturaPlayerCtx);
+
+  const startLoadingScripts = () => {
+    if(kalturaPlayer.dispatch)
+      kalturaPlayer.dispatch({type: PlayerLoadingStatuses.Loading});
+  };
+
+  return (
+    <Button className={classes.loadScriptsButton}
+            label={'load player scripts'}
+            onClick={startLoadingScripts}></Button>
+  );
+};
+
+export const ManuallyLoadPlayerFactory: Story = () => {
+  const classes = useStyle();
+
+  return (
+    <>
+      <KalturaPlayerManager autoLoad={false}
+                            config={{
+                              partnerId: partnerId,
+                              uiConfId: uiConfId,
+                              playkitUrl: playkitUrl
+                            }}>
+        <>
+          <LoadPlayerScriptsComponent/>
+          <div className={classes.playerContainer}>
+            <KalturaPlayer entryId={entryId}
+                           playerId={playerId}
+                           ks={ks}
+                           onMediaLoaded={(entryId) => console.log(entryId)}
+                           onError={(error => console.log(error))}
+            />
+          </div>
+        </>
+      </KalturaPlayerManager>
+    </>
+  )
+};
+
+ManuallyLoadPlayerFactory.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Manually load Kaltura Player scripts (kaltura player manager property)`
+    }
+  }
+};
+
 
 export default {
   title: 'Kaltura/Player',
   component: KalturaPlayer,
   decorators: [
-    // withKnobs,
-    // withThemeProvider,
+    withKnobs
   ],
   parameters: {
     componentSubtitle: `Kaltura Player.`,

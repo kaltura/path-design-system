@@ -1,3 +1,12 @@
+export const initalCtxState: KalturaPlayerCtxValue =
+  {
+    state: {
+      status: PlayerLoadingStatuses.Initial,
+      config: {}
+    },
+    dispatch: null
+  };
+
 export const enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
   Loading = 'Loading',
@@ -34,7 +43,9 @@ export interface KalturaPlayerManagerProps {
 export interface KalturaPlayerProps {
   playerId: string;
   entryId: string;
-  onMediaLoaded?: (entryId: string) => void
-  onError?: (error: string) => void; //todo use KalturaPlayer Error codes / enums
   ks: string;
+  autoplay?: boolean;
+  onPlayerLoaded?: (entryId: string) => void;
+  onMediaLoaded?: (entryId: string) => void;
+  onError?: (error: string) => void; //todo use KalturaPlayer Error codes / enums
 }

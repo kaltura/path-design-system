@@ -1,20 +1,13 @@
 import * as React from 'react';
 import {useEffect, useMemo, useReducer} from "react";
 import {
+  PlayerLoadingStatuses,
+  KalturaPlayerManagerProps,
   KalturaPlayerCtxValue,
-  PlayerLoadingStatuses, KalturaPlayerManagerProps,
+  initalCtxState,
 } from "./definitions";
 import {loadPlaykitScript, reducer} from "./utils";
 
-
-const initalCtxState: KalturaPlayerCtxValue =
-  {
-    state: {
-      status: PlayerLoadingStatuses.Initial,
-      config: {}
-    },
-    dispatch: null
-  };
 
 export const KalturaPlayerCtx = React.createContext<KalturaPlayerCtxValue>(initalCtxState);
 
@@ -57,7 +50,7 @@ export const KalturaPlayerManager = (props: KalturaPlayerManagerProps) => {
   }, [state.status]);
 
 
-  const playerValue = useMemo(() => {
+  const playerCtxValue = useMemo(() => {
 
     return {
       state,
@@ -66,8 +59,12 @@ export const KalturaPlayerManager = (props: KalturaPlayerManagerProps) => {
   }, [state.status]);
 
   return (
-    <KalturaPlayerCtx.Provider value={playerValue}>
+    <KalturaPlayerCtx.Provider value={playerCtxValue}>
       {children}
     </KalturaPlayerCtx.Provider>
   )
 };
+
+KalturaPlayerManager.defaultProps = {
+  autoLoad: true
+}

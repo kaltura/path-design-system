@@ -14,8 +14,8 @@ const useStyles = createUseStyles({
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   const classes = useStyles();
-  const {playerId, entryId, ks, onMediaLoaded, onError} = props;
-  const kalturaPlayer = useContext(KalturaPlayerCtx);
+  const {playerId, entryId, ks, autoplay, onMediaLoaded, onPlayerLoaded, onError} = props;
+  const {state} = useContext(KalturaPlayerCtx);
   const [kPlayer, setKPlayer] = useState({});
 
   const loadPlayer = () => {
@@ -23,11 +23,18 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
     const player = playerFactory['setup'](
       { targetId: playerId,
         provider: {
-          partnerId: kalturaPlayer.state.config.partnerId,
-          uiConfId: kalturaPlayer.state.config.uiConfId,
+          partnerId: state.config.partnerId,
+          uiConfId: state.config.uiConfId,
           ks: ks
-        }});
-    player['loadMedia']( {entryId});
+        },
+        playback: {
+          autoplay,
+        }
+      });
+    if(onPlayerLoaded)
+      onPlayerLoaded(entryId);
+
+    player['loadMedia']( {entryId });
     player.addEventListener('changesourceended', () => {
       if(onMediaLoaded)
         onMediaLoaded(entryId);
@@ -43,7 +50,7 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
   };
 
   useEffect(() => {
-    switch (kalturaPlayer.state.status) {
+    switch (state.status) {
       case PlayerLoadingStatuses.Loaded:
         loadPlayer();
       break;
@@ -55,10 +62,14 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
     return () => {
       destroyPlayer();
     }
-  }, [kalturaPlayer.state.status]);
+  }, [state.status]);
 
   return (
     <div id={playerId} className={classes.kalturaPlayer}></div>
   )
 
+};
+
+KalturaPlayer.defaultProps = {
+  autoplay: true
 };
