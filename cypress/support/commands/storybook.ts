@@ -1,9 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-namespace
-
 declare namespace Cypress {
   interface Chainable<Subject> {
     getStories<E extends Node = HTMLElement>(): Chainable<JQuery<E>>;
-    loadStory(id: string, innerPage?: boolean): Chainable<unknown>;
+    loadStory(id?: string, innerPage?: boolean): Chainable<unknown>;
     activateKnobsTab(): Chainable<unknown>;
     activateActionsTab(): Chainable<unknown>;
     expandAll<E extends Node = HTMLElement>(): Chainable<JQuery<E>>;
