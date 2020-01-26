@@ -1,44 +1,44 @@
-export const initalCtxState: KalturaPlayerCtxValue =
+export const initalCtxState: PlayerFactoryCtxValue =
   {
     state: {
-      status: PlayerLoadingStatuses.Initial,
+      status: PlayerLoadingStatus.Initial,
       config: {}
     },
     dispatch: null
   };
 
-export const ladingScriptsErrorMsg = 'Oops, failed to load kaltura player scripts';
+export const LadingScriptsErrorMsg = 'Oops, failed to load kaltura player scripts';
 
-export const enum PlayerLoadingStatuses {
+export const enum PlayerLoadingStatus {
   Loaded = 'Loaded',
   Loading = 'Loading',
   Error = 'Error',
   Initial = 'Initial'
 }
 
-export interface KalturaPlayerState {
-  status: PlayerLoadingStatuses;
-  config: PlayerConfig;
+export interface PlayerFactoryState {
+  status: PlayerLoadingStatus;
+  config: PlayerFactoryConfig;
 }
 
-export interface KalturaPlayerActions {
-  type: PlayerLoadingStatuses;
+export interface PlayerReducerActions {
+  type: PlayerLoadingStatus;
 }
 
-export interface PlayerConfig {
+export interface PlayerFactoryConfig {
   playkitUrl?: string;
   partnerId?: string;
   uiConfId?: string;
 }
 
-export interface KalturaPlayerCtxValue {
-  state: KalturaPlayerState;
+export interface PlayerFactoryCtxValue {
+  state: PlayerFactoryState;
   dispatch: any | null;
 }
 
 export interface KalturaPlayerManagerProps {
   autoLoad: boolean;
-  config: PlayerConfig;
+  config: PlayerFactoryConfig;
   children?: React.ReactChild;
 }
 

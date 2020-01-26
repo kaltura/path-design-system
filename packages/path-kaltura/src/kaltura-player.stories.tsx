@@ -4,7 +4,7 @@ import {KalturaPlayerCtx, KalturaPlayerManager} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
-import {PlayerLoadingStatuses} from "./definitions";
+import {PlayerLoadingStatus} from "./definitions";
 import {useContext} from "react";
 
 
@@ -20,7 +20,7 @@ const useStyle = createUseStyles({
   }
 });
 
-const ks = "djJ8MTgyNzU1MXwAJe7NTMERgw7OXAHmKd223WMron3KPt5pyRjmXSZXwYrTChjmVjqoIjAjFSMeu13WlHE_cxqYvF6Zzg-NfMck-6V61A_hK_tgxztQosznBYbsS5h-FKJY_g1XZU_WzJO1kGq_pu6OAf6eRm7ipltnupNe6frD7vnd5jVyxuGfuw==";
+const ks = "djJ8MTgyNzU1MXzHVGeQMl3wWuCzo7GnvBlbgLVcwwigMmrOR_IQcAmcKnTOizskYB2pyCVKlMptdZ7Xd7qIf3yJoHnoSueCWPELexV2yYImarZOyTbZopc_t6z8JaNCVghVkQ2YB6Qf1XQPM1kp9jKlxDSOFpjUUorOvlvOAE9FTJxewwfx4shVuw==";
 const partnerId = '1827551';
 const uiConfId = '44400392';
 const playkitUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
@@ -204,7 +204,7 @@ const LoadPlayerScriptsComponent = () => {
 
   const startLoadingScripts = () => {
     if(kalturaPlayer.dispatch)
-      kalturaPlayer.dispatch({type: PlayerLoadingStatuses.Loading});
+      kalturaPlayer.dispatch({type: PlayerLoadingStatus.Loading});
   };
 
   return (

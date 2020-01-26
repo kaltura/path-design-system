@@ -1,9 +1,9 @@
-import {KalturaPlayerActions, PlayerLoadingStatuses, KalturaPlayerState} from "./definitions";
+import {PlayerReducerActions, PlayerLoadingStatus, PlayerFactoryState} from "./definitions";
 
-export const reducer = (state: KalturaPlayerState, action: KalturaPlayerActions) => {
-  if(action.type === PlayerLoadingStatuses.Loading) {
-    if (state.status === PlayerLoadingStatuses.Initial) {
-      return { ...state, status: PlayerLoadingStatuses.Loading}
+export const reducer = (state: PlayerFactoryState, action: PlayerReducerActions) => {
+  if(action.type === PlayerLoadingStatus.Loading) {
+    if (state.status === PlayerLoadingStatus.Initial) {
+      return { ...state, status: PlayerLoadingStatus.Loading}
     }
   }
   return {...state, status: action.type}
@@ -11,7 +11,7 @@ export const reducer = (state: KalturaPlayerState, action: KalturaPlayerActions)
 
 export const loadPlaykitScript = (script: string | undefined, dispatch: any) => {
   if(!script) {
-    dispatch({type: PlayerLoadingStatuses.Error});
+    dispatch({type: PlayerLoadingStatus.Error});
     return;
   }
   const head = document.head || document.getElementsByTagName('head')[0];
@@ -19,10 +19,10 @@ export const loadPlaykitScript = (script: string | undefined, dispatch: any) => 
   scriptElement.type = "text/javascript";
   scriptElement.src = script;
   scriptElement.onload = () => {
-    dispatch({type: PlayerLoadingStatuses.Loaded})
+    dispatch({type: PlayerLoadingStatus.Loaded})
   };
   scriptElement.onerror = () => {
-    dispatch({type: PlayerLoadingStatuses.Error});
+    dispatch({type: PlayerLoadingStatus.Error});
   };
   head.appendChild(scriptElement);
 };
