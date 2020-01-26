@@ -43,11 +43,36 @@ export interface KalturaPlayerManagerProps {
 }
 
 export interface KalturaPlayerProps {
+  /**
+   * Player Id, will be the containing player element id. should be unique
+   */
   playerId: string;
+  /**
+   * Entry Id, playable media entry id.
+   */
   entryId: string;
+  /**
+   * KS
+   */
   ks: string;
-  autoplay?: boolean;
+  /**
+   * Autoplay. Indicating if the auto play selected media
+   * @default true
+   */
+  autoplay: boolean;
+  /**
+   * OnPlayerLoaded event handler. Will be called after all player scripts were loaded
+   * @param entryId
+   */
   onPlayerLoaded?: (entryId: string) => void;
+  /**
+   * OnMediaLoaded event handler. Will be called after media entry was successful loaded in player
+   * @param entryId
+   */
   onMediaLoaded?: (entryId: string) => void;
+  /**
+   * OnError event handler. Will be called after a player related error
+   * @param error
+   */
   onError?: (error: string) => void; //todo use KalturaPlayer Error codes / enums
 }

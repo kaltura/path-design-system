@@ -36,31 +36,37 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
   const classes = useStyles();
   const {playerId, entryId, ks, autoplay, onMediaLoaded, onPlayerLoaded, onError} = props;
   const {state} = useContext(KalturaPlayerCtx);
-  const [kPlayer, setKPlayer] = useState({});
+  const [kPlayer, setKPlayer] = useState({player: null, status: PlayerLoadingStatuses.Initial});
 
   const loadPlayer = () => {
     const playerFactory = window['KalturaPlayer'];
-    const player = playerFactory['setup'](
-      { targetId: playerId,
-        provider: {
-          partnerId: state.config.partnerId,
-          uiConfId: state.config.uiConfId,
-          ks: ks
-        },
-        playback: {
-          autoplay,
-        }
-      });
-    if(onPlayerLoaded)
-      onPlayerLoaded(entryId);
+    try {
+      const player = playerFactory['setup'](
+        { targetId: playerId,
+          provider: {
+            partnerId: state.config.partnerId,
+            uiConfId: state.config.uiConfId,
+            ks: ks
+          },
+          playback: {
+            autoplay,
+          }
+        });
 
-    player['loadMedia']( {entryId });
-    player.addEventListener('changesourceended', () => {
-      if(onMediaLoaded)
-        onMediaLoaded(entryId);
-    });
-    // todo look for media loading error in playkit repo
-    setKPlayer(player);
+      if(onPlayerLoaded)
+        onPlayerLoaded(entryId);
+
+      player['loadMedia']( {entryId });
+      player.addEventListener('changesourceended', () => {
+        if(onMediaLoaded)
+          onMediaLoaded(entryId);
+      });
+      // todo look for media loading error in playkit repo
+      setKPlayer({player, status: PlayerLoadingStatuses.Loaded});
+    } catch (e) {
+      if(onError) onError(e);
+      setKPlayer({player: null, status: PlayerLoadingStatuses.Error})
+    }
   };
 
   const destroyPlayer = () => {
@@ -75,8 +81,7 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
         loadPlayer();
         break;
       case PlayerLoadingStatuses.Error:
-        if(onError)
-          onError('Script loading error');
+        if(onError) onError('Script loading error');
         break;
     }
     return () => {
@@ -86,14 +91,17 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   return (
     <>
-      {state.status === PlayerLoadingStatuses.Loaded
-        && <div id={playerId} className={classes.kalturaPlayer}></div>}
-      {state.status === PlayerLoadingStatuses.Error
-      && <div className={classes.scriptErrorContainer}>
-        <div className={classes.scriptsErrorMsg}>{ladingScriptsErrorMsg}</div>
-      </div> }
+      {(state.status === PlayerLoadingStatuses.Error
+        || kPlayer.status === PlayerLoadingStatuses.Error)
+
+        ? (<div className={classes.scriptErrorContainer}>
+            <div className={classes.scriptsErrorMsg}>{ladingScriptsErrorMsg}</div>
+          </div>)
+
+        : (<div id={playerId} className={classes.kalturaPlayer}></div>)
+      }
     </>
-)
+  )
 
 };
 

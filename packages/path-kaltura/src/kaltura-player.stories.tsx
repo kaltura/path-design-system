@@ -25,11 +25,11 @@ const partnerId = '1827551';
 const uiConfId = '44400392';
 const playkitUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
 const errorPlayerUrl = 'httpd://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
-const playerId = '123456';
 const entryId = '1_qm3jtb9a';
 
 export const Default: Story = () => {
   const classes = useStyle();
+  const playerId = '123456';
 
   return (
     <KalturaPlayerManager config={{
@@ -59,6 +59,7 @@ Default.story = {
 
 export const KalturaPlayerAutoPlay: Story = () => {
   const classes = useStyle();
+  const playerId = '1123456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
@@ -89,6 +90,7 @@ KalturaPlayerAutoPlay.story = {
 
 export const KalturaPlayerWithoutAutoPlay: Story = () => {
   const classes = useStyle();
+  const playerId = '223456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
@@ -122,6 +124,7 @@ KalturaPlayerWithoutAutoPlay.story = {
 
 export const kalturaPlayerErrorLoadingScripts: Story = () => {
   const classes = useStyle();
+  const playerId = '323456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
@@ -135,7 +138,7 @@ export const kalturaPlayerErrorLoadingScripts: Story = () => {
                        playerId={playerId}
                        ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
-                       onError={(error => alert(error))}
+                       onError={(error => console.log(error))}
         />
       </div>
     </KalturaPlayerManager>
@@ -153,6 +156,7 @@ kalturaPlayerErrorLoadingScripts.story = {
 
 export const MultiplePlayersInPage: Story = () => {
   const classes = useStyle();
+  const playerId = '423456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
@@ -212,6 +216,7 @@ const LoadPlayerScriptsComponent = () => {
 
 export const ManuallyLoadPlayerFactory: Story = () => {
   const classes = useStyle();
+  const playerId = '523456';
 
   return (
     <>
