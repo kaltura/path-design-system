@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {KalturaPlayer} from "./kaltura-player";
-import {KalturaPlayerCtx, KalturaPlayerManager} from "./kaltura-player-manager";
+import {KalturaPlayerManager} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
-import {PlayerLoadingStatus} from "./definitions";
+import {PlayerLoadingStatus} from "./player-definitions";
 import {useContext} from "react";
+import {KalturaPlayerContext} from "./kaltura-player-provider";
 
 
 const useStyle = createUseStyles({
@@ -20,26 +21,24 @@ const useStyle = createUseStyles({
   }
 });
 
-const ks = "djJ8MTgyNzU1MXzHVGeQMl3wWuCzo7GnvBlbgLVcwwigMmrOR_IQcAmcKnTOizskYB2pyCVKlMptdZ7Xd7qIf3yJoHnoSueCWPELexV2yYImarZOyTbZopc_t6z8JaNCVghVkQ2YB6Qf1XQPM1kp9jKlxDSOFpjUUorOvlvOAE9FTJxewwfx4shVuw==";
+const ks = "djJ8MTgyNzU1MXy4QK84-8pGo0REheMzEexFP7k4TyYRNmKVwo9pCoU3j5ZqSjnIivBn2mxsTmP7YD-ZijjgpeVVtlc1WHdOpTDioidlwIxFe9MjrF11zwmjUOriIID0wOfz0GSyrGMFPRXh4uZN15ymU1ECwt3wky8xSw9Ryu3k8f8OuCreR2m_DA==";
 const partnerId = '1827551';
 const uiConfId = '44400392';
-const playkitUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
+const playerBundleUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
 const errorPlayerUrl = 'httpd://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
 const entryId = '1_qm3jtb9a';
 
 export const Default: Story = () => {
   const classes = useStyle();
-  const playerId = '123456';
 
   return (
     <KalturaPlayerManager config={{
       partnerId: partnerId,
       uiConfId: uiConfId,
-      playkitUrl: playkitUrl
+      playerBundleUrl: playerBundleUrl
     }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       playerId={playerId}
                        ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
                        onError={(error => console.log(error))}
@@ -59,18 +58,16 @@ Default.story = {
 
 export const KalturaPlayerAutoPlay: Story = () => {
   const classes = useStyle();
-  const playerId = '1123456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            playkitUrl: playkitUrl
+                            playerBundleUrl: playerBundleUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       playerId={playerId}
                        ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
                        onError={(error => console.log(error))}
@@ -90,18 +87,16 @@ KalturaPlayerAutoPlay.story = {
 
 export const KalturaPlayerWithoutAutoPlay: Story = () => {
   const classes = useStyle();
-  const playerId = '223456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            playkitUrl: playkitUrl
+                            playerBundleUrl: playerBundleUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       playerId={playerId}
                        autoplay={false}
                        ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
@@ -124,18 +119,16 @@ KalturaPlayerWithoutAutoPlay.story = {
 
 export const kalturaPlayerErrorLoadingScripts: Story = () => {
   const classes = useStyle();
-  const playerId = '323456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            playkitUrl: errorPlayerUrl
+                            playerBundleUrl: errorPlayerUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       playerId={playerId}
                        ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
                        onError={(error => console.log(error))}
@@ -156,19 +149,17 @@ kalturaPlayerErrorLoadingScripts.story = {
 
 export const MultiplePlayersInPage: Story = () => {
   const classes = useStyle();
-  const playerId = '423456';
 
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            playkitUrl: playkitUrl
+                            playerBundleUrl: playerBundleUrl
                           }}>
       <>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
-                         playerId={playerId}
                          ks={ks}
                          onMediaLoaded={(entryId) => console.log(entryId)}
                          onError={(error => console.log(error))}
@@ -177,7 +168,6 @@ export const MultiplePlayersInPage: Story = () => {
         <br/>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
-                         playerId={`${playerId}111`}
                          ks={ks}
                          onMediaLoaded={(entryId) => console.log(entryId)}
                          onError={(error => console.log(error))}
@@ -200,7 +190,7 @@ const LoadPlayerScriptsComponent = () => {
 
   const classes = useStyle();
 
-  const kalturaPlayer = useContext(KalturaPlayerCtx);
+  const kalturaPlayer = useContext(KalturaPlayerContext);
 
   const startLoadingScripts = () => {
     if(kalturaPlayer.dispatch)
@@ -216,7 +206,6 @@ const LoadPlayerScriptsComponent = () => {
 
 export const ManuallyLoadPlayerFactory: Story = () => {
   const classes = useStyle();
-  const playerId = '523456';
 
   return (
     <>
@@ -224,13 +213,12 @@ export const ManuallyLoadPlayerFactory: Story = () => {
                             config={{
                               partnerId: partnerId,
                               uiConfId: uiConfId,
-                              playkitUrl: playkitUrl
+                              playerBundleUrl: playerBundleUrl
                             }}>
         <>
           <LoadPlayerScriptsComponent/>
           <div className={classes.playerContainer}>
             <KalturaPlayer entryId={entryId}
-                           playerId={playerId}
                            ks={ks}
                            onMediaLoaded={(entryId) => console.log(entryId)}
                            onError={(error => console.log(error))}

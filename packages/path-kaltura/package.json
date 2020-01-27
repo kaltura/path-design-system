@@ -28,12 +28,14 @@
     "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"
   },
   "peerDependencies": {
-    "antd": "3.25.0",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "react-jss": "10.0.0"
+    "@kaltura-react-ui-kits/path-theming": "file:../path-theming",
+    "react-jss": "10.0.0",
+    "@types/shortid": "0.0.29",
+    "shortid": "^2.2.15"
   },
   "files": [
     "dist",

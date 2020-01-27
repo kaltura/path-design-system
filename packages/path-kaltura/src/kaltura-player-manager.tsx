@@ -2,24 +2,29 @@ import * as React from 'react';
 import {useEffect, useMemo, useReducer} from "react";
 import {
   PlayerLoadingStatus,
-  KalturaPlayerManagerProps,
-  PlayerFactoryCtxValue,
-  initalCtxState,
-} from "./definitions";
-import {loadPlaykitScript, reducer} from "./utils";
+  PlayerManagerConfig,
+} from "./player-definitions";
+import {loadPlayerIntoSession, loadPlayerReducer} from "./utils";
+import {KalturaPlayerContext} from "./kaltura-player-provider";
 
-
-export const KalturaPlayerCtx = React.createContext<PlayerFactoryCtxValue>(initalCtxState);
+export interface KalturaPlayerManagerProps {
+  autoLoad: boolean;
+  config: PlayerManagerConfig;
+  children?: React.ReactChild;
+}
 
 export const KalturaPlayerManager = (props: KalturaPlayerManagerProps) => {
 
   const {autoLoad, config, children} = props;
-  const [state, dispatch] =
-    useReducer(reducer, { status: PlayerLoadingStatus.Initial, config});
+  const [state, dispatch] = useReducer(
+    loadPlayerReducer, { status: PlayerLoadingStatus.Initial, config});
 
   useEffect(() => {
 
-    if(!config || !config.partnerId || ! config.uiConfId || !config.playkitUrl) {
+    if(!config || !config.partnerId || ! config.uiConfId || !config.playerBundleUrl) {
+      console.log(`cannot load kaltura player scripts into session,
+        missing parameters (did you remember to provide partnerId,
+        uiConfId and playerBundleUrl?`);
       dispatch({type: PlayerLoadingStatus.Error});
       return;
     }
@@ -40,28 +45,28 @@ export const KalturaPlayerManager = (props: KalturaPlayerManagerProps) => {
       if (state.status !== PlayerLoadingStatus.Loading) {
         return;
       }
-      loadPlaykitScript(config.playkitUrl, dispatch);
+      loadPlayerIntoSession(config.playerBundleUrl, dispatch);
     };
 
     if(state.status === PlayerLoadingStatus.Loading) {
       loadPlayer();
     }
 
-  }, [state.status]);
+  }, [state.status, dispatch, config]);
 
 
-  const playerCtxValue = useMemo(() => {
+  const playerContextValue = useMemo(() => {
 
     return {
       state,
       dispatch
     }
-  }, [state.status]);
+  }, [state.status, dispatch]);
 
   return (
-    <KalturaPlayerCtx.Provider value={playerCtxValue}>
+    <KalturaPlayerContext.Provider value={playerContextValue}>
       {children}
-    </KalturaPlayerCtx.Provider>
+    </KalturaPlayerContext.Provider>
   )
 };
 

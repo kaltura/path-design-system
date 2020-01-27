@@ -1,6 +1,6 @@
-import {PlayerReducerActions, PlayerLoadingStatus, PlayerFactoryState} from "./definitions";
+import {PlayerReducerActions, PlayerLoadingStatus, PlayerManagerState} from "./player-definitions";
 
-export const reducer = (state: PlayerFactoryState, action: PlayerReducerActions) => {
+export const loadPlayerReducer = (state: PlayerManagerState, action: PlayerReducerActions) => {
   if(action.type === PlayerLoadingStatus.Loading) {
     if (state.status === PlayerLoadingStatus.Initial) {
       return { ...state, status: PlayerLoadingStatus.Loading}
@@ -9,7 +9,7 @@ export const reducer = (state: PlayerFactoryState, action: PlayerReducerActions)
   return {...state, status: action.type}
 };
 
-export const loadPlaykitScript = (script: string | undefined, dispatch: any) => {
+export const loadPlayerIntoSession = (script: string | undefined, dispatch: any) => {
   if(!script) {
     dispatch({type: PlayerLoadingStatus.Error});
     return;
