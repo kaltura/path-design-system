@@ -21,14 +21,6 @@ const loadPlayerReducer = (state: PlayerManagerState, action: PlayerReducerActio
   return {...state, status: action.type}
 };
 
-// const getExistingScript = (scriptUrl: string): HTMLScriptElement | null => {
-//   return document.querySelectorAll(`script[src="${scriptUrl}"]`)[0] as HTMLScriptElement;
-// };
-
-const isBundlerLoaded = (bundlerUrl: string): boolean => {
-  return !!window['loadedBundlers'][bundlerUrl];
-};
-
 export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, dispatch: any) => {
 
   if(!playerBundlerUrl) {
@@ -38,7 +30,7 @@ export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, disp
     return;
   }
 
-  if(isBundlerLoaded(playerBundlerUrl)) {
+  if(!!window['loadedBundlers'][playerBundlerUrl]) {
     console.log('**** player bundler was already loaded into session');
     dispatch({type: PlayerLoadingStatus.Loaded});
     return;
