@@ -9,15 +9,18 @@ export const loadPlayerReducer = (state: PlayerManagerState, action: PlayerReduc
   return {...state, status: action.type}
 };
 
-export const loadPlayerIntoSession = (script: string | undefined, dispatch: any) => {
-  if(!script) {
+export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, dispatch: any) => {
+
+  console.log(`******* loading player into session....`);
+
+  if(!playerBundlerUrl) {
     dispatch({type: PlayerLoadingStatus.Error});
     return;
   }
   const head = document.head || document.getElementsByTagName('head')[0];
   const scriptElement = document.createElement('script');
   scriptElement.type = "text/javascript";
-  scriptElement.src = script;
+  scriptElement.src = playerBundlerUrl;
   scriptElement.onload = () => {
     dispatch({type: PlayerLoadingStatus.Loaded})
   };

@@ -2,7 +2,8 @@ export const enum PlayerLoadingStatus {
   Loaded = 'Loaded',
   Loading = 'Loading',
   Error = 'Error',
-  Initial = 'Initial'
+  Initial = 'Initial',
+  Destroyed = 'Destroyed'
 }
 
 export interface PlayerReducerActions {

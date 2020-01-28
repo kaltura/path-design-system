@@ -40,9 +40,7 @@ export const Default: Story = () => {
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
                        ks={ks}
-                       onMediaLoaded={(entryId) => console.log(entryId)}
-                       onError={(error => console.log(error))}
-        />
+                       onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
   )
@@ -69,9 +67,7 @@ export const KalturaPlayerAutoPlay: Story = () => {
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
                        ks={ks}
-                       onMediaLoaded={(entryId) => console.log(entryId)}
-                       onError={(error => console.log(error))}
-        />
+                       onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
   )
@@ -99,9 +95,7 @@ export const KalturaPlayerWithoutAutoPlay: Story = () => {
         <KalturaPlayer entryId={entryId}
                        autoplay={false}
                        ks={ks}
-                       onMediaLoaded={(entryId) => console.log(entryId)}
-                       onError={(error => console.log(error))}
-        />
+                       onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
   )
@@ -131,7 +125,8 @@ export const kalturaPlayerErrorLoadingScripts: Story = () => {
         <KalturaPlayer entryId={entryId}
                        ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
-                       onError={(error => console.log(error))}
+                       onPlayerLoadingError={(error => console.log(error))}
+                       onMediaLoadingError={(error => console.log(error))}
         />
       </div>
     </KalturaPlayerManager>
@@ -141,7 +136,7 @@ export const kalturaPlayerErrorLoadingScripts: Story = () => {
 kalturaPlayerErrorLoadingScripts.story = {
   parameters: {
     docs: {
-      storyDescription: `Kaltura Player error while loading kaltura player factory scripts`
+      storyDescription: `Kaltura Player error while loading kaltura player bundler scripts`
     }
   }
 };
@@ -161,17 +156,13 @@ export const MultiplePlayersInPage: Story = () => {
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          ks={ks}
-                         onMediaLoaded={(entryId) => console.log(entryId)}
-                         onError={(error => console.log(error))}
-          />
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
         <br/>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          ks={ks}
-                         onMediaLoaded={(entryId) => console.log(entryId)}
-                         onError={(error => console.log(error))}
-          />
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
       </>
     </KalturaPlayerManager>
@@ -204,7 +195,7 @@ const LoadPlayerScriptsComponent = () => {
   );
 };
 
-export const ManuallyLoadPlayerFactory: Story = () => {
+export const ManuallyLoadPlayerBundlerScripts: Story = () => {
   const classes = useStyle();
 
   return (
@@ -220,9 +211,7 @@ export const ManuallyLoadPlayerFactory: Story = () => {
           <div className={classes.playerContainer}>
             <KalturaPlayer entryId={entryId}
                            ks={ks}
-                           onMediaLoaded={(entryId) => console.log(entryId)}
-                           onError={(error => console.log(error))}
-            />
+                           onMediaLoaded={(entryId) => console.log(entryId)}/>
           </div>
         </>
       </KalturaPlayerManager>
@@ -230,10 +219,10 @@ export const ManuallyLoadPlayerFactory: Story = () => {
   )
 };
 
-ManuallyLoadPlayerFactory.story = {
+ManuallyLoadPlayerBundlerScripts.story = {
   parameters: {
     docs: {
-      storyDescription: `Manually load Kaltura Player scripts (kaltura player manager property)`
+      storyDescription: `Manually load Kaltura Player bundler scripts (kaltura player manager property)`
     }
   }
 };

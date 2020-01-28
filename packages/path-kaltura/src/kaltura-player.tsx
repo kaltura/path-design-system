@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {useContext, useEffect, useRef, useState} from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
 import {PlayerLoadingStatus} from "./player-definitions";
-import * as shortid from 'shortid';
-import {KalturaPlayerContext} from "./kaltura-player-provider";
+import {useLoadMedia} from "./use-load-media";
 
 export interface KalturaPlayerProps {
   /**
@@ -30,10 +28,16 @@ export interface KalturaPlayerProps {
    */
   onMediaLoaded?: (entryId: string) => void;
   /**
-   * OnError event handler. Will be called after a player related error
+   * onPlayerLoadingError event handler. Will be called after a player loading related error
    * @param error
    */
-  onError?: (error: string) => void; //todo use KalturaPlayer Error codes / enums
+  onPlayerLoadingError?: (entryId: string) => void;
+  /**
+   * onMediaLoadingError event handler. Will be called after a media loading related error
+   * @param error
+   */
+  onMediaLoadingError?: (entryId: string) => void;
+
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -68,100 +72,26 @@ export const LadingScriptsErrorMsg = 'Oops, failed to load kaltura player script
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   const classes = useStyles();
-  const {entryId, ks, autoplay, onMediaLoaded, onPlayerLoaded, onError} = props;
-  const {state: playerManagerState} = useContext(KalturaPlayerContext);
-  const [kPlayerState, setKPlayerState] = useState(PlayerLoadingStatus.Initial);
-  const playerIdRef = useRef(shortid.generate());
-  const kPlayerRef = useRef<KalturaPlayerTypes.Player | null>();
+  const {
+    entryId, ks, autoplay,
+    onPlayerLoadingError, onPlayerLoaded,
+    onMediaLoadingError, onMediaLoaded} = props;
 
-  const loadPlayer = () => {
-    if(kPlayerRef.current) {
-      console.log('Kaltura player was already loaded');
-      return;
-    }
-
-    setKPlayerState(PlayerLoadingStatus.Loading);
-
-    const playerFactory = window['KalturaPlayer'] as KalturaPlayerTypes.KalturaPlayerManager;
-    try {
-      const player: KalturaPlayerTypes.Player = playerFactory.setup(
-        {
-          targetId: playerIdRef.current,
-          provider: {
-            partnerId: playerManagerState.config.partnerId,
-            uiConfId: playerManagerState.config.uiConfId,
-            ks: ks
-          },
-          playback: {
-            autoplay,
-          }
-        });
-
-      if(onPlayerLoaded) onPlayerLoaded(entryId);
-
-      kPlayerRef.current = player;
-
-      loadMedia();
-
-    } catch (e) {
-      console.log(`kaltura Player: setup failure: ${e}`);
-      setKPlayerState(PlayerLoadingStatus.Error);
-      if(onError) onError(e);
-    }
-  };
-
-  const loadMedia = () => {
-    if(!kPlayerRef.current) {
-      console.log('Kaltura player failed to load media. No player was setup');
-      return;
-    }
-
-    kPlayerRef.current.loadMedia( {entryId })
-      .then(() => {
-        console.log('Kaltura Player: Successfully loaded media');
-        setKPlayerState(PlayerLoadingStatus.Loaded);
-        if(onMediaLoaded) onMediaLoaded(entryId);
-      })
-      .catch((err: any) => {
-        console.log(`Kaltura Player: 'loadMedia' error: ${err}`);
-        setKPlayerState(PlayerLoadingStatus.Error);
-        if(onError) onError(err);
-      });
-
-  };
-
-  const destroyPlayer = () => {
-    if(kPlayerRef.current) {
-        kPlayerRef.current.destroy();
-        kPlayerRef.current = null;
-    }
-  };
-
-  useEffect(() => {
-    switch (playerManagerState.status) {
-      case PlayerLoadingStatus.Loaded:
-        loadPlayer();
-        break;
-      case PlayerLoadingStatus.Error:
-        console.log('Kaltura Player factory loading error');
-        if(onError) onError('Kaltura Player Factory loading error');
-        break;
-    }
-    return () => {
-      destroyPlayer();
-    }
-  }, [playerManagerState.status]);
+  const {playerId, playerStatus, mediaStatus} = useLoadMedia(
+    {autoplay, entryId, ks, onPlayerLoadingError,
+      onPlayerLoaded, onMediaLoadingError, onMediaLoaded
+    });
 
   return (
     <>
-      {(playerManagerState.status === PlayerLoadingStatus.Error
-        || kPlayerState === PlayerLoadingStatus.Error)
+      {(playerStatus === PlayerLoadingStatus.Error
+        || mediaStatus === PlayerLoadingStatus.Error)
 
         ? (<div className={classes.scriptErrorContainer}>
-            <div className={classes.scriptsErrorMsg}>{LadingScriptsErrorMsg}</div>
-          </div>)
+          <div className={classes.scriptsErrorMsg}>{LadingScriptsErrorMsg}</div>
+        </div>)
 
-        : (<div id={playerIdRef.current} className={classes.kalturaPlayer}></div>)
+        : (<div id={playerId} className={classes.kalturaPlayer}></div>)
       }
     </>
   )
