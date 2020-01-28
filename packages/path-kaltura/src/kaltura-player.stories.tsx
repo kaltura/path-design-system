@@ -21,7 +21,7 @@ const useStyle = createUseStyles({
   }
 });
 
-const ks = "djJ8MTgyNzU1MXy4QK84-8pGo0REheMzEexFP7k4TyYRNmKVwo9pCoU3j5ZqSjnIivBn2mxsTmP7YD-ZijjgpeVVtlc1WHdOpTDioidlwIxFe9MjrF11zwmjUOriIID0wOfz0GSyrGMFPRXh4uZN15ymU1ECwt3wky8xSw9Ryu3k8f8OuCreR2m_DA==";
+const ks = "djJ8MTgyNzU1MXz5hElN8rqjxNmAlkzIqdJlFbnvLkX9O5yVByAPLHarMmcpD3xfM_KjugcmSB01mv7ySjS5tyBv78yQIAdXkaPtDwgQvWo4CRZ6NTynbtGg2ze3AAU8hPEvTvSBA_wM_h9RsCUpqnJ7_vjaiPHa-9NTrwl2DT8-uGWARau6tiI1UA==";
 const partnerId = '1827551';
 const uiConfId = '44400392';
 const playerBundleUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
