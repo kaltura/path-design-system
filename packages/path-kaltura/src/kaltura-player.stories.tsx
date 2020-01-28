@@ -1,10 +1,9 @@
 import * as React from 'react';
 import {KalturaPlayer} from "./kaltura-player";
-import {KalturaPlayerManager} from "./kaltura-player-manager";
+import {KalturaPlayerManager, PlayerLoadingStatus} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
-import {PlayerLoadingStatus} from "./player-definitions";
 import {useContext} from "react";
 import {KalturaPlayerContext} from "./kaltura-player-provider";
 

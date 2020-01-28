@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
 import {KalturaPlayerContext} from "./kaltura-player-provider";
-import {PlayerLoadingStatus} from "./player-definitions";
 import * as shortid from "shortid";
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
+import {PlayerLoadingStatus} from "./kaltura-player-manager";
 
 export interface UseLoadMediaOptions {
   autoplay: boolean;

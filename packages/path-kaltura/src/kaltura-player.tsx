@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
-import {PlayerLoadingStatus} from "./player-definitions";
 import {useLoadMedia} from "./use-load-media";
+import {PlayerLoadingStatus} from "./kaltura-player-manager";
 
 export interface KalturaPlayerProps {
   /**

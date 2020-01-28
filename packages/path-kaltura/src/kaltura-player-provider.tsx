@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PlayerLoadingStatus, PlayerManagerState} from "./player-definitions";
+import {PlayerLoadingStatus, PlayerManagerState} from "./kaltura-player-manager";
 
 export interface PlayerContextValue {
   state: PlayerManagerState;

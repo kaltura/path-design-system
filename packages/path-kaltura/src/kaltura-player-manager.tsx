@@ -1,14 +1,34 @@
 import * as React from 'react';
 import {useMemo} from "react";
-import {
-  PlayerManagerConfig,
-} from "./player-definitions";
 import {KalturaPlayerContext} from "./kaltura-player-provider";
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 
 // map of loaded bundler urls
 if(!window['loadedBundlers']) {
   window['loadedBundlers'] = {};
+}
+
+export const enum PlayerLoadingStatus {
+  Loaded = 'Loaded',
+  Loading = 'Loading',
+  Error = 'Error',
+  Initial = 'Initial',
+  Destroyed = 'Destroyed'
+}
+
+export interface PlayerReducerActions {
+  type: PlayerLoadingStatus;
+}
+
+export interface PlayerManagerState {
+  status: PlayerLoadingStatus;
+  config: PlayerManagerConfig;
+}
+
+export interface PlayerManagerConfig {
+  playerBundleUrl?: string;
+  partnerId?: string;
+  uiConfId?: string;
 }
 
 export interface KalturaPlayerManagerProps {

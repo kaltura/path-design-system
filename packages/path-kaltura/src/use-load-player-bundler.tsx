@@ -1,5 +1,10 @@
-import {PlayerLoadingStatus, PlayerManagerConfig, PlayerManagerState, PlayerReducerActions} from "./player-definitions";
 import {useEffect, useReducer} from "react";
+import {
+  PlayerLoadingStatus,
+  PlayerManagerConfig,
+  PlayerManagerState,
+  PlayerReducerActions
+} from "./kaltura-player-manager";
 
 export interface UseLoadPlayerBundlerOptions {
   autoLoad: boolean;
