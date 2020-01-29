@@ -1,8 +1,25 @@
-describe('Search', function() {
+describe('Search Input', function() {
   beforeEach(() => {
     cy.visit('');
     cy.loadStory('inputs-search-input--workshop');
     cy.activateKnobsTab();
+  });
+
+  it('Placeholder', function() {
+    const text = 'Test Placeholder attribute';
+    cy.iframe('input.ant-input').each($input => {
+      cy.wrap($input)
+        .should('have.attr', 'placeholder', '');
+    });
+
+    // Set text for Placeholder (knob) input
+    cy.setKnobPlaceholder(text)
+
+    // Verify text from Placeholder knob is displayed in two inputs
+    cy.iframe('input.ant-input').each($input => {
+      cy.wrap($input)
+        .should('have.attr', 'placeholder', text);
+    });
   });
 
   it('Is Busy', function() {
@@ -15,7 +32,7 @@ describe('Search', function() {
     });
 
     // Click knob "Is busy"
-    cy.get('#Is\\ busy').click();
+    cy.setKnobIsBusy()
 
     // Verify 2 spinners exists, for each input field
     cy.iframe('input.ant-input').each($input => {
@@ -27,18 +44,16 @@ describe('Search', function() {
   });
 
   it('Has Error', function() {
-    cy.iframe('input.ant-input')
-      .each($input => {
+    cy.iframe('input.ant-input').each($input => {
       cy.wrap($input)
         .parent()
         .should('have.attr', 'has-error', 'false');
     });
 
-    // Click knob "Is busy"
-    cy.get('#Has\\ Error').click();
+    // Click knob "Has Error"
+    cy.setKnobHasError()
 
-    cy.iframe('input.ant-input')
-      .each($input => {
+    cy.iframe('input.ant-input').each($input => {
       cy.wrap($input)
         .parent()
         .should('have.attr', 'has-error', 'true');
@@ -46,20 +61,16 @@ describe('Search', function() {
   });
 
   it('Disabled', function() {
-    cy.iframe('input.ant-input')
-      .each($input => {
+    cy.iframe('input.ant-input').each($input => {
       cy.wrap($input)
-        // .should('have.not.attr', 'class', 'ant-input ant-input-disabled input-0-2-5');
         .should('to.have.not.class', 'ant-input-disabled');
     });
 
-    // Click knob "Is busy"
-    cy.get('#Disabled').click();
+    // Click knob "Disabled"
+    cy.setKnobIsDisabled()
 
-    cy.iframe('input.ant-input')
-      .each($input => {
-      cy.wrap($input)
-        .should('to.have.class', 'ant-input-disabled');
+    cy.iframe('input.ant-input').each($input => {
+      cy.wrap($input).should('to.have.class', 'ant-input-disabled');
     });
   });
 });

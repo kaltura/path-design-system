@@ -6,6 +6,16 @@ declare namespace Cypress {
     activateKnobsTab(): Chainable<unknown>;
     activateActionsTab(): Chainable<unknown>;
     expandAll<E extends Node = HTMLElement>(): Chainable<JQuery<E>>;
+
+    // Simplebar
+    clickZoomIn(count?: number): Chainable<unknown>;
+    clickZoomOut(count?: number): Chainable<unknown>;
+
+    // Knobs
+    setKnobPlaceholder(text: string): Chainable<unknown>;
+    setKnobHasError(): Chainable<unknown>;
+    setKnobIsBusy(): Chainable<unknown>;
+    setKnobIsDisabled(): Chainable<unknown>;
   }
 }
 
@@ -48,7 +58,40 @@ Cypress.Commands.add('expandAll', () => {
       }
     })
     .then(() => {
-      // if we expanded any stories, lets check if there is any inner stories to expand
+      // If we expanded any stories, lets check if there is any inner stories to expand
       didExpand && cy.expandAll();
     });
+});
+
+// Simplebar
+Cypress.Commands.add('clickZoomIn', (count = 1) => {
+  for (let i = 0; i < count; i++) {
+    // Use blur to un-focus the element
+    cy.get('[title="Zoom in"]').click().blur();
+
+  }
+});
+
+Cypress.Commands.add('clickZoomOut', (count = 1) => {
+  for (let i = 0; i < count; i++) {
+    // Use blur to un-focus the element
+    cy.get('[title="Zoom out"]').click().blur();
+  }
+});
+
+// Knobs
+Cypress.Commands.add('setKnobPlaceholder', text => {
+  cy.get('#Placeholder').type(text);
+});
+
+Cypress.Commands.add('setKnobHasError', () => {
+  cy.get('#Has\\ Error').click();
+});
+
+Cypress.Commands.add('setKnobIsBusy', () => {
+  cy.get('#Is\\ busy').click();
+});
+
+Cypress.Commands.add('setKnobIsDisabled', () => {
+  cy.get('#Disabled').click();
 });

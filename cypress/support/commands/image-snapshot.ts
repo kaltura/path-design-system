@@ -4,16 +4,20 @@ declare namespace Cypress {
     runStorybookVisualRegression(size?: Array<any>): Chainable<any>;
     stopAllAnimations(): void;
     setResolution(size: Array<any>): void;
+    // zoomInOutSnapshots(
+    //   loadedStory: Chainable<unknown>,
+    //   snapshotName: any,
+    //   zoomInCount: number,
+    //   zoomOut: number
+    // ): void;
   }
 }
+
 Cypress.Commands.add('stopAllAnimations', () => {
   // Stop all animations
-  cy.iframe(
-    "i[class*='processingIcon']" && "svg[class*='anticon-spin']",
-    true
-  ).each($icon => {
+  cy.iframe("svg[class*='anticon-spin']", true).each($icon => {
     if ($icon != undefined) {
-      $icon.hide();
+      cy.wrap($icon).invoke('css', 'animation', 'none');
     }
   });
   // Need this for 'matchImageSnapshot' method.
@@ -35,7 +39,16 @@ Cypress.Commands.add('runStorybookVisualRegression', size => {
     if (Cypress._.isArray(size)) {
       name = size[0] + 'X' + size[1] + '_' + name;
     }
+    // cy.zoomInOutSnapshots(loadedStory, name, 1, 2);
     loadedStory.matchImageSnapshot(name);
+    //Zoom in
+    cy.clickZoomIn()
+    cy.get('body');
+    loadedStory.matchImageSnapshot(name + '_ZoomIn');
+    //Zoom out
+    cy.clickZoomOut(2)
+    cy.get('body');
+    loadedStory.matchImageSnapshot(name + '_ZoomOut');
   });
 });
 
@@ -46,3 +59,17 @@ Cypress.Commands.add('setResolution', size => {
     cy.viewport(size);
   }
 });
+
+// Cypress.Commands.add(
+//   'zoomInOutSnapshots',
+//   (loadedStory, snapshotName, zoomInCount, zoomOutCount) => {
+//     loadedStory.matchImageSnapshot(snapshotName);
+//     //Zoom in
+//     cy.clickZoomIn(zoomInCount)
+//     cy.get('body');
+//     loadedStory.matchImageSnapshot(snapshotName + '_ZoomIn');
+//     //Zoom out
+//     cy.clickZoomOut(zoomOutCount)
+//     cy.get('body');
+//     loadedStory.matchImageSnapshot(snapshotName + '_ZoomOut');
+// });
