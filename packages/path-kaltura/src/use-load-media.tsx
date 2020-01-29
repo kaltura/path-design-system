@@ -1,9 +1,8 @@
 import {useContext, useEffect, useState} from "react";
-import {KalturaPlayerContext} from "./kaltura-player-provider";
+import {KalturaPlayerContext, PlayerLoadingStatus} from "./kaltura-player-context";
 import * as shortid from "shortid";
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
-import {PlayerLoadingStatus} from "./kaltura-player-manager";
 
 export interface UseLoadMediaOptions {
   autoplay: boolean;
@@ -77,7 +76,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           })
       );
     } catch (e) {
-      console.warn(`kaltura Player: setup failure: ${e}`);
+      console.warn(`kaltura Player: setup failure:`, e);
       if(onPlayerLoadingError) onPlayerLoadingError(entryId);
       setLoadMediaState(prevState => (
         {
@@ -118,7 +117,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         );
       })
       .catch((err: any) => {
-        console.warn(`Kaltura Player: 'loadMedia' error: ${err}`);
+        console.warn(`Kaltura Player: 'loadMedia' error:`,err);
         if(onMediaLoadingError) onMediaLoadingError(entryId);
         setLoadMediaState(prevState => (
           {

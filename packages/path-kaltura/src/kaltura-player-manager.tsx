@@ -1,19 +1,11 @@
 import * as React from 'react';
 import {useMemo} from "react";
-import {KalturaPlayerContext} from "./kaltura-player-provider";
+import {KalturaPlayerContext, PlayerLoadingStatus} from "./kaltura-player-context";
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 
 // map of loaded bundler urls
 if(!window['loadedBundlers']) {
   window['loadedBundlers'] = {};
-}
-
-export const enum PlayerLoadingStatus {
-  Loaded = 'Loaded',
-  Loading = 'Loading',
-  Error = 'Error',
-  Initial = 'Initial',
-  Destroyed = 'Destroyed'
 }
 
 export interface PlayerReducerActions {

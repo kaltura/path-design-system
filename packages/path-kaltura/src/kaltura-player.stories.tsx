@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {KalturaPlayer} from "./kaltura-player";
-import {KalturaPlayerManager, PlayerLoadingStatus} from "./kaltura-player-manager";
+import {KalturaPlayerManager} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
 import {useContext} from "react";
-import {KalturaPlayerContext} from "./kaltura-player-provider";
+import {KalturaPlayerContext, PlayerLoadingStatus} from "./kaltura-player-context";
 
 
 const useStyle = createUseStyles({
@@ -20,7 +20,8 @@ const useStyle = createUseStyles({
   }
 });
 
-const ks = "djJ8MTgyNzU1MXz5hElN8rqjxNmAlkzIqdJlFbnvLkX9O5yVByAPLHarMmcpD3xfM_KjugcmSB01mv7ySjS5tyBv78yQIAdXkaPtDwgQvWo4CRZ6NTynbtGg2ze3AAU8hPEvTvSBA_wM_h9RsCUpqnJ7_vjaiPHa-9NTrwl2DT8-uGWARau6tiI1UA==";
+// a 1 year KS for view only this specific entry
+const ks = "NzkyMTY0MDg4MTU1NTM3YjcyOTIwNDJiZmU5YWI1M2FiNDZlZDRhY3wxODI3NTUxOzE4Mjc1NTE7MTYxMDI4OTc4OTswOzE1ODAyODk3ODkuOTkwNjtzaGFpLmFpbnZvbmVyQGthbHR1cmEuY29tO3N2aWV3OjFfcW0zanRiOWEsdmlldzoxX3FtM2p0YjlhLGxpc3Q6Kjs7";
 const partnerId = '1827551';
 const uiConfId = '44400392';
 const playerBundleUrl = 'https://cfvod.kaltura.com/p/1827551/embedPlaykitJs/uiconf_id/44400392';
@@ -110,7 +111,7 @@ KalturaPlayerWithoutAutoPlay.story = {
 
 
 
-export const kalturaPlayerErrorLoadingScripts: Story = () => {
+export const kalturaPlayerErrorLoadingBundler: Story = () => {
   const classes = useStyle();
 
   return (
@@ -132,7 +133,7 @@ export const kalturaPlayerErrorLoadingScripts: Story = () => {
   )
 };
 
-kalturaPlayerErrorLoadingScripts.story = {
+kalturaPlayerErrorLoadingBundler.story = {
   parameters: {
     docs: {
       storyDescription: `Kaltura Player error while loading kaltura player bundler scripts`
@@ -176,21 +177,21 @@ MultiplePlayersInPage.story = {
   }
 };
 
-const LoadPlayerScriptsComponent = () => {
+const LoadPlayerBundlerComponent = () => {
 
   const classes = useStyle();
 
   const kalturaPlayer = useContext(KalturaPlayerContext);
 
-  const startLoadingScripts = () => {
+  const startLoadingBundler = () => {
     if(kalturaPlayer.dispatch)
       kalturaPlayer.dispatch({type: PlayerLoadingStatus.Loading});
   };
 
   return (
     <Button className={classes.loadScriptsButton}
-            label={'load player scripts'}
-            onClick={startLoadingScripts}></Button>
+            label={'load player bundler'}
+            onClick={startLoadingBundler}></Button>
   );
 };
 
@@ -206,7 +207,7 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
                               playerBundleUrl: playerBundleUrl
                             }}>
         <>
-          <LoadPlayerScriptsComponent/>
+          <LoadPlayerBundlerComponent/>
           <div className={classes.playerContainer}>
             <KalturaPlayer entryId={entryId}
                            ks={ks}

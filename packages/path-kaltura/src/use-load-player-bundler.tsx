@@ -1,10 +1,10 @@
 import {useEffect, useReducer} from "react";
 import {
-  PlayerLoadingStatus,
   PlayerManagerConfig,
   PlayerManagerState,
   PlayerReducerActions
 } from "./kaltura-player-manager";
+import {PlayerLoadingStatus} from "./kaltura-player-context";
 
 export interface UseLoadPlayerBundlerOptions {
   autoLoad: boolean;
@@ -57,7 +57,7 @@ export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, disp
     };
     head.appendChild(scriptElement);
   } catch (e) {
-    console.warn(`Failed to add player bundler script to page. ${e}`);
+    console.warn(`Failed to add player bundler to page.`, e);
     dispatch({type: PlayerLoadingStatus.Error});
   }
 };
@@ -71,20 +71,20 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
   useEffect(() => {
 
     if(!config || !config.partnerId || ! config.uiConfId || !config.playerBundleUrl) {
-      console.log(`cannot load kaltura player scripts into session,
+      console.log(`cannot load kaltura player bundler into session,
         missing parameters (did you remember to provide partnerId,
         uiConfId and playerBundleUrl?`);
       dispatch({type: PlayerLoadingStatus.Error});
       return;
     }
 
-    // if there is no need to load player scripts
+    // if there is no need to load player bundler scripts
     if (state.status === PlayerLoadingStatus.Error
       || state.status === PlayerLoadingStatus.Loaded) {
       return;
     }
 
-    // hot loading player scripts
+    // hot loading player bundler scripts
     if (state.status === PlayerLoadingStatus.Initial && autoLoad) {
       dispatch({type: PlayerLoadingStatus.Loading});
       return;

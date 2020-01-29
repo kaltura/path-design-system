@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
 import {useLoadMedia} from "./use-load-media";
-import {PlayerLoadingStatus} from "./kaltura-player-manager";
+import {PlayerLoadingStatus} from "./kaltura-player-context";
 
 export interface KalturaPlayerProps {
   /**
@@ -18,7 +18,7 @@ export interface KalturaPlayerProps {
    */
   autoplay: boolean;
   /**
-   * OnPlayerLoaded event handler. Will be called after all player scripts were loaded
+   * OnPlayerLoaded event handler. Will be called after all player bundler scripts were loaded
    * @param entryId
    */
   onPlayerLoaded?: (entryId: string) => void;
@@ -49,13 +49,13 @@ const useStyles = createUseStyles((theme: Theme) => ({
     height: '100%',
     width: '100%',
     backgroundColor: theme.colors.grayscale4,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
     position: 'relative'
   },
   scriptsErrorMsg: {
-    position: 'absolute',
-    top: 'calc(50% - 1em)',
     width: '100%',
-    height: '1em',
     fontSize: '15px',
     fontWeight: 'normal',
     fontStretch: 'normal',
@@ -67,7 +67,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   }
 }),  { theming });
 
-export const LadingScriptsErrorMsg = 'Oops, failed to load kaltura player scripts';
+export const LadingBundlerErrorMsg = 'Oops, failed to load kaltura player bundler';
 
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
@@ -77,24 +77,22 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
     onPlayerLoadingError, onPlayerLoaded,
     onMediaLoadingError, onMediaLoaded} = props;
 
-  const {playerId, playerStatus, mediaStatus} = useLoadMedia(
+  const {playerId, playerStatus} = useLoadMedia(
     {autoplay, entryId, ks, onPlayerLoadingError,
       onPlayerLoaded, onMediaLoadingError, onMediaLoaded
     });
 
   return (
     <>
-      {(playerStatus === PlayerLoadingStatus.Error
-        || mediaStatus === PlayerLoadingStatus.Error)
-
+      {playerStatus === PlayerLoadingStatus.Error
         ? (<div className={classes.scriptErrorContainer}>
-          <div className={classes.scriptsErrorMsg}>{LadingScriptsErrorMsg}</div>
+          <div className={classes.scriptsErrorMsg}>{LadingBundlerErrorMsg}</div>
         </div>)
 
         : (<div id={playerId} className={classes.kalturaPlayer}></div>)
       }
     </>
-  )
+  );
 };
 
 KalturaPlayer.defaultProps = {
