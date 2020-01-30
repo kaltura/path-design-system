@@ -19,21 +19,28 @@ export interface IconsComponentsList {
 
 const icons16List: string[] = [
     'ArrowLeft16Icon',
+    'ConnectingArrow16Icon',
     'Home16Icon',
     'Plus16Icon',
 ];
 
 const icons24List: string[] = [
     'Close24Icon',
+    'Duplicate24Icon',
     'Gear24Icon',
     'Image24Icon',
+    'Interaction24Icon',
     'Minus24Icon',
+    'Pencil24Icon',
+    'Play24Icon',
+    'PlayFull24Icon',
     'Plus24Icon',
     'Redo24Icon',
     'Search24Icon',
     'SpinnerBright24Icon',
     'SpinnerDark24Icon',
     'Target24Icon',
+    'Trash24Icon',
     'Undo24Icon',
     'Upload24Icon',
     'Video24Icon',

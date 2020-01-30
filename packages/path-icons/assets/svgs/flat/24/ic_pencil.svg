@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>ic_pencil</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ic_pencil" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" x="0" y="0" width="24" height="24"></rect>
+        <g id="Group-3" transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(3.000000, 8.000000)"></g>
+        <path d="M19,8 C20.1045695,8 21,8.8954305 21,10 L21,10 L21,14 C21,15.1045695 20.1045695,16 19,16 L19,16 L7.41421356,16 C6.88378058,16 6.37507276,15.7892863 6,15.4142136 L6,15.4142136 L3.29289322,12.7071068 C2.90236893,12.3165825 2.90236893,11.6834175 3.29289322,11.2928932 L3.29289322,11.2928932 L6,8.58578644 C6.37507276,8.21071368 6.88378058,8 7.41421356,8 L7.41421356,8 Z M15.7,10 L7.41421356,10 L5.414,12 L7.41421356,14 L15.7,14 L15.7,10 Z M19,10 L17.7,10 L17.7,14 L19,14 L19,10 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) "></path>
+    </g>
+</svg>
