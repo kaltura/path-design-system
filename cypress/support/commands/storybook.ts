@@ -89,7 +89,7 @@ Cypress.Commands.add('setKnobHasError', () => {
 });
 
 Cypress.Commands.add('setKnobIsBusy', () => {
-  cy.get('#Is\\ busy').click();
+  cy.get('#Is\\ Busy').click();
 });
 
 Cypress.Commands.add('setKnobIsDisabled', () => {

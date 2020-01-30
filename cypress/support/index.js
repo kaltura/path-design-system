@@ -21,7 +21,7 @@ import './commands/image-snapshot';
 // TODO should be in the relevant command file
 import {addMatchImageSnapshotCommand} from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand({
-  failureThreshold: 0.0, // threshold for entire image
+  failureThreshold: 0.003, // threshold for entire image
   failureThresholdType: 'percent', // percent of image or number of pixels
   customDiffConfig: {threshold: 0.0}, // threshold for each pixel
   customDiffDir: 'cypress/visual_diffs', // capture viewport in screenshot

@@ -4,17 +4,19 @@ declare namespace Cypress {
     runStorybookVisualRegression(size?: Array<any>): Chainable<any>;
     stopAllAnimations(): void;
     setResolution(size: Array<any>): void;
-    // zoomInOutSnapshots(
-    //   loadedStory: Chainable<unknown>,
-    //   snapshotName: any,
-    //   zoomInCount: number,
-    //   zoomOut: number
-    // ): void;
+    matchBodySnapshot(loadedStory: Chainable<unknown>, snapshotName: any): void;
+    zoomInOutSnapshots(
+      loadedStory: Chainable<unknown>,
+      snapshotName: any,
+      zoomInCount: number,
+      zoomOut: number
+    ): void;
   }
 }
-
 Cypress.Commands.add('stopAllAnimations', () => {
   // Stop all animations
+  // TODO wait
+  cy.wait(1000);
   cy.iframe("svg[class*='anticon-spin']", true).each($icon => {
     if ($icon != undefined) {
       cy.wrap($icon).invoke('css', 'animation', 'none');
@@ -42,11 +44,11 @@ Cypress.Commands.add('runStorybookVisualRegression', size => {
     // cy.zoomInOutSnapshots(loadedStory, name, 1, 2);
     loadedStory.matchImageSnapshot(name);
     //Zoom in
-    cy.clickZoomIn()
+    cy.clickZoomIn();
     cy.get('body');
     loadedStory.matchImageSnapshot(name + '_ZoomIn');
     //Zoom out
-    cy.clickZoomOut(2)
+    cy.clickZoomOut(2);
     cy.get('body');
     loadedStory.matchImageSnapshot(name + '_ZoomOut');
   });
@@ -60,16 +62,24 @@ Cypress.Commands.add('setResolution', size => {
   }
 });
 
-// Cypress.Commands.add(
-//   'zoomInOutSnapshots',
-//   (loadedStory, snapshotName, zoomInCount, zoomOutCount) => {
-//     loadedStory.matchImageSnapshot(snapshotName);
-//     //Zoom in
-//     cy.clickZoomIn(zoomInCount)
-//     cy.get('body');
-//     loadedStory.matchImageSnapshot(snapshotName + '_ZoomIn');
-//     //Zoom out
-//     cy.clickZoomOut(zoomOutCount)
-//     cy.get('body');
-//     loadedStory.matchImageSnapshot(snapshotName + '_ZoomOut');
-// });
+Cypress.Commands.add('matchBodySnapshot', (loadedStory, snapshotName) => {
+  cy.wait(3000);
+  cy.stopAllAnimations();
+  cy.get('body');
+  loadedStory.matchImageSnapshot(snapshotName);
+});
+
+Cypress.Commands.add(
+  'zoomInOutSnapshots',
+  (loadedStory, snapshotName, zoomInCount, zoomOutCount) => {
+    loadedStory.matchImageSnapshot(snapshotName);
+    //Zoom in
+    cy.clickZoomIn(zoomInCount);
+    cy.get('body');
+    loadedStory.matchImageSnapshot(snapshotName + '_ZoomIn');
+    //Zoom out
+    cy.clickZoomOut(zoomOutCount);
+    cy.get('body');
+    loadedStory.matchImageSnapshot(snapshotName + '_ZoomOut');
+  }
+);
