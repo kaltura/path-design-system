@@ -47,6 +47,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     fontStretch: 'normal',
     fontStyle: 'normal',
     letterSpacing: 'normal',
+    marginBottom: '2px !important' //in order to override antd margin
   },
   labelLarge: {
     fontSize: '18px',
