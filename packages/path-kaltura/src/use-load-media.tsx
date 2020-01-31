@@ -7,7 +7,6 @@ import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
 export interface UseLoadMediaOptions {
   autoplay: boolean;
   entryId: string;
-  ks: string;
   onPlayerLoaded?: (entryId: string) => void;
   onMediaLoaded?: (entryId: string) => void;
   onPlayerLoadingError?: (entryId: string) => void;
@@ -23,7 +22,7 @@ export interface LoadMediaState {
 
 export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
-  const {entryId, autoplay, ks, onMediaLoaded,
+  const {entryId, autoplay, onMediaLoaded,
     onMediaLoadingError, onPlayerLoaded, onPlayerLoadingError} = options;
 
   const {state: playerManagerState} = useContext(KalturaPlayerContext);
@@ -35,7 +34,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         playerStatus: PlayerLoadingStatus.Initial,
         mediaStatus: PlayerLoadingStatus.Initial
       });
-
 
   const loadPlayer = () => {
 
@@ -60,13 +58,14 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           provider: {
             uiConfId: playerManagerState.config.uiConfId,
             partnerId: playerManagerState.config.partnerId,
-            ks: ks
+            ks: playerManagerState.config.ks
           },
           playback: {
             autoplay,
           }
         });
 
+      console.log('kaltura player was successfully loaded');
       if(onPlayerLoaded) onPlayerLoaded(entryId);
       setLoadMediaState(
         prevState => (
@@ -130,6 +129,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const destroyPlayer = () => {
     if(loadMediaState.player) {
+      console.log('Kaltura player: Destroy');
       loadMediaState.player.destroy();
       setLoadMediaState(prevState => (
         {

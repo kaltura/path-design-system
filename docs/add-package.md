@@ -13,6 +13,12 @@
 * update tsconfig.json with the new package name:
       "@kaltura-react-ui-kits/package-name": \["package-name/src"\]
 
+* if you want to link the new package to path-composer project:
+  * goto path-composer main package.json file
+  * edit the following npm command: "ui-kit:link" and add the following
+    to the end of the existing command:
+      * 'npm link @kaltura-react-ui-kits/<new-package>
+
 
 
 

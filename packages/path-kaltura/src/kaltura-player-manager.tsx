@@ -18,6 +18,7 @@ export interface PlayerManagerState {
 }
 
 export interface PlayerManagerConfig {
+  ks?:string;
   playerBundleUrl?: string;
   partnerId?: string;
   uiConfId?: string;

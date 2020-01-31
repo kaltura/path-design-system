@@ -33,13 +33,13 @@ export const Default: Story = () => {
 
   return (
     <KalturaPlayerManager config={{
+      ks:ks,
       partnerId: partnerId,
       uiConfId: uiConfId,
       playerBundleUrl: playerBundleUrl
     }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
@@ -60,13 +60,13 @@ export const KalturaPlayerAutoPlay: Story = () => {
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
+                            ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
                             playerBundleUrl: playerBundleUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
@@ -87,6 +87,7 @@ export const KalturaPlayerWithoutAutoPlay: Story = () => {
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
+                            ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
                             playerBundleUrl: playerBundleUrl
@@ -94,7 +95,6 @@ export const KalturaPlayerWithoutAutoPlay: Story = () => {
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
                        autoplay={false}
-                       ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
@@ -117,13 +117,13 @@ export const kalturaPlayerErrorLoadingBundler: Story = () => {
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
+                            ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
                             playerBundleUrl: errorPlayerUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
-                       ks={ks}
                        onMediaLoaded={(entryId) => console.log(entryId)}
                        onPlayerLoadingError={(error => console.log(error))}
                        onMediaLoadingError={(error => console.log(error))}
@@ -148,6 +148,7 @@ export const MultiplePlayersInPage: Story = () => {
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
+                            ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
                             playerBundleUrl: playerBundleUrl
@@ -155,13 +156,11 @@ export const MultiplePlayersInPage: Story = () => {
       <>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
-                         ks={ks}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
         <br/>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
-                         ks={ks}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
       </>
@@ -202,6 +201,7 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
     <>
       <KalturaPlayerManager autoLoad={false}
                             config={{
+                              ks:ks,
                               partnerId: partnerId,
                               uiConfId: uiConfId,
                               playerBundleUrl: playerBundleUrl
@@ -210,7 +210,6 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
           <LoadPlayerBundlerComponent/>
           <div className={classes.playerContainer}>
             <KalturaPlayer entryId={entryId}
-                           ks={ks}
                            onMediaLoaded={(entryId) => console.log(entryId)}/>
           </div>
         </>

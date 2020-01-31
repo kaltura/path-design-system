@@ -9,10 +9,6 @@ export interface KalturaPlayerProps {
    */
   entryId: string;
   /**
-   * KS
-   */
-  ks: string;
-  /**
    * Autoplay. Indicating if the auto play selected media
    * @default true
    */
@@ -73,12 +69,12 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   const classes = useStyles();
   const {
-    entryId, ks, autoplay,
+    entryId, autoplay,
     onPlayerLoadingError, onPlayerLoaded,
     onMediaLoadingError, onMediaLoaded} = props;
 
   const {playerId, playerStatus} = useLoadMedia(
-    {autoplay, entryId, ks, onPlayerLoadingError,
+    {autoplay, entryId, onPlayerLoadingError,
       onPlayerLoaded, onMediaLoadingError, onMediaLoaded
     });
 

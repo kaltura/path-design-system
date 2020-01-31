@@ -71,7 +71,7 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
   useEffect(() => {
 
     if(!config || !config.partnerId || ! config.uiConfId || !config.playerBundleUrl) {
-      console.log(`cannot load kaltura player bundler into session,
+      console.warn(`cannot load kaltura player bundler into session,
         missing parameters (did you remember to provide partnerId,
         uiConfId and playerBundleUrl?`);
       dispatch({type: PlayerLoadingStatus.Error});
