@@ -150,6 +150,10 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
     loadMedia();
 
+    return () => {
+      destroyPlayer();
+    }
+
   }, [loadMediaState.playerStatus]);
 
   //listen to player manager loading status in order to load player
@@ -174,9 +178,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           })
         );
         break;
-    }
-    return () => {
-      destroyPlayer();
     }
   }, [playerManagerState.status]);
 
