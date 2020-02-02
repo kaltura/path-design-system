@@ -1,5 +1,5 @@
-import {useContext, useEffect, useState} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatus} from "./kaltura-player-context";
+import {useContext, useEffect, useRef, useState} from "react";
+import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
 import * as shortid from "shortid";
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
@@ -15,9 +15,8 @@ export interface UseLoadMediaOptions {
 
 export interface LoadMediaState {
   playerId: string;
-  player: Player | null;
-  playerStatus: PlayerLoadingStatus;
-  mediaStatus: PlayerLoadingStatus;
+  playerStatus: PlayerLoadingStatuses;
+  mediaStatus: PlayerLoadingStatuses;
 }
 
 export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
@@ -27,154 +26,143 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const {state: playerManagerState} = useContext(KalturaPlayerContext);
 
+  const unmounted = useRef(false);
+
   const [loadMediaState, setLoadMediaState] = useState<LoadMediaState>(
-      {
-        playerId: shortid.generate(),
-        player: null,
-        playerStatus: PlayerLoadingStatus.Initial,
-        mediaStatus: PlayerLoadingStatus.Initial
-      });
+    {
+      playerId: shortid.generate(),
+      playerStatus: PlayerLoadingStatuses.Initial,
+      mediaStatus: PlayerLoadingStatuses.Initial
+    });
 
-  const loadPlayer = () => {
+  const playerRef = useRef<Player | null>(null);
 
-    if(loadMediaState.player) {
-      console.log('Kaltura player was already loaded');
-      return;
-    }
-
-    setLoadMediaState(
-      prevState => (
-        {...prevState,
-          playerStatus: PlayerLoadingStatus.Loading
-        })
-    );
-
-    const playerManager = window['KalturaPlayer'] as KalturaPlayerManager;
-
-    try {
-      const player: KalturaPlayerTypes.Player = playerManager.setup(
-        {
-          targetId: loadMediaState.playerId,
-          provider: {
-            uiConfId: playerManagerState.config.uiConfId,
-            partnerId: playerManagerState.config.partnerId,
-            ks: playerManagerState.config.ks
-          },
-          playback: {
-            autoplay,
-          }
-        });
-
-      console.log('kaltura player was successfully loaded');
-      if(onPlayerLoaded) onPlayerLoaded(entryId);
-      setLoadMediaState(
-        prevState => (
-          {...prevState,
-            player: player,
-            playerStatus: PlayerLoadingStatus.Loaded
-          })
-      );
-    } catch (e) {
-      console.warn(`kaltura Player: setup failure:`, e);
-      if(onPlayerLoadingError) onPlayerLoadingError(entryId);
+  //mount and unmount component (destroy current player instance)
+  useEffect(() => {
+    if(playerRef.current) {
+      console.log('Kaltura player: Destroy');
+      playerRef.current.destroy();
+      playerRef.current = null;
       setLoadMediaState(prevState => (
         {
           ...prevState,
-          playerStatus: PlayerLoadingStatus.Error
+          playerStatus: PlayerLoadingStatuses.Destroyed,
+          mediaStatus: PlayerLoadingStatuses.Destroyed
         })
       );
     }
-  };
+    unmounted.current = true;
+  }, []);
 
-  const loadMedia = () => {
+  //listen to player loading status in order to load media
+  useEffect(() => {
 
-    if(!loadMediaState.player ||
-      loadMediaState.playerStatus !== PlayerLoadingStatus.Loaded) {
+    if(!playerRef.current ||
+      loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
       console.warn(`Kaltura player hasn't been setup yet.`);
       return;
     }
-
-    // for typescript to allow calling methods on player instance //todo [sa]
-    if(!loadMediaState.player) return;
-
     setLoadMediaState(prevState => (
       {
         ...prevState,
-        mediaStatus: PlayerLoadingStatus.Loading
+        mediaStatus: PlayerLoadingStatuses.Loading
       })
     );
 
-    loadMediaState.player.loadMedia( {entryId })
+    if(!playerRef.current) return;
+
+    playerRef.current.loadMedia( {entryId })
       .then(() => {
+        if(unmounted.current) return;
         console.log('Kaltura Player: Successfully loaded media');
         if(onMediaLoaded) onMediaLoaded(entryId);
         setLoadMediaState(prevState => (
           {
             ...prevState,
-            mediaStatus: PlayerLoadingStatus.Loaded
+            mediaStatus: PlayerLoadingStatuses.Loaded
           })
         );
       })
       .catch((err: any) => {
+        if(unmounted.current) return;
         console.warn(`Kaltura Player: 'loadMedia' error:`,err);
         if(onMediaLoadingError) onMediaLoadingError(entryId);
         setLoadMediaState(prevState => (
           {
             ...prevState,
-            mediaStatus: PlayerLoadingStatus.Error
+            mediaStatus: PlayerLoadingStatuses.Error
           })
         );
       });
-  };
-
-  const destroyPlayer = () => {
-    if(loadMediaState.player) {
-      console.log('Kaltura player: Destroy');
-      loadMediaState.player.destroy();
-      setLoadMediaState(prevState => (
-        {
-          ...prevState,
-          player: null,
-          playerStatus: PlayerLoadingStatus.Destroyed,
-          mediaStatus: PlayerLoadingStatus.Destroyed
-        })
-      );
-    }
-  };
-
-  //listen to player loading status in order to load media
-  useEffect(() => {
-
-    if(loadMediaState.playerStatus !== PlayerLoadingStatus.Loaded)
-      return;
-
-    loadMedia();
-
-    return () => {
-      destroyPlayer();
-    }
 
   }, [loadMediaState.playerStatus]);
 
   //listen to player manager loading status in order to load player
   useEffect(() => {
-    if(loadMediaState.mediaStatus === PlayerLoadingStatus.Destroyed
-      || loadMediaState.playerStatus === PlayerLoadingStatus.Destroyed) {
+
+    const loadPlayer = () => {
+
+      if(playerRef.current) {
+        console.log('Kaltura player was already loaded');
+        return;
+      }
+      setLoadMediaState(
+        prevState => (
+          {...prevState,
+            playerStatus: PlayerLoadingStatuses.Loading
+          })
+      );
+      const playerManager = window['KalturaPlayer'] as KalturaPlayerManager;
+      try {
+        const player: KalturaPlayerTypes.Player = playerManager.setup(
+          {
+            targetId: loadMediaState.playerId,
+            provider: {
+              uiConfId: playerManagerState.config.uiConfId,
+              partnerId: playerManagerState.config.partnerId,
+              ks: playerManagerState.config.ks
+            },
+            playback: {
+              autoplay,
+            }
+          });
+        console.log('kaltura player was successfully loaded');
+        if(onPlayerLoaded) onPlayerLoaded(entryId);
+        playerRef.current = player;
+        setLoadMediaState(
+          prevState => (
+            {...prevState,
+              playerStatus: PlayerLoadingStatuses.Loaded
+            })
+        );
+      } catch (e) {
+        console.warn(`kaltura Player: setup failure:`, e);
+        if(onPlayerLoadingError) onPlayerLoadingError(entryId);
+        setLoadMediaState(prevState => (
+          {
+            ...prevState,
+            playerStatus: PlayerLoadingStatuses.Error
+          })
+        );
+      }
+    };
+
+    if(loadMediaState.mediaStatus === PlayerLoadingStatuses.Destroyed
+      || loadMediaState.playerStatus === PlayerLoadingStatuses.Destroyed) {
       console.warn('Kaltura player was destroyed.');
       return;
     }
-
     switch (playerManagerState.status) {
-      case PlayerLoadingStatus.Loaded:
+      case PlayerLoadingStatuses.Loaded:
         loadPlayer();
         break;
-      case PlayerLoadingStatus.Error:
+      case PlayerLoadingStatuses.Error:
         console.warn('Kaltura Player manager loading error');
         if(onPlayerLoadingError) onPlayerLoadingError(entryId);
         setLoadMediaState(prevState => (
           {
             ...prevState,
-            playerStatus: PlayerLoadingStatus.Error
+            playerStatus: PlayerLoadingStatuses.Error
           })
         );
         break;

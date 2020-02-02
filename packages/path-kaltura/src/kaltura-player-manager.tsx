@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useMemo} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatus} from "./kaltura-player-context";
+import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 
 // map of loaded bundler urls
@@ -9,11 +9,11 @@ if(!window['loadedBundlers']) {
 }
 
 export interface PlayerReducerActions {
-  type: PlayerLoadingStatus;
+  type: PlayerLoadingStatuses;
 }
 
 export interface PlayerManagerState {
-  status: PlayerLoadingStatus;
+  status: PlayerLoadingStatuses;
   config: PlayerManagerConfig;
 }
 

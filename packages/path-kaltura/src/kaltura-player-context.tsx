@@ -1,7 +1,7 @@
 import * as React from "react";
 import {PlayerManagerState} from "./kaltura-player-manager";
 
-export const enum PlayerLoadingStatus {
+export const enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
   Loading = 'Loading',
   Error = 'Error',
@@ -17,7 +17,7 @@ export interface PlayerContextValue {
 export const defaultPlayerContext: PlayerContextValue =
   {
     state: {
-      status: PlayerLoadingStatus.Initial,
+      status: PlayerLoadingStatuses.Initial,
       config: {}
     },
     dispatch: null

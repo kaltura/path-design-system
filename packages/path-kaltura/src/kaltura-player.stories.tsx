@@ -5,7 +5,7 @@ import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
 import {useContext} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatus} from "./kaltura-player-context";
+import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
 
 
 const useStyle = createUseStyles({
@@ -40,6 +40,7 @@ export const Default: Story = () => {
     }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
+                       autoplay={false}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
     </KalturaPlayerManager>
@@ -187,7 +188,7 @@ const LoadPlayerBundlerComponent = () => {
 
   const startLoadingBundler = () => {
     if(kalturaPlayer.dispatch)
-      kalturaPlayer.dispatch({type: PlayerLoadingStatus.Loading});
+      kalturaPlayer.dispatch({type: PlayerLoadingStatuses.Loading});
   };
 
   return (

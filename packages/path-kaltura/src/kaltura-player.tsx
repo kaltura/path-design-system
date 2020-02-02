@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
 import {useLoadMedia} from "./use-load-media";
-import {PlayerLoadingStatus} from "./kaltura-player-context";
+import {PlayerLoadingStatuses} from "./kaltura-player-context";
 
 export interface KalturaPlayerProps {
   /**
@@ -80,7 +80,7 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   return (
     <>
-      {playerStatus === PlayerLoadingStatus.Error
+      {playerStatus === PlayerLoadingStatuses.Error
         ? (<div className={classes.scriptErrorContainer}>
           <div className={classes.scriptsErrorMsg}>{LadingBundlerErrorMsg}</div>
         </div>)

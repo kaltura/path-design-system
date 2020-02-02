@@ -4,7 +4,7 @@ import {
   PlayerManagerState,
   PlayerReducerActions
 } from "./kaltura-player-manager";
-import {PlayerLoadingStatus} from "./kaltura-player-context";
+import {PlayerLoadingStatuses} from "./kaltura-player-context";
 
 export interface UseLoadPlayerBundlerOptions {
   autoLoad: boolean;
@@ -13,10 +13,10 @@ export interface UseLoadPlayerBundlerOptions {
 
 const loadPlayerReducer = (state: PlayerManagerState, action: PlayerReducerActions) => {
   console.log(`a request for: ${action.type} was made`);
-  if(action.type === PlayerLoadingStatus.Loading) {
-    if (state.status === PlayerLoadingStatus.Initial) {
+  if(action.type === PlayerLoadingStatuses.Loading) {
+    if (state.status === PlayerLoadingStatuses.Initial) {
       console.log('**** changed to loading state');
-      return { ...state, status: PlayerLoadingStatus.Loading}
+      return { ...state, status: PlayerLoadingStatuses.Loading}
     } else{
       console.warn(`Changing player loading state to 'loading' is
        permitted only from an 'initial' state. Ignoring state changes request`);
@@ -31,13 +31,13 @@ export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, disp
   if(!playerBundlerUrl) {
     console.warn('Failed to load player into session,' +
       ' did you forget to provide a player bundler url?');
-    dispatch({type: PlayerLoadingStatus.Error});
+    dispatch({type: PlayerLoadingStatuses.Error});
     return;
   }
 
   if(!!window['loadedBundlers'][playerBundlerUrl]) {
     console.log('**** player bundler was already loaded into session');
-    dispatch({type: PlayerLoadingStatus.Loaded});
+    dispatch({type: PlayerLoadingStatuses.Loaded});
     return;
   }
 
@@ -50,15 +50,15 @@ export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, disp
     scriptElement.src = playerBundlerUrl;
     scriptElement.onload = () => {
       window['loadedBundlers'][playerBundlerUrl] = true;
-      dispatch({type: PlayerLoadingStatus.Loaded});
+      dispatch({type: PlayerLoadingStatuses.Loaded});
     };
     scriptElement.onerror = () => {
-      dispatch({type: PlayerLoadingStatus.Error});
+      dispatch({type: PlayerLoadingStatuses.Error});
     };
     head.appendChild(scriptElement);
   } catch (e) {
     console.warn(`Failed to add player bundler to page.`, e);
-    dispatch({type: PlayerLoadingStatus.Error});
+    dispatch({type: PlayerLoadingStatuses.Error});
   }
 };
 
@@ -66,7 +66,7 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
 
   const {autoLoad, config} = options;
   const [state, dispatch] = useReducer(
-    loadPlayerReducer, { status: PlayerLoadingStatus.Initial, config});
+    loadPlayerReducer, { status: PlayerLoadingStatuses.Initial, config});
 
   useEffect(() => {
 
@@ -74,34 +74,27 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
       console.warn(`cannot load kaltura player bundler into session,
         missing parameters (did you remember to provide partnerId,
         uiConfId and playerBundleUrl?`);
-      dispatch({type: PlayerLoadingStatus.Error});
+      dispatch({type: PlayerLoadingStatuses.Error});
       return;
     }
 
     // if there is no need to load player bundler scripts
-    if (state.status === PlayerLoadingStatus.Error
-      || state.status === PlayerLoadingStatus.Loaded) {
+    if (state.status === PlayerLoadingStatuses.Error
+      || state.status === PlayerLoadingStatuses.Loaded) {
       return;
     }
 
     // hot loading player bundler scripts
-    if (state.status === PlayerLoadingStatus.Initial && autoLoad) {
-      dispatch({type: PlayerLoadingStatus.Loading});
+    if (state.status === PlayerLoadingStatuses.Initial && autoLoad) {
+      dispatch({type: PlayerLoadingStatuses.Loading});
       return;
     }
 
-    const loadPlayer =  (): void => {
-      if (state.status !== PlayerLoadingStatus.Loading) {
-        return;
-      }
+    if(state.status === PlayerLoadingStatuses.Loading) {
       loadPlayerIntoSession(config.playerBundleUrl, dispatch);
-    };
-
-    if(state.status === PlayerLoadingStatus.Loading) {
-      loadPlayer();
     }
 
-  }, [state.status, dispatch, config]);
+  }, [state.status, dispatch]);
 
 
   return [state, dispatch];
