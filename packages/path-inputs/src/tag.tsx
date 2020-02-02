@@ -1,23 +1,18 @@
 import * as React from 'react';
+import {CSSProperties} from 'react';
 import {createUseStyles, Theme, theming} from '@kaltura-react-ui-kits/path-theming';
-import {CSSProperties} from "react";
+import {Typography, TypographyTypes} from "./typography";
+
 const classNames = require('classnames');
 
 const useStyles = createUseStyles((theme: Theme) => ({
   tag: {
-    display: 'inline',
+    display: 'inline-block',
+    maxWidth: '100%',
     padding: '5px 8px',
     borderRadius: '4px',
     border: `solid 1px ${theme.colors.grayscale4}`,
     backgroundColor: theme.colors.white,
-    textAlign: 'center',
-    fontSize: '13px',
-    fontWeight: 'bold',
-    fontStretch: 'normal',
-    fontStyle: 'normal',
-    lineHeight: '1em',
-    letterSpacing: 'normal',
-    color: '#434a4b'
   }
 }), { theming });
 
@@ -43,8 +38,12 @@ export const Tag = (props: TagProps) => {
   const classes = useStyles();
 
   return (
-    <div className= {classNames({[classes.tag]: true}, className)}
-         style={style}>{label}</div>
+    <div className={classNames({[classes.tag]: true},className)} style={style}>
+      <Typography type={TypographyTypes.Label13}
+                  rows={1}
+                  ellipsis={true}
+                  text={label}></Typography>
+    </div>
   );
 
 };

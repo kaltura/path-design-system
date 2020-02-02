@@ -35,9 +35,10 @@ const longText = 'Bryant was the son of former NBA player Joe Bryant. He attende
 const typesLabel = 'Typography text types';
 const typesOptions = {
   Paragraph: TypographyTypes.Paragraph,
-  LabelLarge: TypographyTypes.LabelLarge,
-  LabelMedium: TypographyTypes.LabelMedium,
-  LabelSmall: TypographyTypes.LabelSmall
+  Label18: TypographyTypes.Label18,
+  Label14: TypographyTypes.Label14,
+  Label13: TypographyTypes.Label13,
+  Label12: TypographyTypes.Label12
 };
 
 export const Default: Story = () => {

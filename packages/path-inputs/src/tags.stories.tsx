@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {Tag} from "./tag";
 import {createUseStyles} from '@kaltura-react-ui-kits/path-theming';
-import {withKnobs} from "@storybook/addon-knobs";
+import {text, withKnobs} from "@storybook/addon-knobs";
 import {withThemeProvider} from "../storybook/with-theme-provider";
 
 const useStyles = createUseStyles({
   tagContaner: {
+    maxWidth: '120px',
     marginTop: '15px',
     marginLeft: '15px'
   }
@@ -28,7 +29,7 @@ export const SingleTag: Story = () => {
 
   return (
     <div className={classes.tagContaner}>
-      <Tag label={'SingleTag'}/>
+      <Tag label={text('Tag text', 'singleTag')}/>
     </div>
   )
 };
