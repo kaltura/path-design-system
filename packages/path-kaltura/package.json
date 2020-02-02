@@ -29,13 +29,12 @@
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0",
-    "shortid": "^2.2.15",
-    "@types/shortid": "0.0.29"
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
     "@kaltura-react-ui-kits/path-theming": "file:../path-theming",
-    "react-jss": "10.0.0"
+    "react-jss": "10.0.0",
+    "shortid": "^2.2.15"
   },
   "files": [
     "dist",

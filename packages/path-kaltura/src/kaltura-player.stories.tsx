@@ -124,6 +124,7 @@ export const kalturaPlayerErrorLoadingBundler: Story = () => {
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
+                       autoplay={false}
                        onMediaLoaded={(entryId) => console.log(entryId)}
                        onPlayerLoadingError={(error => console.log(error))}
                        onMediaLoadingError={(error => console.log(error))}
@@ -156,11 +157,13 @@ export const MultiplePlayersInPage: Story = () => {
       <>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
+                         autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
         <br/>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
+                         autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
       </>
@@ -210,6 +213,7 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
           <LoadPlayerBundlerComponent/>
           <div className={classes.playerContainer}>
             <KalturaPlayer entryId={entryId}
+                           autoplay={false}
                            onMediaLoaded={(entryId) => console.log(entryId)}/>
           </div>
         </>
