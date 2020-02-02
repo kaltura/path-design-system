@@ -6,15 +6,16 @@ const classNames = require('classnames');
 
 export enum TypographyTypes {
   Paragraph = 'Paragraph',
-  LabelLarge = 'LabelLarge',
-  LabelMedium = 'LabelMedium',
-  LabelSmall = 'LabelSmall'
+  Label18 = 'Label18',
+  Label14 = 'Label14',
+  Label13 = 'Label13',
+  Label12 = 'Label12'
 }
 
 export interface TypographyProps {
   /**
    * Typography types determine how the text will look like
-   * @default TypographyTypes.LabelMedium
+   * @default TypographyTypes.Label14
    */
   type: TypographyTypes;
   /**
@@ -49,19 +50,25 @@ const useStyles = createUseStyles((theme: Theme) => ({
     letterSpacing: 'normal',
     marginBottom: '2px !important' //in order to override antd margin
   },
-  labelLarge: {
+  label18: {
     fontSize: '18px',
     fontWeight: 'bold',
     lineHeight: 'normal',
     color: '#434a4b'
   },
-  labelMedium: {
+  label14: {
     fontSize: '14px',
     fontWeight: 'bold',
     lineHeight: 'normal',
     color: theme.colors.grayscale1
   },
-  labelSmall: {
+  label13: {
+    fontSize: '13px',
+    fontWeight: 'bold',
+    lineHeight: 'normal',
+    color: '#434a4b'
+  },
+  label12: {
     fontSize: '12px',
     fontWeight: 'bold',
     lineHeight: 'normal',
@@ -88,9 +95,10 @@ export const Typography = (props: TypographyProps) => {
       className={classNames(
         {
           [classes.fontStyle]: true,
-          [classes.labelLarge]: type === TypographyTypes.LabelLarge,
-          [classes.labelMedium]: type === TypographyTypes.LabelMedium,
-          [classes.labelSmall]: type === TypographyTypes.LabelSmall,
+          [classes.label18]: type === TypographyTypes.Label18,
+          [classes.label14]: type === TypographyTypes.Label14,
+          [classes.label13]: type === TypographyTypes.Label13,
+          [classes.label12]: type === TypographyTypes.Label12,
           [classes.paragraphStyle]: type === TypographyTypes.Paragraph
         }, className)}
       ellipsis={ellipsisAttr}>{text}</Paragraph>
@@ -100,6 +108,6 @@ export const Typography = (props: TypographyProps) => {
 Typography.defaultProps = {
   ellipsis: true,
   rows: 1,
-  type: TypographyTypes.LabelMedium,
+  type: TypographyTypes.Label14,
   expandable: false
 };
