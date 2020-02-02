@@ -44,7 +44,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-    "@types/shortid": "0.0.29"
-  }
+  "devDependencies": {}
 }
