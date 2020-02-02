@@ -7,8 +7,7 @@ const classNames = require('classnames');
 
 const useStyles = createUseStyles((theme: Theme) => ({
   tag: {
-    display: 'inline-block',
-    maxWidth: '100%',
+    display: 'block',
     padding: '5px 8px',
     borderRadius: '4px',
     border: `solid 1px ${theme.colors.grayscale4}`,
