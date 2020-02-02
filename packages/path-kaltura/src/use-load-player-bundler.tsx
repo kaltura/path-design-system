@@ -1,9 +1,5 @@
-import {useEffect, useReducer} from "react";
-import {
-  PlayerManagerConfig,
-  PlayerManagerState,
-  PlayerReducerActions
-} from "./kaltura-player-manager";
+import {useCallback, useEffect, useReducer, useRef} from "react";
+import {PlayerManagerConfig, PlayerManagerState, PlayerReducerActions} from "./kaltura-player-manager";
 import {PlayerLoadingStatuses} from "./kaltura-player-context";
 
 export interface UseLoadPlayerBundlerOptions {
@@ -26,18 +22,21 @@ const loadPlayerReducer = (state: PlayerManagerState, action: PlayerReducerActio
   return {...state, status: action.type}
 };
 
-export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, dispatch: any) => {
+export const loadPlayerIntoSession = (
+  playerBundlerUrl: string | undefined,
+  callback: (newState: PlayerLoadingStatuses) => void
+) => {
 
   if(!playerBundlerUrl) {
     console.warn('Failed to load player into session,' +
       ' did you forget to provide a player bundler url?');
-    dispatch({type: PlayerLoadingStatuses.Error});
+    callback(PlayerLoadingStatuses.Error);
     return;
   }
 
-  if(!!window['loadedBundlers'][playerBundlerUrl]) {
+  if(!!window['KalturaPlayer'] && window['KalturaPlayer'].setup) {
     console.log('**** player bundler was already loaded into session');
-    dispatch({type: PlayerLoadingStatuses.Loaded});
+    callback(PlayerLoadingStatuses.Loaded);
     return;
   }
 
@@ -49,24 +48,30 @@ export const loadPlayerIntoSession = (playerBundlerUrl: string | undefined, disp
     scriptElement.type = "text/javascript";
     scriptElement.src = playerBundlerUrl;
     scriptElement.onload = () => {
-      window['loadedBundlers'][playerBundlerUrl] = true;
-      dispatch({type: PlayerLoadingStatuses.Loaded});
+      callback(PlayerLoadingStatuses.Loaded);
     };
     scriptElement.onerror = () => {
-      dispatch({type: PlayerLoadingStatuses.Error});
+      callback(PlayerLoadingStatuses.Error);
     };
     head.appendChild(scriptElement);
   } catch (e) {
     console.warn(`Failed to add player bundler to page.`, e);
-    dispatch({type: PlayerLoadingStatuses.Error});
+    callback(PlayerLoadingStatuses.Error);
   }
 };
 
 export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [PlayerManagerState, any] => {
 
   const {autoLoad, config} = options;
+  const unmounted = useRef(false);
   const [state, dispatch] = useReducer(
     loadPlayerReducer, { status: PlayerLoadingStatuses.Initial, config});
+
+  useEffect(() => {
+    return () => {
+      unmounted.current = true;
+    }
+  }, []);
 
   useEffect(() => {
 
@@ -91,11 +96,20 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
     }
 
     if(state.status === PlayerLoadingStatuses.Loading) {
-      loadPlayerIntoSession(config.playerBundleUrl, dispatch);
+      loadPlayerIntoSession(
+        config.playerBundleUrl,
+        (status: PlayerLoadingStatuses) => {
+          if(!unmounted.current)
+            dispatch({type: status})
+        });
     }
 
   }, [state.status, dispatch]);
 
 
-  return [state, dispatch];
+  const loadPlayer = useCallback(() => {
+    dispatch({type: PlayerLoadingStatuses.Loading});
+  }, []);
+
+  return [state, loadPlayer];
 };

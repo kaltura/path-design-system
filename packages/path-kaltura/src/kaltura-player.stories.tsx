@@ -187,8 +187,8 @@ const LoadPlayerBundlerComponent = () => {
   const kalturaPlayer = useContext(KalturaPlayerContext);
 
   const startLoadingBundler = () => {
-    if(kalturaPlayer.dispatch)
-      kalturaPlayer.dispatch({type: PlayerLoadingStatuses.Loading});
+    if(kalturaPlayer.loadPlayer)
+      kalturaPlayer.loadPlayer({type: PlayerLoadingStatuses.Loading});
   };
 
   return (

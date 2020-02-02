@@ -3,11 +3,6 @@ import {useMemo} from "react";
 import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 
-// map of loaded bundler urls
-if(!window['loadedBundlers']) {
-  window['loadedBundlers'] = {};
-}
-
 export interface PlayerReducerActions {
   type: PlayerLoadingStatuses;
 }
@@ -33,15 +28,15 @@ export interface KalturaPlayerManagerProps {
 export const KalturaPlayerManager = (props: KalturaPlayerManagerProps) => {
 
   const {autoLoad, config, children} = props;
-  const [state, dispatch] = useLoadPlayerBundler({config, autoLoad});
+  const [state, loadPlayer] = useLoadPlayerBundler({config, autoLoad});
 
   const playerContextValue = useMemo(() => {
 
     return {
       state,
-      dispatch
+      loadPlayer
     }
-  }, [state.status, dispatch]);
+  }, [state.status, loadPlayer]);
 
   return (
     <KalturaPlayerContext.Provider value={playerContextValue}>
