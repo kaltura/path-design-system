@@ -2,6 +2,8 @@ import {useCallback, useEffect, useReducer, useRef} from "react";
 import {PlayerManagerConfig, PlayerManagerState, PlayerReducerActions} from "./kaltura-player-manager";
 import {PlayerLoadingStatuses} from "./kaltura-player-context";
 
+let currentPlayerBundler: string | null = null;
+
 export interface UseLoadPlayerBundlerOptions {
   autoLoad: boolean;
   config: PlayerManagerConfig;
@@ -96,6 +98,16 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
     }
 
     if(state.status === PlayerLoadingStatuses.Loading) {
+      if(currentPlayerBundler && currentPlayerBundler !== config.playerBundleUrl) {
+        dispatch({type: PlayerLoadingStatuses.Error});
+        console.warn(`It is not allowed to create multiple players'
+         bundlers with different bundler urls. Did you create more than one
+         provider ?`);
+        return;
+      }
+
+      currentPlayerBundler = config.playerBundleUrl;
+
       loadPlayerIntoSession(
         config.playerBundleUrl,
         (status: PlayerLoadingStatuses) => {

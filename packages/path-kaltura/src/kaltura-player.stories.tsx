@@ -232,6 +232,80 @@ ManuallyLoadPlayerBundlerScripts.story = {
 };
 
 
+export const TowIdenticalPlayerProviders: Story = () => {
+  const classes = useStyle();
+
+  return (
+    <KalturaPlayerManager autoLoad={true}
+                          config={{
+                            ks:ks,
+                            partnerId: partnerId,
+                            uiConfId: uiConfId,
+                            playerBundleUrl: playerBundleUrl
+                          }}>
+      <KalturaPlayerManager autoLoad={true}
+                            config={{
+                              ks:ks,
+                              partnerId: partnerId,
+                              uiConfId: uiConfId,
+                              playerBundleUrl: playerBundleUrl
+                            }}>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+      </KalturaPlayerManager>
+    </KalturaPlayerManager>
+  )
+};
+
+TowIdenticalPlayerProviders.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Having two identical Kaltura Player providers`
+    }
+  }
+};
+
+
+export const TowDifferentPlayerProviders: Story = () => {
+  const classes = useStyle();
+
+  return (
+    <KalturaPlayerManager autoLoad={true}
+                          config={{
+                            ks:ks,
+                            partnerId: partnerId,
+                            uiConfId: uiConfId,
+                            playerBundleUrl: playerBundleUrl
+                          }}>
+      <KalturaPlayerManager autoLoad={true}
+                            config={{
+                              ks:ks,
+                              partnerId: partnerId,
+                              uiConfId: uiConfId,
+                              playerBundleUrl: `${playerBundleUrl}123`
+                            }}>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+      </KalturaPlayerManager>
+    </KalturaPlayerManager>
+  )
+};
+
+TowDifferentPlayerProviders.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Having two different Kaltura Player providers`
+    }
+  }
+};
+
+
 export default {
   title: 'Kaltura/Player',
   component: KalturaPlayer,

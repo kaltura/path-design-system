@@ -58,7 +58,8 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   //listen to player loading status in order to load media
   useEffect(() => {
 
-    if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial)
+    if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial
+        || loadMediaState.playerStatus === PlayerLoadingStatuses.Error)
       return;
 
     if(!playerRef.current ||
