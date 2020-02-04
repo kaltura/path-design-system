@@ -181,7 +181,7 @@ MultiplePlayersInPage.story = {
   }
 };
 
-const LoadPlayerBundlerComponent = () => {
+const LoadPlayerBundlerComponent = (props: {label: string}) => {
 
   const classes = useStyle();
 
@@ -194,7 +194,7 @@ const LoadPlayerBundlerComponent = () => {
 
   return (
     <Button className={classes.loadScriptsButton}
-            label={'load player bundler'}
+            label={props.label}
             onClick={startLoadingBundler}></Button>
   );
 };
@@ -212,7 +212,7 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
                               playerBundleUrl: playerBundleUrl
                             }}>
         <>
-          <LoadPlayerBundlerComponent/>
+          <LoadPlayerBundlerComponent label={'load player bundler'}/>
           <div className={classes.playerContainer}>
             <KalturaPlayer entryId={entryId}
                            autoplay={false}
@@ -287,18 +287,21 @@ export const TowDifferentPlayerProviders: Story = () => {
                          autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-        <KalturaPlayerManager autoLoad={true}
+        <KalturaPlayerManager autoLoad={false}
                               config={{
                                 ks:ks,
                                 partnerId: partnerId,
                                 uiConfId: uiConfId,
-                                playerBundleUrl: `${playerBundleUrl}123`
+                                playerBundleUrl: errorPlayerUrl
                               }}>
-          <div className={classes.playerContainer}>
-            <KalturaPlayer entryId={entryId}
-                           autoplay={false}
-                           onMediaLoaded={(entryId) => console.log(entryId)}/>
-          </div>
+          <>
+            <LoadPlayerBundlerComponent label={'try to load player with different bundler url'}/>
+            <div className={classes.playerContainer}>
+              <KalturaPlayer entryId={entryId}
+                             autoplay={false}
+                             onMediaLoaded={(entryId) => console.log(entryId)}/>
+            </div>
+          </>
         </KalturaPlayerManager>
       </>
     </KalturaPlayerManager>
