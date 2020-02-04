@@ -48,7 +48,8 @@ const useStyles = createUseStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    position: 'relative'
+    position: 'relative',
+    borderRadius: '4px'
   },
   scriptsErrorMsg: {
     width: '100%',

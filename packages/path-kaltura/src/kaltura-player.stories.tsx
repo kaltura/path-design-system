@@ -6,6 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
 import {useContext} from "react";
 import {KalturaPlayerContext} from "./kaltura-player-context";
+import './kaltura-player.css';
 
 
 const useStyle = createUseStyles({
@@ -280,19 +281,26 @@ export const TowDifferentPlayerProviders: Story = () => {
                             uiConfId: uiConfId,
                             playerBundleUrl: playerBundleUrl
                           }}>
-      <KalturaPlayerManager autoLoad={true}
-                            config={{
-                              ks:ks,
-                              partnerId: partnerId,
-                              uiConfId: uiConfId,
-                              playerBundleUrl: `${playerBundleUrl}123`
-                            }}>
+      <>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-      </KalturaPlayerManager>
+        <KalturaPlayerManager autoLoad={true}
+                              config={{
+                                ks:ks,
+                                partnerId: partnerId,
+                                uiConfId: uiConfId,
+                                playerBundleUrl: `${playerBundleUrl}123`
+                              }}>
+          <div className={classes.playerContainer}>
+            <KalturaPlayer entryId={entryId}
+                           autoplay={false}
+                           onMediaLoaded={(entryId) => console.log(entryId)}/>
+          </div>
+        </KalturaPlayerManager>
+      </>
     </KalturaPlayerManager>
   )
 };
