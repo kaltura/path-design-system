@@ -8,6 +8,7 @@ declare namespace Cypress {
     expandAll<E extends Node = HTMLElement>(): Chainable<JQuery<E>>;
 
     // Simplebar
+    hideSideSimpleBar(): void;
     clickZoomIn(count?: number): Chainable<unknown>;
     clickZoomOut(count?: number): Chainable<unknown>;
 
@@ -64,23 +65,35 @@ Cypress.Commands.add('expandAll', () => {
 });
 
 // Simplebar
+Cypress.Commands.add('hideSideSimpleBar', () => {
+  cy.get('body').then($body => {
+    if ($body.find('input#storybook-explorer-searchfield').length > 0) {
+      cy.get('body').type('s');
+    }
+  });
+});
+
 Cypress.Commands.add('clickZoomIn', (count = 1) => {
   for (let i = 0; i < count; i++) {
     // Use blur to un-focus the element
-    cy.get('[title="Zoom in"]').click().blur();
-
+    cy.get('[title="Zoom in"]')
+      .click()
+      .blur();
   }
 });
 
 Cypress.Commands.add('clickZoomOut', (count = 1) => {
   for (let i = 0; i < count; i++) {
     // Use blur to un-focus the element
-    cy.get('[title="Zoom out"]').click().blur();
+    cy.get('[title="Zoom out"]')
+      .click()
+      .blur();
   }
 });
 
 // Knobs
 Cypress.Commands.add('setKnobPlaceholder', text => {
+  // cy.wait(500)
   cy.get('#Placeholder').type(text);
 });
 

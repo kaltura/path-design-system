@@ -1,5 +1,6 @@
 // eslint-disable-next-line filenames/match-regex
-const sizes = [
+let sizes = [
+  [800, 600],
   [1200, 800],
   [1920, 1080],
 ];
