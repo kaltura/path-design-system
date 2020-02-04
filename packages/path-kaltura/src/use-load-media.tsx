@@ -29,17 +29,19 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   const unmounted = useRef(false);
 
   const [loadMediaState, setLoadMediaState] = useState<LoadMediaState>(
-    {
+    () => ({
       playerId: shortid.generate(),
       playerStatus: PlayerLoadingStatuses.Initial,
       mediaStatus: PlayerLoadingStatuses.Initial
-    });
+    }));
 
   const playerRef = useRef<Player | null>(null);
 
-  //mount and unmount component (destroy current player instance)
+  //unmount component (destroy current player instance)
   useEffect(() => {
-    if(playerRef.current) {
+    return () => {
+      unmounted.current = true;
+      if(!playerRef.current) return;
       console.log('Kaltura player: Destroy');
       playerRef.current.destroy();
       playerRef.current = null;
@@ -51,11 +53,13 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         })
       );
     }
-    unmounted.current = true;
   }, []);
 
   //listen to player loading status in order to load media
   useEffect(() => {
+
+    if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial)
+      return;
 
     if(!playerRef.current ||
       loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
@@ -68,8 +72,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         mediaStatus: PlayerLoadingStatuses.Loading
       })
     );
-
-    if(!playerRef.current) return;
 
     playerRef.current.loadMedia( {entryId })
       .then(() => {
@@ -106,12 +108,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         console.log('Kaltura player was already loaded');
         return;
       }
-      setLoadMediaState(
-        prevState => (
-          {...prevState,
-            playerStatus: PlayerLoadingStatuses.Loading
-          })
-      );
       const playerManager = window['KalturaPlayer'] as KalturaPlayerManager;
       try {
         const player: KalturaPlayerTypes.Player = playerManager.setup(

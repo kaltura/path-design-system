@@ -5,7 +5,7 @@ import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
 import {useContext} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
+import {KalturaPlayerContext} from "./kaltura-player-context";
 
 
 const useStyle = createUseStyles({
@@ -188,7 +188,7 @@ const LoadPlayerBundlerComponent = () => {
 
   const startLoadingBundler = () => {
     if(kalturaPlayer.loadPlayer)
-      kalturaPlayer.loadPlayer({type: PlayerLoadingStatuses.Loading});
+      kalturaPlayer.loadPlayer();
   };
 
   return (

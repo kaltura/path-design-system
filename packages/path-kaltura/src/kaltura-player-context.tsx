@@ -11,7 +11,7 @@ export const enum PlayerLoadingStatuses {
 
 export interface PlayerContextValue {
   state: PlayerManagerState;
-  loadPlayer: any | null;
+  loadPlayer: () => void;
 }
 
 export const defaultPlayerContext: PlayerContextValue =
@@ -20,7 +20,7 @@ export const defaultPlayerContext: PlayerContextValue =
       status: PlayerLoadingStatuses.Initial,
       config: {}
     },
-    loadPlayer: null
+    loadPlayer: () => {}
   };
 
 export const KalturaPlayerContext = React.createContext<PlayerContextValue>(defaultPlayerContext);
