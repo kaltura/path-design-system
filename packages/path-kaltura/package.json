@@ -39,7 +39,8 @@
   "files": [
     "dist",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "./src/kaltura-player.css"
   ],
   "publishConfig": {
     "access": "public"
