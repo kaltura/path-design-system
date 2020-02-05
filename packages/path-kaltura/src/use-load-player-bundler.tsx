@@ -77,7 +77,7 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
 
   useEffect(() => {
 
-    if(!config || !config.partnerId || ! config.uiConfId || !config.playerBundleUrl) {
+    if(!config || !config.partnerId || ! config.uiConfId || !config.serviceUrl) {
       console.warn(`cannot load kaltura player bundler into session,
         missing parameters (did you remember to provide partnerId,
         uiConfId and playerBundleUrl?`);
@@ -97,8 +97,10 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
       return;
     }
 
+    const playerBundlerUrl = `${config.serviceUrl}/p/${config.partnerId}/embedPlaykitJs/uiconf_id/${config.uiConfId}`;
+
     if(state.status === PlayerLoadingStatuses.Loading) {
-      if(currentPlayerBundler && currentPlayerBundler !== config.playerBundleUrl) {
+      if(currentPlayerBundler && currentPlayerBundler !== playerBundlerUrl) {
         dispatch({type: PlayerLoadingStatuses.Error});
         console.warn(`It is not allowed to create multiple players'
          bundlers with different bundler urls. Did you create more than one
@@ -106,10 +108,10 @@ export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [Pla
         return;
       }
 
-      currentPlayerBundler = config.playerBundleUrl;
+      currentPlayerBundler = playerBundlerUrl;
 
       loadPlayerIntoSession(
-        config.playerBundleUrl,
+        currentPlayerBundler,
         (status: PlayerLoadingStatuses) => {
           if(!unmounted.current)
             dispatch({type: status})
