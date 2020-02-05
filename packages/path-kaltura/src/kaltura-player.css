@@ -1,0 +1,10 @@
+.kaltura-player-container,
+.playkit-overlay-action,
+.playkit-video-player,
+.playkit-black-cover,
+.playkit-hover,
+.playkit-pre-playback-play-overlay.playkit-has-poster,
+.playkit-engine,
+.playkit-poster {
+  border-radius: 4px !important
+}
