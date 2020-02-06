@@ -5,6 +5,8 @@
 .playkit-hover,
 .playkit-pre-playback-play-overlay.playkit-has-poster,
 .playkit-engine,
-.playkit-poster {
+.playkit-poster,
+.playkit-top-bar,
+.playkit-bottom-bar {
   border-radius: 4px !important
 }
