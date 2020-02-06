@@ -9,7 +9,8 @@ export enum TypographyTypes {
   Label18 = 'Label18',
   Label14 = 'Label14',
   Label13 = 'Label13',
-  Label12 = 'Label12'
+  Label12 = 'Label12',
+  Label12Black = 'Label12Black',
 }
 
 export interface TypographyProps {
@@ -74,6 +75,12 @@ const useStyles = createUseStyles((theme: Theme) => ({
     lineHeight: 'normal',
     color: theme.colors.grayscale2
   },
+  label12Black: {
+    fontSize: '12px',
+    fontWeight: 'bold',
+    lineHeight: 'normal',
+    color: theme.colors.grayscale1
+  },
   paragraphStyle: {
     fontSize: '15px',
     fontWeight: 'normal',
@@ -99,6 +106,7 @@ export const Typography = (props: TypographyProps) => {
           [classes.label14]: type === TypographyTypes.Label14,
           [classes.label13]: type === TypographyTypes.Label13,
           [classes.label12]: type === TypographyTypes.Label12,
+          [classes.label12Black]: type === TypographyTypes.Label12Black,
           [classes.paragraphStyle]: type === TypographyTypes.Paragraph
         }, className)}
       ellipsis={ellipsisAttr}>{text}</Paragraph>
