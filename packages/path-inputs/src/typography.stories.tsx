@@ -107,6 +107,7 @@ export const Workshop: Story = () => {
       <Typography
         type={select(typesLabel, typesOptions, TypographyTypes.Paragraph)}
         rows={number('Rows', 1)}
+        expandable={boolean('Enable expand', true)}
         ellipsis={boolean('Enable ellipsis', true)}
         text={text('Text content', 'This is a text for testings')}></Typography>
     </div>
