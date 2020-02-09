@@ -16,13 +16,8 @@ jobs:
           node-version: 12
       - name: Install dependencies
         run: npm ci
-      - name: Version the packages using Lerna
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx lerna version -y --conventional-commits --create-release github
-      - name: Publish the packages using Lerna
+      - name: Publish Canary versions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx lerna publish from-package -y
+        run: lerna publish -y --canary --preid ci --npm-tag=ci
