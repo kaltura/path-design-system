@@ -18,6 +18,9 @@ jobs:
           git fetch
           git config user.email "${{ secrets.GITHUB_PUBLISHER_EMAIL }}"
           git config user.name "${{ secrets.GITHUB_PUBLISHER_NAME }}"
+          npm set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+          npm set username ${{ secrets.NPM_USERNAME }}
+          npm set email ${{ secrets.NPM_EMAIL }}
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -28,7 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx lerna version -y --conventional-commits --create-release github -m "chore(release): [skip ci] publish %s"
+        run: npx lerna version -y --conventional-commits --create-release github -m "chore(release)&#58; [skip ci] publish %s"
       - name: Publish the packages using Lerna
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
