@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/kaltura/path-design-system/compare/v0.3.0...v0.4.0) (2020-02-09)
+
+
+### Features
+
+* **path-ui:** add typography type black 12px label ([#63](https://github.com/kaltura/path-design-system/issues/63)) ([bba3e7a](https://github.com/kaltura/path-design-system/commit/bba3e7a301fa84d2216c1cc66ef9f4ff27444b60))
+
+
+
+
+
 # [0.3.0](https://github.com/kaltura/path-design-system/compare/v0.2.0...v0.3.0) (2020-02-05)
 
 
