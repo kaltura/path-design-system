@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://github.com/kaltura/path-design-system/compare/v0.5.1...v0.5.2) (2020-02-09)
+
+
+### Bug Fixes
+
+* export kaltura player css overrides ([c8d5e28](https://github.com/kaltura/path-design-system/commit/c8d5e289eb9be86a9f9b53f07e090e72007ab7e3))
+
+
+
+
+
 ## [0.5.1](https://github.com/kaltura/path-design-system/compare/v0.5.0...v0.5.1) (2020-02-09)
 
 **Note:** Version bump only for package path-design-system
