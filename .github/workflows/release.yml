@@ -19,10 +19,9 @@ jobs:
       - name: Version the packages using Lerna
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: lerna version
+        run: lerna version -y --conventional-commits --create-release github
        - name: Publish the packages using Lerna
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-       run: lerna publish
+       run: lerna publish -y
