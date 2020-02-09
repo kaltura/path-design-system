@@ -1,5 +1,5 @@
 {
-  "name": "@kaltura-react-ui-kits/path-inputs",
+  "name": "@kaltura-react-ui-kits/path-kaltura",
   "version": "0.3.0",
   "description": "",
   "author": "Kaltura",
@@ -28,18 +28,19 @@
     "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"
   },
   "peerDependencies": {
-    "antd": "3.25.0",
     "react": "^15.0.0 || ^16.0.0",
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "@kaltura-react-ui-kits/path-icons": "file:../path-icons",
-    "classnames": "^2.2.6"
+    "@kaltura-react-ui-kits/path-theming": "file:../path-theming",
+    "react-jss": "10.0.0",
+    "shortid": "^2.2.15"
   },
   "files": [
     "dist",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "./src/kaltura-player.css"
   ],
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>ic_play</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ic_play" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" x="0" y="0" width="24" height="24"></rect>
+        <path d="M20.5038491,13.6641006 L8.10940039,21.9270664 C7.19034302,22.5397713 5.94860433,22.2914236 5.33589941,21.3723662 C5.11687605,21.0438312 5,20.6578158 5,20.2629658 L5,3.73703418 C5,2.63246468 5.8954305,1.73703418 7,1.73703418 C7.39484997,1.73703418 7.78086536,1.85391024 8.10940039,2.07293359 L20.5038491,10.3358994 C21.4229065,10.9486043 21.6712542,12.190343 21.0585493,13.1094004 C20.9120796,13.329105 20.7235537,13.5176309 20.5038491,13.6641006 Z" id="Triangle" fill="#000000"></path>
+    </g>
+</svg>

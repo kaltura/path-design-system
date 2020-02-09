@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/kaltura/path-design-system/compare/v0.2.0...v0.3.0) (2020-02-05)
+
+
+### Features
+
+* **path-input:** add tag component  ([#56](https://github.com/kaltura/path-design-system/issues/56)) PATH-486 ([6444d52](https://github.com/kaltura/path-design-system/commit/6444d52a925165c597d8841c37c8a8d0a4014ee8))
+
+
+
+
+
 # [0.2.0](https://github.com/kaltura/path-design-system/compare/v0.1.2...v0.2.0) (2020-01-16)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs

@@ -237,8 +237,7 @@ export const Workshop: Story = () => {
                 label={text("Label", "Label")}
                 isActive={boolean("Active", false)}
                 disabled={boolean("Disabled", false)}
-                type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
-                layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
+                type="default"
                 onClick={action('clicked')}></Button>
         </div>
         <div className="col">
@@ -247,8 +246,7 @@ export const Workshop: Story = () => {
                 disabled={boolean("Disabled", false)}
                 icon={<Plus24Icon/>}
                 label={text("Label", "Label")}
-                type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
-                layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
+                type="default"
                 isActive={boolean("Active", false)}
                 onClick={action('clicked')}></Button>
         </div>
@@ -257,10 +255,73 @@ export const Workshop: Story = () => {
                 isProcessing={boolean('isProcessing',true)}
                 disabled={boolean("Disabled", false)}
                 label={text("Label", "Label")}
-                type={select(typeLabel, typeOptions, typeDefaultValue) as 'default' | 'cta' | 'borderless'}
-                layout={select(layoutLabel, layoutOptions, 'horizontal') as 'horizontal' | 'vertical'}
+                type="default"
+                layout="vertical"
+                icon={<Target24Icon/>}
                 isActive={boolean("Active", false)}
                 onClick={action('clicked')}></Button>
+        </div>
+
+        <div className="col">
+          <Button
+            isProcessing={boolean('isProcessing',false)}
+            label={text("Label", "Label")}
+            isActive={boolean("Active", false)}
+            disabled={boolean("Disabled", false)}
+            type="cta"
+            onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+          <Button
+            isProcessing={boolean('isProcessing',false)}
+            disabled={boolean("Disabled", false)}
+            icon={<Plus24Icon/>}
+            label={text("Label", "Label")}
+            type="cta"
+            isActive={boolean("Active", false)}
+            onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+          <Button
+            isProcessing={boolean('isProcessing',true)}
+            disabled={boolean("Disabled", false)}
+            label={text("Label", "Label")}
+            type="cta"
+            layout="vertical"
+            icon={<Target24Icon/>}
+            isActive={boolean("Active", false)}
+            onClick={action('clicked')}></Button>
+        </div>
+
+        <div className="col">
+          <Button
+            isProcessing={boolean('isProcessing',false)}
+            label={text("Label", "Label")}
+            isActive={boolean("Active", false)}
+            disabled={boolean("Disabled", false)}
+            type="borderless"
+            onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+          <Button
+            isProcessing={boolean('isProcessing',false)}
+            disabled={boolean("Disabled", false)}
+            icon={<Plus24Icon/>}
+            label={text("Label", "Label")}
+            type="borderless"
+            isActive={boolean("Active", false)}
+            onClick={action('clicked')}></Button>
+        </div>
+        <div className="col">
+          <Button
+            isProcessing={boolean('isProcessing',true)}
+            disabled={boolean("Disabled", false)}
+            label={text("Label", "Label")}
+            type="borderless"
+            layout="vertical"
+            icon={<Target24Icon/>}
+            isActive={boolean("Active", false)}
+            onClick={action('clicked')}></Button>
         </div>
     </div>
 };

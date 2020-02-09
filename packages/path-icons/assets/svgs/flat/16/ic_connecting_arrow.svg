@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>ic_connecting_arrow</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ic_connecting_arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M5,5 L5,11 C5,11.7772945 5.84797124,12.2574076 6.51449576,11.8574929 L11.5144958,8.85749293 C12.1618347,8.46908953 12.1618347,7.53091047 11.5144958,7.14250707 L6.51449576,4.14250707 C5.84797124,3.74259237 5,4.22270552 5,5 Z" id="Path" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>
