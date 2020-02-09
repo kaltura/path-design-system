@@ -40,7 +40,7 @@
     "dist",
     "LICENSE",
     "CHANGELOG.md",
-    "./src/kaltura-player.css"
+    "kaltura-player.css"
   ],
   "publishConfig": {
     "access": "public"
