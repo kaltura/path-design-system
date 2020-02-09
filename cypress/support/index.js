@@ -17,7 +17,6 @@
 import './commands/storybook';
 import './commands/iframe';
 import './commands/image-snapshot';
-import './commands/reusable-test';
 
 // TODO should be in the relevant command file
 import {addMatchImageSnapshotCommand} from 'cypress-image-snapshot/command';

@@ -1,3 +1,10 @@
+import {
+  testAllInputsDisabled,
+  testAllInputsHasError,
+  testAllInputsIsBusy,
+  testAllInputsPlaceholder,
+} from '../support/reusable-test';
+
 describe('Search Input', function() {
   beforeEach(() => {
     cy.visit('');
@@ -7,19 +14,19 @@ describe('Search Input', function() {
 
   it('Placeholder', function() {
     const text = 'Test Placeholder attribute';
-    cy.testAllInputsPlaceholder(2, text);
+    testAllInputsPlaceholder(2, text);
   });
 
   it('Is Busy', function() {
     // Verify 2 inputs displayed
-    cy.testAllInputsIsBusy(2);
+    testAllInputsIsBusy(2);
   });
 
   it('Has Error', function() {
-    cy.testAllInputsHasError(2);
+    testAllInputsHasError(2);
   });
 
   it('Disabled', function() {
-    cy.testAllInputsDisabled(2);
+    testAllInputsDisabled(2);
   });
 });

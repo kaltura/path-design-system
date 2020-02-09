@@ -4,7 +4,6 @@ declare namespace Cypress {
     runStorybookVisualRegression(size?: Array<any>): Chainable<any>;
     stopAllAnimations(): void;
     setResolution(size: Array<any>): void;
-    matchBodySnapshot(loadedStory: Chainable<unknown>, snapshotName: any): void;
   }
 }
 Cypress.Commands.add('stopAllAnimations', () => {
@@ -23,6 +22,8 @@ Cypress.Commands.add('stopAllAnimations', () => {
 
 Cypress.Commands.add('runStorybookVisualRegression', size => {
   return cy.getStories().each(story => {
+    console.log(story);
+    console.log(size);
     let name = story.attr('title');
     const id = story.attr('id');
     const loadedStory = cy.loadStory(id);
@@ -53,11 +54,4 @@ Cypress.Commands.add('setResolution', size => {
   } else {
     cy.viewport(size);
   }
-});
-
-Cypress.Commands.add('matchBodySnapshot', (loadedStory, snapshotName) => {
-  cy.wait(3000);
-  cy.stopAllAnimations();
-  cy.get('body');
-  loadedStory.matchImageSnapshot(snapshotName);
 });

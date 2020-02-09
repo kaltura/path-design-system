@@ -1,3 +1,8 @@
+import {
+  testAllInputsDisabled, testAllInputsDisabledAndBusy,
+  testAllInputsHasError,
+} from '../support/reusable-test';
+
 describe('Text Input', function() {
   beforeEach(() => {
     cy.visit('');
@@ -6,10 +11,14 @@ describe('Text Input', function() {
   });
 
   it('Has Error', function() {
-    cy.testAllInputsHasError(5);
+    testAllInputsHasError(5);
   });
 
   it('Disabled', function() {
-    cy.testAllInputsDisabled(5);
+    testAllInputsDisabled(5);
+  });
+
+  it('Disabled and Busy', function() {
+    testAllInputsDisabledAndBusy(5, 4);
   });
 });

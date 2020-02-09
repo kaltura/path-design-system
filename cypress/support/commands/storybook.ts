@@ -17,6 +17,7 @@ declare namespace Cypress {
     setKnobHasError(): Chainable<unknown>;
     setKnobIsBusy(): Chainable<unknown>;
     setKnobIsDisabled(): Chainable<unknown>;
+    setKnobIsDisabledAndIsBusy(): void;
   }
 }
 
@@ -47,11 +48,12 @@ Cypress.Commands.add('loadStory', (id: string, innerPage = false) => {
 Cypress.Commands.add('expandAll', () => {
   let didExpand = false;
   return cy
-    .get('a[id^=explorer]:not([href])')
+    .get('a[id^=explorer]:not([href]):has( span.sidebar-expander)')
     .each(story => {
       const isExpanded =
         story.parent().find(`#${story.attr('id')} + .css-0`).length > 0;
       if (!isExpanded) {
+        console.log('open ' + story.attr('id'));
         cy.get(story as any)
           .scrollIntoView()
           .click({force: true});
@@ -94,17 +96,22 @@ Cypress.Commands.add('clickZoomOut', (count = 1) => {
 // Knobs
 Cypress.Commands.add('setKnobPlaceholder', text => {
   // cy.wait(500)
-  cy.get('#Placeholder').type(text);
+  return cy.get('#Placeholder').type(text);
 });
 
 Cypress.Commands.add('setKnobHasError', () => {
-  cy.get('#Has\\ Error').click();
+  return cy.get('#Has\\ Error').click();
 });
 
 Cypress.Commands.add('setKnobIsBusy', () => {
-  cy.get('#Is\\ Busy').click();
+  return cy.get('#Is\\ Busy').click();
 });
 
 Cypress.Commands.add('setKnobIsDisabled', () => {
-  cy.get('#Disabled').click();
+  return cy.get('#Disabled').click();
+});
+
+Cypress.Commands.add('setKnobIsDisabledAndIsBusy', () => {
+  cy.setKnobIsDisabled();
+  cy.setKnobIsBusy();
 });
