@@ -15,7 +15,6 @@ jobs:
           git checkout "${GITHUB_REF:11}"
           git remote rm origin
           git remote add origin https://${{ secrets.GITHUB_PUBLISHER_USERNAME }}:${{ secrets.GITHUB_TOKEN }}@github.com/kaltura/kaltura-path-ui-kit.git
-          git remote -v
           git fetch
           git config user.email "${{ secrets.GITHUB_PUBLISHER_EMAIL }}"
           git config user.name "${{ secrets.GITHUB_PUBLISHER_NAME }}"
@@ -29,7 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx lerna version -y --conventional-commits --create-release github
+        run: npx lerna version -y --conventional-commits --create-release github -m "chore(release): [skip ci] publish %s"
       - name: Publish the packages using Lerna
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
