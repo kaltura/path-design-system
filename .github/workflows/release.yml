@@ -20,4 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: lerna publish -y --canary --preid ci --npm-tag=ci
+        run: npx lerna publish -y --canary --preid ci --npm-tag=ci
