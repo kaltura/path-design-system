@@ -22,7 +22,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx lerna version -y --conventional-commits --create-release github
       - name: Publish the packages using Lerna
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-       run: npx lerna publish from-package -y
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx lerna publish from-package -y
