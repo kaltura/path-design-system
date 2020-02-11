@@ -316,6 +316,25 @@ TowDifferentPlayerProviders.story = {
   }
 };
 
+export const KalturaPlayerWithNoProvider: Story = () => {
+  const classes = useStyle();
+
+  return (
+    <div className={classes.playerContainer}>
+      <KalturaPlayer entryId={entryId}
+                     onMediaLoaded={(entryId) => console.log(entryId)}/>
+    </div>
+  )
+};
+
+KalturaPlayerWithNoProvider.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Kaltura Player with no provider`
+    }
+  }
+};
+
 
 export default {
   title: 'Kaltura/Player',
