@@ -11,20 +11,24 @@ describe('Text Input', function() {
   });
 
   it('Verify Icon fits Text Input field and positioned as designed', function() {
-    zoomInOutSnapshots(loadedStory, 'VerifyIconFitsInput', 1, 2);
+    zoomInOutSnapshots(loadedStory, 'VerifyIconFitsInput', 2, 3);
   });
 
   it('Use a long string (gt 32 chars)', function() {
     cy.iframe('input[class*="ant-input"][placeholder="Default"]').type(
-      '0123456789!@#$%^&*()_+=-qwertyuiop'
+      'LONG including some $peci@l chars & > 32 CHARS'
     );
-    zoomInOutSnapshots(loadedStory, 'UseLongString', 1, 2);
+    zoomInOutSnapshots(loadedStory, 'UseLongString', 2, 3);
+
+    cy.log("Clear previous string and verify")
+    cy.iframe('input[class*="ant-input"][placeholder="Default"]').clear();
+    zoomInOutSnapshots(loadedStory, 'ClearString', 3, 2);
   });
 
   it('Verify Disabled and Is Busy Text Input', function() {
     cy.setKnobIsBusy()
     cy.setKnobIsDisabled()
-    zoomInOutSnapshots(loadedStory, 'VerifyDisabledAndIsBusy', 1, 2);
+    zoomInOutSnapshots(loadedStory, 'VerifyDisabledAndIsBusy', 2, 3);
   });
 
   [
@@ -43,7 +47,7 @@ describe('Text Input', function() {
   ].forEach(test => {
     it(test.testName, function() {
       test.method();
-      zoomInOutSnapshots(loadedStory, test.testName, 1, 2);
+      zoomInOutSnapshots(loadedStory, test.testName, 2, 3);
     });
   });
 });
