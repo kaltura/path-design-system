@@ -1,4 +1,4 @@
-
+//TODO rewrite the test
 describe('Button', function() {
   beforeEach(() => {
     cy.visit('');
@@ -13,7 +13,7 @@ describe('Button', function() {
       .iframeLoaded()
       .getInDocument('button')
       .should(($buttons) => {
-        expect($buttons).to.have.length(3);
+        expect($buttons).to.have.length(9);
         return $buttons;
       }).each(($button) => {
         cy.wrap($button).find(`i[class*="processingIcon"]`).should('not.be.exist');
@@ -27,7 +27,7 @@ describe('Button', function() {
       .iframeLoaded()
       .getInDocument('button')
       .should(($buttons) => {
-        expect($buttons).to.have.length(3);
+        expect($buttons).to.have.length(9);
         return $buttons;
       }).each(($button) => {
       cy.wrap($button).find(`i[class*="processingIcon"]`).should('be.exist');

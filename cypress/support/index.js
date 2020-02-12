@@ -14,9 +14,15 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands/storybook'
-import './commands/iframe'
+import './commands/storybook';
+import './commands/iframe';
+import './commands/image-snapshot';
 
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+// TODO should be in the relevant command file
+import {addMatchImageSnapshotCommand} from 'cypress-image-snapshot/command';
+addMatchImageSnapshotCommand({
+  failureThreshold: 0.003, // threshold for entire image
+  failureThresholdType: 'percent', // percent of image or number of pixels
+  customDiffConfig: {threshold: 0.0}, // threshold for each pixel
+  customDiffDir: 'cypress/visual_diffs', // capture viewport in screenshot
+})
