@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.7](https://github.com/kaltura/path-design-system/compare/v0.5.6...v0.5.7) (2020-02-17)
+
+
+### Bug Fixes
+
+* change serviceUrl configuration name to bundlerUrl ([#72](https://github.com/kaltura/path-design-system/issues/72)) ([ae44386](https://github.com/kaltura/path-design-system/commit/ae44386b444f0b9db1dc19a2d5a5d7865b4e619d))
+
+
+
+
+
 ## [0.5.6](https://github.com/kaltura/path-design-system/compare/v0.5.5...v0.5.6) (2020-02-12)
 
 
