@@ -25,8 +25,8 @@ const useStyle = createUseStyles({
 const ks = "NzkyMTY0MDg4MTU1NTM3YjcyOTIwNDJiZmU5YWI1M2FiNDZlZDRhY3wxODI3NTUxOzE4Mjc1NTE7MTYxMDI4OTc4OTswOzE1ODAyODk3ODkuOTkwNjtzaGFpLmFpbnZvbmVyQGthbHR1cmEuY29tO3N2aWV3OjFfcW0zanRiOWEsdmlldzoxX3FtM2p0YjlhLGxpc3Q6Kjs7";
 const partnerId = '1827551';
 const uiConfId = '44400392';
-const serviceUrl = 'https://cfvod.kaltura.com';
-const errorServiceUrl = 'httpd://cfvod.kaltura.com';
+const bunderlUrl = 'https://cfvod.kaltura.com';
+const errorBundlerUrl = 'httpd://cfvod.kaltura.com';
 const entryId = '1_qm3jtb9a';
 
 export const Default: Story = () => {
@@ -37,7 +37,7 @@ export const Default: Story = () => {
       ks:ks,
       partnerId: partnerId,
       uiConfId: uiConfId,
-      serviceUrl: serviceUrl
+      bundlerUrl: bunderlUrl
     }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
@@ -65,7 +65,7 @@ export const KalturaPlayerAutoPlay: Story = () => {
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            serviceUrl: serviceUrl
+                            bundlerUrl: bunderlUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
@@ -92,7 +92,7 @@ export const KalturaPlayerWithoutAutoPlay: Story = () => {
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            serviceUrl: serviceUrl
+                            bundlerUrl: bunderlUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
@@ -122,7 +122,7 @@ export const kalturaPlayerErrorLoadingBundler: Story = () => {
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            serviceUrl: errorServiceUrl
+                            bundlerUrl: errorBundlerUrl
                           }}>
       <div className={classes.playerContainer}>
         <KalturaPlayer entryId={entryId}
@@ -154,7 +154,7 @@ export const MultiplePlayersInPage: Story = () => {
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            serviceUrl: serviceUrl
+                            bundlerUrl: bunderlUrl
                           }}>
       <>
         <div className={classes.playerContainer}>
@@ -209,7 +209,7 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
                               ks:ks,
                               partnerId: partnerId,
                               uiConfId: uiConfId,
-                              serviceUrl: serviceUrl
+                              bundlerUrl: bunderlUrl
                             }}>
         <>
           <LoadPlayerBundlerComponent label={'load player bundler'}/>
@@ -242,14 +242,14 @@ export const TowIdenticalPlayerProviders: Story = () => {
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            serviceUrl: serviceUrl
+                            bundlerUrl: bunderlUrl
                           }}>
       <KalturaPlayerManager autoLoad={true}
                             config={{
                               ks:ks,
                               partnerId: partnerId,
                               uiConfId: uiConfId,
-                              serviceUrl: serviceUrl
+                              bundlerUrl: bunderlUrl
                             }}>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
@@ -279,7 +279,7 @@ export const TowDifferentPlayerProviders: Story = () => {
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
-                            serviceUrl: serviceUrl
+                            bundlerUrl: bunderlUrl
                           }}>
       <>
         <div className={classes.playerContainer}>
@@ -292,7 +292,7 @@ export const TowDifferentPlayerProviders: Story = () => {
                                 ks:ks,
                                 partnerId: partnerId,
                                 uiConfId: uiConfId,
-                                serviceUrl: errorServiceUrl
+                                bundlerUrl: errorBundlerUrl
                               }}>
           <>
             <LoadPlayerBundlerComponent label={'try to load player with different bundler url'}/>
