@@ -180,7 +180,7 @@ export const Workshop: Story = () => {
                 <SearchInput value={value}
                              placeholder={text('Placeholder', '')}
                              hasError={boolean('Has Error', false)}
-                             isBusy={boolean('Is busy', false)}
+                             isBusy={boolean('Is Busy', false)}
                              disabled={boolean('Disabled', false)}
                              onChange={onChange}/>
             </div>
@@ -193,7 +193,7 @@ export const Workshop: Story = () => {
                              inputRef={inputRef}
                              placeholder={text('Placeholder', '')}
                              hasError={boolean('Has Error', false)}
-                             isBusy={boolean('Is busy', false)}
+                             isBusy={boolean('Is Busy', false)}
                              disabled={boolean('Disabled', false)}
                              onChange={action('uncontrolled changed')}/>
             </div>

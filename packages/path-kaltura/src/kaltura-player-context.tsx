@@ -17,7 +17,7 @@ export interface PlayerContextValue {
 export const defaultPlayerContext: PlayerContextValue =
   {
     state: {
-      status: PlayerLoadingStatuses.Initial,
+      status: PlayerLoadingStatuses.Error,
       config: {}
     },
     loadPlayer: () => {}

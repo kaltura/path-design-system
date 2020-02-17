@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.6](https://github.com/kaltura/path-design-system/compare/v0.5.5...v0.5.6) (2020-02-12)
+
+
+### Bug Fixes
+
+* handle kaltura player with no provider ([#69](https://github.com/kaltura/path-design-system/issues/69)) ([79fd86e](https://github.com/kaltura/path-design-system/commit/79fd86e58ac455ec272aa8cdc188b5b6ea19ff81))
+
+
+
+
+
 ## [0.5.5](https://github.com/kaltura/path-design-system/compare/v0.5.4...v0.5.5) (2020-02-09)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
