@@ -14,7 +14,7 @@ export interface PlayerManagerState {
 
 export interface PlayerManagerConfig {
   ks?:string;
-  serviceUrl?: string;
+  bundlerUrl?: string;
   partnerId?: string;
   uiConfId?: string;
 }
