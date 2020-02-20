@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.8](https://github.com/kaltura/path-design-system/compare/v0.5.7...v0.5.8) (2020-02-20)
+
+
+### Bug Fixes
+
+* fix borderless button style ([#74](https://github.com/kaltura/path-design-system/issues/74)) ([f5590d0](https://github.com/kaltura/path-design-system/commit/f5590d036a9ebd23edb97da5f66f924ab5441f7c))
+
+
+
+
+
 ## [0.5.7](https://github.com/kaltura/path-design-system/compare/v0.5.6...v0.5.7) (2020-02-17)
 
 
