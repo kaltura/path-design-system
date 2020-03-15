@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.10](https://github.com/kaltura/path-design-system/compare/v0.5.9...v0.5.10) (2020-03-15)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
+
+
+
+
+
 ## [0.5.7](https://github.com/kaltura/path-design-system/compare/v0.5.6...v0.5.7) (2020-02-17)
 
 
