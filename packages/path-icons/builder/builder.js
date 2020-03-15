@@ -89,9 +89,9 @@ async function generateIndex(options) {
 }
 
 const noises = [
-    ['<path transform="scale(Infinity, Infinity)" d="M0 0h16v16H0z" />', ''],
-    ['<path transform="scale(Infinity, Infinity)" d="M24 0H0v24h24z" />', ''],
-    ['<path transform="scale(Infinity, Infinity)" d="M0 0h24v24H0z" />', ''],
+    ['<path d="M0 0h16v16H0z" />', ''],
+    ['<path d="M24 0H0v24h24z" />', ''],
+    ['<path d="M0 0h24v24H0z" />', ''],
 ];
 
 export async function cleanPaths({ svgPath, data, isFlat }) {
@@ -118,15 +118,6 @@ export async function cleanPaths({ svgPath, data, isFlat }) {
     .replace(/fill-rule=/g, 'fillRule=')
     .replace(/ clip-path=".+?"/g, '') // Fix visibility issue and save some bytes.
     .replace(/<clipPath.+?<\/clipPath>/g, ''); // Remove unused definitions
-
-  const sizeMatch = svgPath.match(/^.*_([0-9]+)px.svg$/);
-  const size = sizeMatch ? Number(sizeMatch[1]) : null;
-
-  if (size !== 24) {
-    const scale = Math.round((24 / size) * 100) / 100; // Keep a maximum of 2 decimals
-    paths = paths.replace('clipPath="url(#b)" ', '');
-    paths = paths.replace(/<path /g, `<path transform="scale(${scale}, ${scale})" `);
-  }
 
   noises.forEach(([search, replace]) => {
     if (paths.indexOf(search) !== -1) {
