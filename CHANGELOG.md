@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.11](https://github.com/kaltura/path-design-system/compare/v0.5.10...v0.5.11) (2020-03-17)
+
+
+### Bug Fixes
+
+* add word-break for long words PATH-456 ([#90](https://github.com/kaltura/path-design-system/issues/90)) ([673347f](https://github.com/kaltura/path-design-system/commit/673347f933099eff95c62025f7c9521d5ec899c2))
+
+
+
+
+
 ## [0.5.10](https://github.com/kaltura/path-design-system/compare/v0.5.9...v0.5.10) (2020-03-15)
 
 **Note:** Version bump only for package path-design-system
