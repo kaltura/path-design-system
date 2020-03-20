@@ -26,7 +26,7 @@ export interface ButtonProps {
   /** A click event callback
    * @default undefined
    * */
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   /** Set button in a processing mode and shows animation indicating busy state
    * @default false
    * */
