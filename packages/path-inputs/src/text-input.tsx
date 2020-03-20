@@ -122,8 +122,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         border: `1px solid ${theme.colors.grayscale4}`,
         borderRadius: '4px',
         '&:hover:not([aria-disabled=true]):not([has-error=true])': {
-            borderColor: theme.colors.cyan,
-            boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
+            borderColor: theme.colors.grayscale3,
         },
     },
     affixWrapper__focus: {
