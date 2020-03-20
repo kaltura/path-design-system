@@ -7,29 +7,29 @@ import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 export interface HintProps {
     /**
      * Position in which hit can be placed
-     * @default top
      */
     direction?: 'top' | 'bottom' | 'right' | 'left';
     /**
      * Max width of hint container. maxWidth: 0 means no restrictions
-     * @default 200
      */
     maxWidth?: number;
     /**
      * Hint content. Can be string or ReactNode
-     * @default undefined
      */
     content?: string | React.ReactNode;
     /**
      * Prevents hint from being shown
-     * @default false
      */
     disabled?: boolean;
     /**
      * Children element that is a target for hint
-     * @default undefined
      */
     children?: React.ReactNode;
+
+    /**
+     * ClassName of wrapped element
+     */
+    className?: string;
 }
 
 function offset(el: HTMLElement): { top: number, left: number } {
@@ -100,7 +100,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
  * The hint is shown on mouse enter, and is hidden on mouse leave
  */
 export function Hint(props: HintProps) {
-    const { content, children, disabled = false, maxWidth = 200, direction = 'top' } = props;
+    const { content, children, className, disabled, maxWidth, direction } = props;
     const maxWithValue = !!maxWidth ? `${maxWidth}px` : 'auto';
     const classes = useStyles(props);
 
@@ -111,8 +111,15 @@ export function Hint(props: HintProps) {
                                overlayClassName='path'
                                placement={direction}
                                autoAdjustOverflow={true}>
-                <span>{children}</span>
+                <span className={className}>{children}</span>
             </EnhancedTooltip>
-            : <span>{children}</span>
+            : <span className={className}>{children}</span>
     );
 }
+
+Hint.defaultProps = {
+  disabled: false,
+  maxWidth: 200,
+  direction: 'top',
+  className: ''
+};
