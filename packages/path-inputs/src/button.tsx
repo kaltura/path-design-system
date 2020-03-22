@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 
 const classNames = require('classnames');
 
@@ -228,6 +228,11 @@ export function Button(props: ButtonProps) {
   const { label, disabled, onClick, icon, isProcessing, className, style, type } = props;
   const isCTA = type === 'cta';
   const isBorderLess = type === 'borderless';
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    setIsDisabled(disabled || !!isProcessing);
+  }, [disabled, isProcessing]);
 
   const btnClass = classNames({
     'btn-leave': true, // hack to remove border glow on click
@@ -255,12 +260,12 @@ export function Button(props: ButtonProps) {
   });
 
   return (
-    <AntButton className={btnClass} disabled={disabled} style={style} onClick={onClick}>
+    <AntButton className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
       <div className={btnContentClass}>
         {icon ? withClassName(icon, iconClass) : null}
         {!isProcessing
           ? null
-          : isCTA && !disabled
+          : isCTA && !isDisabled
             ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
             : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
         <span className={labelClass}>{label}</span>
