@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.12](https://github.com/kaltura/path-design-system/compare/v0.5.11...v0.5.12) (2020-03-22)
+
+
+### Bug Fixes
+
+* disable button in progress state PATH-413 ([#92](https://github.com/kaltura/path-design-system/issues/92)) ([065a29c](https://github.com/kaltura/path-design-system/commit/065a29c15664a007249651aebb454ac5e9e8ba91))
+
+
+
+
+
 ## [0.5.11](https://github.com/kaltura/path-design-system/compare/v0.5.10...v0.5.11) (2020-03-17)
 
 
