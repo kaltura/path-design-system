@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { InputElement, InputRef, TextInput } from './text-input';
 import { Plus24Icon, Search24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { Theme } from '@kaltura-react-ui-kits/path-theming';
 import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 
 const classNames = require('classnames');
@@ -50,12 +49,16 @@ export interface SearchInputFieldProps {
     onChange?: (event: React.ChangeEvent<InputElement>) => void;
 }
 
-const useStyles = createUseStyles((theme: Theme) => ({
+const useStyles = createUseStyles(() => ({
     clearBtn: {
-        cursor: 'pointer',
-        color: theme.colors.grayscale3,
         transform: 'rotate(45deg)',
+        '&:hover' : {
+          cursor: 'pointer'
+        }
     },
+    clearBtnDisabled: {
+      cursor: 'default !important'
+    }
 }), { theming });
 
 const resolveOnChange = (
@@ -96,7 +99,10 @@ const resolveOnChange = (
 export const SearchInput = (props: SearchInputFieldProps) => {
     const { value, defaultValue, disabled, placeholder, inputRef, hasError, isBusy, onChange } = props;
     const classes = useStyles(props);
-    const clearBtnClass = classNames({ [classes.clearBtn]: true });
+    const clearBtnClass = classNames({
+      [classes.clearBtn]: true,
+      [classes.clearBtnDisabled]: disabled
+    });
     const [isControlled] = useState<boolean>(value === '' || !!value);
     const [localValue, setLocalValue] = useState<string>((value ?? defaultValue) || '');
     const [showClear, setShowClear] = useState(false);
@@ -106,6 +112,7 @@ export const SearchInput = (props: SearchInputFieldProps) => {
         resolveOnChange(inputEl, event, onChange);
     };
     const clearInput = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        if(disabled) return;
         if (!isControlled) {
             setLocalValue('');
         }
