@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.13](https://github.com/kaltura/path-design-system/compare/v0.5.12...v0.5.13) (2020-03-22)
+
+
+### Bug Fixes
+
+* text-input hover style PATH-484 ([#95](https://github.com/kaltura/path-design-system/issues/95)) ([591d78d](https://github.com/kaltura/path-design-system/commit/591d78ddaa522c4dfa6141b4b37044867de2cb17))
+
+
+
+
+
 ## [0.5.12](https://github.com/kaltura/path-design-system/compare/v0.5.11...v0.5.12) (2020-03-22)
 
 
