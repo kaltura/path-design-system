@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.15](https://github.com/kaltura/path-design-system/compare/v0.5.14...v0.5.15) (2020-03-23)
+
+
+### Bug Fixes
+
+* change buttons background color from white to transparent ([#98](https://github.com/kaltura/path-design-system/issues/98)) ([73e7387](https://github.com/kaltura/path-design-system/commit/73e7387de1be50f7a8a6a0b01c011bbff3d232fb))
+
+
+
+
+
 ## [0.5.14](https://github.com/kaltura/path-design-system/compare/v0.5.13...v0.5.14) (2020-03-23)
 
 
