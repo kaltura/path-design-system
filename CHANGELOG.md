@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.16](https://github.com/kaltura/path-design-system/compare/v0.5.15...v0.5.16) (2020-03-23)
+
+**Note:** Version bump only for package path-design-system
+
+
+
+
+
 ## [0.5.15](https://github.com/kaltura/path-design-system/compare/v0.5.14...v0.5.15) (2020-03-23)
 
 
