@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.14](https://github.com/kaltura/path-design-system/compare/v0.5.13...v0.5.14) (2020-03-23)
+
+
+### Bug Fixes
+
+* disable clear input text on disabled input field PATH-507 ([#97](https://github.com/kaltura/path-design-system/issues/97)) ([4602090](https://github.com/kaltura/path-design-system/commit/460209003a4368853b8422fb52022984bd6c2d26))
+
+
+
+
+
 ## [0.5.13](https://github.com/kaltura/path-design-system/compare/v0.5.12...v0.5.13) (2020-03-22)
 
 
