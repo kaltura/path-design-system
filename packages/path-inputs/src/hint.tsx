@@ -3,33 +3,34 @@ import { Tooltip } from 'antd';
 import './hint.css';
 import { Theme } from '@kaltura-react-ui-kits/path-theming';
 import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
+import { useEffect, useState } from 'react';
 
 export interface HintProps {
     /**
      * Position in which hit can be placed
-     * @default top
      */
     direction?: 'top' | 'bottom' | 'right' | 'left';
     /**
      * Max width of hint container. maxWidth: 0 means no restrictions
-     * @default 200
      */
     maxWidth?: number;
     /**
      * Hint content. Can be string or ReactNode
-     * @default undefined
      */
     content?: string | React.ReactNode;
     /**
      * Prevents hint from being shown
-     * @default false
      */
     disabled?: boolean;
     /**
      * Children element that is a target for hint
-     * @default undefined
      */
     children?: React.ReactNode;
+
+    /**
+     * ClassName of wrapped element
+     */
+    className?: string;
 }
 
 function offset(el: HTMLElement): { top: number, left: number } {
@@ -100,19 +101,40 @@ const useStyles = createUseStyles((theme: Theme) => ({
  * The hint is shown on mouse enter, and is hidden on mouse leave
  */
 export function Hint(props: HintProps) {
-    const { content, children, disabled = false, maxWidth = 200, direction = 'top' } = props;
+    const { content, children, className, disabled, maxWidth, direction } = props;
+    const [visible, setVisible] = useState(false);
     const maxWithValue = !!maxWidth ? `${maxWidth}px` : 'auto';
     const classes = useStyles(props);
 
+    useEffect(() => {
+      if (disabled) {
+        setVisible(false);
+      }
+    },
+    [disabled]);
+
+    const handleVisibilityChange = (isVisible: boolean) => {
+      if (!disabled) {
+        setVisible(isVisible);
+      }
+    };
+
     const getContent = () => <span className={classes.hintContent} style={{ maxWidth: maxWithValue }}>{content}</span>;
     return (
-        !disabled
-            ? <EnhancedTooltip overlay={getContent}
-                               overlayClassName='path'
-                               placement={direction}
-                               autoAdjustOverflow={true}>
-                <span>{children}</span>
-            </EnhancedTooltip>
-            : <span>{children}</span>
+      <EnhancedTooltip visible={visible}
+                       onVisibleChange={handleVisibilityChange}
+                       overlay={getContent}
+                       overlayClassName='path'
+                       placement={direction}
+                       autoAdjustOverflow={true}>
+        <div className={className}>{children}</div>
+      </EnhancedTooltip>
     );
 }
+
+Hint.defaultProps = {
+  disabled: false,
+  maxWidth: 200,
+  direction: 'top',
+  className: ''
+};
