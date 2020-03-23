@@ -78,24 +78,24 @@ const useStyles = createUseStyles((theme: Theme) => ({
     '&:hover': {
       boxShadow: 'none',
       color: '#434a4b',
-      backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
+      backgroundColor: props.isProcessing ? 'transparent' : theme.colors.grayscale4,
       border: `1px solid ${theme.colors.grayscale4}`,
     },
     '&:active': {
       boxShadow: 'none',
       color: '#434a4b',
-      backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale5,
+      backgroundColor: props.isProcessing ? 'transparent' : theme.colors.grayscale5,
       border: `1px solid ${theme.colors.grayscale4}`,
     },
     '&:disabled': {
       boxShadow: 'none',
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
       border: `1px solid ${theme.colors.grayscale4}`,
       color: theme.colors.grayscale4
     },
     '&:disabled:hover': {
       boxShadow: 'none',
-      backgroundColor: '#ffffff'
+      backgroundColor: 'transparent'
     },
   }),
   'btnCTA': (props: ButtonProps) => ({
@@ -120,18 +120,18 @@ const useStyles = createUseStyles((theme: Theme) => ({
     },
     '&:disabled': {
       boxShadow: 'none',
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
       border: `1px solid ${theme.colors.grayscale4}`,
       color: theme.colors.grayscale4
     },
     '&:disabled:hover': {
       boxShadow: 'none',
-      backgroundColor: '#ffffff'
+      backgroundColor: 'transparent'
     },
   }),
   'btnBorderless': (props: ButtonProps) => ({
     color: theme.colors.grayscale1,
-    backgroundColor: theme.colors.white,
+    backgroundColor: 'transparent',
     border: 'none',
     boxShadow: 'none',
     '&:focus': {
@@ -141,24 +141,24 @@ const useStyles = createUseStyles((theme: Theme) => ({
     },
     '&:hover': {
       color: theme.colors.grayscale1,
-      backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale4,
+      backgroundColor: props.isProcessing ? 'transparent' : theme.colors.grayscale4,
       border: 'none',
     },
     '&:active': {
       color: theme.colors.grayscale1,
-      backgroundColor: props.isProcessing ? '#ffffff' : theme.colors.grayscale6,
+      backgroundColor: props.isProcessing ? 'transparent' : theme.colors.grayscale6,
       border: 'none',
     },
     '&:disabled': {
       boxShadow: 'none',
-      backgroundColor: theme.colors.white,
+      backgroundColor: 'transparent',
       border: 'none',
       color: theme.colors.grayscale4
     },
     '&:disabled:hover': {
       color: theme.colors.grayscale4,
       boxShadow: 'none',
-      backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
       border: 'none',
     },
   }),
