@@ -3,6 +3,7 @@ import { Tooltip } from 'antd';
 import './hint.css';
 import { Theme } from '@kaltura-react-ui-kits/path-theming';
 import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
+import { useEffect, useState } from 'react';
 
 export interface HintProps {
     /**
@@ -101,19 +102,33 @@ const useStyles = createUseStyles((theme: Theme) => ({
  */
 export function Hint(props: HintProps) {
     const { content, children, className, disabled, maxWidth, direction } = props;
+    const [visible, setVisible] = useState(false);
     const maxWithValue = !!maxWidth ? `${maxWidth}px` : 'auto';
     const classes = useStyles(props);
 
+    useEffect(() => {
+      if (disabled) {
+        setVisible(false);
+      }
+    },
+    [disabled]);
+
+    const handleVisibilityChange = (isVisible: boolean) => {
+      if (!disabled) {
+        setVisible(isVisible);
+      }
+    };
+
     const getContent = () => <span className={classes.hintContent} style={{ maxWidth: maxWithValue }}>{content}</span>;
     return (
-        !disabled
-            ? <EnhancedTooltip overlay={getContent}
-                               overlayClassName='path'
-                               placement={direction}
-                               autoAdjustOverflow={true}>
-                <span className={className}>{children}</span>
-            </EnhancedTooltip>
-            : <span className={className}>{children}</span>
+      <EnhancedTooltip visible={visible}
+                       onVisibleChange={handleVisibilityChange}
+                       overlay={getContent}
+                       overlayClassName='path'
+                       placement={direction}
+                       autoAdjustOverflow={true}>
+        <span className={className}>{children}</span>
+      </EnhancedTooltip>
     );
 }
 
