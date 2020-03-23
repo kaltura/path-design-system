@@ -127,7 +127,7 @@ export function Hint(props: HintProps) {
                        overlayClassName='path'
                        placement={direction}
                        autoAdjustOverflow={true}>
-        <span className={className}>{children}</span>
+        <div className={className}>{children}</div>
       </EnhancedTooltip>
     );
 }
