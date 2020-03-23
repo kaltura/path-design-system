@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.17](https://github.com/kaltura/path-design-system/compare/v0.5.16...v0.5.17) (2020-03-23)
+
+
+### Bug Fixes
+
+* update button onClick event API typing ([#91](https://github.com/kaltura/path-design-system/issues/91)) ([4f1d13a](https://github.com/kaltura/path-design-system/commit/4f1d13a07017032dcb8a503d7e06575c55ff1c49))
+
+
+
+
+
 ## [0.5.16](https://github.com/kaltura/path-design-system/compare/v0.5.15...v0.5.16) (2020-03-23)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
