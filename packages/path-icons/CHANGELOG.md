@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.18](https://github.com/kaltura/path-design-system/compare/v0.5.17...v0.5.18) (2020-03-24)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-icons
+
+
+
+
+
 ## [0.5.9](https://github.com/kaltura/path-design-system/compare/v0.5.8...v0.5.9) (2020-03-15)
 
 
