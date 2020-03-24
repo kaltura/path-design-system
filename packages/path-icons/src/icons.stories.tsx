@@ -22,6 +22,7 @@ const icons16List: string[] = [
     'ConnectingArrow16Icon',
     'Home16Icon',
     'Plus16Icon',
+    'Refresh16Icon',
 ];
 
 const icons24List: string[] = [
