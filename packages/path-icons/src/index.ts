@@ -14,6 +14,7 @@ export { PlayFull24Icon } from './playFull24';
 export { Plus16Icon } from './plus16';
 export { Plus24Icon } from './plus24';
 export { Redo24Icon } from './redo24';
+export { Refresh16Icon } from './refresh16';
 export { Search24Icon } from './search24';
 export { SpinnerBright24Icon } from './spinnerBright24';
 export { SpinnerDark24Icon } from './spinnerDark24';
