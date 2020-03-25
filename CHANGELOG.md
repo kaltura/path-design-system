@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.19](https://github.com/kaltura/path-design-system/compare/v0.5.18...v0.5.19) (2020-03-25)
+
+
+### Bug Fixes
+
+* input border disappearing on zoom out in chrome PATH-459 ([#100](https://github.com/kaltura/path-design-system/issues/100)) ([294c63c](https://github.com/kaltura/path-design-system/commit/294c63c9766f9e3466a6ab6385bf456b3e618ff5))
+
+
+
+
+
 ## [0.5.18](https://github.com/kaltura/path-design-system/compare/v0.5.17...v0.5.18) (2020-03-24)
 
 **Note:** Version bump only for package path-design-system
