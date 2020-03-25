@@ -79,6 +79,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     input: {
         height: '32px',
         width: '100%',
+        minWidth: '0',
         padding: '8px',
         lineHeight: '32px',
         fontFamily: theme.input.fontFamily,
@@ -119,7 +120,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        border: `1px solid ${theme.colors.grayscale4}`,
+        border: `thin solid ${theme.colors.grayscale4}`,
         borderRadius: '4px',
         '&:hover:not([aria-disabled=true]):not([has-error=true])': {
             borderColor: theme.colors.grayscale3,
@@ -132,7 +133,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     affixWrapper__disabled: {
         boxShadow: 'none',
         backgroundColor: theme.colors.white,
-        border: `1px solid ${theme.colors.grayscale5}`,
+        border: `thin solid ${theme.colors.grayscale5}`,
         '&::placeholder': {
             color: theme.colors.grayscale4,
         },
