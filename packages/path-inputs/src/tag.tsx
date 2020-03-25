@@ -10,7 +10,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     display: 'block',
     padding: '5px 8px',
     borderRadius: '4px',
-    border: `solid 1px ${theme.colors.grayscale4}`,
+    border: `thin solid ${theme.colors.grayscale4}`,
     backgroundColor: theme.colors.white,
   }
 }), { theming });
