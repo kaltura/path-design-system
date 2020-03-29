@@ -93,7 +93,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontSize: theme.hint.fontSize,
         fontWeight: theme.hint.fontWeight,
         lineHeight: theme.hint.lineHeight,
-        display: 'inline-block',
+        display: 'block',
     },
 }), { theming });
 
