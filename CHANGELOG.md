@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/kaltura/path-design-system/compare/v0.5.19...v0.6.0) (2020-03-29)
+
+
+### Features
+
+* add text area input component ([#103](https://github.com/kaltura/path-design-system/issues/103)) ([6c69133](https://github.com/kaltura/path-design-system/commit/6c6913366e42d4429b56ffb195c0f36b5bdb6d29))
+
+
+
+
+
 ## [0.5.19](https://github.com/kaltura/path-design-system/compare/v0.5.18...v0.5.19) (2020-03-25)
 
 
