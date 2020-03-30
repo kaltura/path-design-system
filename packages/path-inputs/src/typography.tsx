@@ -47,7 +47,7 @@ export interface TypographyProps {
 
 const useStyles = createUseStyles((theme: Theme) => ({
   fontStyle :{
-    wordBreak: 'break-all',
+    wordBreak: 'break-word',
     fontStretch: 'normal',
     fontStyle: 'normal',
     letterSpacing: 'normal',
