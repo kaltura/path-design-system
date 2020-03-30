@@ -1,0 +1,45 @@
+.path-dropdown {
+  border-radius: 4px;
+  box-shadow: 0 4px 30px -8px rgba(0, 0, 0, 0.2);
+  border: solid 1px #d9d9d9;
+  background-color: #ffffff;
+  min-width: 80px !important;
+}
+
+.path-dropdown-hidden {
+  display: none;
+}
+
+.path-selection-search,
+.path-selection-search-input {
+  width: 100%;
+}
+
+.path-selection-search-input {
+
+}
+
+.path-item {
+  padding: 8px 15px 10px 16px;
+  font-family: 'Lato';
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.47;
+  position: relative;
+}
+
+.path-item:hover {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.path-item .path-item-option-state {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+}
+
+.path-item.path-item-option-disabled {
+  color: #cccccc;
+  cursor: not-allowed;
+}

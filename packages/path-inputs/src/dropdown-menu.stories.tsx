@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { withKnobs } from "@storybook/addon-knobs";
 import { withThemeProvider } from "../storybook/with-theme-provider";
 import { DropdownMenu } from './dropdown-menu';
+import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
 
 const options = [
   {
@@ -24,10 +25,22 @@ const options = [
   },
 ];
 
+const useStyles = createUseStyles({
+  container: {
+    width: '400px',
+    height: '100px',
+    padding: '10px'
+  }
+});
+
 export const Default: Story = () => {
-  const [value, setValue] = useState(options[0].value);
+  const classes = useStyles();
+  const [value, setValue] = useState('1');
+
   return (
-    <DropdownMenu value={value} options={options} onChange={setValue}/>
+    <div className={classes.container}>
+      <DropdownMenu value={value} options={options} onChange={setValue}/>
+    </div>
   );
 };
 
