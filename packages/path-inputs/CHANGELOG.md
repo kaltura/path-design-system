@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/kaltura/path-design-system/compare/v0.6.1...v0.6.2) (2020-03-30)
+
+
+### Bug Fixes
+
+* break whole words if too long PATH-461 ([#105](https://github.com/kaltura/path-design-system/issues/105)) ([8f58f45](https://github.com/kaltura/path-design-system/commit/8f58f4577c95d43c10e5d443d34f7452ae398302))
+
+
+
+
+
 ## [0.6.1](https://github.com/kaltura/path-design-system/compare/v0.6.0...v0.6.1) (2020-03-29)
 
 
