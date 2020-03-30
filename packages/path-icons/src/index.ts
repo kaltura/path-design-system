@@ -1,5 +1,6 @@
 export { ArrowLeft16Icon } from './arrowLeft16';
 export { BrokenMedia32Icon } from './brokenMedia32';
+export { Checkmark16Icon } from './checkmark16';
 export { Close24Icon } from './close24';
 export { ConnectingArrow16Icon } from './connectingArrow16';
 export { Duplicate24Icon } from './duplicate24';
@@ -23,3 +24,5 @@ export { Trash24Icon } from './trash24';
 export { Undo24Icon } from './undo24';
 export { Upload24Icon } from './upload24';
 export { Video24Icon } from './video24';
+export { ZoomIn24Icon } from './zoomIn24';
+export { ZoomOut24Icon } from './zoomOut24';

@@ -19,6 +19,7 @@ export interface IconsComponentsList {
 
 const icons16List: string[] = [
     'ArrowLeft16Icon',
+    'Checkmark16Icon',
     'ConnectingArrow16Icon',
     'Home16Icon',
     'Plus16Icon',
@@ -45,6 +46,8 @@ const icons24List: string[] = [
     'Undo24Icon',
     'Upload24Icon',
     'Video24Icon',
+    'ZoomIn24Icon',
+    'ZoomOut24Icon',
 ];
 const dartBackground = [
     'SpinnerDark24Icon',
