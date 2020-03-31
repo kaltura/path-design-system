@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ReactText, useState } from 'react';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { withThemeProvider } from '../../storybook/with-theme-provider';
-import { DropdownMenu, DropdownMenuType } from './dropdown-menu';
+import { DropdownMenu } from './dropdown-menu';
 import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
 import { action } from '@storybook/addon-actions';
 import {
@@ -11,6 +11,7 @@ import {
   Redo24Icon,
   Upload24Icon
 } from '@kaltura-react-ui-kits/path-icons';
+import { DropdownMenuType } from './dropdown-menu-types';
 
 const options = [
   {
