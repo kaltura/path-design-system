@@ -7,8 +7,8 @@ import {
 } from '@kaltura-react-ui-kits/path-theming';
 import { Button } from 'antd';
 import { ArrowLeft16Icon } from '@kaltura-react-ui-kits/path-icons';
-import { DropdownMenuType } from './dropdown-menu';
 import { v4 as uuidV4 } from 'uuid';
+import { DropdownMenuType } from './dropdown-menu-types';
 
 const classNames = require('classnames');
 

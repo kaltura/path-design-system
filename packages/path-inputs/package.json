@@ -45,7 +45,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-    "@types/uuid": "^7.0.2"
-  }
+  "devDependencies": {}
 }

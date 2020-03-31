@@ -11,13 +11,9 @@ import { Checkmark16Icon } from '@kaltura-react-ui-kits/path-icons';
 import { SelectInputButton } from './dropdown-menu-select-button';
 import { SelectInputOptionContent } from './dropdown-menu-select-option-content';
 import { v4 as uuidV4 } from 'uuid';
+import { DropdownMenuType } from './dropdown-menu-types';
 
 import './dropdown-menu.css';
-
-export enum DropdownMenuType {
-  Labeled = 'Labeled',
-  Action = 'Action'
-}
 
 export interface DropdownMenuOption {
   /**
