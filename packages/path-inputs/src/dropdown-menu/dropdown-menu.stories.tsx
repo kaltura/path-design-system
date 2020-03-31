@@ -13,24 +13,21 @@ import {
 } from '@kaltura-react-ui-kits/path-icons';
 import { DropdownMenuType } from './dropdown-menu-types';
 
-const options = [
-  {
-    value: '1',
-    label: 'Option 1',
-  },
-  {
-    value: '2',
-    label: 'Option 2',
-  },
-  {
-    value: '3',
-    label: 'Option 3',
-  }
-];
-
 const useStyles = createUseStyles({
+  wrapper: {
+    display: 'flex',
+  },
+  column: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+  },
   container: {
     width: '250px',
+    padding: '10px'
+  },
+  smallContainer: {
+    width: '50px',
     padding: '10px'
   },
   customOption: {
@@ -46,6 +43,20 @@ const useStyles = createUseStyles({
 
 export const Default: Story = () => {
   const classes = useStyles();
+  const options = [
+    {
+      value: '1',
+      label: 'Option 1',
+    },
+    {
+      value: '2',
+      label: 'Option 2',
+    },
+    {
+      value: '3',
+      label: 'Option 3',
+    }
+  ];
 
   return (
     <div className={classes.container}>
@@ -54,8 +65,57 @@ export const Default: Story = () => {
   );
 };
 
+
+export const Dimensions: Story = () => {
+  const classes = useStyles();
+  const options = Array.from({ length: 50 }, (_, i) => ({
+    value: i,
+    label: `Option ${i}`,
+  }));
+
+  return (
+    <div className={classes.wrapper}>
+      <div className={classes.column}>
+        <p>Max length of the dropdown container is <code>320px</code></p>
+        <div className={classes.container}>
+          <DropdownMenu value={0} options={options}/>
+        </div>
+      </div>
+
+      <div className={classes.column}>
+        <p>Min width of the dropdown is <code>80px</code></p>
+        <div className={classes.smallContainer}>
+          <DropdownMenu value={0} options={options}/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+Dimensions.story = {
+  parameters: {
+    docs: {
+      storyDescription: `In order to style each option separately <code>optionClass</code>, <code>optionLabelClass</code> and <code>optionIconClass</code> properties can be provided for option object in the options array.`,
+    }
+  }
+};
+
 export const Placeholder: Story = () => {
   const classes = useStyles();
+  const options = [
+    {
+      value: '1',
+      label: 'Option 1',
+    },
+    {
+      value: '2',
+      label: 'Option 2',
+    },
+    {
+      value: '3',
+      label: 'Option 3',
+    }
+  ];
 
   return (
     <div className={classes.container}>
@@ -74,6 +134,20 @@ Placeholder.story = {
 
 export const Disabled: Story = () => {
   const classes = useStyles();
+  const options = [
+    {
+      value: '1',
+      label: 'Option 1',
+    },
+    {
+      value: '2',
+      label: 'Option 2',
+    },
+    {
+      value: '3',
+      label: 'Option 3',
+    }
+  ];
 
   return (
     <div className={classes.container}>
@@ -92,7 +166,7 @@ Disabled.story = {
 
 export const DisabledOption: Story = () => {
   const classes = useStyles();
-  const optionsWithDisabled = [
+  const options = [
     {
       value: '1',
       label: 'Option 1',
@@ -114,7 +188,7 @@ export const DisabledOption: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value='1' options={optionsWithDisabled}/>
+      <DropdownMenu value='1' options={options}/>
     </div>
   );
 };
@@ -130,6 +204,20 @@ DisabledOption.story = {
 export const Controlled: Story = () => {
   const classes = useStyles();
   const [value, setValue] = useState<ReactText>('1');
+  const options = [
+    {
+      value: '1',
+      label: 'Option 1',
+    },
+    {
+      value: '2',
+      label: 'Option 2',
+    },
+    {
+      value: '3',
+      label: 'Option 3',
+    }
+  ];
 
   const handleChange = (val: ReactText) => {
     setValue(val);
@@ -153,6 +241,20 @@ Controlled.story = {
 
 export const Actions: Story = () => {
   const classes = useStyles();
+  const options = [
+    {
+      value: '1',
+      label: 'Option 1',
+    },
+    {
+      value: '2',
+      label: 'Option 2',
+    },
+    {
+      value: '3',
+      label: 'Option 3',
+    }
+  ];
 
   const handleSelect = (val: ReactText) => {
     action('onSelect')(val);
@@ -160,7 +262,8 @@ export const Actions: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu type={DropdownMenuType.Action} options={options} onSelect={handleSelect}/>
+      <DropdownMenu type={DropdownMenuType.Action} options={options}
+                    onSelect={handleSelect}/>
     </div>
   );
 };
@@ -175,7 +278,7 @@ Actions.story = {
 
 export const OptionsIcons: Story = () => {
   const classes = useStyles();
-  const optionsWithIcons = [
+  const options = [
     {
       value: '1',
       label: 'Option 1',
@@ -201,7 +304,7 @@ export const OptionsIcons: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value='1' options={optionsWithIcons}/>
+      <DropdownMenu value='1' options={options}/>
     </div>
   );
 };
@@ -216,7 +319,7 @@ OptionsIcons.story = {
 
 export const Divider: Story = () => {
   const classes = useStyles();
-  const optionsWithDividers = [
+  const options = [
     {
       value: '1',
       label: 'Option 1',
@@ -244,7 +347,7 @@ export const Divider: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value='1' options={optionsWithDividers}/>
+      <DropdownMenu value='1' options={options}/>
     </div>
   );
 };
@@ -259,7 +362,7 @@ Divider.story = {
 
 export const OptionsCustomStyles: Story = () => {
   const classes = useStyles();
-  const optionsWithCustomStyles = [
+  const options = [
     {
       value: '1',
       label: 'optionClass',
@@ -282,7 +385,7 @@ export const OptionsCustomStyles: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu type={DropdownMenuType.Action} options={optionsWithCustomStyles}/>
+      <DropdownMenu type={DropdownMenuType.Action} options={options}/>
     </div>
   );
 };
@@ -298,7 +401,7 @@ OptionsCustomStyles.story = {
 export const Workshop: Story = () => {
   const classes = useStyles();
   const [value, setValue] = useState<ReactText>('');
-  const workshopOptions = [
+  const options = [
     {
       value: '1',
       label: 'Option 1',
@@ -325,7 +428,7 @@ export const Workshop: Story = () => {
     },
   ];
 
-  const options = [DropdownMenuType.Labeled, DropdownMenuType.Action];
+  const types = [DropdownMenuType.Labeled, DropdownMenuType.Action];
 
   const handleChange = (e: ReactText) => {
     setValue(e);
@@ -335,10 +438,10 @@ export const Workshop: Story = () => {
   return (
     <div className={classes.container}>
       <DropdownMenu value={value}
-                    type={select('Type', options, DropdownMenuType.Labeled)}
+                    type={select('Type', types, DropdownMenuType.Labeled)}
                     disabled={boolean('Disabled', false)}
                     placeholder={text('Placeholder', 'Enter placeholder')}
-                    options={workshopOptions}
+                    options={options}
                     onChange={handleChange}
                     onSelect={action('onSelect')}/>
     </div>

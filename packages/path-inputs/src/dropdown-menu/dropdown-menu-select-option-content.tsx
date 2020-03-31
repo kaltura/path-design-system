@@ -46,9 +46,6 @@ const useStyles = createUseStyles((theme: Theme) => ({
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis',
   },
   icon: (props: SelectInputOptionContentProps) => ({
     marginRight: '12px',
@@ -57,6 +54,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
   label: {
     fontSize: '15px',
     fontWeight: 'bold',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
   }
 }), { theming });
 

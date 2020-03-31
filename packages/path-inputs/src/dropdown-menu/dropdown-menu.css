@@ -38,10 +38,7 @@
 }
 
 .path-item .path-item-option-content {
-  width: calc(100% - 20px);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  width: calc(100% - 10px);
 }
 
 .path-item .path-item-option-state {
