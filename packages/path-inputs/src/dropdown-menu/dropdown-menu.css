@@ -15,10 +15,6 @@
   width: 100%;
 }
 
-.path-selection-search-input {
-
-}
-
 .path-item {
   padding: 8px 15px 10px 16px;
   font-family: 'Lato';
@@ -28,9 +24,24 @@
   position: relative;
 }
 
-.path-item:hover {
+.path-item:hover:not(.path-item-option-divider) {
   background-color: #f4f4f4;
   cursor: pointer;
+}
+
+.path-item-option-divider {
+  cursor: default !important;
+  padding: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #cfdddf;
+}
+
+.path-item .path-item-option-content {
+  width: calc(100% - 20px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .path-item .path-item-option-state {
