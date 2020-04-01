@@ -2,6 +2,7 @@
   position: relative;
   height: 14px;
   padding: 5px 0;
+  margin: 0 8px;
   width: 100%;
   border-radius: 6px;
   touch-action: none;
@@ -99,10 +100,6 @@
 
 .path-slider-dot-reverse {
   margin-right: -4px;
-}
-
-.path-slider-disabled {
-  background-color: #cccccc;
 }
 
 .path-slider-disabled .path-slider-track {
@@ -260,6 +257,7 @@
   background-color: #333333;
   border-radius: 6px;
   box-shadow: 0 0 4px #d9d9d9;
+  white-space: nowrap;
 }
 
 .path-slider-tooltip-arrow {
