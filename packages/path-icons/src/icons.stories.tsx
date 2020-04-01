@@ -46,8 +46,6 @@ const icons24List: string[] = [
     'Undo24Icon',
     'Upload24Icon',
     'Video24Icon',
-    'ZoomIn24Icon',
-    'ZoomOut24Icon',
 ];
 const dartBackground = [
     'SpinnerDark24Icon',
