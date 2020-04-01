@@ -23,3 +23,5 @@ export { Trash24Icon } from './trash24';
 export { Undo24Icon } from './undo24';
 export { Upload24Icon } from './upload24';
 export { Video24Icon } from './video24';
+export { ZoomIn24Icon } from './zoomIn24';
+export { ZoomOut24Icon } from './zoomOut24';
