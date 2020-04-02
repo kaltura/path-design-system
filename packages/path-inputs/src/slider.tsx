@@ -2,7 +2,11 @@ import * as React from 'react';
 import { FunctionComponent, ReactElement } from 'react';
 // @ts-ignore cannot install @types/rc-slider because it will cause react typings conflict
 import RcSlider, { createSliderWithTooltip } from 'rc-slider';
-import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
+import {
+  createUseStyles,
+  Theme,
+  theming
+} from '@kaltura-react-ui-kits/path-theming';
 
 import './slider.css';
 
@@ -79,11 +83,118 @@ const prefixCls = 'path-slider';
 const tipPrefixCls = 'path-slider-tooltip';
 const SliderWithTooltip = createSliderWithTooltip(RcSlider);
 
-const useStyles = createUseStyles({
+const useStyles = createUseStyles((theme: Theme) => ({
   container: {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
+    '& .path-slider': {
+      position: 'relative',
+      height: '14px',
+      padding: '5px 0',
+      margin: '0 8px',
+      width: '100%',
+      borderRadius: '6px',
+      touchAction: 'none',
+      boxSizing: 'border-box'
+    },
+    '& .path-slider *': { boxSizing: 'border-box' },
+    '& .path-slider-rail': {
+      position: 'absolute',
+      width: '100%',
+      backgroundColor: theme.colors.grayscale4,
+      height: '4px',
+      borderRadius: '4px'
+    },
+    '& .path-slider-track': { display: 'none' },
+    '& .path-slider-handle': {
+      position: 'absolute',
+      width: '16px',
+      height: '16px',
+      marginTop: '-5px',
+      cursor: 'grab',
+      borderRadius: '50%',
+      backgroundColor: theme.colors.grayscale1,
+      touchAction: 'pan-x'
+    },
+    '& .path-slider-handle-dragging.path-slider-handle-dragging.path-slider-handle-dragging': {
+      backgroundColor: theme.colors.grayscale2
+    },
+    '& .path-slider-handle:focus': { outline: 'none' },
+    '& .path-slider-handle-click-focused:focus': { boxShadow: 'unset' },
+    '& .path-slider-handle:active': {
+      backgroundColor: theme.colors.grayscale2,
+      cursor: 'grabbing'
+    },
+    '& .path-slider-mark': {
+      position: 'absolute',
+      top: '18px',
+      left: '0',
+      width: '100%',
+      fontSize: '12px'
+    },
+    '& .path-slider-mark-text': {
+      position: 'absolute',
+      display: 'inline-block',
+      verticalAlign: 'middle',
+      textAlign: 'center',
+      cursor: 'pointer',
+      color: theme.colors.grayscale3
+    },
+    '& .path-slider-mark-text-active': { color: theme.colors.grayscale2 },
+    '& .path-slider-step': {
+      position: 'absolute',
+      width: '100%',
+      height: '4px',
+      background: 'transparent'
+    },
+    '& .path-slider-dot': {
+      position: 'absolute',
+      bottom: '-2px',
+      marginLeft: '-4px',
+      width: '8px',
+      height: '8px',
+      border: `2px solid ${theme.colors.grayscale5}`,
+      backgroundColor: theme.colors.white,
+      cursor: 'pointer',
+      borderRadius: '50%',
+      verticalAlign: 'middle'
+    },
+    '& .path-slider-dot-reverse': { marginRight: '-4px' },
+    '& .path-slider-disabled .path-slider-track': { backgroundColor: theme.colors.grayscale4 },
+    '& .path-slider-disabled .path-slider-handle, & .path-slider-disabled .path-slider-dot': {
+      boxShadow: 'none',
+      backgroundColor: theme.colors.grayscale4,
+      cursor: 'not-allowed'
+    },
+    '& .path-slider-disabled .path-slider-mark-text, & .path-slider-disabled .path-slider-dot': {
+      cursor: 'not-allowed !important'
+    },
+    '& .path-slider-vertical': { width: '14px', height: '100%', padding: '0 5px' },
+    '& .path-slider-vertical .path-slider-rail': { height: '100%', width: '4px' },
+    '& .path-slider-vertical .path-slider-track': {
+      left: '5px',
+      bottom: '0',
+      width: '4px'
+    },
+    '& .path-slider-vertical .path-slider-handle': {
+      marginLeft: '-5px',
+      touchAction: 'pan-y'
+    },
+    '& .path-slider-vertical .path-slider-mark': {
+      top: '0',
+      left: '18px',
+      height: '100%'
+    },
+    '& .path-slider-vertical .path-slider-step': { height: '100%', width: '4px' },
+    '& .path-slider-vertical .path-slider-dot': {
+      left: '2px',
+      marginBottom: '-4px'
+    },
+    '& .path-slider-vertical .path-slider-dot:first-child': {
+      marginBottom: '-4px'
+    },
+    '& .path-slider-vertical .path-slider-dot:last-child': { marginBottom: '-4px' },
   },
   affix: {
     marginRight: '8px'
@@ -91,7 +202,7 @@ const useStyles = createUseStyles({
   postfix: {
     marginLeft: '8px'
   }
-});
+}), { theming });
 
 /**
  * A Slider component for displaying current value in range
