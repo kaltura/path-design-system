@@ -13,7 +13,11 @@ import { SelectInputOptionContent } from './dropdown-menu-select-option-content'
 import { v4 as uuidV4 } from 'uuid';
 import { DropdownMenuType } from './dropdown-menu-types';
 
-import './dropdown-menu.css';
+import {
+  createUseStyles,
+  Theme,
+  theming
+} from '@kaltura-react-ui-kits/path-theming';
 
 export interface DropdownMenuOption {
   /**
@@ -102,6 +106,49 @@ export interface DropdownMenuProps {
   onSelect?: (value: ReactText) => void,
 }
 
+const useStyles = createUseStyles((theme: Theme) => ({
+  '@global': {
+    '.path-dropdown': {
+      borderRadius: '4px',
+      boxShadow: '0 4px 30px -8px rgba(0, 0, 0, 0.2)',
+      border: `solid 1px ${theme.colors.grayscale5}`,
+      backgroundColor: theme.colors.white,
+      minWidth: '80px !important'
+    },
+    '.path-dropdown-hidden': { display: 'none' },
+    '.path-selection-search, .path-selection-search-input': { width: '100%' },
+    '.path-item': {
+      padding: '8px 15px 10px 16px',
+      fontFamily: 'Lato, Arial, Helvetica',
+      fontSize: '15px',
+      fontWeight: 'bold',
+      lineHeight: '1.47',
+      position: 'relative'
+    },
+    '.path-item:hover:not(.path-item-option-divider)': {
+      backgroundColor: theme.colors.grayscale8,
+      cursor: 'pointer'
+    },
+    '.path-item-option-divider': {
+      cursor: 'default !important',
+      padding: '0',
+      width: '100%',
+      height: '1px',
+      backgroundColor: '#cfdddf'
+    },
+    '.path-item .path-item-option-content': { width: 'calc(100% - 10px)' },
+    '.path-item .path-item-option-state': {
+      position: 'absolute',
+      right: '9px',
+      top: '9px'
+    },
+    '.path-item.path-item-option-disabled': {
+      color: theme.colors.grayscale4,
+      cursor: 'not-allowed'
+    }
+  }
+}), { theming });
+
 /**
  * DroprownMenu component gives a user a way to select item or action from the dropdrown list of options.
  */
@@ -132,6 +179,8 @@ export function DropdownMenu(props: DropdownMenuProps) {
     }
     onChange && onChange(e);
   };
+
+  useStyles();
 
   return (
     // @ts-ignore
