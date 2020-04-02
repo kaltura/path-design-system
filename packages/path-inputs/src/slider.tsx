@@ -8,8 +8,6 @@ import {
   theming
 } from '@kaltura-react-ui-kits/path-theming';
 
-import './slider.css';
-
 const classNames = require('classnames');
 
 export interface SliderProps {
@@ -201,6 +199,47 @@ const useStyles = createUseStyles((theme: Theme) => ({
   },
   postfix: {
     marginLeft: '8px'
+  },
+  '@global': {
+    '.path-slider-tooltip': {
+      position: 'absolute',
+      left: '-9999px',
+      top: '-9999px',
+      visibility: 'visible',
+      boxSizing: 'border-box'
+    },
+    '.path-slider-tooltip *': { boxSizing: 'border-box' },
+    '.path-slider-tooltip-hidden': { display: 'none' },
+    '.path-slider-tooltip-placement-top': { padding: '4px 0 8px 0' },
+    '.path-slider-tooltip-inner': {
+      padding: '6px',
+      minWidth: '24px',
+      height: '24px',
+      fontSize: '12px',
+      lineHeight: '1',
+      color: theme.colors.white,
+      minHeight: 'unset',
+      textAlign: 'center',
+      textDecoration: 'none',
+      backgroundColor: theme.colors.grayscale1,
+      borderRadius: '6px',
+      boxShadow: `0 0 4px ${theme.colors.grayscale5}`,
+      whiteSpace: 'nowrap'
+    },
+    '.path-slider-tooltip-arrow': {
+      position: 'absolute',
+      width: '0',
+      height: '0',
+      borderColor: 'transparent',
+      borderStyle: 'solid'
+    },
+    '.path-slider-tooltip-placement-top .path-slider-tooltip-arrow': {
+      bottom: '4px',
+      left: '50%',
+      marginLeft: '-4px',
+      borderWidth: '4px 4px 0',
+      borderTopColor: theme.colors.grayscale1
+    }
   }
 }), { theming });
 
