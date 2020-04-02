@@ -12,6 +12,7 @@ import {
   Upload24Icon
 } from '@kaltura-react-ui-kits/path-icons';
 import { DropdownMenuType } from './dropdown-menu-types';
+import { Switch } from 'antd';
 
 const useStyles = createUseStyles({
   wrapper: {
@@ -60,7 +61,7 @@ export const Default: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value={'1'} options={options}/>
+      <DropdownMenu defaultValue={'1'} options={options}/>
     </div>
   );
 };
@@ -78,14 +79,14 @@ export const Dimensions: Story = () => {
       <div className={classes.column}>
         <p>Max length of the dropdown container is <code>320px</code></p>
         <div className={classes.container}>
-          <DropdownMenu value={0} options={options}/>
+          <DropdownMenu defaultValue={0} options={options}/>
         </div>
       </div>
 
       <div className={classes.column}>
         <p>Min width of the dropdown is <code>80px</code></p>
         <div className={classes.smallContainer}>
-          <DropdownMenu value={0} options={options}/>
+          <DropdownMenu defaultValue={0} options={options}/>
         </div>
       </div>
     </div>
@@ -188,7 +189,7 @@ export const DisabledOption: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value='1' options={options}/>
+      <DropdownMenu defaultValue='1' options={options}/>
     </div>
   );
 };
@@ -204,6 +205,7 @@ DisabledOption.story = {
 export const Controlled: Story = () => {
   const classes = useStyles();
   const [value, setValue] = useState<ReactText>('1');
+  const [ignoreChange, setIgnoreChange] = useState(false);
   const options = [
     {
       value: '1',
@@ -220,21 +222,39 @@ export const Controlled: Story = () => {
   ];
 
   const handleChange = (val: ReactText) => {
-    setValue(val);
-    action('onChange')(val);
+    if (!ignoreChange) {
+      setValue(val);
+      action('onChange')(val);
+    }
   };
 
   return (
-    <div className={classes.container}>
-      <DropdownMenu value={value} options={options} onChange={handleChange}/>
-    </div>
+    <>
+      <p>Ignore changes <Switch checked={ignoreChange}
+                                onChange={setIgnoreChange}/></p>
+      <div className={classes.wrapper}>
+        <div className={classes.column}>
+          <div className={classes.container}>
+            <DropdownMenu value={value}
+                          options={options}
+                          onChange={handleChange}/>
+          </div>
+        </div>
+
+        <div className={classes.column}>
+          <div className={classes.container}>
+            <DropdownMenu defaultValue={value} options={options}/>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 
 Controlled.story = {
   parameters: {
     docs: {
-      storyDescription: `The component can be controlled. Use <code>value</code> and <code>onChange</code> properties to provide ability control dropdown's value change.`,
+      storyDescription: `The component can be controlled. Use <code>value</code> and <code>onChange</code> properties to provide ability control dropdown's value change. In case <code>value/onChange</code> properties are not provided the component will work in uncontrolled mode.`,
     }
   }
 };
@@ -304,7 +324,7 @@ export const OptionsIcons: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value='1' options={options}/>
+      <DropdownMenu defaultValue='1' options={options}/>
     </div>
   );
 };
@@ -347,7 +367,7 @@ export const Divider: Story = () => {
 
   return (
     <div className={classes.container}>
-      <DropdownMenu value='1' options={options}/>
+      <DropdownMenu defaultValue='1' options={options}/>
     </div>
   );
 };

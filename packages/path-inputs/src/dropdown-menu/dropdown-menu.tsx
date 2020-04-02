@@ -69,6 +69,11 @@ export interface DropdownMenuProps {
   type?: DropdownMenuType;
 
   /**
+   * Default value of the dropdown
+   */
+  defaultValue?: ReactText;
+
+  /**
    * Current selected value of the dropdown
    */
   value?: ReactText;
@@ -101,9 +106,10 @@ export interface DropdownMenuProps {
  * DroprownMenu component gives a user a way to select item or action from the dropdrown list of options.
  */
 export function DropdownMenu(props: DropdownMenuProps) {
-  const { value, type, options, placeholder, disabled, onChange, onSelect } = props;
+  const { value, defaultValue, type, options, placeholder, disabled, onChange, onSelect } = props;
   const [open, setOpen] = useState(false);
-  const [localValue, setLocalValue] = useState(() => value);
+  const [isControlled] = useState(() => !!value);
+  const [localValue, setLocalValue] = useState(() => value || defaultValue);
   const getInputElement = useCallback(
     () => {
       const selectedOption = options.find(opt => opt.value === localValue);
@@ -113,15 +119,17 @@ export function DropdownMenu(props: DropdownMenuProps) {
                                 open={open}
                                 disabled={!!disabled}/>
     },
-    [value, type, localValue, open, disabled, placeholder]
+    [type, localValue, open, disabled, placeholder]
   );
 
   useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
+    setLocalValue(value || defaultValue);
+  }, [value, defaultValue]);
 
   const handleChange = (e: ReactText) => {
-    setLocalValue(e);
+    if (!isControlled) {
+      setLocalValue(e);
+    }
     onChange && onChange(e);
   };
 
