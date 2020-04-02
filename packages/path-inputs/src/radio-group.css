@@ -146,11 +146,13 @@ span.path-radio + * {
   position: relative;
   display: inline-block;
   height: 32px;
+  min-width: 114px;
+  text-align: center;
   margin: 0;
   padding: 0 15px;
   color: #888888;
   line-height: 30px;
-  background: #fff;
+  background: #FFFFFF;
   border: thin solid #d9d9d9;
   border-top-width: 1.02px;
   border-left-width: 0;
