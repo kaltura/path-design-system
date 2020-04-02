@@ -9,7 +9,7 @@ import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
 
 const useStyles = createUseStyles({
   container: {
-    padding: '50px'
+    padding: '50px',
   }
 });
 
