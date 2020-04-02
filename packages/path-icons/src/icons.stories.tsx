@@ -26,11 +26,13 @@ const icons16List: string[] = [
 ];
 
 const icons24List: string[] = [
+    'Api24Icon',
     'Close24Icon',
     'Duplicate24Icon',
     'Gear24Icon',
     'Image24Icon',
     'Interaction24Icon',
+    'Magnet24Icon',
     'Minus24Icon',
     'Pencil24Icon',
     'Play24Icon',
@@ -45,6 +47,9 @@ const icons24List: string[] = [
     'Undo24Icon',
     'Upload24Icon',
     'Video24Icon',
+    'Waveform24Icon',
+    'ZoomIn24Icon',
+    'ZoomOut24Icon',
 ];
 const dartBackground = [
     'SpinnerDark24Icon',
