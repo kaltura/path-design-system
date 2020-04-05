@@ -29,6 +29,7 @@ const icons24List: string[] = [
     'Api24Icon',
     'Close24Icon',
     'Duplicate24Icon',
+    'Film24Icon',
     'Gear24Icon',
     'Image24Icon',
     'Interaction24Icon',

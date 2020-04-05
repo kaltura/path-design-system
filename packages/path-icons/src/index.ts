@@ -4,6 +4,7 @@ export { BrokenMedia32Icon } from './brokenMedia32';
 export { Close24Icon } from './close24';
 export { ConnectingArrow16Icon } from './connectingArrow16';
 export { Duplicate24Icon } from './duplicate24';
+export { Film24Icon } from './film24';
 export { Gear24Icon } from './gear24';
 export { Home16Icon } from './home16';
 export { Image24Icon } from './image24';
