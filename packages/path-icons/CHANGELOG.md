@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/kaltura/path-design-system/compare/v0.6.3...v0.7.0) (2020-04-05)
+
+
+### Features
+
+* add film icon ([#113](https://github.com/kaltura/path-design-system/issues/113)) ([4f78862](https://github.com/kaltura/path-design-system/commit/4f78862537edde2f93b6c455cae6e5ad442899a5))
+
+
+
+
+
 ## [0.6.3](https://github.com/kaltura/path-design-system/compare/v0.6.2...v0.6.3) (2020-04-02)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-icons
