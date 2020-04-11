@@ -1,13 +1,14 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
 import * as shortid from "shortid";
+import { BehaviorSubject } from 'rxjs';
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
 
 export interface UseLoadMediaOptions {
   autoplay: boolean;
   entryId: string;
-  onPlayerLoaded?: (entryId: string) => void;
+  onPlayerLoaded?: (data: {entryId: string, playerId: string}) => void;
   onMediaLoaded?: (entryId: string) => void;
   onPlayerLoadingError?: (entryId: string) => void;
   onMediaLoadingError?: (entryId: string) => void;
@@ -24,7 +25,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   const {entryId, autoplay, onMediaLoaded,
     onMediaLoadingError, onPlayerLoaded, onPlayerLoadingError} = options;
 
-  const {state: playerManagerState} = useContext(KalturaPlayerContext);
+  const {state: playerManagerState, addPlayerCurrentTimeObservable, removePlayerCurrentTimeObservable} = useContext(KalturaPlayerContext);
 
   const unmounted = useRef(false);
 
@@ -37,14 +38,25 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const playerRef = useRef<Player | null>(null);
 
+  const playerTimeSubject = useRef(new BehaviorSubject<number>(0));
+  const playerTime$ = useRef(playerTimeSubject.current.asObservable());
+
+  const updatePlayerCurrentTime = () => {
+    if(playerRef.current){
+      playerTimeSubject.current.next(playerRef.current.currentTime);
+    }
+  };
+
   //unmount component (destroy current player instance)
   useEffect(() => {
     return () => {
       unmounted.current = true;
       if(!playerRef.current) return;
+      playerRef.current.removeEventListener('timeupdate', updatePlayerCurrentTime);
       console.log('Kaltura player: Destroy');
       playerRef.current.destroy();
       playerRef.current = null;
+      removePlayerCurrentTimeObservable(loadMediaState.playerId);
       setLoadMediaState(prevState => (
         {
           ...prevState,
@@ -124,8 +136,12 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
             }
           });
         console.log('kaltura player was successfully loaded');
-        if(onPlayerLoaded) onPlayerLoaded(entryId);
         playerRef.current = player;
+        addPlayerCurrentTimeObservable(loadMediaState.playerId, playerTime$.current);
+        playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime)
+
+        if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
+
         setLoadMediaState(
           prevState => (
             {...prevState,

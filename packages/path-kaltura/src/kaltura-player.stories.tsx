@@ -4,7 +4,7 @@ import {KalturaPlayerManager} from "./kaltura-player-manager";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import {KalturaPlayerContext} from "./kaltura-player-context";
 import '../kaltura-player.css';
 
@@ -83,6 +83,28 @@ KalturaPlayerAutoPlay.story = {
   }
 };
 
+const PrintPlayerCurrentTime = (props: {playerId: string}) => {
+
+  const {playerId} = props;
+
+  const {getPlayerCurrentTimeObservable} = useContext(KalturaPlayerContext);
+  const [currentTime, setcurrentTime] = useState(0);
+
+  useEffect(() => {
+    if(!playerId) return;
+    if(getPlayerCurrentTimeObservable(playerId) === null) return;
+
+    getPlayerCurrentTimeObservable(playerId).subscribe((currentTime) => {
+      setcurrentTime(currentTime);
+    })
+  }, [playerId]);
+
+  return (
+    <div>{`Player ${playerId} currentTime: ${currentTime}`}</div>
+  );
+
+};
+
 export const KalturaPlayerWithoutAutoPlay: Story = () => {
   const classes = useStyle();
 
@@ -148,6 +170,18 @@ kalturaPlayerErrorLoadingBundler.story = {
 export const MultiplePlayersInPage: Story = () => {
   const classes = useStyle();
 
+  const [playerAId, setPlayerAId] = useState('');
+  const [playerBId, setPlayerBId] = useState('');
+
+  const onPlayerALoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerAId(data.playerId);
+  };
+
+  const onPlayerBLoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerBId(data.playerId);
+  };
+
+
   return (
     <KalturaPlayerManager autoLoad={true}
                           config={{
@@ -160,14 +194,18 @@ export const MultiplePlayersInPage: Story = () => {
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          autoplay={false}
+                         onPlayerLoaded={onPlayerALoad}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
+        <PrintPlayerCurrentTime playerId={playerAId}/>
         <br/>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          autoplay={false}
+                         onPlayerLoaded={onPlayerBLoad}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
+        <PrintPlayerCurrentTime playerId={playerBId}/>
       </>
     </KalturaPlayerManager>
   )
