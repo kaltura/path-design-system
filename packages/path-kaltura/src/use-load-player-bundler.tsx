@@ -1,15 +1,15 @@
 import {useCallback, useEffect, useReducer, useRef} from "react";
-import {PlayerManagerConfig, PlayerManagerState, PlayerReducerActions} from "./kaltura-player-manager";
+import {PlayerProvidedConfig, PlayerProviderState, PlayerReducerActions} from "./kaltura-player-provider";
 import {PlayerLoadingStatuses} from "./kaltura-player-context";
 
 let currentPlayerBundler: string | null = null;
 
 export interface UseLoadPlayerBundlerOptions {
   autoLoad: boolean;
-  config: PlayerManagerConfig;
+  config: PlayerProvidedConfig;
 }
 
-const loadPlayerReducer = (state: PlayerManagerState, action: PlayerReducerActions) => {
+const loadPlayerReducer = (state: PlayerProviderState, action: PlayerReducerActions) => {
   console.log(`a request for: ${action.type} was made`);
   if(action.type === PlayerLoadingStatuses.Loading) {
     if (state.status === PlayerLoadingStatuses.Initial) {
@@ -62,7 +62,7 @@ export const loadPlayerIntoSession = (
   }
 };
 
-export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [PlayerManagerState, any] => {
+export const useLoadPlayerBundler = (options: UseLoadPlayerBundlerOptions): [PlayerProviderState, any] => {
 
   const {autoLoad, config} = options;
   const unmounted = useRef(false);

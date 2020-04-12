@@ -1,3 +1,9 @@
+interface FakeEvent {}
+
+type CoreEventListener = (event: FakeEvent) => boolean | void;
+
+type PlayerEventTypes = 'timeupdate';
+
 declare namespace KalturaPlayerTypes {
 
   export interface KalturaPlayerManager {
@@ -26,6 +32,10 @@ declare namespace KalturaPlayerTypes {
   }
 
   export interface Player {
+    addEventListener(type: PlayerEventTypes, listener: CoreEventListener): void;
+    removeEventListener: (type: PlayerEventTypes, listener: CoreEventListener) => void;
+    currentTime: number;
+    Event: Record<string, string>;
     loadMedia(mediaInfo: MediaInfoObject): Promise;
     destroy(): void;
   }
