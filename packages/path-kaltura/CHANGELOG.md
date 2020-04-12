@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/kaltura/path-design-system/compare/v0.7.0...v1.0.0) (2020-04-12)
+
+
+### Features
+
+* provide players current playing time and seek abilities ([#116](https://github.com/kaltura/path-design-system/issues/116)) ([8205f72](https://github.com/kaltura/path-design-system/commit/8205f72064c94f2e0771e902092cad79982697cc))
+
+
+### BREAKING CHANGES
+
+* `KalturaPlayer` component api changed for `OnPlayerLoaded`
+
+Previously
+```
+ onPlayerLoaded?: (entryId: string) => void;
+```
+
+Current
+```
+onPlayerLoaded?: (data: {entryId: string, playerId: string}) => void;
+```
+
+
+
+
+
 # [0.7.0](https://github.com/kaltura/path-design-system/compare/v0.6.3...v0.7.0) (2020-04-05)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
