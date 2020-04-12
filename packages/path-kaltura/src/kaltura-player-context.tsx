@@ -25,10 +25,9 @@ export const defaultPlayerContext: PlayerContextValue =
         config: {}
       },
       loadPlayer: () => {},
-      getPlayerCurrentTime$: (playerId: string) =>  throwError(new Error(`No player with provided playerId: ${playerId}`)),
-      seek: (playerId: string, time: number) => { console.warn(`No player with provided playerId: ${playerId}, failed to update time ${time}`)},
-      registerPlayer: (playerId: string, currentTime$: Observable<number>) =>
-        ({ seek$: throwError(new Error(`No player with provided playerId ${playerId}`)), onRemove: () => {console.log(currentTime$)}})
+      getPlayerCurrentTime$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
+      seek: () => { console.warn(`can't seek, KalturaPlayerProvider is missing`)},
+      registerPlayer: () => ({ seek$: throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)), onRemove: () => {}})
     };
 
 export const KalturaPlayerContext = React.createContext<PlayerContextValue>(defaultPlayerContext);

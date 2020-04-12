@@ -66,7 +66,7 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       getPlayerCurrentTime$,
       seek
     }
-  }, [state.status, loadPlayer, _players]);
+  }, [state.status, loadPlayer]);
 
   return (
     <KalturaPlayerContext.Provider value={playerContextValue}>
