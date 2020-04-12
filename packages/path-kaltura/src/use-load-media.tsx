@@ -25,7 +25,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   const {entryId, autoplay, onMediaLoaded,
     onMediaLoadingError, onPlayerLoaded, onPlayerLoadingError} = options;
 
-  const {state: playerManagerState, registerPlayer} = useContext(KalturaPlayerContext);
+  const {state: playerProviderState, registerPlayer} = useContext(KalturaPlayerContext);
 
   const unmounted = useRef(false);
 
@@ -135,9 +135,9 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           {
             targetId: loadMediaState.playerId,
             provider: {
-              uiConfId: playerManagerState.config.uiConfId,
-              partnerId: playerManagerState.config.partnerId,
-              ks: playerManagerState.config.ks
+              uiConfId: playerProviderState.config.uiConfId,
+              partnerId: playerProviderState.config.partnerId,
+              ks: playerProviderState.config.ks
             },
             playback: {
               autoplay,
@@ -176,7 +176,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       console.warn('Kaltura player was destroyed.');
       return;
     }
-    switch (playerManagerState.status) {
+    switch (playerProviderState.status) {
       case PlayerLoadingStatuses.Loaded:
         loadPlayer();
         break;
@@ -191,7 +191,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         );
         break;
     }
-  }, [playerManagerState.status]);
+  }, [playerProviderState.status]);
 
   return loadMediaState;
 };

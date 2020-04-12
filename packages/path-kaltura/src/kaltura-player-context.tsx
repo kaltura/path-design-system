@@ -1,5 +1,5 @@
 import * as React from "react";
-import {PlayerManagerState} from "./kaltura-player-provider";
+import {PlayerProviderState} from "./kaltura-player-provider";
 import { Observable, throwError } from 'rxjs';
 
 export const enum PlayerLoadingStatuses {
@@ -11,7 +11,7 @@ export const enum PlayerLoadingStatuses {
 }
 
 export interface PlayerContextValue {
-  state: PlayerManagerState;
+  state: PlayerProviderState;
   loadPlayer: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
   seek: (playerId: string, time: number) => void;

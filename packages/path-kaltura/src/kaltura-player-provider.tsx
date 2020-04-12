@@ -8,25 +8,25 @@ export interface PlayerReducerActions {
   type: PlayerLoadingStatuses;
 }
 
-export interface PlayerManagerState {
+export interface PlayerProviderState {
   status: PlayerLoadingStatuses;
-  config: PlayerManagerConfig;
+  config: PlayerProvidedConfig;
 }
 
-export interface PlayerManagerConfig {
+export interface PlayerProvidedConfig {
   ks?:string;
   bundlerUrl?: string;
   partnerId?: string;
   uiConfId?: string;
 }
 
-export interface KalturaPlayerManagerProps {
+export interface KalturaPlayerProviderProps {
   autoLoad: boolean;
-  config: PlayerManagerConfig;
+  config: PlayerProvidedConfig;
   children?: React.ReactChild;
 }
 
-export const KalturaPlayerProvider = (props: KalturaPlayerManagerProps) => {
+export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
 
   const {autoLoad, config, children} = props;
   const [state, loadPlayer] = useLoadPlayerBundler({config, autoLoad});
