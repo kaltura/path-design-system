@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useReducer, useRef} from "react";
-import {PlayerManagerConfig, PlayerManagerState, PlayerReducerActions} from "./kaltura-player-manager";
+import {PlayerManagerConfig, PlayerManagerState, PlayerReducerActions} from "./kaltura-player-provider";
 import {PlayerLoadingStatuses} from "./kaltura-player-context";
 
 let currentPlayerBundler: string | null = null;

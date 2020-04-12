@@ -1,6 +1,6 @@
 import * as React from "react";
-import {PlayerManagerState} from "./kaltura-player-manager";
-import { Observable } from 'rxjs';
+import {PlayerManagerState} from "./kaltura-player-provider";
+import { Observable, throwError } from 'rxjs';
 
 export const enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
@@ -13,9 +13,9 @@ export const enum PlayerLoadingStatuses {
 export interface PlayerContextValue {
   state: PlayerManagerState;
   loadPlayer: () => void;
-  addPlayerCurrentTimeObservable: (playerId: string, currentTimeObservable: Observable<number>) => void;
-  getPlayerCurrentTimeObservable: (playerId: string) => Observable<number> | null;
-  removePlayerCurrentTimeObservable: (playerId: string) => void;
+  getPlayerCurrentTime$: (playerId: string) => Observable<number>;
+  seek: (playerId: string, time: number) => void;
+  registerPlayer: (playerId: string, currentTime$: Observable<number>) => { seek$: Observable<number>, onRemove: () => void }
 }
 
 export const defaultPlayerContext: PlayerContextValue =
@@ -25,10 +25,10 @@ export const defaultPlayerContext: PlayerContextValue =
         config: {}
       },
       loadPlayer: () => {},
-      addPlayerCurrentTimeObservable: () => {},
-      getPlayerCurrentTimeObservable: () => null,
-      removePlayerCurrentTimeObservable: () => {}
-    }
-  ;
+      getPlayerCurrentTime$: (playerId: string) =>  throwError(new Error(`No player with provided playerId: ${playerId}`)),
+      seek: (playerId: string, time: number) => { console.warn(`No player with provided playerId: ${playerId}, failed to update time ${time}`)},
+      registerPlayer: (playerId: string, currentTime$: Observable<number>) =>
+        ({ seek$: throwError(new Error(`No player with provided playerId ${playerId}`)), onRemove: () => {console.log(currentTime$)}})
+    };
 
 export const KalturaPlayerContext = React.createContext<PlayerContextValue>(defaultPlayerContext);

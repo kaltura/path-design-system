@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
 import * as shortid from "shortid";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
 
@@ -25,7 +25,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   const {entryId, autoplay, onMediaLoaded,
     onMediaLoadingError, onPlayerLoaded, onPlayerLoadingError} = options;
 
-  const {state: playerManagerState, addPlayerCurrentTimeObservable, removePlayerCurrentTimeObservable} = useContext(KalturaPlayerContext);
+  const {state: playerManagerState, registerPlayer} = useContext(KalturaPlayerContext);
 
   const unmounted = useRef(false);
 
@@ -40,6 +40,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const playerTimeSubject = useRef(new BehaviorSubject<number>(0));
   const playerTime$ = useRef(playerTimeSubject.current.asObservable());
+  const playerRegistrationRef = useRef({seekSubscription: Subscription.EMPTY, onRemove: () => {}});
 
   const updatePlayerCurrentTime = () => {
     if(playerRef.current){
@@ -54,9 +55,11 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       if(!playerRef.current) return;
       playerRef.current.removeEventListener('timeupdate', updatePlayerCurrentTime);
       console.log('Kaltura player: Destroy');
+      playerRegistrationRef.current.seekSubscription.unsubscribe();
+      playerRegistrationRef.current.onRemove();
+      playerTimeSubject.current.complete();
       playerRef.current.destroy();
       playerRef.current = null;
-      removePlayerCurrentTimeObservable(loadMediaState.playerId);
       setLoadMediaState(prevState => (
         {
           ...prevState,
@@ -115,6 +118,11 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   //listen to player manager loading status in order to load player
   useEffect(() => {
 
+    const onSeek = (time: number) => {
+    if(!playerRef.current || !playerRef.current.currentTime) return;
+      playerRef.current.currentTime = time;
+    };
+
     const loadPlayer = () => {
 
       if(playerRef.current) {
@@ -135,10 +143,13 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
               autoplay,
             }
           });
+
         console.log('kaltura player was successfully loaded');
         playerRef.current = player;
-        addPlayerCurrentTimeObservable(loadMediaState.playerId, playerTime$.current);
-        playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime)
+        const {seek$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current);
+        const seekSubscription = seek$.subscribe((seekTo: number) => onSeek(seekTo));
+        playerRegistrationRef.current = {seekSubscription, onRemove};
+        playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime);
 
         if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {KalturaPlayer} from "./kaltura-player";
-import {KalturaPlayerManager} from "./kaltura-player-manager";
+import {KalturaPlayerProvider} from "./kaltura-player-provider";
 import {createUseStyles} from "@kaltura-react-ui-kits/path-theming";
 import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
@@ -33,7 +33,7 @@ export const Default: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager config={{
+    <KalturaPlayerProvider config={{
       ks:ks,
       partnerId: partnerId,
       uiConfId: uiConfId,
@@ -44,7 +44,7 @@ export const Default: Story = () => {
                        autoplay={false}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
-    </KalturaPlayerManager>
+    </KalturaPlayerProvider>
   )
 };
 
@@ -60,8 +60,8 @@ export const KalturaPlayerAutoPlay: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -71,7 +71,7 @@ export const KalturaPlayerAutoPlay: Story = () => {
         <KalturaPlayer entryId={entryId}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
-    </KalturaPlayerManager>
+    </KalturaPlayerProvider>
   )
 };
 
@@ -83,34 +83,12 @@ KalturaPlayerAutoPlay.story = {
   }
 };
 
-const PrintPlayerCurrentTime = (props: {playerId: string}) => {
-
-  const {playerId} = props;
-
-  const {getPlayerCurrentTimeObservable} = useContext(KalturaPlayerContext);
-  const [currentTime, setcurrentTime] = useState(0);
-
-  useEffect(() => {
-    if(!playerId) return;
-    if(getPlayerCurrentTimeObservable(playerId) === null) return;
-
-    getPlayerCurrentTimeObservable(playerId).subscribe((currentTime) => {
-      setcurrentTime(currentTime);
-    })
-  }, [playerId]);
-
-  return (
-    <div>{`Player ${playerId} currentTime: ${currentTime}`}</div>
-  );
-
-};
-
 export const KalturaPlayerWithoutAutoPlay: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -121,7 +99,7 @@ export const KalturaPlayerWithoutAutoPlay: Story = () => {
                        autoplay={false}
                        onMediaLoaded={(entryId) => console.log(entryId)}/>
       </div>
-    </KalturaPlayerManager>
+    </KalturaPlayerProvider>
   )
 };
 
@@ -139,8 +117,8 @@ export const kalturaPlayerErrorLoadingBundler: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -154,7 +132,7 @@ export const kalturaPlayerErrorLoadingBundler: Story = () => {
                        onMediaLoadingError={(error => console.log(error))}
         />
       </div>
-    </KalturaPlayerManager>
+    </KalturaPlayerProvider>
   )
 };
 
@@ -170,21 +148,9 @@ kalturaPlayerErrorLoadingBundler.story = {
 export const MultiplePlayersInPage: Story = () => {
   const classes = useStyle();
 
-  const [playerAId, setPlayerAId] = useState('');
-  const [playerBId, setPlayerBId] = useState('');
-
-  const onPlayerALoad = (data: {entryId: string, playerId: string}) => {
-    setPlayerAId(data.playerId);
-  };
-
-  const onPlayerBLoad = (data: {entryId: string, playerId: string}) => {
-    setPlayerBId(data.playerId);
-  };
-
-
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -194,20 +160,16 @@ export const MultiplePlayersInPage: Story = () => {
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          autoplay={false}
-                         onPlayerLoaded={onPlayerALoad}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-        <PrintPlayerCurrentTime playerId={playerAId}/>
         <br/>
         <div className={classes.playerContainer}>
           <KalturaPlayer entryId={entryId}
                          autoplay={false}
-                         onPlayerLoaded={onPlayerBLoad}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-        <PrintPlayerCurrentTime playerId={playerBId}/>
       </>
-    </KalturaPlayerManager>
+    </KalturaPlayerProvider>
   )
 };
 
@@ -242,8 +204,8 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
 
   return (
     <>
-      <KalturaPlayerManager autoLoad={false}
-                            config={{
+      <KalturaPlayerProvider autoLoad={false}
+                             config={{
                               ks:ks,
                               partnerId: partnerId,
                               uiConfId: uiConfId,
@@ -257,7 +219,7 @@ export const ManuallyLoadPlayerBundlerScripts: Story = () => {
                            onMediaLoaded={(entryId) => console.log(entryId)}/>
           </div>
         </>
-      </KalturaPlayerManager>
+      </KalturaPlayerProvider>
     </>
   )
 };
@@ -271,19 +233,19 @@ ManuallyLoadPlayerBundlerScripts.story = {
 };
 
 
-export const TowIdenticalPlayerProviders: Story = () => {
+export const TwoIdenticalPlayerProviders: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
                             bundlerUrl: bunderlUrl
                           }}>
-      <KalturaPlayerManager autoLoad={true}
-                            config={{
+      <KalturaPlayerProvider autoLoad={true}
+                             config={{
                               ks:ks,
                               partnerId: partnerId,
                               uiConfId: uiConfId,
@@ -294,12 +256,12 @@ export const TowIdenticalPlayerProviders: Story = () => {
                          autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-      </KalturaPlayerManager>
-    </KalturaPlayerManager>
+      </KalturaPlayerProvider>
+    </KalturaPlayerProvider>
   )
 };
 
-TowIdenticalPlayerProviders.story = {
+TwoIdenticalPlayerProviders.story = {
   parameters: {
     docs: {
       storyDescription: `Having two identical Kaltura Player providers`
@@ -312,8 +274,8 @@ export const TowDifferentPlayerProviders: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerManager autoLoad={true}
-                          config={{
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -325,8 +287,8 @@ export const TowDifferentPlayerProviders: Story = () => {
                          autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-        <KalturaPlayerManager autoLoad={false}
-                              config={{
+        <KalturaPlayerProvider autoLoad={false}
+                               config={{
                                 ks:ks,
                                 partnerId: partnerId,
                                 uiConfId: uiConfId,
@@ -340,9 +302,9 @@ export const TowDifferentPlayerProviders: Story = () => {
                              onMediaLoaded={(entryId) => console.log(entryId)}/>
             </div>
           </>
-        </KalturaPlayerManager>
+        </KalturaPlayerProvider>
       </>
-    </KalturaPlayerManager>
+    </KalturaPlayerProvider>
   )
 };
 
@@ -372,6 +334,88 @@ KalturaPlayerWithNoProvider.story = {
     }
   }
 };
+
+const PlayerSeekAndShow = (props: {playerId: string}) => {
+
+  const {playerId} = props;
+  const classes = useStyle();
+
+  const {getPlayerCurrentTime$, seek} = useContext(KalturaPlayerContext);
+  const [currentTime, setcurrentTime] = useState(0);
+
+  useEffect(() => {
+    if(!playerId) return;
+
+    getPlayerCurrentTime$(playerId).subscribe((currentTime) => {
+      setcurrentTime(currentTime);
+    })
+  }, [playerId]);
+
+  const seekTo = () => {
+    if(!playerId) return;
+    seek(playerId, Math.floor(currentTime + 10));
+  };
+
+  return (
+    <div>
+      <div>{`Player ${playerId} currentTime: ${currentTime}`}</div>
+      <Button label={'Add 10 seconds'} onClick={seekTo}/>
+    </div>
+  );
+};
+
+export const MultiplePlayersWithTimeAndSeekInPage: Story = () => {
+  const classes = useStyle();
+
+  const [playerAId, setPlayerAId] = useState('');
+  const [playerBId, setPlayerBId] = useState('');
+
+  const onPlayerALoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerAId(data.playerId);
+  };
+
+  const onPlayerBLoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerBId(data.playerId);
+  };
+
+
+  return (
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
+                             ks:ks,
+                             partnerId: partnerId,
+                             uiConfId: uiConfId,
+                             bundlerUrl: bunderlUrl
+                           }}>
+      <>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onPlayerLoaded={onPlayerALoad}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+        <PlayerSeekAndShow playerId={playerAId}/>
+        <br/>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onPlayerLoaded={onPlayerBLoad}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+        <PlayerSeekAndShow playerId={playerBId}/>
+      </>
+    </KalturaPlayerProvider>
+  )
+};
+
+MultiplePlayersWithTimeAndSeekInPage.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Kaltura Player multiple instances`
+    }
+  }
+};
+
 
 
 export default {
