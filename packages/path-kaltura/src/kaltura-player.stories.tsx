@@ -416,7 +416,36 @@ MultiplePlayersWithTimeAndSeekInPage.story = {
   }
 };
 
+const workshopEntry = '1_qk8sqm6v';
+const workshopKs = 'Yzk0NzE1MjZmZDMyZmI0NzFiZThjODQ1YjM3NmY0YjhiOGU4OGZmMHwxODI3NTUxOzE4Mjc1NTE7MTYxNzAyMTk4NTswOzE1ODcwMjE5ODUuOTkyMjtzaGFpLmFpbnZvbmVyQGthbHR1cmEuY29tO3N2aWV3OjFfcWs4c3FtNnYsdmlldzoxX3FrOHNxbTZ2LGxpc3Q6Kjs7';
 
+export const KalturaPlayerWorkshopForTesting: Story = () => {
+  const classes = useStyle();
+
+  return (
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
+                             ks:workshopKs,
+                             partnerId: partnerId,
+                             uiConfId: uiConfId,
+                             bundlerUrl: bunderlUrl
+                           }}>
+      <div className={classes.playerContainer}>
+        <KalturaPlayer entryId={workshopEntry}
+                       autoplay={false}
+                       onMediaLoaded={(entryId) => console.log(entryId)}/>
+      </div>
+    </KalturaPlayerProvider>
+  )
+};
+
+KalturaPlayerWorkshopForTesting.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Kaltura Player workshop for testing`
+    }
+  }
+};
 
 export default {
   title: 'Kaltura/Player',
