@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/kaltura/path-design-system/compare/v1.0.1...v1.1.0) (2020-04-20)
+
+
+### Features
+
+* add time input component ([#120](https://github.com/kaltura/path-design-system/issues/120)) ([2fd7700](https://github.com/kaltura/path-design-system/commit/2fd7700b86211976036f8cfe6a99198b88302a90))
+
+
+
+
+
 # [1.0.0](https://github.com/kaltura/path-design-system/compare/v0.7.0...v1.0.0) (2020-04-12)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
