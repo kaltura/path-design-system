@@ -108,8 +108,8 @@ export const SearchInput = (props: SearchInputFieldProps) => {
     const [showClear, setShowClear] = useState(false);
     const [inputEl, setInputEl] = useState<InputElement>(null);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLocalValue(event.target.value);
-        resolveOnChange(inputEl, event, onChange);
+      setLocalValue(event.target.value);
+      resolveOnChange(inputEl, event, onChange);
     };
     const clearInput = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         if(disabled) return;
