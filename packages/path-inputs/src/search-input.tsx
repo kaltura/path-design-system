@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { InputElement, InputRef, TextInput } from './text-input';
+import { InputRef, TextInput } from './text-input';
 import { Plus24Icon, Search24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 
@@ -46,7 +46,7 @@ export interface SearchInputFieldProps {
      * Event callback which is triggered after a user have typed something into an input field
      * @default undefined
      * */
-    onChange?: (event: React.ChangeEvent<InputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const useStyles = createUseStyles(() => ({
@@ -62,13 +62,13 @@ const useStyles = createUseStyles(() => ({
 }), { theming });
 
 const resolveOnChange = (
-    target: InputElement,
+    target: HTMLInputElement | null,
     e:
-        | React.ChangeEvent<InputElement>
+        | React.ChangeEvent<HTMLInputElement>
         | React.MouseEvent<HTMLElement, MouseEvent>,
-    onChange?: (event: React.ChangeEvent<InputElement>) => void,
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 ): void => {
-    const callOnChange = (event: React.ChangeEvent<InputElement>) => {
+    const callOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (typeof onChange === 'function') {
             onChange(event);
         }
@@ -83,12 +83,12 @@ const resolveOnChange = (
             const originalInputValue = target.value;
             // change target ref value cause e.target.value should be '' when clear input
             target.value = '';
-            callOnChange(event as React.ChangeEvent<InputElement>);
+            callOnChange(event as React.ChangeEvent<HTMLInputElement>);
             // reset target ref value
             target.value = originalInputValue;
             return;
         }
-        callOnChange(event as React.ChangeEvent<InputElement>);
+        callOnChange(event as React.ChangeEvent<HTMLInputElement>);
     }
 };
 
@@ -106,7 +106,7 @@ export const SearchInput = (props: SearchInputFieldProps) => {
     const [isControlled] = useState<boolean>(value === '' || !!value);
     const [localValue, setLocalValue] = useState<string>((value ?? defaultValue) || '');
     const [showClear, setShowClear] = useState(false);
-    const [inputEl, setInputEl] = useState<InputElement>(null);
+    const [inputEl, setInputEl] = useState<HTMLInputElement | null>(null);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLocalValue(event.target.value);
         resolveOnChange(inputEl, event, onChange);
@@ -120,7 +120,7 @@ export const SearchInput = (props: SearchInputFieldProps) => {
         resolveOnChange(inputEl, event, onChange);
     };
 
-    const saveInput = (el: InputElement) => {
+    const saveInput = (el: HTMLInputElement) => {
         setInputEl(el);
 
         if (!inputRef) {

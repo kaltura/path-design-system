@@ -7,8 +7,7 @@ import { SpinnerBright24Icon } from '@kaltura-react-ui-kits/path-icons';
 
 const classNames = require('classnames');
 
-export type InputElement = HTMLInputElement | null;
-export type InputRef = ((ref: InputElement) => void) | React.MutableRefObject<InputElement>;
+export type InputRef = ((ref: HTMLInputElement | null) => void) | React.MutableRefObject<HTMLInputElement | null>;
 export type AffixContent = React.ReactElement | string;
 
 export interface TextInputProps {
@@ -66,7 +65,7 @@ export interface TextInputProps {
      * Event callback which is triggered after a user have typed something into an input field
      * @default undefined
      * */
-    onChange?: (event: React.ChangeEvent<InputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
     /**
      * HTML input type
