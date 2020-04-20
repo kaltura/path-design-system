@@ -9,6 +9,7 @@
 
 import * as React from 'react';
 import {ChangeEvent, CSSProperties, ReactElement} from 'react';
+import {TextInput} from "./text-input";
 
 const DEFAULT_COLON = ':';
 const DEFAULT_VALUE_SHORT = `00${DEFAULT_COLON}00`;
@@ -67,7 +68,7 @@ export function validateTimeAndCursor(
   return [validatedValue, newCursorPosition];
 }
 
-type onChangeType = (event: ChangeEvent<HTMLInputElement>, value: string) => void;
+export type onChangeType = (event: ChangeEvent<HTMLInputElement>, value: string) => void;
 
 interface Props {
   value?: string;
@@ -86,7 +87,7 @@ interface State {
   _maxLength: number;
 }
 
-export default class TimeInput extends React.Component<Props, State> {
+class TimeField extends React.Component<Props, State> {
   static defaultProps: Props = {
     showSeconds: false,
     input: null,
@@ -230,3 +231,47 @@ export default class TimeInput extends React.Component<Props, State> {
     );
   }
 }
+
+export interface TimeInputProps {
+  /**
+   * Initial value for controlled input
+   * @default 00:00:00
+   * */
+  value?: string;
+  /**
+   * Event callback which is triggered after a user have typed something into an input field
+   * @default undefined
+   * */
+  onChange?: onChangeType;
+  /**
+   * If to show a time with seconds HH:mm:ss
+   * @default true
+   */
+  showSeconds?: boolean;
+  /**
+   * custom textInput element
+   * @default TextInput
+   */
+  input: ReactElement | null;
+  /**
+   * Hours minutes seconds separator
+   * @default :
+   */
+  colon?: string;
+  /**
+   * Custom style
+   */
+  style?: CSSProperties | {};
+}
+
+export const TimeInput = (props: TimeInputProps) => {
+
+  return (<TimeField {...props}/>)
+};
+
+TimeInput.defaultProps = {
+  value: '00:00:00',
+  showSeconds: true,
+  colon: ':',
+  input: <TextInput/>
+};
