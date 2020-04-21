@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { TextInput } from './text-input';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import {boolean, select, withKnobs} from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import { Target24Icon, Upload24Icon, Video24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
+import {Button} from "./button";
 
 const useStyles = createUseStyles({
     'table': {
@@ -252,33 +253,41 @@ export const Workshop: Story = () => {
                        placeholder="Default"
                        supportBusy={true}
                        isBusy={boolean("Is Busy", false)}
+                       centerText={boolean("Center Text", false)}
                        hasError={boolean("Has Error", false)}
                        disabled={boolean("Disabled", false)}
+                       size={select("Size", ['large', 'small'], 'large') as 'large' | 'small'}
                        onChange={onChange}/>
             <TextInput value={value}
                        placeholder="With Icon"
                        preContent={<Video24Icon/>}
                        supportBusy={true}
+                       centerText={boolean("Center Text", false)}
                        isBusy={boolean("Is Busy", false)}
                        hasError={boolean("Has Error", false)}
                        disabled={boolean("Disabled", false)}
+                       size={select("Size", ['large', 'small'], 'large') as 'large' | 'small'}
                        onChange={onChange}/>
             <TextInput value={value}
                        placeholder="With Label"
                        postContent="Label"
                        supportBusy={true}
+                       centerText={boolean("Center Text", false)}
                        isBusy={boolean("Is Busy", false)}
                        hasError={boolean("Has Error", false)}
                        disabled={boolean("Disabled", false)}
+                       size={select("Size", ['large', 'small'], 'large') as 'large' | 'small'}
                        onChange={onChange}/>
             <TextInput value={value}
                        placeholder="With Label and Icon"
                        preContent={<Video24Icon/>}
                        postContent="Label that a bit longer"
                        supportBusy={true}
+                       centerText={boolean("Center Text", false)}
                        isBusy={boolean("Is Busy", false)}
                        hasError={boolean("Has Error", false)}
                        disabled={boolean("Disabled", false)}
+                       size={select("Size", ['large', 'small'], 'large') as 'large' | 'small'}
                        onChange={onChange}/>
             <TextInput value={value}
                        placeholder="Toggle Support Busy"
@@ -286,6 +295,8 @@ export const Workshop: Story = () => {
                        isBusy={boolean("Is Busy", false)}
                        hasError={boolean("Has Error", false)}
                        disabled={boolean("Disabled", false)}
+                       centerText={boolean("Center Text", false)}
+                       size={select("Size", ['large', 'small'], 'large') as 'large' | 'small'}
                        onChange={onChange}/>
         </div>
     </div>;
