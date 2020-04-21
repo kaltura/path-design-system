@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/kaltura/path-design-system/compare/v1.1.0...v1.2.0) (2020-04-21)
+
+
+### Features
+
+* add size and center text alignment properties to text input ([#121](https://github.com/kaltura/path-design-system/issues/121)) ([3b6b9c7](https://github.com/kaltura/path-design-system/commit/3b6b9c7eeec7ea8b8f0facc9677e1f584a184b13))
+
+
+
+
+
 # [1.1.0](https://github.com/kaltura/path-design-system/compare/v1.0.1...v1.1.0) (2020-04-20)
 
 
