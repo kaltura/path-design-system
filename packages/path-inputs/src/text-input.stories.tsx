@@ -6,7 +6,6 @@ import { action } from '@storybook/addon-actions';
 import { withThemeProvider } from '../storybook/with-theme-provider';
 import { Target24Icon, Upload24Icon, Video24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { createUseStyles } from '@kaltura-react-ui-kits/path-theming';
-import {Button} from "./button";
 
 const useStyles = createUseStyles({
     'table': {
