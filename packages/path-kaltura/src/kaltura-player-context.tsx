@@ -10,12 +10,17 @@ export const enum PlayerLoadingStatuses {
   Destroyed = 'Destroyed'
 }
 
+export interface SeekOptions {
+  seekTo: number;
+  pause: boolean;
+}
+
 export interface PlayerContextValue {
   state: PlayerProviderState;
   loadPlayer: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
-  seek: (playerId: string, time: number) => void;
-  registerPlayer: (playerId: string, currentTime$: Observable<number>) => { seek$: Observable<number>, onRemove: () => void }
+  seek: (playerId: string, options: SeekOptions) => void;
+  registerPlayer: (playerId: string, currentTime$: Observable<number>) => { seek$: Observable<SeekOptions>, onRemove: () => void }
 }
 
 export const defaultPlayerContext: PlayerContextValue =

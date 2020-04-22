@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useMemo, useRef} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
+import {KalturaPlayerContext, PlayerLoadingStatuses, SeekOptions} from "./kaltura-player-context";
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 import { Observable, Subject, throwError } from 'rxjs';
 
@@ -31,12 +31,12 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
   const {autoLoad, config, children} = props;
   const [state, loadPlayer] = useLoadPlayerBundler({config, autoLoad});
 
-  const _players = useRef<Record<string, {currentTime$: Observable<number>, doSeek: Subject<number>}>>({});
+  const _players = useRef<Record<string, {currentTime$: Observable<number>, doSeek: Subject<SeekOptions>}>>({});
 
   const playerContextValue = useMemo(() => {
 
     const registerPlayer = (playerId: string, currentTime$: Observable<number>) => {
-      _players.current[playerId] = {currentTime$, doSeek: new Subject<number>()};
+      _players.current[playerId] = {currentTime$, doSeek: new Subject<SeekOptions>()};
       return {
         seek$: _players.current[playerId].doSeek.asObservable(),
         onRemove: () => {
@@ -47,10 +47,10 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       }
     };
 
-    const seek = (playerId: string, time: number) => {
+    const seek = (playerId: string, options: SeekOptions) => {
       if(!_players.current[playerId]) return;
 
-      _players.current[playerId].doSeek.next(time);
+      _players.current[playerId].doSeek.next(options);
     };
 
     const getPlayerCurrentTime$ = (playerId: string) => {

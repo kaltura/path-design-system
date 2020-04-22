@@ -1,5 +1,5 @@
 import {useContext, useEffect, useRef, useState} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatuses} from "./kaltura-player-context";
+import {KalturaPlayerContext, PlayerLoadingStatuses, SeekOptions} from "./kaltura-player-context";
 import * as shortid from "shortid";
 import { BehaviorSubject, Subscription } from 'rxjs';
 import Player = KalturaPlayerTypes.Player;
@@ -74,7 +74,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   useEffect(() => {
 
     if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial
-        || loadMediaState.playerStatus === PlayerLoadingStatuses.Error)
+      || loadMediaState.playerStatus === PlayerLoadingStatuses.Error)
       return;
 
     if(!playerRef.current ||
@@ -118,8 +118,9 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   //listen to player manager loading status in order to load player
   useEffect(() => {
 
-    const onSeek = (time: number) => {
-    if(!playerRef.current || !playerRef.current.currentTime) return;
+    const onSeek = (time: number, pause: boolean) => {
+      if(!playerRef.current || !playerRef.current.currentTime) return;
+      if (pause) playerRef.current.pause();
       playerRef.current.currentTime = time;
     };
 
@@ -147,7 +148,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         console.log('kaltura player was successfully loaded');
         playerRef.current = player;
         const {seek$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current);
-        const seekSubscription = seek$.subscribe((seekTo: number) => onSeek(seekTo));
+        const seekSubscription = seek$.subscribe(({seekTo, pause} : SeekOptions) => onSeek(seekTo, pause));
         playerRegistrationRef.current = {seekSubscription, onRemove};
         playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime);
 
