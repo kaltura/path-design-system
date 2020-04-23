@@ -119,7 +119,9 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   useEffect(() => {
 
     const onSeek = (time: number, pause: boolean) => {
-      if(!playerRef.current || !playerRef.current.currentTime) return;
+      if(!playerRef.current
+        || playerRef.current.currentTime === null
+        || isNaN(playerRef.current.currentTime)) return;
       if (pause) playerRef.current.pause();
       playerRef.current.currentTime = time;
     };
