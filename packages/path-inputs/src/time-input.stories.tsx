@@ -23,7 +23,7 @@ export const TimeInputValue: Story = () => {
 
   const classes = useStyles();
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>, time: string) => {
+  const onChange = (time: string, event: ChangeEvent<HTMLInputElement>) => {
     action('changed')(event);
     setValue(time);
   };
