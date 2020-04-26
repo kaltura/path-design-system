@@ -120,8 +120,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
     const onSeek = (time: number, pause: boolean) => {
       if(!playerRef.current
-        || playerRef.current.currentTime === null
-        || isNaN(playerRef.current.currentTime)) return;
+        || typeof playerRef.current.currentTime !== 'number') return;
       if (pause) playerRef.current.pause();
       playerRef.current.currentTime = time;
     };
