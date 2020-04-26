@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/kaltura/path-design-system/compare/v1.2.0...v1.3.0) (2020-04-26)
+
+
+### Features
+
+* export time input, modify onchange event params, add pause option to player seek action ([#122](https://github.com/kaltura/path-design-system/issues/122)) ([534c81c](https://github.com/kaltura/path-design-system/commit/534c81c05e7bb4d11df8b055611390783643acbe))
+
+
+
+
+
 ## [1.0.1](https://github.com/kaltura/path-design-system/compare/v1.0.0...v1.0.1) (2020-04-19)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
