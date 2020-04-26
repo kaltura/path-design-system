@@ -68,7 +68,7 @@ export function validateTimeAndCursor(
   return [validatedValue, newCursorPosition];
 }
 
-export type onChangeType = (event: ChangeEvent<HTMLInputElement>, value: string) => void;
+export type onChangeType = (value: string, event?: ChangeEvent<HTMLInputElement>) => void;
 
 interface Props {
   value?: string;
@@ -199,7 +199,7 @@ class TimeField extends React.Component<Props, State> {
     this.setState({value: validatedTime}, () => {
       inputEl.selectionStart = validatedCursorPosition;
       inputEl.selectionEnd = validatedCursorPosition;
-      callback(event, validatedTime);
+      callback(validatedTime, event);
     });
 
     event.persist();
@@ -209,7 +209,7 @@ class TimeField extends React.Component<Props, State> {
     const {value} = this.state;
     const {onChange, style, showSeconds, input, colon, ...props} = this.props; //eslint-disable-line no-unused-vars
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) =>
-      this.onInputChange(event, (e: ChangeEvent<HTMLInputElement>, v: string) => onChange && onChange(e, v));
+      this.onInputChange(event, (v: string, e: ChangeEvent<HTMLInputElement>) => onChange && onChange(v, e));
 
     if (input) {
       return React.cloneElement(input, {

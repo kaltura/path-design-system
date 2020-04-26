@@ -37,6 +37,7 @@ declare namespace KalturaPlayerTypes {
     currentTime: number;
     Event: Record<string, string>;
     loadMedia(mediaInfo: MediaInfoObject): Promise;
+    pause(): void;
     destroy(): void;
   }
 }
