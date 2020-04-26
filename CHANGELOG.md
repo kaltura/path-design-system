@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/kaltura/path-design-system/compare/v1.3.0...v1.3.1) (2020-04-26)
+
+
+### Bug Fixes
+
+* time input api fix ([#125](https://github.com/kaltura/path-design-system/issues/125)) ([680838e](https://github.com/kaltura/path-design-system/commit/680838eb956fa7e4255a989f9082d97d7373e946))
+
+
+
+
+
 # [1.3.0](https://github.com/kaltura/path-design-system/compare/v1.2.0...v1.3.0) (2020-04-26)
 
 
