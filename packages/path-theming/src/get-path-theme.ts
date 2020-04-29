@@ -19,9 +19,12 @@ export const getPathTheme = () : Theme => ({
         lime: '#b2d238',
         green: '#009444',
         deepcyan: '#00a784',
+        allports: '#008297',
         cyan: '#01accd',
         royalblue: '#1c4b98',
+        submarine: '#bac8cb',
         white: '#FFFFFF',
+        gray: '#434a4b'
     },
     button: {
         borderRadius: '4px',

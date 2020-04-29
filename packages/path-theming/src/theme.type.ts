@@ -17,9 +17,12 @@ export interface Theme {
     lime: string;
     green: string;
     deepcyan: string;
+    allports: string;
     cyan: string;
     royalblue: string;
+    submarine: string;
     white: string;
+    gray: string;
   };
   button: {
     borderRadius: string;
