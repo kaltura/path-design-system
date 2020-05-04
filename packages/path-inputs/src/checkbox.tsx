@@ -9,46 +9,39 @@ import {CSSProperties, useEffect, useState} from 'react';
 const classNames = require('classnames');
 
 export interface CheckboxProps {
-  /** Label of the checkbox
-   * @default undefined
+  /**
+   * Label of the checkbox
    * */
   label?: string;
-  /** Disables input and changes style of the checkbox
-   * @default false
+  /**
+   * Disables input and changes style of the checkbox
    * */
   disabled?: boolean;
   /**
    * Value of the checkbox
-   * @default undefined
    */
   value?: any;
   /**
    * Optional default checked
-   * @default undefined
    */
   defaultChecked?: boolean;
   /**
    * Optional is checkbox checked
-   * @default false
    */
   checked?: boolean;
   /**
-   * is checkbox in the partial state
-   * @default false
+   * Is checkbox in the partial state
    */
   partial?: boolean;
   /** A onChange event callback
-   * @default undefined
    * */
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * Optional class names of the checkbox
-   * @default ''
    */
   className?: string;
   /**
    * Optional styles of the checkbox
-   * @default undefined
    */
   style?: CSSProperties;
 }
@@ -212,10 +205,6 @@ const useStyles = createUseStyles(
   {theming}
 );
 
-/**
- * Checkboxes are allowing users to toggle between two states.
- * In most cases, they are use to select/deselect multiple items or enable/disable an option.
- */
 export function Checkbox({
   label,
   disabled,
@@ -228,18 +217,14 @@ export function Checkbox({
   partial,
 }: CheckboxProps) {
   const classes = useStyles();
-  const [isChecked, setChecked] = useState(checked || defaultChecked);
-  const [isPartial, setPartial] = useState(partial && !checked);
+  const [isControlled] = useState(typeof checked === 'boolean');
 
+  const [isChecked, setChecked] = useState(
+    typeof checked === 'boolean' ? checked : defaultChecked || false
+  );
   useEffect(() => {
-    setChecked(checked || defaultChecked);
-  }, [checked, defaultChecked]);
-
-  useEffect(() => {
-    setPartial(partial && !checked);
-  }, [partial, checked]);
-
-  const isControlled = !!checked;
+    setChecked(checked || false);
+  }, [checked]);
 
   const checkboxWrapperClass = classNames({
     [classes.checkboxWrapper]: true,
@@ -249,7 +234,7 @@ export function Checkbox({
     [classes.checkbox]: true,
     [classes.checkboxDisabled]: disabled,
     [classes.checkboxChecked]: isChecked,
-    [classes.checkboxPartial]: isPartial,
+    [classes.checkboxPartial]: partial,
   });
   const checkboxInputClass = classNames({
     [classes.checkboxInput]: true,
@@ -265,10 +250,6 @@ export function Checkbox({
 
     if (!isControlled) {
       setChecked(event.target.checked);
-    }
-
-    if (isPartial) {
-      setPartial(false);
     }
 
     if (onChange) {
@@ -296,6 +277,5 @@ export function Checkbox({
 
 Checkbox.defaultProps = {
   disabled: false,
-  checked: false,
   partial: false,
 };
