@@ -41,25 +41,6 @@ export const Default: Story = () => {
   );
 };
 
-export const Change: Story = () => {
-  const [value, setValue] = useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(event.target.checked);
-    action('onChange')(event.target.checked);
-  };
-
-  return <Checkbox label="Checkbox" checked={value} onChange={handleChange} />;
-};
-
-Change.story = {
-  parameters: {
-    docs: {
-      storyDescription: `Checkbox could be controlled component. To make it work <code>checked</code> and <code>onChange</code> properties must be provided.`,
-    },
-  },
-};
-
 export const Disabled: Story = () => {
   return (
     <div className="row">
@@ -80,27 +61,6 @@ Disabled.story = {
   parameters: {
     docs: {
       storyDescription: `Checkbox could be disabled with provided <code>disabled</code> prop.`,
-    },
-  },
-};
-
-export const DefaultChecked: Story = () => {
-  return (
-    <div className="row">
-      <div className="col">
-        <Checkbox label="Checkbox" defaultChecked={true} />
-      </div>
-      <div className="col">
-        <Checkbox label="Checkbox" defaultChecked={true} disabled={true} />
-      </div>
-    </div>
-  );
-};
-
-DefaultChecked.story = {
-  parameters: {
-    docs: {
-      storyDescription: `Checkbox could have <code>defaultChecked</code> value.`,
     },
   },
 };
@@ -139,13 +99,28 @@ However controlled component has to be used with <code>checked</code> and <code>
 };
 
 export const Workshop: Story = () => {
+  const [value, setValue] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setValue(event.target.checked);
+    action('onChange')(event.target.checked);
+  };
+
   return (
     <div>
       <div className="col">
         <Checkbox
-          label="Checkbox"
-          checked={boolean('Checked', false)}
-          onChange={action('clicked')}
+          label="Controlled checkbox"
+          checked={value}
+          onChange={handleChange}
+          disabled={boolean('Disabled', false)}
+        />
+      </div>
+      <div className="col">
+        <Checkbox
+          label="Uncontrolled checkbox"
+          defaultChecked={true}
+          onChange={action('changed')}
           disabled={boolean('Disabled', false)}
         />
       </div>
@@ -154,17 +129,7 @@ export const Workshop: Story = () => {
           label="Checkbox with partial"
           partial={boolean('Partial', false)}
           disabled={boolean('Disabled', false)}
-          checked={boolean('Checked', false)}
-          onChange={action('clicked')}
-        />
-      </div>
-      <div className="col">
-        <Checkbox
-          label="Checkbox with default checked"
-          disabled={boolean('Disabled', false)}
-          checked={boolean('Checked', false)}
-          defaultChecked={boolean('Default Checked', false)}
-          onChange={action('clicked')}
+          onChange={action('changed')}
         />
       </div>
     </div>
