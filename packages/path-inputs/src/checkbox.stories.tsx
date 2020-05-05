@@ -150,6 +150,6 @@ export default {
   decorators: [withKnobs, withThemeProvider],
   parameters: {
     componentSubtitle: `Checkboxes are allowing users to toggle between two states.
-    In most cases, they are use to select/deselect multiple items or enable/disable an option.`,
+    In most cases, they are use to select/deselect multiple items or enable/disable an option. Also it's possible to use master-checkbox with partial state to show intermediate value.`,
   },
 };
