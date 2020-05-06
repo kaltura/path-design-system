@@ -24,6 +24,8 @@ export { Plus24Icon } from './plus24';
 export { Redo24Icon } from './redo24';
 export { Refresh16Icon } from './refresh16';
 export { Search24Icon } from './search24';
+export { SpinnerBrightIcon } from './spinnerBright';
+export { SpinnerDarkIcon } from './spinnerDark';
 export { Target24Icon } from './target24';
 export { TimeTimeline24Icon } from './timeTimeline24';
 export { Trash24Icon } from './trash24';
