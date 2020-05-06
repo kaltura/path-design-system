@@ -24,7 +24,7 @@
     "start": "rollup -c -w",
     "build:icons": "rimraf src && npm run build:icons:flat && npm run build:icons:twoTones && npm run build:icons:storybook",
     "build:icons:flat": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/flat --is-flat",
-    "build:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/two-tone",
+    "build:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone",
     "build:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src",
     "lint:js": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
     "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"

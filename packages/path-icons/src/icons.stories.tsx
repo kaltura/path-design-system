@@ -46,6 +46,8 @@ const icons24List: string[] = [
     'Plus24Icon',
     'Redo24Icon',
     'Search24Icon',
+    'SpinnerBright24Icon',
+    'SpinnerDark24Icon',
     'Target24Icon',
     'TimeTimeline24Icon',
     'Trash24Icon',
