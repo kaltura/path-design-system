@@ -9,6 +9,7 @@ export enum TypographyTypes {
   Label18 = 'Label18',
   Label15 = 'Label15',
   Label14 = 'Label14',
+  Label14White = 'Label14White',
   Label14Gray = 'Label14Gray',
   Label13 = 'Label13',
   Label12 = 'Label12',
@@ -73,6 +74,12 @@ const useStyles = createUseStyles((theme: Theme) => ({
     lineHeight: 'normal',
     color: theme.colors.grayscale2
   },
+  label14White : {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    lineHeight: 'normal',
+    color: theme.colors.white
+  },
   label13: {
     fontSize: '13px',
     fontWeight: 'bold',
@@ -127,6 +134,7 @@ export const Typography = (props: TypographyProps) => {
           [classes.label18]: type === TypographyTypes.Label18,
           [classes.label14]: type === TypographyTypes.Label14,
           [classes.label14Gray]: type === TypographyTypes.Label14Gray,
+          [classes.label14White]: type === TypographyTypes.Label14White,
           [classes.label13]: type === TypographyTypes.Label13,
           [classes.label15]: type === TypographyTypes.Label15,
           [classes.label12]: type === TypographyTypes.Label12,
