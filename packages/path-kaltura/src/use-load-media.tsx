@@ -153,7 +153,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           .subscribe(({actionType, options} : PlayerAction) => {
             switch (actionType) {
               case PlayerActionTypes.Seek:
-                if(actionType !== PlayerActionTypes.Seek || !options) return;
+                if(!options) return;
                 onSeek(options.seekTo, options.pause);
                 break;
               case PlayerActionTypes.Pause:
