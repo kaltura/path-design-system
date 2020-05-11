@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/kaltura/path-design-system/compare/v1.4.1...v2.0.0) (2020-05-11)
+
+
+### Features
+
+* add play and pause actions to player provider PATH-740 ([#133](https://github.com/kaltura/path-design-system/issues/133)) ([a0391b6](https://github.com/kaltura/path-design-system/commit/a0391b6fcf19b6c0e57c2b22ed58e4df046ec508))
+
+
+### BREAKING CHANGES
+
+* changing the seek action arguments in Kaltura Player component
+
+
+
+
+
 # [1.3.0](https://github.com/kaltura/path-design-system/compare/v1.2.0...v1.3.0) (2020-04-26)
 
 
