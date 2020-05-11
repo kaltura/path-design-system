@@ -1,6 +1,12 @@
 import * as React from 'react';
 import {useMemo, useRef} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatuses, SeekOptions} from "./kaltura-player-context";
+import {
+  KalturaPlayerContext,
+  PlayerAction,
+  PlayerActionTypes,
+  PlayerLoadingStatuses,
+  SeekOptions
+} from "./kaltura-player-context";
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 import { Observable, Subject, throwError } from 'rxjs';
 
@@ -31,17 +37,17 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
   const {autoLoad, config, children} = props;
   const [state, loadPlayer] = useLoadPlayerBundler({config, autoLoad});
 
-  const _players = useRef<Record<string, {currentTime$: Observable<number>, doSeek: Subject<SeekOptions>}>>({});
+  const _players = useRef<Record<string, {currentTime$: Observable<number>, doAction: Subject<PlayerAction>}>>({});
 
   const playerContextValue = useMemo(() => {
 
     const registerPlayer = (playerId: string, currentTime$: Observable<number>) => {
-      _players.current[playerId] = {currentTime$, doSeek: new Subject<SeekOptions>()};
+      _players.current[playerId] = {currentTime$, doAction: new Subject<PlayerAction>()};
       return {
-        seek$: _players.current[playerId].doSeek.asObservable(),
+        action$: _players.current[playerId].doAction.asObservable(),
         onRemove: () => {
           if(!_players.current[playerId]) return;
-          _players.current[playerId].doSeek.complete();
+          _players.current[playerId].doAction.complete();
           delete _players.current[playerId];
         }
       }
@@ -50,7 +56,19 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
     const seek = (playerId: string, options: SeekOptions) => {
       if(!_players.current[playerId]) return;
 
-      _players.current[playerId].doSeek.next(options);
+      _players.current[playerId].doAction.next({actionType: PlayerActionTypes.Seek, options});
+    };
+
+    const play = (playerId: string) => {
+      if(!_players.current[playerId]) return;
+
+      _players.current[playerId].doAction.next({actionType: PlayerActionTypes.Play});
+    };
+
+    const pause = (playerId: string) => {
+      if(!_players.current[playerId]) return;
+
+      _players.current[playerId].doAction.next({actionType: PlayerActionTypes.Pause});
     };
 
     const getPlayerCurrentTime$ = (playerId: string) => {
@@ -64,7 +82,9 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       loadPlayer,
       registerPlayer,
       getPlayerCurrentTime$,
-      seek
+      seek,
+      play,
+      pause
     }
   }, [state.status, loadPlayer]);
 

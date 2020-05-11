@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef, useState} from "react";
-import {KalturaPlayerContext, PlayerLoadingStatuses, SeekOptions} from "./kaltura-player-context";
+import {KalturaPlayerContext, PlayerAction, PlayerActionTypes, PlayerLoadingStatuses} from "./kaltura-player-context";
 import * as shortid from "shortid";
-import { BehaviorSubject, Subscription } from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
 
@@ -148,9 +148,25 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
         console.log('kaltura player was successfully loaded');
         playerRef.current = player;
-        const {seek$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current);
-        const seekSubscription = seek$.subscribe(({seekTo, pause} : SeekOptions) => onSeek(seekTo, pause));
-        playerRegistrationRef.current = {seekSubscription, onRemove};
+        const {action$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current);
+        const playerActionsSubscription = action$
+          .subscribe(({actionType, options} : PlayerAction) => {
+            switch (actionType) {
+              case PlayerActionTypes.Seek:
+                if(actionType !== PlayerActionTypes.Seek || !options) return;
+                onSeek(options.seekTo, options.pause);
+                break;
+              case PlayerActionTypes.Pause:
+                if(!playerRef.current) return;
+                playerRef.current.pause();
+                break;
+              case PlayerActionTypes.Play:
+                if(!playerRef.current) return;
+                playerRef.current.play();
+                break;
+            }
+          });
+        playerRegistrationRef.current = {seekSubscription: playerActionsSubscription, onRemove};
         playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime);
 
         if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
