@@ -38,6 +38,7 @@ declare namespace KalturaPlayerTypes {
     Event: Record<string, string>;
     loadMedia(mediaInfo: MediaInfoObject): Promise;
     pause(): void;
+    play(): void;
     destroy(): void;
   }
 }

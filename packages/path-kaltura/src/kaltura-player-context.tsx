@@ -10,6 +10,17 @@ export const enum PlayerLoadingStatuses {
   Destroyed = 'Destroyed'
 }
 
+export enum PlayerActionTypes {
+  Play = 'Play',
+  Pause = 'Pause',
+  Seek = 'Seek'
+}
+
+export interface PlayerAction {
+  actionType: PlayerActionTypes;
+  options?: SeekOptions;
+}
+
 export interface SeekOptions {
   seekTo: number;
   pause: boolean;
@@ -20,7 +31,9 @@ export interface PlayerContextValue {
   loadPlayer: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
   seek: (playerId: string, options: SeekOptions) => void;
-  registerPlayer: (playerId: string, currentTime$: Observable<number>) => { seek$: Observable<SeekOptions>, onRemove: () => void }
+  play: (playerId: string) => void;
+  pause: (playerId: string) => void;
+  registerPlayer: (playerId: string, currentTime$: Observable<number>) => { action$: Observable<PlayerAction>, onRemove: () => void }
 }
 
 export const defaultPlayerContext: PlayerContextValue =
@@ -32,7 +45,9 @@ export const defaultPlayerContext: PlayerContextValue =
       loadPlayer: () => {},
       getPlayerCurrentTime$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
       seek: () => { console.warn(`can't seek, KalturaPlayerProvider is missing`)},
-      registerPlayer: () => ({ seek$: throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)), onRemove: () => {}})
+      play: () => { console.warn(`can't play, KalturaPlayerProvider is missing`)},
+      pause: () => { console.warn(`can't pause, KalturaPlayerProvider is missing`)},
+      registerPlayer: () => ({ action$: throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)), onRemove: () => {}})
     };
 
 export const KalturaPlayerContext = React.createContext<PlayerContextValue>(defaultPlayerContext);

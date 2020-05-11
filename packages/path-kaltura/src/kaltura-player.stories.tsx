@@ -353,7 +353,7 @@ const PlayerSeekAndShow = (props: {playerId: string}) => {
 
   const seekTo = () => {
     if(!playerId) return;
-    seek(playerId, Math.floor(currentTime + 10));
+    seek(playerId, {seekTo: Math.floor(currentTime + 10), pause: false});
   };
 
   return (
@@ -415,6 +415,95 @@ MultiplePlayersWithTimeAndSeekInPage.story = {
     }
   }
 };
+
+const PlayerPlayAndPauseActions = (props: {playerId: string}) => {
+
+  const {playerId} = props;
+  const classes = useStyle();
+
+  const {getPlayerCurrentTime$, play, pause} = useContext(KalturaPlayerContext);
+  const [currentTime, setcurrentTime] = useState(0);
+
+  useEffect(() => {
+    if(!playerId) return;
+
+    getPlayerCurrentTime$(playerId).subscribe((currentTime) => {
+      setcurrentTime(currentTime);
+    })
+  }, [playerId]);
+
+  const playAction = () => {
+    if(!playerId) return;
+    play(playerId);
+  };
+
+  const pauseAction = () => {
+    if(!playerId) return;
+    pause(playerId);
+  };
+
+  return (
+    <div>
+      <div>{`Player ${playerId} currentTime: ${currentTime}`}</div>
+      <Button label={'play'} onClick={playAction}/>
+      <Button label={'pause'} onClick={pauseAction}/>
+    </div>
+  );
+};
+
+
+export const MultiplePlayersForPlayAndPauseActions: Story = () => {
+  const classes = useStyle();
+
+  const [playerAId, setPlayerAId] = useState('');
+  const [playerBId, setPlayerBId] = useState('');
+
+  const onPlayerALoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerAId(data.playerId);
+  };
+
+  const onPlayerBLoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerBId(data.playerId);
+  };
+
+
+  return (
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
+                             ks:ks,
+                             partnerId: partnerId,
+                             uiConfId: uiConfId,
+                             bundlerUrl: bunderlUrl
+                           }}>
+      <>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onPlayerLoaded={onPlayerALoad}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+        <PlayerPlayAndPauseActions playerId={playerAId}/>
+        <br/>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onPlayerLoaded={onPlayerBLoad}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+        <PlayerPlayAndPauseActions playerId={playerBId}/>
+      </>
+    </KalturaPlayerProvider>
+  )
+};
+
+MultiplePlayersForPlayAndPauseActions.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Kaltura Player multiple instances for testing play and pause action streams`
+    }
+  }
+};
+
 
 const workshopEntry = '1_qk8sqm6v';
 const workshopKs = 'Yzk0NzE1MjZmZDMyZmI0NzFiZThjODQ1YjM3NmY0YjhiOGU4OGZmMHwxODI3NTUxOzE4Mjc1NTE7MTYxNzAyMTk4NTswOzE1ODcwMjE5ODUuOTkyMjtzaGFpLmFpbnZvbmVyQGthbHR1cmEuY29tO3N2aWV3OjFfcWs4c3FtNnYsdmlldzoxX3FrOHNxbTZ2LGxpc3Q6Kjs7';
