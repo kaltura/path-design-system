@@ -2,7 +2,20 @@ interface FakeEvent {}
 
 type CoreEventListener = (event: FakeEvent) => boolean | void;
 
-type PlayerEventTypes = 'timeupdate';
+type PlayerEventTypes = 'timeupdate' | 'playerstatechanged';
+
+type PlayerStateTypes = 'paused' | 'playing' | 'loading' | 'idle' | 'buffering' | 'error';
+
+type PlayerStateChangeEvent = {
+  payload: {
+    newState: {
+      type: string
+    },
+    oldState: {
+      type: string
+    }
+  }
+}
 
 declare namespace KalturaPlayerTypes {
 

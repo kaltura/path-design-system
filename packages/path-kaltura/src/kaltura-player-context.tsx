@@ -30,10 +30,11 @@ export interface PlayerContextValue {
   state: PlayerProviderState;
   loadPlayer: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
+  getPlayerState$: (playerId: string) => Observable<PlayerStateTypes>;
   seek: (playerId: string, options: SeekOptions) => void;
   play: (playerId: string) => void;
   pause: (playerId: string) => void;
-  registerPlayer: (playerId: string, currentTime$: Observable<number>) => { action$: Observable<PlayerAction>, onRemove: () => void }
+  registerPlayer: (playerId: string, currentTime$: Observable<number>, playerState$: Observable<string>) => { action$: Observable<PlayerAction>, onRemove: () => void }
 }
 
 export const defaultPlayerContext: PlayerContextValue =
@@ -43,6 +44,7 @@ export const defaultPlayerContext: PlayerContextValue =
         config: {}
       },
       loadPlayer: () => {},
+      getPlayerState$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
       getPlayerCurrentTime$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
       seek: () => { console.warn(`can't seek, KalturaPlayerProvider is missing`)},
       play: () => { console.warn(`can't play, KalturaPlayerProvider is missing`)},

@@ -505,6 +505,83 @@ MultiplePlayersForPlayAndPauseActions.story = {
 };
 
 
+const PlayerStateUpdateLabels = (props: {playerId: string}) => {
+
+  const {playerId} = props;
+  const classes = useStyle();
+
+  const {getPlayerCurrentTime$, getPlayerState$} = useContext(KalturaPlayerContext);
+  const [currentState, setCurrentState] = useState('idle');
+
+  useEffect(() => {
+    if(!playerId) return;
+
+    getPlayerState$(playerId).subscribe((currentState) => {
+      setCurrentState(currentState);
+    })
+  }, [playerId]);
+
+  return (
+    <div>
+      <div>{`Player ${playerId} currentState: ${currentState}`}</div>
+    </div>
+  );
+};
+
+
+export const MultiplePlayersForPlayerStateUpdate: Story = () => {
+  const classes = useStyle();
+
+  const [playerAId, setPlayerAId] = useState('');
+  const [playerBId, setPlayerBId] = useState('');
+
+  const onPlayerALoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerAId(data.playerId);
+  };
+
+  const onPlayerBLoad = (data: {entryId: string, playerId: string}) => {
+    setPlayerBId(data.playerId);
+  };
+
+
+  return (
+    <KalturaPlayerProvider autoLoad={true}
+                           config={{
+                             ks:ks,
+                             partnerId: partnerId,
+                             uiConfId: uiConfId,
+                             bundlerUrl: bunderlUrl
+                           }}>
+      <>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onPlayerLoaded={onPlayerALoad}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+        <PlayerStateUpdateLabels playerId={playerAId}/>
+        <br/>
+        <div className={classes.playerContainer}>
+          <KalturaPlayer entryId={entryId}
+                         autoplay={false}
+                         onPlayerLoaded={onPlayerBLoad}
+                         onMediaLoaded={(entryId) => console.log(entryId)}/>
+        </div>
+        <PlayerStateUpdateLabels playerId={playerBId}/>
+      </>
+    </KalturaPlayerProvider>
+  )
+};
+
+MultiplePlayersForPlayerStateUpdate.story = {
+  parameters: {
+    docs: {
+      storyDescription: `Kaltura Player multiple instances for testing players state update`
+    }
+  }
+};
+
+
 const workshopEntry = '1_qk8sqm6v';
 const workshopKs = 'Yzk0NzE1MjZmZDMyZmI0NzFiZThjODQ1YjM3NmY0YjhiOGU4OGZmMHwxODI3NTUxOzE4Mjc1NTE7MTYxNzAyMTk4NTswOzE1ODcwMjE5ODUuOTkyMjtzaGFpLmFpbnZvbmVyQGthbHR1cmEuY29tO3N2aWV3OjFfcWs4c3FtNnYsdmlldzoxX3FrOHNxbTZ2LGxpc3Q6Kjs7';
 
