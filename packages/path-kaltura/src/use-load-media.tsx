@@ -39,7 +39,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   const playerRef = useRef<Player | null>(null);
 
   const playerTimeSubject = useRef(new BehaviorSubject<number>(0));
-  const playerStateSubject = useRef(new BehaviorSubject<string>('idle'));
+  const playerStateSubject = useRef(new BehaviorSubject<PlayerStateTypes>('idle'));
   const playerTime$ = useRef(playerTimeSubject.current.asObservable());
   const playerState$ = useRef(playerStateSubject.current.asObservable());
   const playerRegistrationRef = useRef({seekSubscription: Subscription.EMPTY, onRemove: () => {}});

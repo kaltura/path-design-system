@@ -16,6 +16,16 @@ export enum PlayerActionTypes {
   Seek = 'Seek'
 }
 
+// duplication of player d.ts PlayerStateTypes
+export enum PlayerStates {
+  paused = 'paused',
+  playing = 'playing',
+  loading = 'loading',
+  idle = 'idle',
+  buffering = 'buffering',
+  error = 'error'
+}
+
 export interface PlayerAction {
   actionType: PlayerActionTypes;
   options?: SeekOptions;

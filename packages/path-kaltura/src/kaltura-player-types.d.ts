@@ -9,10 +9,10 @@ type PlayerStateTypes = 'paused' | 'playing' | 'loading' | 'idle' | 'buffering' 
 type PlayerStateChangeEvent = {
   payload: {
     newState: {
-      type: string
+      type: PlayerStateTypes
     },
     oldState: {
-      type: string
+      type: PlayerStateTypes
     }
   }
 }
