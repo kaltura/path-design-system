@@ -39,12 +39,20 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   const playerRef = useRef<Player | null>(null);
 
   const playerTimeSubject = useRef(new BehaviorSubject<number>(0));
+  const playerStateSubject = useRef(new BehaviorSubject<PlayerStateTypes>('idle'));
   const playerTime$ = useRef(playerTimeSubject.current.asObservable());
+  const playerState$ = useRef(playerStateSubject.current.asObservable());
   const playerRegistrationRef = useRef({seekSubscription: Subscription.EMPTY, onRemove: () => {}});
 
   const updatePlayerCurrentTime = () => {
     if(playerRef.current){
       playerTimeSubject.current.next(playerRef.current.currentTime);
+    }
+  };
+
+  const updatePlayerState = (e: PlayerStateChangeEvent) => {
+    if(playerRef.current){
+      playerStateSubject.current.next(e.payload.newState.type);
     }
   };
 
@@ -54,6 +62,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       unmounted.current = true;
       if(!playerRef.current) return;
       playerRef.current.removeEventListener('timeupdate', updatePlayerCurrentTime);
+      playerRef.current.removeEventListener('playerstatechanged', updatePlayerState);
       console.log('Kaltura player: Destroy');
       playerRegistrationRef.current.seekSubscription.unsubscribe();
       playerRegistrationRef.current.onRemove();
@@ -148,7 +157,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
         console.log('kaltura player was successfully loaded');
         playerRef.current = player;
-        const {action$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current);
+        const {action$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current, playerState$.current);
         const playerActionsSubscription = action$
           .subscribe(({actionType, options} : PlayerAction) => {
             switch (actionType) {
@@ -168,6 +177,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           });
         playerRegistrationRef.current = {seekSubscription: playerActionsSubscription, onRemove};
         playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime);
+        playerRef.current.addEventListener('playerstatechanged', updatePlayerState);
 
         if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
 

@@ -37,12 +37,15 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
   const {autoLoad, config, children} = props;
   const [state, loadPlayer] = useLoadPlayerBundler({config, autoLoad});
 
-  const _players = useRef<Record<string, {currentTime$: Observable<number>, doAction: Subject<PlayerAction>}>>({});
+  const _players = useRef<Record<string, {
+    currentTime$: Observable<number>,
+    playerState$: Observable<PlayerStateTypes>,
+    doAction: Subject<PlayerAction>}>>({});
 
   const playerContextValue = useMemo(() => {
 
-    const registerPlayer = (playerId: string, currentTime$: Observable<number>) => {
-      _players.current[playerId] = {currentTime$, doAction: new Subject<PlayerAction>()};
+    const registerPlayer = (playerId: string, currentTime$: Observable<number>, playerState$: Observable<PlayerStateTypes>) => {
+      _players.current[playerId] = {currentTime$, playerState$ ,doAction: new Subject<PlayerAction>()};
       return {
         action$: _players.current[playerId].doAction.asObservable(),
         onRemove: () => {
@@ -77,11 +80,18 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
         : throwError(new Error('No player with provided playerId'))
     };
 
+    const getPlayerState$ = (playerId: string) => {
+      return _players.current[playerId]
+        ? _players.current[playerId].playerState$
+        : throwError(new Error('No player with provided playerId'))
+    };
+
     return {
       state,
       loadPlayer,
       registerPlayer,
       getPlayerCurrentTime$,
+      getPlayerState$,
       seek,
       play,
       pause
