@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/kaltura/path-design-system/compare/v2.0.0...v2.1.0) (2020-05-12)
+
+
+### Features
+
+* add player current state to player provider PATH-740 ([#135](https://github.com/kaltura/path-design-system/issues/135)) ([a5220b7](https://github.com/kaltura/path-design-system/commit/a5220b7c7be70dad4821e5b3d30c6142ee5fd3f7))
+
+
+
+
+
 # [2.0.0](https://github.com/kaltura/path-design-system/compare/v1.4.1...v2.0.0) (2020-05-11)
 
 
