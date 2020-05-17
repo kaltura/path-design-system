@@ -2,6 +2,7 @@ import * as React from 'react';
 import Paragraph from "antd/lib/typography/Paragraph";
 import 'antd/dist/antd.css';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
+import { CSSProperties } from 'react';
 const classNames = require('classnames');
 
 export enum TypographyTypes {
@@ -46,6 +47,10 @@ export interface TypographyProps {
    * Classname for external style
    */
   className?: string;
+  /**
+   * Optional styles for a typography
+   */
+  style?: CSSProperties;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -120,7 +125,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
 export const Typography = (props: TypographyProps) => {
 
-  const {text, type, rows, ellipsis, expandable, className} = props;
+  const {text, type, rows, ellipsis, expandable, className, style} = props;
 
   const classes = useStyles(props);
 
@@ -128,6 +133,7 @@ export const Typography = (props: TypographyProps) => {
 
   return (
     <Paragraph
+      style={style}
       className={classNames(
         {
           [classes.fontStyle]: true,
