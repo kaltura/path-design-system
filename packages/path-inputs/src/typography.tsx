@@ -2,12 +2,12 @@ import * as React from 'react';
 import Paragraph from "antd/lib/typography/Paragraph";
 import 'antd/dist/antd.css';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
-import { CSSProperties } from 'react';
 const classNames = require('classnames');
 
 export enum TypographyTypes {
   Paragraph = 'Paragraph',
   Label18 = 'Label18',
+  Label18Normal = 'Label18Normal',
   Label15 = 'Label15',
   Label14 = 'Label14',
   Label14White = 'Label14White',
@@ -47,10 +47,6 @@ export interface TypographyProps {
    * Classname for external style
    */
   className?: string;
-  /**
-   * Optional styles for a typography
-   */
-  style?: CSSProperties;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -64,6 +60,12 @@ const useStyles = createUseStyles((theme: Theme) => ({
   label18: {
     fontSize: '18px',
     fontWeight: 'bold',
+    lineHeight: 'normal',
+    color: '#434a4b'
+  },
+  Label18Normal: {
+    fontSize: '18px',
+    fontWeight: 'normal',
     lineHeight: 'normal',
     color: '#434a4b'
   },
@@ -125,7 +127,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
 export const Typography = (props: TypographyProps) => {
 
-  const {text, type, rows, ellipsis, expandable, className, style} = props;
+  const {text, type, rows, ellipsis, expandable, className} = props;
 
   const classes = useStyles(props);
 
@@ -133,11 +135,11 @@ export const Typography = (props: TypographyProps) => {
 
   return (
     <Paragraph
-      style={style}
       className={classNames(
         {
           [classes.fontStyle]: true,
           [classes.label18]: type === TypographyTypes.Label18,
+          [classes.Label18Normal]: type === TypographyTypes.Label18Normal,
           [classes.label14]: type === TypographyTypes.Label14,
           [classes.label14Gray]: type === TypographyTypes.Label14Gray,
           [classes.label14White]: type === TypographyTypes.Label14White,
