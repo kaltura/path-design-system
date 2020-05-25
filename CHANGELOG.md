@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/kaltura/path-design-system/compare/v2.1.0...v2.2.0) (2020-05-25)
+
+
+### Features
+
+* update styles in Typography component PATH-744 ([#138](https://github.com/kaltura/path-design-system/issues/138)) ([627f9ca](https://github.com/kaltura/path-design-system/commit/627f9ca9f97f735f42472e852bb275228ae53099))
+
+
+
+
+
 # [2.1.0](https://github.com/kaltura/path-design-system/compare/v2.0.0...v2.1.0) (2020-05-12)
 
 
