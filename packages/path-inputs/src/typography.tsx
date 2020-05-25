@@ -7,6 +7,7 @@ const classNames = require('classnames');
 export enum TypographyTypes {
   Paragraph = 'Paragraph',
   Label18 = 'Label18',
+  Label18Normal = 'Label18Normal',
   Label15 = 'Label15',
   Label14 = 'Label14',
   Label14White = 'Label14White',
@@ -59,6 +60,12 @@ const useStyles = createUseStyles((theme: Theme) => ({
   label18: {
     fontSize: '18px',
     fontWeight: 'bold',
+    lineHeight: 'normal',
+    color: '#434a4b'
+  },
+  Label18Normal: {
+    fontSize: '18px',
+    fontWeight: 'normal',
     lineHeight: 'normal',
     color: '#434a4b'
   },
@@ -132,6 +139,7 @@ export const Typography = (props: TypographyProps) => {
         {
           [classes.fontStyle]: true,
           [classes.label18]: type === TypographyTypes.Label18,
+          [classes.Label18Normal]: type === TypographyTypes.Label18Normal,
           [classes.label14]: type === TypographyTypes.Label14,
           [classes.label14Gray]: type === TypographyTypes.Label14Gray,
           [classes.label14White]: type === TypographyTypes.Label14White,
