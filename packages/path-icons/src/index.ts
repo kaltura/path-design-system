@@ -5,6 +5,7 @@ export { Checkmark16Icon } from './checkmark16';
 export { Close24Icon } from './close24';
 export { ConnectingArrow16Icon } from './connectingArrow16';
 export { Duplicate24Icon } from './duplicate24';
+export { Exit24Icon } from './exit24';
 export { Film24Icon } from './film24';
 export { Freeze24Icon } from './freeze24';
 export { Gear24Icon } from './gear24';
