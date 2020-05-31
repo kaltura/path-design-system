@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/kaltura/path-design-system/compare/v2.2.0...v2.3.0) (2020-05-31)
+
+
+### Features
+
+* add exit icon PATH-780 ([#142](https://github.com/kaltura/path-design-system/issues/142)) ([095b64a](https://github.com/kaltura/path-design-system/commit/095b64a780d882450010fa6c4dc10ea9e7837b72))
+
+
+
+
+
 # [2.2.0](https://github.com/kaltura/path-design-system/compare/v2.1.0...v2.2.0) (2020-05-25)
 
 
