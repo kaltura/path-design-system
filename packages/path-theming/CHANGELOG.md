@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-theming
+
+
+
+
+
 # [2.0.0](https://github.com/kaltura/path-design-system/compare/v1.4.1...v2.0.0) (2020-05-11)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-theming

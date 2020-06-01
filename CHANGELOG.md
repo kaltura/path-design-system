@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
+
+
+### Bug Fixes
+
+* update player currentTime to use milliseconds ([#143](https://github.com/kaltura/path-design-system/issues/143)) ([3db3f22](https://github.com/kaltura/path-design-system/commit/3db3f220834790957e9c05f533d7533016a797fa))
+
+
+### BREAKING CHANGES
+
+* - player seek is now using milliseconds instead of seconds
+- current player time is now returning milliseconds instead of seconds
+
+
+
+
+
 # [2.3.0](https://github.com/kaltura/path-design-system/compare/v2.2.0...v2.3.0) (2020-05-31)
 
 
