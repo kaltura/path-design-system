@@ -46,7 +46,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const updatePlayerCurrentTime = () => {
     if(playerRef.current){
-      playerTimeSubject.current.next(playerRef.current.currentTime);
+      playerTimeSubject.current.next(playerRef.current.currentTime * 1000);
     }
   };
 
@@ -131,7 +131,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       if(!playerRef.current
         || typeof playerRef.current.currentTime !== 'number') return;
       if (pause) playerRef.current.pause();
-      playerRef.current.currentTime = time;
+      playerRef.current.currentTime = time / 1000;
     };
 
     const loadPlayer = () => {
