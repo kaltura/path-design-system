@@ -131,7 +131,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       if(!playerRef.current
         || typeof playerRef.current.currentTime !== 'number') return;
       if (pause) playerRef.current.pause();
-      playerRef.current.currentTime = Math.floor(time / 1000);
+      playerRef.current.currentTime = time / 1000;
     };
 
     const loadPlayer = () => {
