@@ -6,3 +6,4 @@ export * from './typography';
 export * from './tag';
 export * from './text-area-input';
 export * from './dropdown-menu';
+export * from './time-input';

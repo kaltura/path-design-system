@@ -3,6 +3,136 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/kaltura/path-design-system/compare/v3.2.0...v3.3.0) (2020-06-04)
+
+
+### Features
+
+* add slider component ([#109](https://github.com/kaltura/path-design-system/issues/109)) ([368089d](https://github.com/kaltura/path-design-system/commit/368089d8444cd57f22964fdbb223ec087484471a))
+
+
+
+
+
+# [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+# [2.3.0](https://github.com/kaltura/path-design-system/compare/v2.2.0...v2.3.0) (2020-05-31)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+# [2.2.0](https://github.com/kaltura/path-design-system/compare/v2.1.0...v2.2.0) (2020-05-25)
+
+
+### Features
+
+* update styles in Typography component PATH-744 ([#138](https://github.com/kaltura/path-design-system/issues/138)) ([627f9ca](https://github.com/kaltura/path-design-system/commit/627f9ca9f97f735f42472e852bb275228ae53099))
+
+
+
+
+
+# [2.0.0](https://github.com/kaltura/path-design-system/compare/v1.4.1...v2.0.0) (2020-05-11)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+## [1.4.1](https://github.com/kaltura/path-design-system/compare/v1.4.0...v1.4.1) (2020-05-07)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+# [1.4.0](https://github.com/kaltura/path-design-system/compare/v1.3.1...v1.4.0) (2020-05-06)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+## [1.3.1](https://github.com/kaltura/path-design-system/compare/v1.3.0...v1.3.1) (2020-04-26)
+
+
+### Bug Fixes
+
+* time input api fix ([#125](https://github.com/kaltura/path-design-system/issues/125)) ([680838e](https://github.com/kaltura/path-design-system/commit/680838eb956fa7e4255a989f9082d97d7373e946))
+
+
+
+
+
+# [1.3.0](https://github.com/kaltura/path-design-system/compare/v1.2.0...v1.3.0) (2020-04-26)
+
+
+### Features
+
+* export time input, modify onchange event params, add pause option to player seek action ([#122](https://github.com/kaltura/path-design-system/issues/122)) ([534c81c](https://github.com/kaltura/path-design-system/commit/534c81c05e7bb4d11df8b055611390783643acbe))
+
+
+
+
+
+# [1.2.0](https://github.com/kaltura/path-design-system/compare/v1.1.0...v1.2.0) (2020-04-21)
+
+
+### Features
+
+* add size and center text alignment properties to text input ([#121](https://github.com/kaltura/path-design-system/issues/121)) ([3b6b9c7](https://github.com/kaltura/path-design-system/commit/3b6b9c7eeec7ea8b8f0facc9677e1f584a184b13))
+
+
+
+
+
+# [1.1.0](https://github.com/kaltura/path-design-system/compare/v1.0.1...v1.1.0) (2020-04-20)
+
+
+### Features
+
+* add time input component ([#120](https://github.com/kaltura/path-design-system/issues/120)) ([2fd7700](https://github.com/kaltura/path-design-system/commit/2fd7700b86211976036f8cfe6a99198b88302a90))
+
+
+
+
+
+# [1.0.0](https://github.com/kaltura/path-design-system/compare/v0.7.0...v1.0.0) (2020-04-12)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+# [0.7.0](https://github.com/kaltura/path-design-system/compare/v0.6.3...v0.7.0) (2020-04-05)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+## [0.6.3](https://github.com/kaltura/path-design-system/compare/v0.6.2...v0.6.3) (2020-04-02)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
 ## [0.6.2](https://github.com/kaltura/path-design-system/compare/v0.6.1...v0.6.2) (2020-03-30)
 
 

@@ -3,6 +3,125 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/kaltura/path-design-system/compare/v3.1.0...v3.2.0) (2020-06-04)
+
+
+### Features
+
+* disable kava analytics report in player ([b64e7a0](https://github.com/kaltura/path-design-system/commit/b64e7a0e3f4b52221cad7f5f59521b24a44ec585))
+
+
+
+
+
+# [3.1.0](https://github.com/kaltura/path-design-system/compare/v3.0.0...v3.1.0) (2020-06-04)
+
+
+### Features
+
+* adjust player current time to ms ([#145](https://github.com/kaltura/path-design-system/issues/145)) ([d6b23ea](https://github.com/kaltura/path-design-system/commit/d6b23ea780e7a8e49e614bf5df8f1f3f51dcd35b))
+
+
+
+
+
+# [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
+
+
+### Bug Fixes
+
+* update player currentTime to use milliseconds ([#143](https://github.com/kaltura/path-design-system/issues/143)) ([3db3f22](https://github.com/kaltura/path-design-system/commit/3db3f220834790957e9c05f533d7533016a797fa))
+
+
+### BREAKING CHANGES
+
+* - player seek is now using milliseconds instead of seconds
+- current player time is now returning milliseconds instead of seconds
+
+
+
+
+
+# [2.1.0](https://github.com/kaltura/path-design-system/compare/v2.0.0...v2.1.0) (2020-05-12)
+
+
+### Features
+
+* add player current state to player provider PATH-740 ([#135](https://github.com/kaltura/path-design-system/issues/135)) ([a5220b7](https://github.com/kaltura/path-design-system/commit/a5220b7c7be70dad4821e5b3d30c6142ee5fd3f7))
+
+
+
+
+
+# [2.0.0](https://github.com/kaltura/path-design-system/compare/v1.4.1...v2.0.0) (2020-05-11)
+
+
+### Features
+
+* add play and pause actions to player provider PATH-740 ([#133](https://github.com/kaltura/path-design-system/issues/133)) ([a0391b6](https://github.com/kaltura/path-design-system/commit/a0391b6fcf19b6c0e57c2b22ed58e4df046ec508))
+
+
+### BREAKING CHANGES
+
+* changing the seek action arguments in Kaltura Player component
+
+
+
+
+
+# [1.3.0](https://github.com/kaltura/path-design-system/compare/v1.2.0...v1.3.0) (2020-04-26)
+
+
+### Features
+
+* export time input, modify onchange event params, add pause option to player seek action ([#122](https://github.com/kaltura/path-design-system/issues/122)) ([534c81c](https://github.com/kaltura/path-design-system/commit/534c81c05e7bb4d11df8b055611390783643acbe))
+
+
+
+
+
+## [1.0.1](https://github.com/kaltura/path-design-system/compare/v1.0.0...v1.0.1) (2020-04-19)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
+
+
+
+
+
+# [1.0.0](https://github.com/kaltura/path-design-system/compare/v0.7.0...v1.0.0) (2020-04-12)
+
+
+### Features
+
+* provide players current playing time and seek abilities ([#116](https://github.com/kaltura/path-design-system/issues/116)) ([8205f72](https://github.com/kaltura/path-design-system/commit/8205f72064c94f2e0771e902092cad79982697cc))
+
+
+### BREAKING CHANGES
+
+* `KalturaPlayer` component api changed for `OnPlayerLoaded`
+
+Previously
+```
+ onPlayerLoaded?: (entryId: string) => void;
+```
+
+Current
+```
+onPlayerLoaded?: (data: {entryId: string, playerId: string}) => void;
+```
+
+
+
+
+
+# [0.7.0](https://github.com/kaltura/path-design-system/compare/v0.6.3...v0.7.0) (2020-04-05)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
+
+
+
+
+
 # [0.6.0](https://github.com/kaltura/path-design-system/compare/v0.5.19...v0.6.0) (2020-03-29)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-kaltura
