@@ -110,13 +110,13 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.8.3",
     "wait-on": "^3.3.0",
-    "yargs": "^15.0.1"
+    "yargs": "^15.0.1",
+    "cypress": "^3.8.1"
   },
   "dependencies": {
     "@kaltura-react-ui-kits/path-icons": "file:packages/path-icons",
     "@kaltura-react-ui-kits/path-inputs": "file:packages/path-inputs",
     "@kaltura-react-ui-kits/path-kaltura": "file:packages/path-kaltura",
-    "@kaltura-react-ui-kits/path-theming": "file:packages/path-theming",
-    "cypress": "^3.8.1"
+    "@kaltura-react-ui-kits/path-theming": "file:packages/path-theming"
   }
 }

@@ -191,7 +191,7 @@ export function DropdownMenu(props: DropdownMenuProps) {
               listHeight={320}
               open={open}
               prefixCls="path"
-              mode="combobox"
+              combobox={true}
               getInputElement={getInputElement}
               menuItemSelectedIcon={<Checkmark16Icon/>}
               onDropdownVisibleChange={setOpen}>
