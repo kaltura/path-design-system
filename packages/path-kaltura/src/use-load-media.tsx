@@ -12,6 +12,7 @@ export interface UseLoadMediaOptions {
   onMediaLoaded?: (entryId: string) => void;
   onPlayerLoadingError?: (entryId: string) => void;
   onMediaLoadingError?: (entryId: string) => void;
+  enableKavaAnalytics?: boolean
 };
 
 export interface LoadMediaState {
@@ -22,7 +23,7 @@ export interface LoadMediaState {
 
 export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
-  const {entryId, autoplay, onMediaLoaded,
+  const {entryId, autoplay, onMediaLoaded, enableKavaAnalytics,
     onMediaLoadingError, onPlayerLoaded, onPlayerLoadingError} = options;
 
   const {state: playerProviderState, registerPlayer} = useContext(KalturaPlayerContext);
@@ -152,7 +153,12 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
             },
             playback: {
               autoplay,
-            }
+            },
+            plugins: {
+              kava: {
+                disable: !enableKavaAnalytics
+              }
+            },
           });
 
         console.log('kaltura player was successfully loaded');
