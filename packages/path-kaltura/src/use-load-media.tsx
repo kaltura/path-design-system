@@ -46,7 +46,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const updatePlayerCurrentTime = () => {
     if(playerRef.current){
-      playerTimeSubject.current.next(playerRef.current.currentTime * 1000);
+      playerTimeSubject.current.next(Math.floor(playerRef.current.currentTime * 1000));
     }
   };
 

@@ -338,7 +338,6 @@ KalturaPlayerWithNoProvider.story = {
 const PlayerSeekAndShow = (props: {playerId: string}) => {
 
   const {playerId} = props;
-  const classes = useStyle();
 
   const {getPlayerCurrentTime$, seek} = useContext(KalturaPlayerContext);
   const [currentTime, setcurrentTime] = useState(0);
@@ -353,7 +352,7 @@ const PlayerSeekAndShow = (props: {playerId: string}) => {
 
   const seekTo = () => {
     if(!playerId) return;
-    seek(playerId, {seekTo: Math.floor(currentTime + 10), pause: false});
+    seek(playerId, {seekTo: Math.floor(currentTime + 10*1000), pause: false});
   };
 
   return (
@@ -419,7 +418,6 @@ MultiplePlayersWithTimeAndSeekInPage.story = {
 const PlayerPlayAndPauseActions = (props: {playerId: string}) => {
 
   const {playerId} = props;
-  const classes = useStyle();
 
   const {getPlayerCurrentTime$, play, pause} = useContext(KalturaPlayerContext);
   const [currentTime, setcurrentTime] = useState(0);
@@ -508,9 +506,8 @@ MultiplePlayersForPlayAndPauseActions.story = {
 const PlayerStateUpdateLabels = (props: {playerId: string}) => {
 
   const {playerId} = props;
-  const classes = useStyle();
 
-  const {getPlayerCurrentTime$, getPlayerState$} = useContext(KalturaPlayerContext);
+  const {getPlayerState$} = useContext(KalturaPlayerContext);
   const [currentState, setCurrentState] = useState('idle');
 
   useEffect(() => {
