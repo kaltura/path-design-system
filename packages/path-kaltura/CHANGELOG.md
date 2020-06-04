@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/kaltura/path-design-system/compare/v3.0.0...v3.1.0) (2020-06-04)
+
+
+### Features
+
+* adjust player current time to ms ([#145](https://github.com/kaltura/path-design-system/issues/145)) ([d6b23ea](https://github.com/kaltura/path-design-system/commit/d6b23ea780e7a8e49e614bf5df8f1f3f51dcd35b))
+
+
+
+
+
 # [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
 
 
