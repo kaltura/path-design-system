@@ -1,5 +1,6 @@
 import * as React from "react";
-import {PlayerManagerState} from "./kaltura-player-manager";
+import {PlayerProviderState} from "./kaltura-player-provider";
+import { Observable, throwError } from 'rxjs';
 
 export const enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
@@ -9,18 +10,56 @@ export const enum PlayerLoadingStatuses {
   Destroyed = 'Destroyed'
 }
 
+export enum PlayerActionTypes {
+  Play = 'Play',
+  Pause = 'Pause',
+  Seek = 'Seek'
+}
+
+// duplication of player d.ts PlayerStateTypes
+export enum PlayerStates {
+  paused = 'paused',
+  playing = 'playing',
+  loading = 'loading',
+  idle = 'idle',
+  buffering = 'buffering',
+  error = 'error'
+}
+
+export interface PlayerAction {
+  actionType: PlayerActionTypes;
+  options?: SeekOptions;
+}
+
+export interface SeekOptions {
+  seekTo: number;
+  pause: boolean;
+}
+
 export interface PlayerContextValue {
-  state: PlayerManagerState;
+  state: PlayerProviderState;
   loadPlayer: () => void;
+  getPlayerCurrentTime$: (playerId: string) => Observable<number>;
+  getPlayerState$: (playerId: string) => Observable<PlayerStateTypes>;
+  seek: (playerId: string, options: SeekOptions) => void;
+  play: (playerId: string) => void;
+  pause: (playerId: string) => void;
+  registerPlayer: (playerId: string, currentTime$: Observable<number>, playerState$: Observable<string>) => { action$: Observable<PlayerAction>, onRemove: () => void }
 }
 
 export const defaultPlayerContext: PlayerContextValue =
-  {
-    state: {
-      status: PlayerLoadingStatuses.Error,
-      config: {}
-    },
-    loadPlayer: () => {}
-  };
+    {
+      state: {
+        status: PlayerLoadingStatuses.Error,
+        config: {}
+      },
+      loadPlayer: () => {},
+      getPlayerState$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
+      getPlayerCurrentTime$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
+      seek: () => { console.warn(`can't seek, KalturaPlayerProvider is missing`)},
+      play: () => { console.warn(`can't play, KalturaPlayerProvider is missing`)},
+      pause: () => { console.warn(`can't pause, KalturaPlayerProvider is missing`)},
+      registerPlayer: () => ({ action$: throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)), onRemove: () => {}})
+    };
 
 export const KalturaPlayerContext = React.createContext<PlayerContextValue>(defaultPlayerContext);

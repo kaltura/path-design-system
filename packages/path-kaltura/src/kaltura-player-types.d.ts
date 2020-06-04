@@ -1,3 +1,22 @@
+interface FakeEvent {}
+
+type CoreEventListener = (event: FakeEvent) => boolean | void;
+
+type PlayerEventTypes = 'timeupdate' | 'playerstatechanged';
+
+type PlayerStateTypes = 'paused' | 'playing' | 'loading' | 'idle' | 'buffering' | 'error';
+
+type PlayerStateChangeEvent = {
+  payload: {
+    newState: {
+      type: PlayerStateTypes
+    },
+    oldState: {
+      type: PlayerStateTypes
+    }
+  }
+}
+
 declare namespace KalturaPlayerTypes {
 
   export interface KalturaPlayerManager {
@@ -26,7 +45,13 @@ declare namespace KalturaPlayerTypes {
   }
 
   export interface Player {
+    addEventListener(type: PlayerEventTypes, listener: CoreEventListener): void;
+    removeEventListener: (type: PlayerEventTypes, listener: CoreEventListener) => void;
+    currentTime: number;
+    Event: Record<string, string>;
     loadMedia(mediaInfo: MediaInfoObject): Promise;
+    pause(): void;
+    play(): void;
     destroy(): void;
   }
 }

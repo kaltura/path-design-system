@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "lerna run clean",
     "build": "lerna run build",
+    "build:icons": "lerna run build:icons",
     "reset": "lerna run reset && rm -rf node_modules",
     "setup": "npm i && npm run build && lerna exec npm link",
     "lerna": "lerna",

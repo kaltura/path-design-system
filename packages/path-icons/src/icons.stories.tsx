@@ -19,6 +19,7 @@ export interface IconsComponentsList {
 
 const icons16List: string[] = [
     'ArrowLeft16Icon',
+    'Checkmark16Icon',
     'ConnectingArrow16Icon',
     'Home16Icon',
     'Plus16Icon',
@@ -26,12 +27,20 @@ const icons16List: string[] = [
 ];
 
 const icons24List: string[] = [
+    'Api24Icon',
     'Close24Icon',
     'Duplicate24Icon',
+    'Exit24Icon',
+    'Film24Icon',
+    'Freeze24Icon',
     'Gear24Icon',
     'Image24Icon',
     'Interaction24Icon',
+    'Loop24Icon',
+    'Magnet24Icon',
+    'Map24Icon',
     'Minus24Icon',
+    'NoAccess24Icon',
     'Pencil24Icon',
     'Play24Icon',
     'PlayFull24Icon',
@@ -41,10 +50,12 @@ const icons24List: string[] = [
     'SpinnerBright24Icon',
     'SpinnerDark24Icon',
     'Target24Icon',
+    'TimeTimeline24Icon',
     'Trash24Icon',
     'Undo24Icon',
     'Upload24Icon',
     'Video24Icon',
+    'Waveform24Icon',
     'ZoomIn24Icon',
     'ZoomOut24Icon',
 ];

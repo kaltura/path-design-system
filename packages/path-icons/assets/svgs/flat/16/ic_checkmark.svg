@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>ic_checkmark</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ic_checkmark" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounds" x="0" y="0" width="16" height="16"></rect>
+        <path d="M11.2317787,4.3598156 C11.5853428,3.9355387 12.2159075,3.87821464 12.6401844,4.23177872 C13.0318246,4.55814556 13.110795,5.12053661 12.8425391,5.53883241 L12.7682213,5.6401844 L7.76822128,11.6401844 C7.41866196,12.0596556 6.80471239,12.1163346 6.38587526,11.7893779 L6.29289322,11.7071068 L4.29289322,9.70710678 C3.90236893,9.31658249 3.90236893,8.68341751 4.29289322,8.29289322 C4.65337718,7.93240926 5.22060824,7.90467972 5.61289944,8.20970461 L5.70710678,8.29289322 L6.932,9.517 L11.2317787,4.3598156 Z" id="Path-5" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>

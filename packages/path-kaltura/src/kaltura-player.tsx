@@ -15,9 +15,9 @@ export interface KalturaPlayerProps {
   autoplay: boolean;
   /**
    * OnPlayerLoaded event handler. Will be called after all player bundler scripts were loaded
-   * @param entryId
+   * @param {entryId: string, playerId: string}
    */
-  onPlayerLoaded?: (entryId: string) => void;
+  onPlayerLoaded?: (data: {entryId: string, playerId: string}) => void;
   /**
    * OnMediaLoaded event handler. Will be called after media entry was successful loaded in player
    * @param entryId
@@ -33,7 +33,6 @@ export interface KalturaPlayerProps {
    * @param error
    */
   onMediaLoadingError?: (entryId: string) => void;
-
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
