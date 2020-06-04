@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/kaltura/path-design-system/compare/v3.2.0...v3.3.0) (2020-06-04)
+
+
+### Features
+
+* add slider component ([#109](https://github.com/kaltura/path-design-system/issues/109)) ([368089d](https://github.com/kaltura/path-design-system/commit/368089d8444cd57f22964fdbb223ec087484471a))
+
+
+
+
+
 # [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs

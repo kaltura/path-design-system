@@ -1,6 +1,6 @@
 {
   "name": "@kaltura-react-ui-kits/path-inputs",
-  "version": "3.0.0",
+  "version": "3.3.0",
   "description": "",
   "author": "Kaltura",
   "license": "AGPL-3.0",
@@ -44,6 +44,5 @@
   ],
   "publishConfig": {
     "access": "public"
-  },
-  "devDependencies": {}
+  }
 }
