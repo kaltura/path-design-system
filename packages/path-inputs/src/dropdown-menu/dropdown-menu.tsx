@@ -193,7 +193,7 @@ export function DropdownMenu(props: DropdownMenuProps) {
               combobox={true}
               getInputElement={getInputElement}
               menuItemSelectedIcon={<Checkmark16Icon/>}
-              onDropdownVisibleChange={value => setOpen(value || false)}>
+              onDropdownVisibleChange={(value: boolean) => setOpen(value || false)}>
       {
         options.map(option =>
           <Option key={option.value || uuidV4()}
