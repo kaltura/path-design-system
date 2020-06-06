@@ -16,7 +16,23 @@ const useStyles = createUseStyles({
 });
 
 export const Default: Story = () => {
-  return <ColorPicker />;
+  const [color, setColor] = useState<Color>('#C71A1A');
+  const onChange = (color: Color) => {
+    action('controlled changed')(color);
+    setColor(color);
+  };
+
+  const onCssColorChange = (color: string) => {
+    action('css-ready color changed')(color);
+  };
+
+  return (
+    <ColorPicker
+      value={color}
+      onChange={onChange}
+      onColorChange={onCssColorChange}
+    />
+  );
 };
 
 export const TransparentColor: Story = () => {
@@ -35,7 +51,7 @@ export const DisabledColorPicker: Story = () => {
   return <ColorPicker disabled={true} />;
 };
 
-TransparentColor.story = {
+DisabledColorPicker.story = {
   parameters: {
     docs: {
       storyDescription: `Disabled Color Picker.`,
@@ -43,26 +59,17 @@ TransparentColor.story = {
   },
 };
 
-export const ControlledColorPicker: Story = () => {
-  const [color, setColor] = useState<Color>();
-  return <ColorPicker value={color} onChange={setColor} />;
-};
-
-ControlledColorPicker.story = {
-  parameters: {
-    docs: {
-      storyDescription: `Controlled Color Picker component.`,
-    },
-  },
-};
-
 export const DifferentColorSchemeColorPicker: Story = () => {
   const classes = useStyles();
+  const onCssColorChange = (color: string) => {
+    action('css-ready color changed')(color);
+  };
+
   return (
     <div className={classes.row}>
-      <ColorPicker colorScheme="rgb" />
-      <ColorPicker colorScheme="hsl" />
-      <ColorPicker colorScheme="hex" />
+      <ColorPicker colorScheme="rgb" onColorChange={onCssColorChange} />
+      <ColorPicker colorScheme="hsl" onColorChange={onCssColorChange} />
+      <ColorPicker colorScheme="hex" onColorChange={onCssColorChange} />
     </div>
   );
 };

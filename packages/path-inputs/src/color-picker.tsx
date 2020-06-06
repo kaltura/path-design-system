@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './hint.css';
 import {
   ChromePicker,
@@ -142,6 +142,10 @@ export function ColorPicker(props: ColorPickerProps) {
   const [color, setColor] = useState<Color | undefined>(value || defaultColor);
   const [colorPaletteVisible, setColorPaletteVisible] = useState(false);
   const classes = useStyles(props);
+
+  useEffect(() => {
+    setColor(value || defaultColor);
+  }, [value]);
 
   const handleChange = (color: ColorResult) => {
     if (disabled) {
