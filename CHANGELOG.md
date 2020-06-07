@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/kaltura/path-design-system/compare/v3.4.0...v3.5.0) (2020-06-07)
+
+
+### Features
+
+* **path-kaltura:** allow customizing player config during player setup ([e6231eb](https://github.com/kaltura/path-design-system/commit/e6231eb2f10898d9a4a930b257dcedd39c7880bd))
+
+
+
+
+
 # [3.4.0](https://github.com/kaltura/path-design-system/compare/v3.3.0...v3.4.0) (2020-06-04)
 
 
