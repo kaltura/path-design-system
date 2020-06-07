@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/kaltura/path-design-system/compare/v3.5.0...v3.6.0) (2020-06-07)
+
+
+### Features
+
+* **path-inputs:** add toggle button component  ([#148](https://github.com/kaltura/path-design-system/issues/148)) ([425eb4c](https://github.com/kaltura/path-design-system/commit/425eb4c517d71ed7b04f3b8d6c5afad451d094c9))
+
+
+
+
+
 # [3.5.0](https://github.com/kaltura/path-design-system/compare/v3.4.0...v3.5.0) (2020-06-07)
 
 
