@@ -208,7 +208,7 @@ export const Workshop: Story = () => {
 };
 
 export default {
-  title: 'Inputs/ToggleButton',
+  title: 'Inputs/Toggle Button',
   component: ToggleButton,
   decorators: [withKnobs, withThemeProvider],
 };
