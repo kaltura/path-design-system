@@ -51,10 +51,14 @@ export function ToggleButton(props: ToggleButtonProps) {
   const {isActive, defaultActive, onChange, disabled} = props;
   const [isControlled] = useState(typeof isActive === 'boolean');
   const [active, setActive] = useState(
-    typeof isActive === 'boolean' ? isActive : defaultActive || false
+    (typeof isActive === 'boolean' ? isActive : defaultActive) || false
   );
 
-  useEffect(() => {
+  useEffect(() => {  
+    if (!isControlled) {
+      return;
+    }
+    
     setActive(isActive || false);
   }, [isActive]);
 
