@@ -12,7 +12,8 @@ export interface UseLoadMediaOptions {
   onMediaLoaded?: (entryId: string) => void;
   onPlayerLoadingError?: (entryId: string) => void;
   onMediaLoadingError?: (entryId: string) => void;
-  enableKavaAnalytics?: boolean
+  enableKavaAnalytics?: boolean;
+  customizeConfig?: (config: Record<string, any>) => Record<string, any>
 };
 
 export interface LoadMediaState {
@@ -143,23 +144,34 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       }
       const playerManager = window['KalturaPlayer'] as KalturaPlayerManager;
       try {
-        const player: KalturaPlayerTypes.Player = playerManager.setup(
-          {
-            targetId: loadMediaState.playerId,
-            provider: {
-              uiConfId: playerProviderState.config.uiConfId,
-              partnerId: playerProviderState.config.partnerId,
-              ks: playerProviderState.config.ks
-            },
-            playback: {
-              autoplay,
-            },
-            plugins: {
-              kava: {
-                disable: !enableKavaAnalytics
-              }
-            },
-          });
+        let config: Record<string, any> = {
+          playback: {
+            autoplay,
+          },
+        };
+
+        if (options.customizeConfig) {
+          config = options.customizeConfig(config) || config;
+        }
+
+        config = {
+          ...config,
+          targetId: loadMediaState.playerId,
+          provider: {
+            ...config.provider,
+            uiConfId: playerProviderState.config.uiConfId,
+            partnerId: playerProviderState.config.partnerId,
+            ks: playerProviderState.config.ks
+          },
+          plugins: {
+            ...config.plugins,
+            kava: {
+              disable: !enableKavaAnalytics
+            }
+          }
+        }
+
+        const player: KalturaPlayerTypes.Player = playerManager.setup(config);
 
         console.log('kaltura player was successfully loaded');
         playerRef.current = player;
