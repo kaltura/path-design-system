@@ -21,7 +21,7 @@ export interface ColorPickerProps {
   /**
    * Default selected color
    */
-  defaultColor?: Color;
+  defaultColor?: string;
   /**
    * Use specific color scheme: hex | hsl | rgb
    */
@@ -29,7 +29,7 @@ export interface ColorPickerProps {
   /**
    * Selected color
    */
-  value?: Color;
+  value?: string;
   /**
    * Disable color-picker
    */
@@ -37,11 +37,7 @@ export interface ColorPickerProps {
   /**
    * Event handler on change color
    */
-  onChange?: (value: Color) => void;
-  /**
-   * Event handler on change css color
-   */
-  onColorChange?: (value: string) => void;
+  onChange?: (value: string) => void;
   /**
    * ClassName of wrapped element
    */
@@ -134,7 +130,6 @@ export function ColorPicker(props: ColorPickerProps) {
     colorScheme = 'rgb',
     value,
     onChange,
-    onColorChange,
     className,
     disabled,
   } = props;
@@ -144,6 +139,10 @@ export function ColorPicker(props: ColorPickerProps) {
   const classes = useStyles(props);
 
   useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
+
     setColor(value || defaultColor);
   }, [value]);
 
@@ -157,12 +156,8 @@ export function ColorPicker(props: ColorPickerProps) {
     }
 
     if (onChange) {
-      onChange(color[colorScheme]);
-    }
-
-    if (onColorChange) {
       const cssColor = ColorToCss(color[colorScheme]);
-      onColorChange(cssColor);
+      onChange(cssColor);
     }
   };
 

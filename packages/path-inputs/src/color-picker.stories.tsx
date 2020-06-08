@@ -5,7 +5,6 @@ import '../../../.storybook/obslete-styles.css';
 import {ColorPicker} from './color-picker';
 import {boolean, withKnobs} from '@storybook/addon-knobs';
 import {withThemeProvider} from '../storybook/with-theme-provider';
-import {Color} from 'react-color';
 import {action} from '@storybook/addon-actions';
 
 const useStyles = createUseStyles({
@@ -16,27 +15,17 @@ const useStyles = createUseStyles({
 });
 
 export const Default: Story = () => {
-  const [color, setColor] = useState<Color>('#C71A1A');
-  const onChange = (color: Color) => {
+  const [color, setColor] = useState('#C71A1A');
+  const onChange = (color: string) => {
     action('controlled changed')(color);
     setColor(color);
   };
 
-  const onCssColorChange = (color: string) => {
-    action('css-ready color changed')(color);
-  };
-
-  return (
-    <ColorPicker
-      value={color}
-      onChange={onChange}
-      onColorChange={onCssColorChange}
-    />
-  );
+  return <ColorPicker value={color} onChange={onChange} />;
 };
 
 export const TransparentColor: Story = () => {
-  return <ColorPicker defaultColor={{r: 0, g: 0, b: 0, a: 0.4}} />;
+  return <ColorPicker defaultColor={'rgba(0,0,0,0.4)'} />;
 };
 
 TransparentColor.story = {
@@ -61,15 +50,15 @@ DisabledColorPicker.story = {
 
 export const DifferentColorSchemeColorPicker: Story = () => {
   const classes = useStyles();
-  const onCssColorChange = (color: string) => {
-    action('css-ready color changed')(color);
+  const onColorChange = (color: string) => {
+    action('color changed')(color);
   };
 
   return (
     <div className={classes.row}>
-      <ColorPicker colorScheme="rgb" onColorChange={onCssColorChange} />
-      <ColorPicker colorScheme="hsl" onColorChange={onCssColorChange} />
-      <ColorPicker colorScheme="hex" onColorChange={onCssColorChange} />
+      <ColorPicker colorScheme="rgb" onChange={onColorChange} />
+      <ColorPicker colorScheme="hsl" onChange={onColorChange} />
+      <ColorPicker colorScheme="hex" onChange={onColorChange} />
     </div>
   );
 };
@@ -83,21 +72,16 @@ DifferentColorSchemeColorPicker.story = {
 };
 
 export const Workshop: Story = () => {
-  const [color, setColor] = useState<Color>();
-  const onChange = (color: Color) => {
+  const [color, setColor] = useState<string>();
+  const onChange = (color: string) => {
     action('controlled changed')(color);
     setColor(color);
-  };
-
-  const onCssColorChange = (color: string) => {
-    action('css-ready color changed')(color);
   };
 
   return (
     <ColorPicker
       value={color}
       onChange={onChange}
-      onColorChange={onCssColorChange}
       disabled={boolean('Disabled', false)}
     />
   );
