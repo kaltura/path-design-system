@@ -36,3 +36,6 @@ export { Video24Icon } from './video24';
 export { Waveform24Icon } from './waveform24';
 export { ZoomIn24Icon } from './zoomIn24';
 export { ZoomOut24Icon } from './zoomOut24';
+export { Bold24Icon } from './bold24';
+export { Italic24Icon } from './italic24';
+export { Underline24Icon } from './underline24';
