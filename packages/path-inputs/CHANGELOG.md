@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://github.com/kaltura/path-design-system/compare/v3.6.0...v3.7.0) (2020-06-09)
+
+
+### Features
+
+* update zoom out icon and support new label type PATH-700 ([#149](https://github.com/kaltura/path-design-system/issues/149)) ([65efe79](https://github.com/kaltura/path-design-system/commit/65efe796b7d2029333186d1c77ad80ab3868fffe))
+
+
+
+
+
 # [3.6.0](https://github.com/kaltura/path-design-system/compare/v3.5.0...v3.6.0) (2020-06-07)
 
 
