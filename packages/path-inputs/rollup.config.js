@@ -42,6 +42,12 @@ export default {
       clean: true,
       tsconfig: path.resolve(__dirname, 'tsconfig.build.json')
     }),
-    commonjs(),
+    commonjs(
+      {
+        namedExports: {
+          'react-is': ['isFragment']
+        }
+      }
+    ),
   ]
 }
