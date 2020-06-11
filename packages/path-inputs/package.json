@@ -1,6 +1,6 @@
 {
   "name": "@kaltura-react-ui-kits/path-inputs",
-  "version": "3.7.0",
+  "version": "3.9.0",
   "description": "",
   "author": "Kaltura",
   "license": "AGPL-3.0",
@@ -35,7 +35,8 @@
   "dependencies": {
     "@kaltura-react-ui-kits/path-icons": "file:../path-icons",
     "classnames": "^2.2.6",
-    "rc-slider": "^9.2.4"
+    "rc-slider": "^9.2.4",
+    "react-color": "^2.18.1"
   },
   "files": [
     "dist",

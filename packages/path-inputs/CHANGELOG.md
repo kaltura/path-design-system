@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/kaltura/path-design-system/compare/v3.8.0...v3.9.0) (2020-06-10)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
+# [3.8.0](https://github.com/kaltura/path-design-system/compare/v3.7.0...v3.8.0) (2020-06-10)
+
+
+### Features
+
+* add color picker component with stories PATH-845 ([#147](https://github.com/kaltura/path-design-system/issues/147)) ([584ca6a](https://github.com/kaltura/path-design-system/commit/584ca6a5e7f60e259efc8dd50377a9c0a1725686))
+
+
+
+
+
 # [3.7.0](https://github.com/kaltura/path-design-system/compare/v3.6.0...v3.7.0) (2020-06-09)
 
 
