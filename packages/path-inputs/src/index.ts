@@ -9,3 +9,4 @@ export * from './time-input';
 export * from './slider';
 export * from './toggle-button';
 export * from './color-picker';
+export * from './radio-group';
