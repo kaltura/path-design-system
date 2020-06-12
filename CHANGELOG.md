@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/kaltura/path-design-system/compare/v3.10.0...v3.11.0) (2020-06-12)
+
+
+### Features
+
+* add logic to the text input filed PATH-834 ([#154](https://github.com/kaltura/path-design-system/issues/154)) ([f1b84ad](https://github.com/kaltura/path-design-system/commit/f1b84ad00fc4df9f8f0cc9d910aad495284b9fc2))
+
+
+
+
+
 # [3.10.0](https://github.com/kaltura/path-design-system/compare/v3.9.0...v3.10.0) (2020-06-11)
 
 
