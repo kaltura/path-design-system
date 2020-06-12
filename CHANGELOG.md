@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.10.0](https://github.com/kaltura/path-design-system/compare/v3.9.0...v3.10.0) (2020-06-11)
+
+
+### Features
+
+* add new typography label and export slider PATH-800 ([#153](https://github.com/kaltura/path-design-system/issues/153)) ([ff3c647](https://github.com/kaltura/path-design-system/commit/ff3c647a990c98f8764fd31457e4dedcce2739a1))
+
+
+
+
+
 # [3.9.0](https://github.com/kaltura/path-design-system/compare/v3.8.0...v3.9.0) (2020-06-10)
 
 
