@@ -82,6 +82,14 @@ export interface TextInputProps {
    * @default undefined
    */
   htmlType?: string;
+  /**
+   * Event callback which is triggered after a user have focus on the input field
+   * */
+  onFocus?: () => void;
+  /**
+   * Event callback which is triggered after a user have blur the input field
+   * */
+  onBlur?: () => void;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -206,7 +214,9 @@ export const TextInput = (props: TextInputProps) => {
     onChange,
     placeholder,
     htmlType,
-    hasError = false
+    hasError = false,
+    onFocus,
+    onBlur,
   } = props;
   const classes = useStyles(props);
 
@@ -249,6 +259,18 @@ export const TextInput = (props: TextInputProps) => {
     }
   };
 
+  const onFocusHandler = () => {
+    setIsInFocus(true);
+
+    if (onFocus) onFocus();
+  };
+
+  const onBlurHandler = () => {
+    setIsInFocus(false);
+
+    if (onBlur) onBlur();
+  };
+
   return (
     <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
             {renderAffix({
@@ -262,8 +284,8 @@ export const TextInput = (props: TextInputProps) => {
              disabled={disabled}
              ref={handleInputRef}
              placeholder={placeholder}
-             onFocus={() => setIsInFocus(true)}
-             onBlur={() => setIsInFocus(false)}
+             onFocus={onFocusHandler}
+             onBlur={onBlurHandler}
              onChange={onChange}/>
       {renderAffix({ element: postContent, className: suffixClass })}
         </span>
