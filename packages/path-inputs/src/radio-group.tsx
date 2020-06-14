@@ -7,6 +7,7 @@ import {
   Theme,
   theming
 } from '@kaltura-react-ui-kits/path-theming';
+const classNames = require('classnames');
 
 const { Group, Button } = Radio;
 
@@ -279,6 +280,10 @@ export interface RadioGroupOption {
 
 export interface RadioGroupProps {
   /**
+   * ClassName of wrapped element
+   */
+  className?: string;
+  /**
    * Current value of the input
    */
   value: ReactText;
@@ -306,13 +311,13 @@ const optionPrefixCls = 'path-radio-button';
  * Used to select a single state from multiple options
  */
 export const RadioGroup: FunctionComponent<RadioGroupProps> = (props) => {
-  const { value, options, disabled, onChange } = props;
+  const { value, options, disabled, onChange, className } = props;
   const classes = useStyle();
   return (
     <Group value={value}
            disabled={disabled}
            onChange={onChange}
-           className={classes.group}
+           className={classNames(classes.group, className)}
            prefixCls={prefixCls}>
       {options.map(option =>
         <Button key={option.value}
