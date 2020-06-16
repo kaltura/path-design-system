@@ -30,6 +30,12 @@ export interface TextAreaInputProps {
    * @default false
    * */
   disabled?: boolean;
+
+  /**
+   * Set input in readonly state which prevents user input and changes input style
+   * @default false
+   * */
+  readOnly?: boolean;
   /**
    * Placeholder text which is displayed when no initial value or user input provided
    * @default undefined
@@ -106,6 +112,7 @@ export const TextAreaInput = (props: TextAreaInputProps) => {
     defaultValue,
     inputRef,
     disabled,
+    readOnly,
     onChange,
     placeholder,
     hasError = false
@@ -140,6 +147,7 @@ export const TextAreaInput = (props: TextAreaInputProps) => {
   return (
     <TextArea className={inputClass}
               {...values}
+              readOnly={readOnly}
               has-error={hasErrorAttribute}
               aria-disabled={disabled}
               disabled={disabled}
