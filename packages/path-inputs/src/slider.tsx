@@ -109,7 +109,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       position: 'absolute',
       width: '16px',
       height: '16px',
-      marginTop: '-5px',
+      marginTop: '-6px',
       cursor: 'grab',
       borderRadius: '50%',
       backgroundColor: theme.colors.grayscale1,
