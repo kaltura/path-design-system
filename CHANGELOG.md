@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.12.0](https://github.com/kaltura/path-design-system/compare/v3.11.2...v3.12.0) (2020-06-16)
+
+
+### Bug Fixes
+
+* remove button animation ([2404f72](https://github.com/kaltura/path-design-system/commit/2404f7229c537d19f5f401528d29ca38206d80ca))
+* slider style ([1175271](https://github.com/kaltura/path-design-system/commit/1175271e7ff16c80798c65cd7125b6f6af22cfa4))
+
+
+### Features
+
+* add text area readonly property ([3a0dc96](https://github.com/kaltura/path-design-system/commit/3a0dc96acf53c81a18e669c2208ae6208d1ec0f1))
+* support disable icon style and add new icons ([c49f054](https://github.com/kaltura/path-design-system/commit/c49f0544dbfbb963f5ed49ce8be245771cf6348f))
+
+
+
+
+
 ## [3.11.2](https://github.com/kaltura/path-design-system/compare/v3.11.1...v3.11.2) (2020-06-14)
 
 **Note:** Version bump only for package path-design-system
