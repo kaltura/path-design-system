@@ -2,12 +2,17 @@ import * as React from 'react';
 import { CustomIconComponentProps, IconProps } from 'antd/lib/icon';
 import {Icon} from 'antd';
 
+// DEVELOPER NOTICE - this file was auto-generated. Don't modify or add icons manually
+
 const <%componentName%>Svg = (props: CustomIconComponentProps) => (
   <svg {...props}><%&paths%></svg>
 );
 
-export const <%componentName%>Icon = (props: IconProps) => {
-  const { style : propStyle, ...rest } = props;
+export const <%componentName%>Icon = (props: IconProps & { disabled?: boolean }) => {
+  const { style : propStyle, disabled, ...rest } = props;
   const style = { ...propStyle, 'fontSize': '<%size%>px'};
+  if (disabled) {
+    style.color = 'rgb(204, 204, 204)';
+  }
   return <Icon component={<%componentName%>Svg} {...rest} style={style} />;
 }
