@@ -59,6 +59,12 @@ const withClassName = (element: React.ReactElement, className: string = '') => {
 };
 
 const useStyles = createUseStyles((theme: Theme) => ({
+  '@global': {
+    '.ant-btn': {
+      '-webkit-transition': 'none',
+      'transition': 'none'
+    }
+  },
   'btn': (props: ButtonProps) => ({
     height: props.layout === 'vertical' ? '60px' : '32px',
     minWidth: props.layout === 'vertical' ? '80px' : '34px',
