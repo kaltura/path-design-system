@@ -239,6 +239,14 @@ export interface TimeInputProps {
    * */
   value?: string;
   /**
+   * Event callback for element onBlur
+   */
+  onBlur: () => void;
+  /**
+   * Event callback for element onFocus
+   */
+  onFocus: () => void;
+  /**
    * Event callback which is triggered after a user have typed something into an input field
    * @default undefined
    * */
@@ -262,6 +270,11 @@ export interface TimeInputProps {
    * Custom style
    */
   style?: CSSProperties | {};
+  /**
+   * Flag that indicates if input has an error, changes input style
+   * @default false
+   * */
+  hasError?: boolean;
 }
 
 export const TimeInput = (props: TimeInputProps) => {
