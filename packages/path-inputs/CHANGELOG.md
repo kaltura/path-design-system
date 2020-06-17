@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.13.0](https://github.com/kaltura/path-design-system/compare/v3.12.0...v3.13.0) (2020-06-17)
+
+
+### Features
+
+* add text input props to time input component PATH-863 ([#159](https://github.com/kaltura/path-design-system/issues/159)) ([c0c1140](https://github.com/kaltura/path-design-system/commit/c0c114084aed23fd803eb1eb20b70bfc35b7665f))
+
+
+
+
+
 # [3.12.0](https://github.com/kaltura/path-design-system/compare/v3.11.2...v3.12.0) (2020-06-16)
 
 
