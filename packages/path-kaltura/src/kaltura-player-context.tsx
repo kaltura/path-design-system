@@ -26,6 +26,15 @@ export enum PlayerStates {
   error = 'error'
 }
 
+export enum PlayerEventsTypes {
+  FirstPlaying = 'firstplaying'
+}
+
+export type PlayerEvents = |
+  {
+    type: PlayerEventsTypes.FirstPlaying
+  }
+
 export interface PlayerAction {
   actionType: PlayerActionTypes;
   options?: SeekOptions;
@@ -41,10 +50,15 @@ export interface PlayerContextValue {
   loadPlayer: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
   getPlayerState$: (playerId: string) => Observable<PlayerStateTypes>;
+  getPlayerEvents$: (playerId: string) => Observable<PlayerEvents>;
   seek: (playerId: string, options: SeekOptions) => void;
   play: (playerId: string) => void;
   pause: (playerId: string) => void;
-  registerPlayer: (playerId: string, currentTime$: Observable<number>, playerState$: Observable<string>) => { action$: Observable<PlayerAction>, onRemove: () => void }
+  registerPlayer: (
+    playerId: string,
+    currentTime$: Observable<number>,
+    playerState$: Observable<string>,
+    playerEvents$: Observable<PlayerEvents>) => { action$: Observable<PlayerAction>, onRemove: () => void }
 }
 
 export const defaultPlayerContext: PlayerContextValue =
@@ -55,6 +69,7 @@ export const defaultPlayerContext: PlayerContextValue =
       },
       loadPlayer: () => {},
       getPlayerState$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
+      getPlayerEvents$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
       getPlayerCurrentTime$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
       seek: () => { console.warn(`can't seek, KalturaPlayerProvider is missing`)},
       play: () => { console.warn(`can't play, KalturaPlayerProvider is missing`)},

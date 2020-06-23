@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import {KalturaPlayerContext, PlayerAction, PlayerActionTypes, PlayerLoadingStatuses} from "./kaltura-player-context";
 import * as shortid from "shortid";
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject, Subscription, Subject} from 'rxjs';
 import Player = KalturaPlayerTypes.Player;
 import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
 
@@ -42,8 +42,10 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const playerTimeSubject = useRef(new BehaviorSubject<number>(0));
   const playerStateSubject = useRef(new BehaviorSubject<PlayerStateTypes>('idle'));
+  const playerEventsSubject = useRef(new Subject<PlayerEvents>());
   const playerTime$ = useRef(playerTimeSubject.current.asObservable());
   const playerState$ = useRef(playerStateSubject.current.asObservable());
+  const playerEvents$ = useRef(playerEventsSubject.current.asObservable());
   const playerRegistrationRef = useRef({seekSubscription: Subscription.EMPTY, onRemove: () => {}});
 
   const updatePlayerCurrentTime = () => {
@@ -58,41 +60,17 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
     }
   };
 
-  //unmount component (destroy current player instance)
-  useEffect(() => {
-    return () => {
-      unmounted.current = true;
-      if(!playerRef.current) return;
-      playerRef.current.removeEventListener('timeupdate', updatePlayerCurrentTime);
-      playerRef.current.removeEventListener('playerstatechanged', updatePlayerState);
-      console.log('Kaltura player: Destroy');
-      playerRegistrationRef.current.seekSubscription.unsubscribe();
-      playerRegistrationRef.current.onRemove();
-      playerTimeSubject.current.complete();
-      playerRef.current.destroy();
-      playerRef.current = null;
-      setLoadMediaState(prevState => (
-        {
-          ...prevState,
-          playerStatus: PlayerLoadingStatuses.Destroyed,
-          mediaStatus: PlayerLoadingStatuses.Destroyed
-        })
-      );
+  const updatePlayerEvents = (event: PlayerEvents) => {
+    if(playerRef.current){
+      playerEventsSubject.current.next(event);
     }
-  }, []);
+  };
 
-  //listen to player loading status in order to load media
-  useEffect(() => {
-
-    if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial
-      || loadMediaState.playerStatus === PlayerLoadingStatuses.Error)
-      return;
-
-    if(!playerRef.current ||
-      loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
-      console.warn(`Kaltura player hasn't been setup yet.`);
+  const loadPlayerMedia = () => {
+    if(playerRef.current === null) {
       return;
     }
+
     setLoadMediaState(prevState => (
       {
         ...prevState,
@@ -123,6 +101,63 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
           })
         );
       });
+
+  };
+
+  //unmount component (destroy current player instance)
+  useEffect(() => {
+    return () => {
+      unmounted.current = true;
+      if(!playerRef.current) return;
+      playerRef.current.removeEventListener('timeupdate', updatePlayerCurrentTime);
+      playerRef.current.removeEventListener('playerstatechanged', updatePlayerState);
+      playerRef.current.removeEventListener('firstplaying', updatePlayerEvents);
+      console.log('Kaltura player: Destroy');
+      playerRegistrationRef.current.seekSubscription.unsubscribe();
+      playerRegistrationRef.current.onRemove();
+      playerTimeSubject.current.complete();
+      playerRef.current.destroy();
+      playerRef.current = null;
+      setLoadMediaState(prevState => (
+        {
+          ...prevState,
+          playerStatus: PlayerLoadingStatuses.Destroyed,
+          mediaStatus: PlayerLoadingStatuses.Destroyed
+        })
+      );
+    }
+  }, []);
+
+  //listen to media change
+  useEffect(() => {
+    if(loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
+      console.warn(`Can't change media. player is in ${loadMediaState.playerStatus} state`);
+      return;
+    }
+    if(!playerRef.current) {
+      console.warn(`Can't change media. There is no player`);
+      return;
+    }
+
+    loadPlayerMedia();
+
+  }, [entryId]);
+
+  //listen to player loading status in order to load media
+  useEffect(() => {
+
+    if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial
+      || loadMediaState.playerStatus === PlayerLoadingStatuses.Loading
+      || loadMediaState.playerStatus === PlayerLoadingStatuses.Error)
+      return;
+
+    if(!playerRef.current ||
+      loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
+      console.warn(`Kaltura player hasn't been setup yet.`);
+      return;
+    }
+
+    loadPlayerMedia();
 
   }, [loadMediaState.playerStatus]);
 
@@ -175,7 +210,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
         console.log('kaltura player was successfully loaded');
         playerRef.current = player;
-        const {action$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current, playerState$.current);
+        const {action$, onRemove} = registerPlayer(loadMediaState.playerId, playerTime$.current, playerState$.current, playerEvents$.current);
         const playerActionsSubscription = action$
           .subscribe(({actionType, options} : PlayerAction) => {
             switch (actionType) {
@@ -196,6 +231,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         playerRegistrationRef.current = {seekSubscription: playerActionsSubscription, onRemove};
         playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime);
         playerRef.current.addEventListener('playerstatechanged', updatePlayerState);
+        playerRef.current.addEventListener('firstplaying', updatePlayerEvents);
 
         if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
 

@@ -2,9 +2,18 @@ interface FakeEvent {}
 
 type CoreEventListener = (event: FakeEvent) => boolean | void;
 
-type PlayerEventTypes = 'timeupdate' | 'playerstatechanged';
+type PlayerEventTypes = 'timeupdate' | 'playerstatechanged' | 'firstplaying';
 
 type PlayerStateTypes = 'paused' | 'playing' | 'loading' | 'idle' | 'buffering' | 'error';
+
+enum PlayerEventsTypes {
+  FirstPlaying = 'firstplaying'
+}
+
+type PlayerEvents = |
+  {
+    type: PlayerEventsTypes.FirstPlaying
+  }
 
 type PlayerStateChangeEvent = {
   payload: {
