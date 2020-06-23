@@ -131,7 +131,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   //listen to media change
   useEffect(() => {
     if(loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
-      console.warn(`Can't change media. player is in ${loadMediaState.playerStatus} state`);
       return;
     }
     if(!playerRef.current) {
@@ -145,11 +144,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   //listen to player loading status in order to load media
   useEffect(() => {
-
-    if(loadMediaState.playerStatus === PlayerLoadingStatuses.Initial
-      || loadMediaState.playerStatus === PlayerLoadingStatuses.Loading
-      || loadMediaState.playerStatus === PlayerLoadingStatuses.Error)
-      return;
 
     if(!playerRef.current ||
       loadMediaState.playerStatus !== PlayerLoadingStatuses.Loaded) {
