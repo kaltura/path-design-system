@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.14.0](https://github.com/kaltura/path-design-system/compare/v3.13.0...v3.14.0) (2020-06-24)
+
+
+### Features
+
+* export first played event PATH-677 ([#161](https://github.com/kaltura/path-design-system/issues/161)) ([b3108fe](https://github.com/kaltura/path-design-system/commit/b3108fef9128001df9f6fdb86658621ba6d4d067))
+
+
+
+
+
 # [3.13.0](https://github.com/kaltura/path-design-system/compare/v3.12.0...v3.13.0) (2020-06-17)
 
 
