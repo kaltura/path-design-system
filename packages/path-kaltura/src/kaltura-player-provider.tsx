@@ -3,7 +3,7 @@ import {useMemo, useRef} from "react";
 import {
   KalturaPlayerContext,
   PlayerAction,
-  PlayerActionTypes,
+  PlayerActionTypes, PlayerEvents,
   PlayerLoadingStatuses,
   SeekOptions
 } from "./kaltura-player-context";
@@ -40,12 +40,17 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
   const _players = useRef<Record<string, {
     currentTime$: Observable<number>,
     playerState$: Observable<PlayerStateTypes>,
+    playerEvents$: Observable<PlayerEvents>,
     doAction: Subject<PlayerAction>}>>({});
 
   const playerContextValue = useMemo(() => {
 
-    const registerPlayer = (playerId: string, currentTime$: Observable<number>, playerState$: Observable<PlayerStateTypes>) => {
-      _players.current[playerId] = {currentTime$, playerState$ ,doAction: new Subject<PlayerAction>()};
+    const registerPlayer = (
+      playerId: string,
+      currentTime$: Observable<number>,
+      playerState$: Observable<PlayerStateTypes>,
+      playerEvents$: Observable<PlayerEvents>) => {
+      _players.current[playerId] = {currentTime$, playerState$ , playerEvents$, doAction: new Subject<PlayerAction>()};
       return {
         action$: _players.current[playerId].doAction.asObservable(),
         onRemove: () => {
@@ -86,12 +91,19 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
         : throwError(new Error('No player with provided playerId'))
     };
 
+    const getPlayerEvents$ = (playerId: string) => {
+      return _players.current[playerId]
+        ? _players.current[playerId].playerEvents$
+        : throwError(new Error('No player with provided playerId'))
+    };
+
     return {
       state,
       loadPlayer,
       registerPlayer,
       getPlayerCurrentTime$,
       getPlayerState$,
+      getPlayerEvents$,
       seek,
       play,
       pause
