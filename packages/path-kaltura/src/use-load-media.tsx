@@ -1,5 +1,11 @@
-import {useContext, useEffect, useRef, useState} from "react";
-import {KalturaPlayerContext, PlayerAction, PlayerActionTypes, PlayerLoadingStatuses} from "./kaltura-player-context";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import {
+  KalturaPlayerContext,
+  PlayerAction,
+  PlayerActionTypes,
+  PlayerEvents, PlayerEventsTypes,
+  PlayerLoadingStatuses
+} from "./kaltura-player-context";
 import * as shortid from "shortid";
 import {BehaviorSubject, Subscription, Subject} from 'rxjs';
 import Player = KalturaPlayerTypes.Player;
@@ -21,6 +27,9 @@ export interface LoadMediaState {
   playerStatus: PlayerLoadingStatuses;
   mediaStatus: PlayerLoadingStatuses;
 }
+
+// @ts-ignore
+const getPlayerVideoResizeEvent = () => window['KalturaPlayer'].ui.EventType.VIDEO_RESIZE;
 
 export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
@@ -60,11 +69,31 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
     }
   };
 
-  const updatePlayerEvents = (event: PlayerEvents) => {
-    if(playerRef.current){
-      playerEventsSubject.current.next(event);
+  const emitFirstPlaying = useCallback(() => {
+    if(!playerRef.current){
+     return;
     }
-  };
+
+    playerEventsSubject.current.next({
+      type: PlayerEventsTypes.FirstPlaying
+    });
+  }, []);
+
+  const emitVideoResized = useCallback((e) => {
+    if(!playerRef.current){
+      return;
+    }
+
+    const {x, y, width, height } = e.payload.videoSize;
+
+    playerEventsSubject.current.next({
+      type: PlayerEventsTypes.VideoResized,
+      x,
+      y,
+      width,
+      height
+    });
+  }, []);
 
   const loadPlayerMedia = () => {
     if(playerRef.current === null) {
@@ -111,7 +140,8 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       if(!playerRef.current) return;
       playerRef.current.removeEventListener('timeupdate', updatePlayerCurrentTime);
       playerRef.current.removeEventListener('playerstatechanged', updatePlayerState);
-      playerRef.current.removeEventListener('firstplaying', updatePlayerEvents);
+      playerRef.current.removeEventListener('firstplaying', emitFirstPlaying);
+      playerRef.current.removeEventListener(getPlayerVideoResizeEvent(), emitVideoResized);
       console.log('Kaltura player: Destroy');
       playerRegistrationRef.current.seekSubscription.unsubscribe();
       playerRegistrationRef.current.onRemove();
@@ -225,7 +255,8 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         playerRegistrationRef.current = {seekSubscription: playerActionsSubscription, onRemove};
         playerRef.current.addEventListener('timeupdate', updatePlayerCurrentTime);
         playerRef.current.addEventListener('playerstatechanged', updatePlayerState);
-        playerRef.current.addEventListener('firstplaying', updatePlayerEvents);
+        playerRef.current.addEventListener('firstplaying', emitFirstPlaying);
+        playerRef.current.addEventListener(getPlayerVideoResizeEvent(), emitVideoResized);
 
         if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
 

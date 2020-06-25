@@ -27,12 +27,21 @@ export enum PlayerStates {
 }
 
 export enum PlayerEventsTypes {
-  FirstPlaying = 'firstplaying'
+  FirstPlaying = 'FirstPlaying',
+  VideoResized = 'VideoResized'
 }
 
 export type PlayerEvents = |
   {
     type: PlayerEventsTypes.FirstPlaying
+  }
+  |
+  {
+    type: PlayerEventsTypes.VideoResized,
+    x: number,
+    y: number,
+    width: number,
+    height: number
   }
 
 export interface PlayerAction {

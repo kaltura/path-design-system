@@ -6,15 +6,6 @@ type PlayerEventTypes = 'timeupdate' | 'playerstatechanged' | 'firstplaying';
 
 type PlayerStateTypes = 'paused' | 'playing' | 'loading' | 'idle' | 'buffering' | 'error';
 
-enum PlayerEventsTypes {
-  FirstPlaying = 'firstplaying'
-}
-
-type PlayerEvents = |
-  {
-    type: PlayerEventsTypes.FirstPlaying
-  }
-
 type PlayerStateChangeEvent = {
   payload: {
     newState: {
