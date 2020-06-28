@@ -275,6 +275,16 @@ export interface TimeInputProps {
    * @default false
    * */
   hasError?: boolean;
+  /**
+   * Set input in disabled state which prevents user input and changes input style
+   * @default false
+   * */
+  disabled?: boolean;
+  /**
+   * Text input element size
+   * @default 'large'
+   */
+  size?: 'large' | 'small';
 }
 
 export const TimeInput = (props: TimeInputProps) => {
