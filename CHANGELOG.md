@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/kaltura/path-design-system/compare/v3.14.0...v3.15.0) (2020-06-28)
+
+
+### Features
+
+* add size property to time input PATH-664 ([#163](https://github.com/kaltura/path-design-system/issues/163)) ([7f989fa](https://github.com/kaltura/path-design-system/commit/7f989fa5bd3972c91f2806b61792ce152f6a35ef))
+
+
+
+
+
 # [3.14.0](https://github.com/kaltura/path-design-system/compare/v3.13.0...v3.14.0) (2020-06-24)
 
 
