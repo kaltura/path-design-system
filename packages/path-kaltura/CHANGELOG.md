@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.16.0](https://github.com/kaltura/path-design-system/compare/v3.15.0...v3.16.0) (2020-06-28)
+
+
+### Features
+
+* add player resize events and api to access the player instance ([#164](https://github.com/kaltura/path-design-system/issues/164)) ([d963229](https://github.com/kaltura/path-design-system/commit/d963229e2bacd5c6eb07f1cd74158dc6bcdade60))
+
+
+
+
+
 # [3.14.0](https://github.com/kaltura/path-design-system/compare/v3.13.0...v3.14.0) (2020-06-24)
 
 
