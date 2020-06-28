@@ -29,8 +29,10 @@ const icons16List: string[] = [
 const icons24List: string[] = [
     'Api24Icon',
     'Bold24Icon',
+    'Chain24Icon',
     'ChevronRight24Icon',
     'Close24Icon',
+    'Detached24Icon',
     'Duplicate24Icon',
     'Exit24Icon',
     'Film24Icon',
