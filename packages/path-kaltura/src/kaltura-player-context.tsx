@@ -28,12 +28,19 @@ export enum PlayerStates {
 
 export enum PlayerEventsTypes {
   FirstPlaying = 'FirstPlaying',
-  VideoResized = 'VideoResized'
+  VideoResized = 'VideoResized',
+  PlayerResized = 'PlayerResized'
 }
 
 export type PlayerEvents = |
   {
     type: PlayerEventsTypes.FirstPlaying
+  }
+  |
+  {
+    type: PlayerEventsTypes.PlayerResized,
+    width: number,
+    height: number
   }
   |
   {
@@ -62,6 +69,7 @@ export interface PlayerContextValue {
   getPlayerEvents$: (playerId: string) => Observable<PlayerEvents>;
   seek: (playerId: string, options: SeekOptions) => void;
   play: (playerId: string) => void;
+  getPlayerInstance: (playerId: string) => null | Record<string, any>;
   pause: (playerId: string) => void;
   registerPlayer: (
     playerId: string,
@@ -82,6 +90,8 @@ export const defaultPlayerContext: PlayerContextValue =
       getPlayerCurrentTime$: () =>  throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)),
       seek: () => { console.warn(`can't seek, KalturaPlayerProvider is missing`)},
       play: () => { console.warn(`can't play, KalturaPlayerProvider is missing`)},
+      getPlayerInstance: () => { console.warn(`can't get player instance , KalturaPlayerProvider is missing`)
+      return null;},
       pause: () => { console.warn(`can't pause, KalturaPlayerProvider is missing`)},
       registerPlayer: () => ({ action$: throwError(new Error(`can't use context, KalturaPlayerProvider is missing`)), onRemove: () => {}})
     };

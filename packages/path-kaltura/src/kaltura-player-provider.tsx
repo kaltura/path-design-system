@@ -37,10 +37,11 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
   const {autoLoad, config, children} = props;
   const [state, loadPlayer] = useLoadPlayerBundler({config, autoLoad});
 
-  const _players = useRef<Record<string, {
+  const _playersRef = useRef<Record<string, {
     currentTime$: Observable<number>,
     playerState$: Observable<PlayerStateTypes>,
     playerEvents$: Observable<PlayerEvents>,
+    getPlayerInstance: () => any,
     doAction: Subject<PlayerAction>}>>({});
 
   const playerContextValue = useMemo(() => {
@@ -50,50 +51,66 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       currentTime$: Observable<number>,
       playerState$: Observable<PlayerStateTypes>,
       playerEvents$: Observable<PlayerEvents>) => {
-      _players.current[playerId] = {currentTime$, playerState$ , playerEvents$, doAction: new Subject<PlayerAction>()};
+      _playersRef.current[playerId] = {
+        currentTime$,
+        playerState$ ,
+        playerEvents$,
+        getPlayerInstance: () => {
+          // @ts-ignore
+          return (window.KalturaPlayer && window.KalturaPlayer.getPlayers && window.KalturaPlayer.getPlayers()[playerId]) || null;
+        },
+        doAction: new Subject<PlayerAction>()
+      };
       return {
-        action$: _players.current[playerId].doAction.asObservable(),
+        action$: _playersRef.current[playerId].doAction.asObservable(),
         onRemove: () => {
-          if(!_players.current[playerId]) return;
-          _players.current[playerId].doAction.complete();
-          delete _players.current[playerId];
+          if(!_playersRef.current[playerId]) return;
+          _playersRef.current[playerId].doAction.complete();
+          delete _playersRef.current[playerId];
         }
       }
     };
 
     const seek = (playerId: string, options: SeekOptions) => {
-      if(!_players.current[playerId]) return;
+      if(!_playersRef.current[playerId]) return;
 
-      _players.current[playerId].doAction.next({actionType: PlayerActionTypes.Seek, options});
+      _playersRef.current[playerId].doAction.next({actionType: PlayerActionTypes.Seek, options});
     };
 
     const play = (playerId: string) => {
-      if(!_players.current[playerId]) return;
+      if(!_playersRef.current[playerId]) return;
 
-      _players.current[playerId].doAction.next({actionType: PlayerActionTypes.Play});
+      _playersRef.current[playerId].doAction.next({actionType: PlayerActionTypes.Play});
     };
 
-    const pause = (playerId: string) => {
-      if(!_players.current[playerId]) return;
+    const getPlayerInstance = (playerId: string) => {
+      if(!_playersRef.current[playerId]) return;
 
-      _players.current[playerId].doAction.next({actionType: PlayerActionTypes.Pause});
+      return _playersRef.current[playerId].getPlayerInstance();
+    };
+
+
+    const pause = (playerId: string) => {
+      if(!_playersRef.current[playerId]) return;
+
+      _playersRef.current[playerId].doAction.next({actionType: PlayerActionTypes.Pause});
     };
 
     const getPlayerCurrentTime$ = (playerId: string) => {
-      return _players.current[playerId]
-        ? _players.current[playerId].currentTime$
+      return _playersRef.current[playerId]
+        ? _playersRef.current[playerId].currentTime$
         : throwError(new Error('No player with provided playerId'))
     };
 
     const getPlayerState$ = (playerId: string) => {
-      return _players.current[playerId]
-        ? _players.current[playerId].playerState$
+      return _playersRef.current[playerId]
+        ? _playersRef.current[playerId].playerState$
         : throwError(new Error('No player with provided playerId'))
     };
 
     const getPlayerEvents$ = (playerId: string) => {
-      return _players.current[playerId]
-        ? _players.current[playerId].playerEvents$
+      return _playersRef.current[playerId]
+        ? _playersRef.current[playerId].playerEvents$
         : throwError(new Error('No player with provided playerId'))
     };
 
@@ -106,7 +123,8 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       getPlayerEvents$,
       seek,
       play,
-      pause
+      pause,
+      getPlayerInstance
     }
   }, [state.status, loadPlayer]);
 

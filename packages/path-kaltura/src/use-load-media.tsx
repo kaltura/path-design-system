@@ -31,6 +31,9 @@ export interface LoadMediaState {
 // @ts-ignore
 const getPlayerVideoResizeEvent = () => window['KalturaPlayer'].ui.EventType.VIDEO_RESIZE;
 
+// @ts-ignore
+const getPlayerResizeEvent = () => window['KalturaPlayer'].ui.EventType.PLAYER_RESIZE;
+
 export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
   const {entryId, autoplay, onMediaLoaded, enableKavaAnalytics,
@@ -95,6 +98,20 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
     });
   }, []);
 
+  const emitPlayerResized = useCallback((e) => {
+    if(!playerRef.current){
+      return;
+    }
+
+    const {width, height } = e.payload.playerSize;
+
+    playerEventsSubject.current.next({
+      type: PlayerEventsTypes.PlayerResized,
+      width,
+      height
+    });
+  }, []);
+
   const loadPlayerMedia = () => {
     if(playerRef.current === null) {
       return;
@@ -142,6 +159,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       playerRef.current.removeEventListener('playerstatechanged', updatePlayerState);
       playerRef.current.removeEventListener('firstplaying', emitFirstPlaying);
       playerRef.current.removeEventListener(getPlayerVideoResizeEvent(), emitVideoResized);
+      playerRef.current.removeEventListener(getPlayerResizeEvent(), emitPlayerResized);
       console.log('Kaltura player: Destroy');
       playerRegistrationRef.current.seekSubscription.unsubscribe();
       playerRegistrationRef.current.onRemove();
@@ -257,6 +275,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         playerRef.current.addEventListener('playerstatechanged', updatePlayerState);
         playerRef.current.addEventListener('firstplaying', emitFirstPlaying);
         playerRef.current.addEventListener(getPlayerVideoResizeEvent(), emitVideoResized);
+        playerRef.current.addEventListener(getPlayerResizeEvent(), emitPlayerResized);
 
         if(onPlayerLoaded) onPlayerLoaded({entryId, playerId: loadMediaState.playerId});
 
