@@ -218,6 +218,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     transform: 'translate(-50%, -50%)',
   },
   'labelClass': {
+    userSelect: 'none',
     padding: '0 4px',
     lineHeight: '24px',
   },

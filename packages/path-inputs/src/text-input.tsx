@@ -96,6 +96,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   input: {
     width: '100%',
     minWidth: '0',
+    userSelect: 'none',
     padding: '8px',
     fontFamily: theme.input.fontFamily,
     fontSize: theme.input.fontSize,
@@ -117,6 +118,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     '&:active': {
       border: 'none',
       boxShadow: 'none',
+      userSelect: 'auto'
     },
     '&:disabled': {
       border: 'none',
@@ -145,6 +147,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   affixWrapper: {
     width: '100%',
     display: 'flex',
+    overflow: 'hidden',
     alignItems: 'center',
     border: `thin solid ${theme.colors.grayscale4}`,
     borderRadius: '4px',
@@ -170,11 +173,13 @@ const useStyles = createUseStyles((theme: Theme) => ({
   },
   preContent: {
     color: theme.colors.grayscale2,
+    userSelect: 'none',
     margin: '0 0 0 8px',
     height: '24px',
     minWidth: '24px',
   },
   postContent: {
+    userSelect: 'none',
     margin: '0 8px 0 0',
     flex: '1 0 auto',
     height: '24px',

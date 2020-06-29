@@ -26,6 +26,12 @@ export interface TypographyProps {
    * @default TypographyTypes.Label14
    */
   type: TypographyTypes;
+
+  /**
+   * Allow user text selection
+   * @default false
+   */
+  allowUserSelect?: boolean;
   /**
    * Text to display
    */
@@ -141,7 +147,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
 export const Typography = (props: TypographyProps) => {
 
-  const {text, type, rows, ellipsis, expandable, className} = props;
+  const {text, type, rows, ellipsis, expandable, className, allowUserSelect} = props;
 
   const classes = useStyles(props);
 
@@ -149,6 +155,9 @@ export const Typography = (props: TypographyProps) => {
 
   return (
     <Paragraph
+      style={{
+        userSelect: allowUserSelect ? 'auto': 'none'
+      }}
       className={classNames(
         {
           [classes.fontStyle]: true,

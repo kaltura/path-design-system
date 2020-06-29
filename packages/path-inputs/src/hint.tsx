@@ -96,6 +96,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontWeight: theme.hint.fontWeight,
         lineHeight: theme.hint.lineHeight,
         display: 'block',
+        userSelect: 'none'
     },
     '@global': {
         '.path.ant-tooltip': { maxWidth: 'unset' },
