@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.1](https://github.com/kaltura/path-design-system/compare/v3.17.0...v3.17.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* prevent user selection of text that is part of ui components ([056a295](https://github.com/kaltura/path-design-system/commit/056a295f3611b5ec4e8e4a6dc412bc484a9eaefd))
+
+
+
+
+
 # [3.17.0](https://github.com/kaltura/path-design-system/compare/v3.16.0...v3.17.0) (2020-06-28)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
