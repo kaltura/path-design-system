@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.17.0](https://github.com/kaltura/path-design-system/compare/v3.16.0...v3.17.0) (2020-06-28)
+
+**Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
+
+
+
+
+
 # [3.15.0](https://github.com/kaltura/path-design-system/compare/v3.14.0...v3.15.0) (2020-06-28)
 
 
