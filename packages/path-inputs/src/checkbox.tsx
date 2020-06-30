@@ -218,11 +218,13 @@ export function Checkbox({
 }: CheckboxProps) {
   const classes = useStyles();
   const [isControlled] = useState(typeof checked === 'boolean');
-
   const [isChecked, setChecked] = useState(
     typeof checked === 'boolean' ? checked : defaultChecked || false
   );
   useEffect(() => {
+    if (!isControlled) {
+      return;
+    }
     setChecked(checked || false);
   }, [checked]);
 

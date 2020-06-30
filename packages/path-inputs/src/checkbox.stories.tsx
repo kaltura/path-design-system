@@ -5,6 +5,7 @@ import {boolean, withKnobs} from '@storybook/addon-knobs';
 import {withThemeProvider} from '../storybook/with-theme-provider';
 import '../../../.storybook/obslete-styles.css';
 import {Checkbox} from './checkbox';
+import { Button } from './button';
 
 export const Default: Story = () => {
   const [value, setValue] = useState(false);
@@ -22,20 +23,17 @@ export const Default: Story = () => {
       </div>
       <div className="col">
         <Checkbox
-          label="Checkbox"
+          label="Partial"
           partial={partial}
           checked={value}
           onChange={handleChange}
         />
       </div>
       <div className="col">
-        <Checkbox label="Checkbox" partial={true} disabled={true} />
+        <Checkbox label="Disabled and Partial" partial={true} disabled={true} />
       </div>
       <div className="col">
-        <Checkbox label="Checkbox" disabled={true} />
-      </div>
-      <div className="col">
-        <Checkbox label="Checkbox" defaultChecked={true} disabled={true} />
+        <Checkbox label="Disabled" disabled={true} />
       </div>
     </div>
   );
@@ -75,6 +73,11 @@ export const PartialChecked: Story = () => {
     action('onChange')(event.target.checked);
   };
 
+  const handlePartial = (): void => {
+    setPartial(true);
+    action('set partial state');
+  };
+
   return (
     <div className="row">
       <div className="col">
@@ -84,6 +87,9 @@ export const PartialChecked: Story = () => {
           checked={value}
           onChange={handleChange}
         />
+      </div>
+      <div className="col">
+        <Button label="Set Partial" onClick={handlePartial} />
       </div>
     </div>
   );
@@ -100,17 +106,32 @@ However controlled component has to be used with <code>checked</code> and <code>
 
 export const Workshop: Story = () => {
   const [value, setValue] = useState(false);
+  const [partialCheckboxValue, setPartialCheckboxValue] = useState(false);
+  const [partial, setPartial] = useState(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValue(event.target.checked);
     action('onChange')(event.target.checked);
   };
 
+  const handlePartialCheckboxChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setPartialCheckboxValue(event.target.checked);
+    setPartial(false);
+    action('onChange')(event.target.checked);
+  };
+
+  const handlePartial = (): void => {
+    setPartial(true);
+    action('set partial state');
+  };
+
   return (
     <div>
       <div className="col">
         <Checkbox
-          label="Controlled checkbox"
+          label="Checkbox"
           checked={value}
           onChange={handleChange}
           disabled={boolean('Disabled', false)}
@@ -118,19 +139,15 @@ export const Workshop: Story = () => {
       </div>
       <div className="col">
         <Checkbox
-          label="Uncontrolled checkbox"
-          defaultChecked={true}
-          onChange={action('changed')}
+          label="Checkbox with partial"
+          partial={partial}
+          checked={partialCheckboxValue}
           disabled={boolean('Disabled', false)}
+          onChange={handlePartialCheckboxChange}
         />
       </div>
       <div className="col">
-        <Checkbox
-          label="Checkbox with partial"
-          partial={boolean('Partial', false)}
-          disabled={boolean('Disabled', false)}
-          onChange={action('changed')}
-        />
+        <Button label="Set Partial" onClick={handlePartial} />
       </div>
     </div>
   );
