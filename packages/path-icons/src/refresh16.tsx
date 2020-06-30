@@ -2,12 +2,17 @@ import * as React from 'react';
 import { CustomIconComponentProps, IconProps } from 'antd/lib/icon';
 import {Icon} from 'antd';
 
+// DEVELOPER NOTICE - this file was auto-generated. Don't modify or add icons manually
+
 const Refresh16Svg = (props: CustomIconComponentProps) => (
   <svg {...props}><g fillRule="evenodd"><path fillRule="nonzero" d="M3.9785 11.604a.9.9 0 011.2712-.0633A4.081 4.081 0 008 12.6c1.705 0 3.1669-1.0407 3.7851-2.5215l-1.5726.7768-.1131.0467a.9002.9002 0 01-.6844-1.6604l3.1863-1.5746.114-.047c.4232-.1418.8966.05 1.0957.4635l1.5413 3.2025.0456.1136a.9002.9002 0 01-.4662 1.0876l-.1136.0456a.9002.9002 0 01-1.0877-.4662l-.449-.9339C12.3142 13.0697 10.3125 14.4 8 14.4a5.8806 5.8806 0 01-3.9583-1.5248.9.9 0 01-.0632-1.2712zM1.0683 4.4866a.9002.9002 0 011.141.3142l.0603.1064.4554.9472C3.6949 3.9244 5.6928 2.6 8 2.6a5.8797 5.8797 0 013.8703 1.4467.9.9 0 11-1.1812 1.3582C9.9479 4.7603 9.003 4.4 8 4.4c-1.6922 0-3.145 1.0251-3.771 2.4882l1.5585-.7697a.9002.9002 0 011.1441.3023l.0615.1059a.9002.9002 0 01-.3023 1.144l-.1058.0615L3.3987 9.307l-.0227.011a.8942.8942 0 01-.0704.0289l.0931-.04a.9068.9068 0 01-.2606.0828 1.224 1.224 0 01-.035.0046.8352.8352 0 01-.0812.0058H3a.907.907 0 01-.3304-.0626 1.0801 1.0801 0 01-.0979-.0456.906.906 0 01-.1584-.109l-.0153-.0137a.7852.7852 0 01-.0743-.0752.7227.7227 0 01-.0326-.0391 1.0081 1.0081 0 01-.0412-.0573l-.0132-.0205a.8987.8987 0 01-.0393-.0694l-.0084-.0173L.6477 5.688a.9.9 0 01.4206-1.2013z" /></g></svg>
 );
 
-export const Refresh16Icon = (props: IconProps) => {
-  const { style : propStyle, ...rest } = props;
+export const Refresh16Icon = (props: IconProps & { disabled?: boolean }) => {
+  const { style : propStyle, disabled, ...rest } = props;
   const style = { ...propStyle, 'fontSize': '16px'};
+  if (disabled) {
+    style.color = 'rgb(204, 204, 204)';
+  }
   return <Icon component={Refresh16Svg} {...rest} style={style} />;
 }

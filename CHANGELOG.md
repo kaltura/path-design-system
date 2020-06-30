@@ -3,6 +3,312 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.1](https://github.com/kaltura/path-design-system/compare/v3.17.0...v3.17.1) (2020-06-29)
+
+
+### Bug Fixes
+
+* prevent user selection of text that is part of ui components ([056a295](https://github.com/kaltura/path-design-system/commit/056a295f3611b5ec4e8e4a6dc412bc484a9eaefd))
+
+
+
+
+
+# [3.17.0](https://github.com/kaltura/path-design-system/compare/v3.16.0...v3.17.0) (2020-06-28)
+
+
+### Features
+
+* update icons gallery ([0b33bcf](https://github.com/kaltura/path-design-system/commit/0b33bcf7a9df014c83c014be631b7a32fd4995f8))
+
+
+
+
+
+# [3.16.0](https://github.com/kaltura/path-design-system/compare/v3.15.0...v3.16.0) (2020-06-28)
+
+
+### Features
+
+* add player resize events and api to access the player instance ([#164](https://github.com/kaltura/path-design-system/issues/164)) ([d963229](https://github.com/kaltura/path-design-system/commit/d963229e2bacd5c6eb07f1cd74158dc6bcdade60))
+
+
+
+
+
+# [3.15.0](https://github.com/kaltura/path-design-system/compare/v3.14.0...v3.15.0) (2020-06-28)
+
+
+### Features
+
+* add size property to time input PATH-664 ([#163](https://github.com/kaltura/path-design-system/issues/163)) ([7f989fa](https://github.com/kaltura/path-design-system/commit/7f989fa5bd3972c91f2806b61792ce152f6a35ef))
+
+
+
+
+
+# [3.14.0](https://github.com/kaltura/path-design-system/compare/v3.13.0...v3.14.0) (2020-06-24)
+
+
+### Features
+
+* export first played event PATH-677 ([#161](https://github.com/kaltura/path-design-system/issues/161)) ([b3108fe](https://github.com/kaltura/path-design-system/commit/b3108fef9128001df9f6fdb86658621ba6d4d067))
+
+
+
+
+
+# [3.13.0](https://github.com/kaltura/path-design-system/compare/v3.12.0...v3.13.0) (2020-06-17)
+
+
+### Features
+
+* add text input props to time input component PATH-863 ([#159](https://github.com/kaltura/path-design-system/issues/159)) ([c0c1140](https://github.com/kaltura/path-design-system/commit/c0c114084aed23fd803eb1eb20b70bfc35b7665f))
+
+
+
+
+
+# [3.12.0](https://github.com/kaltura/path-design-system/compare/v3.11.2...v3.12.0) (2020-06-16)
+
+
+### Bug Fixes
+
+* remove button animation ([2404f72](https://github.com/kaltura/path-design-system/commit/2404f7229c537d19f5f401528d29ca38206d80ca))
+* slider style ([1175271](https://github.com/kaltura/path-design-system/commit/1175271e7ff16c80798c65cd7125b6f6af22cfa4))
+
+
+### Features
+
+* add text area readonly property ([3a0dc96](https://github.com/kaltura/path-design-system/commit/3a0dc96acf53c81a18e669c2208ae6208d1ec0f1))
+* support disable icon style and add new icons ([c49f054](https://github.com/kaltura/path-design-system/commit/c49f0544dbfbb963f5ed49ce8be245771cf6348f))
+
+
+
+
+
+## [3.11.2](https://github.com/kaltura/path-design-system/compare/v3.11.1...v3.11.2) (2020-06-14)
+
+**Note:** Version bump only for package path-design-system
+
+
+
+
+
+## [3.11.1](https://github.com/kaltura/path-design-system/compare/v3.11.0...v3.11.1) (2020-06-12)
+
+**Note:** Version bump only for package path-design-system
+
+
+
+
+
+# [3.11.0](https://github.com/kaltura/path-design-system/compare/v3.10.0...v3.11.0) (2020-06-12)
+
+
+### Features
+
+* add logic to the text input filed PATH-834 ([#154](https://github.com/kaltura/path-design-system/issues/154)) ([f1b84ad](https://github.com/kaltura/path-design-system/commit/f1b84ad00fc4df9f8f0cc9d910aad495284b9fc2))
+
+
+
+
+
+# [3.10.0](https://github.com/kaltura/path-design-system/compare/v3.9.0...v3.10.0) (2020-06-11)
+
+
+### Features
+
+* add new typography label and export slider PATH-800 ([#153](https://github.com/kaltura/path-design-system/issues/153)) ([ff3c647](https://github.com/kaltura/path-design-system/commit/ff3c647a990c98f8764fd31457e4dedcce2739a1))
+
+
+
+
+
+# [3.9.0](https://github.com/kaltura/path-design-system/compare/v3.8.0...v3.9.0) (2020-06-10)
+
+
+### Features
+
+* add icons for the video-editor PATH-832 ([#151](https://github.com/kaltura/path-design-system/issues/151)) ([831c26c](https://github.com/kaltura/path-design-system/commit/831c26cac673e28773ef09a56c1a3a1585d5a838))
+
+
+
+
+
+# [3.8.0](https://github.com/kaltura/path-design-system/compare/v3.7.0...v3.8.0) (2020-06-10)
+
+
+### Features
+
+* add color picker component with stories PATH-845 ([#147](https://github.com/kaltura/path-design-system/issues/147)) ([584ca6a](https://github.com/kaltura/path-design-system/commit/584ca6a5e7f60e259efc8dd50377a9c0a1725686))
+
+
+
+
+
+# [3.7.0](https://github.com/kaltura/path-design-system/compare/v3.6.0...v3.7.0) (2020-06-09)
+
+
+### Features
+
+* update zoom out icon and support new label type PATH-700 ([#149](https://github.com/kaltura/path-design-system/issues/149)) ([65efe79](https://github.com/kaltura/path-design-system/commit/65efe796b7d2029333186d1c77ad80ab3868fffe))
+
+
+
+
+
+# [3.6.0](https://github.com/kaltura/path-design-system/compare/v3.5.0...v3.6.0) (2020-06-07)
+
+
+### Features
+
+* **path-inputs:** add toggle button component  ([#148](https://github.com/kaltura/path-design-system/issues/148)) ([425eb4c](https://github.com/kaltura/path-design-system/commit/425eb4c517d71ed7b04f3b8d6c5afad451d094c9))
+
+
+
+
+
+# [3.5.0](https://github.com/kaltura/path-design-system/compare/v3.4.0...v3.5.0) (2020-06-07)
+
+
+### Features
+
+* **path-kaltura:** allow customizing player config during player setup ([e6231eb](https://github.com/kaltura/path-design-system/commit/e6231eb2f10898d9a4a930b257dcedd39c7880bd))
+
+
+
+
+
+# [3.4.0](https://github.com/kaltura/path-design-system/compare/v3.3.0...v3.4.0) (2020-06-04)
+
+
+### Features
+
+* add radio group component ([#111](https://github.com/kaltura/path-design-system/issues/111)) ([4cafad4](https://github.com/kaltura/path-design-system/commit/4cafad49c5ff5a25c74f0c05434446ea31befaeb))
+
+
+
+
+
+# [3.3.0](https://github.com/kaltura/path-design-system/compare/v3.2.0...v3.3.0) (2020-06-04)
+
+
+### Features
+
+* add slider component ([#109](https://github.com/kaltura/path-design-system/issues/109)) ([368089d](https://github.com/kaltura/path-design-system/commit/368089d8444cd57f22964fdbb223ec087484471a))
+
+
+
+
+
+# [3.2.0](https://github.com/kaltura/path-design-system/compare/v3.1.0...v3.2.0) (2020-06-04)
+
+
+### Features
+
+* disable kava analytics report in player ([b64e7a0](https://github.com/kaltura/path-design-system/commit/b64e7a0e3f4b52221cad7f5f59521b24a44ec585))
+
+
+
+
+
+# [3.1.0](https://github.com/kaltura/path-design-system/compare/v3.0.0...v3.1.0) (2020-06-04)
+
+
+### Features
+
+* adjust player current time to ms ([#145](https://github.com/kaltura/path-design-system/issues/145)) ([d6b23ea](https://github.com/kaltura/path-design-system/commit/d6b23ea780e7a8e49e614bf5df8f1f3f51dcd35b))
+
+
+
+
+
+# [3.0.0](https://github.com/kaltura/path-design-system/compare/v2.3.0...v3.0.0) (2020-06-01)
+
+
+### Bug Fixes
+
+* update player currentTime to use milliseconds ([#143](https://github.com/kaltura/path-design-system/issues/143)) ([3db3f22](https://github.com/kaltura/path-design-system/commit/3db3f220834790957e9c05f533d7533016a797fa))
+
+
+### BREAKING CHANGES
+
+* - player seek is now using milliseconds instead of seconds
+- current player time is now returning milliseconds instead of seconds
+
+
+
+
+
+# [2.3.0](https://github.com/kaltura/path-design-system/compare/v2.2.0...v2.3.0) (2020-05-31)
+
+
+### Features
+
+* add exit icon PATH-780 ([#142](https://github.com/kaltura/path-design-system/issues/142)) ([095b64a](https://github.com/kaltura/path-design-system/commit/095b64a780d882450010fa6c4dc10ea9e7837b72))
+
+
+
+
+
+# [2.2.0](https://github.com/kaltura/path-design-system/compare/v2.1.0...v2.2.0) (2020-05-25)
+
+
+### Features
+
+* update styles in Typography component PATH-744 ([#138](https://github.com/kaltura/path-design-system/issues/138)) ([627f9ca](https://github.com/kaltura/path-design-system/commit/627f9ca9f97f735f42472e852bb275228ae53099))
+
+
+
+
+
+# [2.1.0](https://github.com/kaltura/path-design-system/compare/v2.0.0...v2.1.0) (2020-05-12)
+
+
+### Features
+
+* add player current state to player provider PATH-740 ([#135](https://github.com/kaltura/path-design-system/issues/135)) ([a5220b7](https://github.com/kaltura/path-design-system/commit/a5220b7c7be70dad4821e5b3d30c6142ee5fd3f7))
+
+
+
+
+
+# [2.0.0](https://github.com/kaltura/path-design-system/compare/v1.4.1...v2.0.0) (2020-05-11)
+
+
+### Features
+
+* add play and pause actions to player provider PATH-740 ([#133](https://github.com/kaltura/path-design-system/issues/133)) ([a0391b6](https://github.com/kaltura/path-design-system/commit/a0391b6fcf19b6c0e57c2b22ed58e4df046ec508))
+
+
+### BREAKING CHANGES
+
+* changing the seek action arguments in Kaltura Player component
+
+
+
+
+
+## [1.4.1](https://github.com/kaltura/path-design-system/compare/v1.4.0...v1.4.1) (2020-05-07)
+
+**Note:** Version bump only for package path-design-system
+
+
+
+
+
+# [1.4.0](https://github.com/kaltura/path-design-system/compare/v1.3.1...v1.4.0) (2020-05-06)
+
+
+### Features
+
+* update icons library ([5d34668](https://github.com/kaltura/path-design-system/commit/5d346683a4555a87ed27740553397a78e218ea2c))
+
+
+
+
+
 ## [1.3.1](https://github.com/kaltura/path-design-system/compare/v1.3.0...v1.3.1) (2020-04-26)
 
 

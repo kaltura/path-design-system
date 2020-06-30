@@ -33,6 +33,11 @@ export interface KalturaPlayerProps {
    * @param error
    */
   onMediaLoadingError?: (entryId: string) => void;
+
+  /**
+   * customize player config before player setup
+   */
+  customizeConfig?: (config: Record<string, any>) => Record<string, any>
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -71,11 +76,12 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
   const {
     entryId, autoplay,
     onPlayerLoadingError, onPlayerLoaded,
+    customizeConfig,
     onMediaLoadingError, onMediaLoaded} = props;
 
   const {playerId, playerStatus} = useLoadMedia(
     {autoplay, entryId, onPlayerLoadingError,
-      onPlayerLoaded, onMediaLoadingError, onMediaLoaded
+      onPlayerLoaded, onMediaLoadingError, onMediaLoaded, customizeConfig
     });
 
   return (

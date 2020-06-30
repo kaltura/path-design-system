@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Tooltip } from 'antd';
-import './hint.css';
-import { Theme } from '@kaltura-react-ui-kits/path-theming';
-import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 import { useEffect, useState } from 'react';
+import { Tooltip } from 'antd';
+import {
+  createUseStyles,
+  Theme,
+  theming
+} from '@kaltura-react-ui-kits/path-theming';
 
 export interface HintProps {
     /**
@@ -94,7 +96,20 @@ const useStyles = createUseStyles((theme: Theme) => ({
         fontWeight: theme.hint.fontWeight,
         lineHeight: theme.hint.lineHeight,
         display: 'block',
+        userSelect: 'none'
     },
+    '@global': {
+        '.path.ant-tooltip': { maxWidth: 'unset' },
+        '.path .ant-tooltip-arrow': { color: theme.colors.grayscale1 },
+        '.path .ant-tooltip-inner': {
+            backgroundColor: theme.colors.grayscale1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: 'unset',
+            textAlign: 'center'
+        }
+    }
 }), { theming });
 
 /**

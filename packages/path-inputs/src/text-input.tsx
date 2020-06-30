@@ -82,12 +82,21 @@ export interface TextInputProps {
    * @default undefined
    */
   htmlType?: string;
+  /**
+   * Event callback which is triggered after a user have focus on the input field
+   * */
+  onFocus?: () => void;
+  /**
+   * Event callback which is triggered after a user have blur the input field
+   * */
+  onBlur?: () => void;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
   input: {
     width: '100%',
     minWidth: '0',
+    userSelect: 'none',
     padding: '8px',
     fontFamily: theme.input.fontFamily,
     fontSize: theme.input.fontSize,
@@ -109,6 +118,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     '&:active': {
       border: 'none',
       boxShadow: 'none',
+      userSelect: 'auto'
     },
     '&:disabled': {
       border: 'none',
@@ -137,6 +147,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   affixWrapper: {
     width: '100%',
     display: 'flex',
+    overflow: 'hidden',
     alignItems: 'center',
     border: `thin solid ${theme.colors.grayscale4}`,
     borderRadius: '4px',
@@ -162,11 +173,13 @@ const useStyles = createUseStyles((theme: Theme) => ({
   },
   preContent: {
     color: theme.colors.grayscale2,
+    userSelect: 'none',
     margin: '0 0 0 8px',
     height: '24px',
     minWidth: '24px',
   },
   postContent: {
+    userSelect: 'none',
     margin: '0 8px 0 0',
     flex: '1 0 auto',
     height: '24px',
@@ -206,7 +219,9 @@ export const TextInput = (props: TextInputProps) => {
     onChange,
     placeholder,
     htmlType,
-    hasError = false
+    hasError = false,
+    onFocus,
+    onBlur,
   } = props;
   const classes = useStyles(props);
 
@@ -249,6 +264,18 @@ export const TextInput = (props: TextInputProps) => {
     }
   };
 
+  const onFocusHandler = () => {
+    setIsInFocus(true);
+
+    if (onFocus) onFocus();
+  };
+
+  const onBlurHandler = () => {
+    setIsInFocus(false);
+
+    if (onBlur) onBlur();
+  };
+
   return (
     <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
             {renderAffix({
@@ -262,8 +289,8 @@ export const TextInput = (props: TextInputProps) => {
              disabled={disabled}
              ref={handleInputRef}
              placeholder={placeholder}
-             onFocus={() => setIsInFocus(true)}
-             onBlur={() => setIsInFocus(false)}
+             onFocus={onFocusHandler}
+             onBlur={onBlurHandler}
              onChange={onChange}/>
       {renderAffix({ element: postContent, className: suffixClass })}
         </span>
