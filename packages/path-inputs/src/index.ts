@@ -12,3 +12,4 @@ export * from './radio-group';
 export * from './slider';
 export * from './dropdown-list';
 export * from './dropdown-menu';
+export * from './checkbox';

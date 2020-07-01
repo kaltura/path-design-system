@@ -273,7 +273,7 @@ export function Checkbox({
         />
         <span className={checkboxInnerClass} />
       </span>
-      <span>{label}</span>
+      {!!label && <span>{label}</span>}
     </label>
   );
 }
