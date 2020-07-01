@@ -18,6 +18,7 @@ export { Home16Icon } from './home16';
 export { Image24Icon } from './image24';
 export { Interaction24Icon } from './interaction24';
 export { Italic24Icon } from './italic24';
+export { Loop16Icon } from './loop16';
 export { Loop24Icon } from './loop24';
 export { Magnet24Icon } from './magnet24';
 export { Map24Icon } from './map24';
