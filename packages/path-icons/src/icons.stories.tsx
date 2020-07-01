@@ -22,6 +22,7 @@ const icons16List: string[] = [
     'Checkmark16Icon',
     'ConnectingArrow16Icon',
     'Home16Icon',
+    'Loop16Icon',
     'Plus16Icon',
     'Refresh16Icon',
 ];
