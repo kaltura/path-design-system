@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.2](https://github.com/kaltura/path-design-system/compare/v3.17.1...v3.17.2) (2020-07-01)
+
+
+### Bug Fixes
+
+* update text input postfix styles and focus logic ([#165](https://github.com/kaltura/path-design-system/issues/165)) ([c8dc0c5](https://github.com/kaltura/path-design-system/commit/c8dc0c5038360fbc3483284d076c22c0fdf06578))
+
+
+
+
+
 ## [3.17.1](https://github.com/kaltura/path-design-system/compare/v3.17.0...v3.17.1) (2020-06-29)
 
 
