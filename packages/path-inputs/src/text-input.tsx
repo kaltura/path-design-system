@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Input } from 'antd';
 import { createUseStyles, theming } from '@kaltura-react-ui-kits/path-theming';
 import { Theme } from '@kaltura-react-ui-kits/path-theming';
@@ -182,8 +182,6 @@ const useStyles = createUseStyles((theme: Theme) => ({
     userSelect: 'none',
     margin: '0 8px 0 0',
     flex: '1 0 auto',
-    height: '24px',
-    minWidth: '24px',
     lineHeight: '24px',
     color: theme.colors.grayscale2,
     fontSize: theme.input.fontSize,
@@ -224,6 +222,7 @@ export const TextInput = (props: TextInputProps) => {
     onBlur,
   } = props;
   const classes = useStyles(props);
+  const innerRef = useRef<Input | null>(null);
 
   const [isInFocus, setIsInFocus] = useState(false);
 
@@ -252,6 +251,8 @@ export const TextInput = (props: TextInputProps) => {
 
   // proxy ref to hide antd input implementation from the end-user
   const handleInputRef = (ref: Input | null) => {
+    innerRef.current = ref;
+
     if (!inputRef) {
       return;
     }
@@ -266,6 +267,9 @@ export const TextInput = (props: TextInputProps) => {
 
   const onFocusHandler = () => {
     setIsInFocus(true);
+    if (innerRef && innerRef.current) {
+      innerRef.current.focus();
+    }
 
     if (onFocus) onFocus();
   };
@@ -277,7 +281,8 @@ export const TextInput = (props: TextInputProps) => {
   };
 
   return (
-    <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}>
+    <span className={affixWrapperClass} aria-disabled={disabled} has-error={hasErrorAttribute}
+          onClick={onFocusHandler}>
             {renderAffix({
               element: isBusy && supportBusy ? <SpinnerBright24Icon spin/> : preContent,
               className: prefixClass,
