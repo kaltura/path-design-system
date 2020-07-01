@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.18.0](https://github.com/kaltura/path-design-system/compare/v3.17.2...v3.18.0) (2020-07-01)
+
+
+### Features
+
+* add checkbox component PATH-686 ([#130](https://github.com/kaltura/path-design-system/issues/130)) ([908c66b](https://github.com/kaltura/path-design-system/commit/908c66bb1fe772fda200ea489e73eaf3ffeaf994))
+
+
+
+
+
 ## [3.17.2](https://github.com/kaltura/path-design-system/compare/v3.17.1...v3.17.2) (2020-07-01)
 
 
