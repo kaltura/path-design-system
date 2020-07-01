@@ -58,6 +58,7 @@ const useStyles = createUseStyles(
       listStyle: 'none',
       display: 'inline-block',
       cursor: 'pointer',
+      userSelect: 'none',
       '&:hover $checkboxInner, $checkbox:hover $checkboxInner': {
         backgroundColor: theme.colors.grayscale4,
       },
