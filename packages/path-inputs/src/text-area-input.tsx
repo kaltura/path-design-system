@@ -5,6 +5,7 @@ import {
   Theme,
   theming
 } from '@kaltura-react-ui-kits/path-theming';
+import {CSSProperties} from "react";
 
 const classNames = require('classnames');
 const { TextArea } = Input;
@@ -56,10 +57,19 @@ export interface TextAreaInputProps {
    * @default undefined
    * */
   onChange?: (event: React.ChangeEvent<TextAreaInputElement>) => void;
+  /**
+   * Should the text area input be with transparent background and without borders
+   * @default undefined
+   */
+  transparent?: boolean;
+  /**
+   * Optional styles of the textArea
+   */
+  style?: CSSProperties;
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
-  input: {
+  input: (props: TextAreaInputProps) => ({
     height: '32px',
     width: '100%',
     padding: '8px',
@@ -68,27 +78,29 @@ const useStyles = createUseStyles((theme: Theme) => ({
     fontSize: theme.input.fontSize,
     fontWeight: theme.input.fontWeight,
     borderRadius: theme.input.borderRadius,
-    border: `thin solid ${theme.colors.grayscale4}`,
+    border: props.transparent ? 'none' : `thin solid ${theme.colors.grayscale4}`,
+    resize: props.transparent ? 'none' : 'auto',
     boxShadow: 'none',
+    backgroundColor: props.transparent ? 'transparent' : theme.colors.white,
     '&::placeholder': {
       color: theme.colors.grayscale2,
     },
     '&:hover:not([aria-disabled=true]):not([has-error=true])': {
-      borderColor: theme.colors.grayscale3,
+      borderColor: props.transparent ? 'none' : theme.colors.grayscale3,
     },
     '&:focus': {
-      borderColor: `${theme.colors.cyan} !important`,
-      boxShadow: `0 0 0 1px ${theme.colors.cyan}`,
+      borderColor:  props.transparent ? 'none' : `${theme.colors.cyan} !important`,
+      boxShadow: props.transparent ? 'none' : `0 0 0 1px ${theme.colors.cyan}`,
     },
     '&:disabled': {
       boxShadow: 'none',
-      backgroundColor: theme.colors.white,
-      border: `thin solid ${theme.colors.grayscale5}`,
+      backgroundColor: props.transparent ? 'transparent' : theme.colors.white,
+      border: props.transparent ? 'none' : `thin solid ${theme.colors.grayscale5}`,
       '&::placeholder': {
         color: theme.colors.grayscale4,
       },
     },
-  },
+  }),
   hasError: {
     borderColor: theme.colors.danger,
     boxShadow: `0 0 0 1px ${theme.colors.danger}`,
@@ -115,7 +127,8 @@ export const TextAreaInput = (props: TextAreaInputProps) => {
     readOnly,
     onChange,
     placeholder,
-    hasError = false
+    hasError = false,
+    style
   } = props;
   const classes = useStyles(props);
 
@@ -146,6 +159,7 @@ export const TextAreaInput = (props: TextAreaInputProps) => {
 
   return (
     <TextArea className={inputClass}
+              style={style}
               {...values}
               readOnly={readOnly}
               has-error={hasErrorAttribute}

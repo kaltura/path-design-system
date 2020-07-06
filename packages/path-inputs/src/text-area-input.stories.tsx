@@ -169,6 +169,7 @@ export const Workshop: Story = () => {
                      placeholder="Default"
                      hasError={boolean("Has Error", false)}
                      disabled={boolean("Disabled", false)}
+                     transparent={boolean("transparent", false)}
                      onChange={onChange}/>
     </div>
   </div>;
