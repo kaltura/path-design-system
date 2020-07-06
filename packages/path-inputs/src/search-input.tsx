@@ -155,5 +155,5 @@ export const SearchInput = (props: SearchInputFieldProps) => {
                       onChange={handleChange}
                       supportBusy={true}
                       postContent={showClear ? <Plus24Icon className={clearBtnClass} onClick={clearInput}/> : undefined}
-                      preContent={<Search24Icon/>}/>;
+                      preContent={<Search24Icon style={{marginTop: 3}}/>}/>;
 };
