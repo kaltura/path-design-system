@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.2](https://github.com/kaltura/path-design-system/compare/v3.19.1...v3.19.2) (2020-07-06)
+
+
+### Bug Fixes
+
+* position of clear icon in search input component PATH-590 ([#169](https://github.com/kaltura/path-design-system/issues/169)) ([954da8d](https://github.com/kaltura/path-design-system/commit/954da8d34881b5b83db7e8f4be3926f43caa4b00))
+
+
+
+
+
 ## [3.19.1](https://github.com/kaltura/path-design-system/compare/v3.19.0...v3.19.1) (2020-07-01)
 
 **Note:** Version bump only for package path-design-system
