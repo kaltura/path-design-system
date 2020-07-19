@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
-import {useLoadMedia} from "./use-load-media";
+import {useLoadPlayer} from "./use-load-player";
 import {PlayerBundleLoadingStatuses} from "./kaltura-player-context";
 
 export interface KalturaPlayerProps {
@@ -79,7 +79,7 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
     customizeConfig,
     onMediaLoadingError, onMediaLoaded} = props;
 
-  const {playerId, playerStatus} = useLoadMedia(
+  const {playerId, playerStatus} = useLoadPlayer(
     {autoplay, entryId, onPlayerLoadingError,
       onPlayerLoaded, onMediaLoadingError, onMediaLoaded, customizeConfig
     });

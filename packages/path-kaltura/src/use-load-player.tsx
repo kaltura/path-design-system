@@ -22,7 +22,7 @@ type PlayerStateChangeEvent = {
     };
   };
 };
-export interface UseLoadMediaOptions {
+export interface UseLoadPlayerOptions {
   autoplay: boolean;
   entryId: string;
   onPlayerLoaded?: (data: { entryId: string; playerId: string }) => void;
@@ -50,7 +50,7 @@ function getUniquePlayerId() {
   return `kaltura-player${uniqueIdIndex}`;
 }
 
-export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
+export const useLoadPlayer = (options: UseLoadPlayerOptions): LoadMediaState => {
   const {
     entryId,
     autoplay,
