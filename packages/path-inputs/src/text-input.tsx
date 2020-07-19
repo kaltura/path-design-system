@@ -266,6 +266,7 @@ export const TextInput = (props: TextInputProps) => {
   };
 
   const onFocusHandler = () => {
+    if(disabled) return;
     setIsInFocus(true);
     if (innerRef && innerRef.current) {
       innerRef.current.focus();
