@@ -6,6 +6,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
 import path from 'path';
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
 import pkg from './package.json'
 
@@ -26,6 +27,7 @@ export default {
     }
   ],
   plugins: [
+    sourcemaps(),
     external(),
     postcss({
       modules: true
