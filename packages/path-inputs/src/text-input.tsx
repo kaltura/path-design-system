@@ -234,7 +234,7 @@ export const TextInput = (props: TextInputProps) => {
   });
   const affixWrapperClass = classNames({
     [classes.affixWrapper]: true,
-    [classes.affixWrapper__focus]: !hasError && isInFocus,
+    [classes.affixWrapper__focus]: !hasError && !disabled &&isInFocus,
     [classes.affixWrapper__disabled]: disabled,
     [classes.affixWrapper__error]: hasError,
   });
