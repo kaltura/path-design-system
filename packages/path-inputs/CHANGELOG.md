@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.3](https://github.com/kaltura/path-design-system/compare/v3.19.2...v3.19.3) (2020-07-19)
+
+
+### Bug Fixes
+
+* prevent focus on disabled input PATH-797 ([#174](https://github.com/kaltura/path-design-system/issues/174)) ([3cffe6f](https://github.com/kaltura/path-design-system/commit/3cffe6fc3640f8c58f784650fdb10f6047c81f18))
+
+
+
+
+
 ## [3.19.2](https://github.com/kaltura/path-design-system/compare/v3.19.1...v3.19.2) (2020-07-06)
 
 
