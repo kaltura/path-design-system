@@ -10,10 +10,8 @@ const playerStatusReducer = (
     type: PlayerBundleLoadingStatuses;
   }
 ): PlayerBundleLoadingStatuses => {
-  console.log(`a request for: ${action.type} was made`);
   if (action.type === PlayerBundleLoadingStatuses.Loading) {
     if (bundleLoadingStatus === PlayerBundleLoadingStatuses.Initial) {
-      console.log("**** changed to loading state");
       return PlayerBundleLoadingStatuses.Loading;
     } else {
       console.warn(`Changing player loading state to 'loading' is
@@ -39,12 +37,9 @@ export const loadPlayerIntoSession = (
 
   // @ts-ignore
   if (!!window["KalturaPlayer"] && window["KalturaPlayer"].setup) {
-    console.log("**** player bundler was already loaded into session");
     callback(PlayerBundleLoadingStatuses.Loaded);
     return;
   }
-
-  console.log(`******* loading player into session....`);
 
   try {
     const head = document.head || document.getElementsByTagName("head")[0];

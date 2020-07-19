@@ -74,7 +74,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
   }));
 
   const playerRef = useCallbackRef<any>(null, () => {
-    console.log('sakal update', {current: playerRef.current});
     if (!playerRef.current) {
       return;
     }
@@ -138,7 +137,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
     );
 
     return () => {
-      console.log('sakal destory', {current: playerRef.current});
       if (!playerRef.current) return;
       playerRef.current.removeEventListener(
         "timeupdate",
@@ -157,7 +155,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         getPlayerResizeEvent(),
         emitPlayerResized
       );
-      console.log("Kaltura player: Destroy");
       playerRegistrationRef.current.seekSubscription.unsubscribe();
       playerRegistrationRef.current.onRemove();
       playerTimeSubjectRef.current.complete();
@@ -195,7 +192,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       .loadMedia({ entryId })
       .then(() => {
         if (unmountedRef.current) return;
-        console.log("Kaltura Player: Successfully loaded media");
         if (onMediaLoaded) onMediaLoaded(entryId);
         setLoadMediaState(prevState => ({
           ...prevState,
@@ -259,7 +255,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
     const loadPlayer = () => {
       if (playerRef.current) {
-        console.log("Kaltura player was already loaded");
         return;
       }
 
@@ -295,7 +290,6 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
 
         const player = playerManager.setup(config);
 
-        console.log("kaltura player was successfully loaded");
         playerRef.current = player;
         const { action$, onRemove } = registerPlayer(
           loadMediaState.playerId,
