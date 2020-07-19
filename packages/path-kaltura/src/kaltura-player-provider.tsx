@@ -4,9 +4,9 @@ import {
   KalturaPlayerContext,
   PlayerAction,
   PlayerActionTypes, PlayerEvents,
-  PlayerLoadingStatuses,
-  SeekOptions
-} from "./kaltura-player-context";
+  PlayerLoadingStatuses, PlayerProvidedConfig,
+  SeekOptions,
+} from './kaltura-player-context';
 import {useLoadPlayerBundler} from "./use-load-player-bundler";
 import { Observable, Subject, throwError } from 'rxjs';
 
@@ -14,17 +14,6 @@ export interface PlayerReducerActions {
   type: PlayerLoadingStatuses;
 }
 
-export interface PlayerProviderState {
-  status: PlayerLoadingStatuses;
-  config: PlayerProvidedConfig;
-}
-
-export interface PlayerProvidedConfig {
-  ks?:string;
-  bundlerUrl?: string;
-  partnerId?: string;
-  uiConfId?: string;
-}
 
 export interface KalturaPlayerProviderProps {
   autoLoad: boolean;
@@ -126,7 +115,7 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       pause,
       getPlayerInstance
     }
-  }, [state.status, loadPlayer]);
+  }, [state, loadPlayer]);
 
   return (
     <KalturaPlayerContext.Provider value={playerContextValue}>

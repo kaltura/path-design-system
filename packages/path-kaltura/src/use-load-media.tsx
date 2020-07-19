@@ -8,8 +8,6 @@ import {
 } from "./kaltura-player-context";
 import * as shortid from "shortid";
 import {BehaviorSubject, Subscription, Subject} from 'rxjs';
-import Player = KalturaPlayerTypes.Player;
-import KalturaPlayerManager = KalturaPlayerTypes.KalturaPlayerManager;
 
 export interface UseLoadMediaOptions {
   autoplay: boolean;
@@ -50,7 +48,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
       mediaStatus: PlayerLoadingStatuses.Initial
     }));
 
-  const playerRef = useRef<Player | null>(null);
+  const playerRef = useRef<any>(null);
 
   const playerTimeSubject = useRef(new BehaviorSubject<number>(0));
   const playerStateSubject = useRef(new BehaviorSubject<PlayerStateTypes>('idle'));
@@ -219,7 +217,7 @@ export const useLoadMedia = (options: UseLoadMediaOptions): LoadMediaState => {
         console.log('Kaltura player was already loaded');
         return;
       }
-      const playerManager = window['KalturaPlayer'] as KalturaPlayerManager;
+      const playerManager = window['KalturaPlayer'] as any;
       try {
         let config: Record<string, any> = {
           playback: {

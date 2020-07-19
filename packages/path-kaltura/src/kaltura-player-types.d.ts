@@ -49,7 +49,7 @@ declare namespace KalturaPlayerTypes {
     removeEventListener: (type: PlayerEventTypes, listener: CoreEventListener) => void;
     currentTime: number;
     Event: Record<string, string>;
-    loadMedia(mediaInfo: MediaInfoObject): Promise;
+    loadMedia(mediaInfo: MediaInfoObject): Promise<any>;
     pause(): void;
     play(): void;
     destroy(): void;

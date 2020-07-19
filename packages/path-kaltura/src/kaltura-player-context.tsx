@@ -1,8 +1,19 @@
 import * as React from "react";
-import {PlayerProviderState} from "./kaltura-player-provider";
 import { Observable, throwError } from 'rxjs';
 
-export const enum PlayerLoadingStatuses {
+export interface PlayerProviderState {
+  status: PlayerLoadingStatuses;
+  config: PlayerProvidedConfig;
+}
+
+export interface PlayerProvidedConfig {
+  ks?:string;
+  bundlerUrl?: string;
+  partnerId?: string;
+  uiConfId?: string;
+}
+
+export enum PlayerLoadingStatuses {
   Loaded = 'Loaded',
   Loading = 'Loading',
   Error = 'Error',
