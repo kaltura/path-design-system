@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useRef } from 'react';
-import {KalturaPlayerContext, PlayerStates, PlayerEvents} from "@kaltura-react-ui-kits/path-kaltura";
+import {KalturaPlayerContext, PlayerStates, PlayerEvents} from "./kaltura-player-context";
 import {BehaviorSubject, Subject} from 'rxjs';
 
 export const usePlayerUpdates = (playerId: string) => {

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useRef } from 'react';
-import {KalturaPlayerContext, SeekOptions} from "@kaltura-react-ui-kits/path-kaltura";
+import {KalturaPlayerContext, SeekOptions} from "./kaltura-player-context";
 import { KalturaPlayerUtils } from './kaltura-player-utils';
 
 export const usePlayer = (playerId: string) => {
