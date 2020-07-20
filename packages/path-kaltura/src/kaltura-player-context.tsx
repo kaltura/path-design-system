@@ -85,7 +85,6 @@ export interface PlayerBundleConfig {
 export interface PlayerContextValue {
   playerBundleStatus: PlayerBundleStatuses;
   playerBundleConfig: PlayerBundleConfig,
-  loadPlayerBundler: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
   getPlayerState$: (playerId: string) => Observable<PlaybackStatuses>;
   getPlayerEvents$: (playerId: string) => Observable<PlayerEvents>;
@@ -104,7 +103,6 @@ export interface PlayerContextValue {
 export const defaultPlayerContext: PlayerContextValue = {
   playerBundleStatus: PlayerBundleStatuses.Error,
   playerBundleConfig: {},
-  loadPlayerBundler: () => {},
   getPlayerState$: () =>
     throwError(
       new Error(`can't use context, KalturaPlayerProvider is missing`)

@@ -41,6 +41,7 @@ function getUniquePlayerId() {
   return `kaltura-player${uniqueIdIndex}`;
 }
 
+let bla: any = null;
 export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
   const {
     entryId,
@@ -64,7 +65,16 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
     mediaStatus: MediaStatuses.Initial
   }));
 
+  const playerTimeSubjectRef = useRef(new BehaviorSubject<number>(0));
+  const playerStateSubjectRef = useRef(new BehaviorSubject<PlaybackStatuses>(PlaybackStatuses.Idle));
+  const playerEventsSubjectRef = useRef(new Subject<PlayerEvents>());
+  const playerRegistrationRef = useRef({
+    seekSubscription: Subscription.EMPTY,
+    onRemove: () => {}
+  });
   const playerRef = useCallbackRef<any>(null, () => {
+    console.log('artem create');
+    bla = playerRef.current;
     if (!playerRef.current) {
       return;
     }
@@ -133,6 +143,7 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
     );
 
     return () => {
+      console.log('artem destroy', { comp: bla === playerRef.current});
       if (!playerRef.current) return;
       playerRef.current.removeEventListener(
         "timeupdate",
@@ -161,17 +172,6 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
         mediaStatus: MediaStatuses.Destroyed
       }));
     };
-  });
-
-
-  const playerTimeSubjectRef = useRef(new BehaviorSubject<number>(0));
-  const playerStateSubjectRef = useRef(
-    new BehaviorSubject<PlaybackStatuses>(PlaybackStatuses.Idle)
-  );
-  const playerEventsSubjectRef = useRef(new Subject<PlayerEvents>());
-  const playerRegistrationRef = useRef({
-    seekSubscription: Subscription.EMPTY,
-    onRemove: () => {}
   });
 
   const loadPlayerMedia = () => {
@@ -226,18 +226,14 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
 
   //listen to player loading status in order to load media
   useEffect(() => {
-    if (
-      !playerRef.current ||
-      playerState.playerStatus !== PlayerStatuses.Loaded
-    ) {
-      console.warn(`Kaltura player hasn't been setup yet.`);
+    if (playerState.playerStatus !== PlayerStatuses.Loaded) {
       return;
     }
 
     loadPlayerMedia();
   }, [playerState.playerStatus]);
 
-  //listen to player manager loading status in order to load player
+  //listen to player bundle loading status in order to load player
   useEffect(() => {
     if (
       playerState.mediaStatus === MediaStatuses.Destroyed ||

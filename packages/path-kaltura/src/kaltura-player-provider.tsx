@@ -13,14 +13,13 @@ import { Observable, Subject, throwError } from "rxjs";
 
 
 export interface KalturaPlayerProviderProps {
-  autoLoad: boolean;
   playerBundleConfig: PlayerBundleConfig;
   children?: React.ReactChild;
 }
 
 export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
-  const { autoLoad, playerBundleConfig, children } = props;
-  const {playerBundleStatus, loadPlayerBundler} = useLoadPlayerBundler({ playerBundleConfig, autoLoad });
+  const { playerBundleConfig, children } = props;
+  const { playerBundleStatus } = useLoadPlayerBundler({ playerBundleConfig });
 
   const _playersRef = useRef<
     Record<
@@ -122,7 +121,6 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
     return {
       playerBundleStatus,
       playerBundleConfig,
-      loadPlayerBundler,
       registerPlayer,
       getPlayerCurrentTime$,
       getPlayerState$,
@@ -132,7 +130,7 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       pause,
       getPlayerInstance
     };
-  }, [playerBundleStatus, loadPlayerBundler]);
+  }, [playerBundleStatus]);
 
   return (
     <KalturaPlayerContext.Provider value={playerContextValue}>
@@ -142,5 +140,4 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
 };
 
 KalturaPlayerProvider.defaultProps = {
-  autoLoad: true
 };

@@ -1,43 +1,52 @@
-import { useCallback, useEffect, useReducer, useRef } from "react";
-import { PlayerBundleConfig } from "./kaltura-player-context";
-import { PlayerBundleStatuses } from "./kaltura-player-context";
+import {useEffect, useState} from 'react';
+import {
+  PlayerBundleConfig,
+  PlayerBundleStatuses,
+} from './kaltura-player-context';
 
-let currentPlayerBundlerUrl: string | null = null;
+type InjectStatuses = 'loading' | 'loaded' | 'error' | 'initial';
+let injectedScriptUrl: string | null = null;
+let injectStatus: InjectStatuses = 'initial';
+let injectLoadedCallbacks: (() => void)[] = [];
 
-const playerStatusReducer = (
-  playerBundleStatus: PlayerBundleStatuses,
-  action: {
-    type: PlayerBundleStatuses;
-  }
-): PlayerBundleStatuses => {
-  if (action.type === PlayerBundleStatuses.Loading) {
-    if (playerBundleStatus === PlayerBundleStatuses.Initial) {
-      return PlayerBundleStatuses.Loading;
-    } else {
-      console.warn(`Changing player loading state to 'loading' is
-       permitted only from an 'initial' state. Ignoring state changes request`);
-      return playerBundleStatus;
-    }
-  }
-  return action.type;
-};
+const handleInjectResponse = (status: 'error' | 'loaded') => {
+  injectStatus = status;
+  injectLoadedCallbacks.forEach(cb => {
+    cb();
+  });
+  injectLoadedCallbacks = [];
+}
 
-export const loadPlayerIntoSession = (
-  playerBundlerUrl: string | undefined,
-  callback: (newState: PlayerBundleStatuses) => void
+const addInjectCallback = (cb: () => void) => {
+  injectLoadedCallbacks.push(cb);
+}
+
+const removeInjectCallback = (cb: () => void) => {
+  injectLoadedCallbacks = injectLoadedCallbacks.filter(listener => listener !== cb);
+}
+
+const injectScriptIntoPage = (
+  playerBundlerUrl: string,
 ) => {
+  if (injectStatus !== 'initial') {
+    return;
+  }
+
+  injectStatus = 'loading';
+  injectedScriptUrl = playerBundlerUrl;
+
   if (!playerBundlerUrl) {
     console.warn(
       "Failed to load player into session," +
       " did you forget to provide a player bundler url?"
     );
-    callback(PlayerBundleStatuses.Error);
+    handleInjectResponse('error');
     return;
   }
 
   // @ts-ignore
   if (!!window["KalturaPlayer"] && window["KalturaPlayer"].setup) {
-    callback(PlayerBundleStatuses.Loaded);
+    handleInjectResponse('loaded');
     return;
   }
 
@@ -47,51 +56,34 @@ export const loadPlayerIntoSession = (
     scriptElement.type = "text/javascript";
     scriptElement.src = playerBundlerUrl;
     scriptElement.onload = () => {
-      callback(PlayerBundleStatuses.Loaded);
+      handleInjectResponse('loaded');
     };
     scriptElement.onerror = (e) => {
       console.warn(`Failed to load kaltura player bundler script.`, e);
-      callback(PlayerBundleStatuses.Error);
+      handleInjectResponse('error');
     };
     head.appendChild(scriptElement);
   } catch (e) {
     console.warn(`Failed to load kaltura player bundler script.`, e);
-    callback(PlayerBundleStatuses.Error);
+    handleInjectResponse('error');
   }
 };
 
 export const useLoadPlayerBundler = (options: {
-  autoLoad: boolean;
   playerBundleConfig: PlayerBundleConfig;
 }) => {
-  const { autoLoad, playerBundleConfig } = options;
-  const unmounted = useRef(false);
-  const [playerBundleStatus, updateStatus] = useReducer(
-    playerStatusReducer,
-    PlayerBundleStatuses.Initial
-  );
+  const { playerBundleConfig } = options;
+  const [playerBundleStatus, setPlayerBundleStatus] = useState(PlayerBundleStatuses.Initial);
 
   useEffect(() => {
-    return () => {
-      unmounted.current = true;
+    const handleLateBundleCallback = () => {
+      if (injectStatus === 'loaded') {
+        setPlayerBundleStatus(PlayerBundleStatuses.Loaded);
+      } else {
+        setPlayerBundleStatus(PlayerBundleStatuses.Error);
+      }
     };
-  }, []);
 
-  useEffect(() => {
-    if (
-      !playerBundleConfig ||
-      !playerBundleConfig.partnerId ||
-      !playerBundleConfig.uiConfId ||
-      !playerBundleConfig.bundlerUrl
-    ) {
-      console.warn(`cannot load kaltura player bundler into session,
-        missing parameters (did you remember to provide partnerId,
-        uiConfId and playerBundleUrl?`);
-      updateStatus({ type: PlayerBundleStatuses.Error });
-      return;
-    }
-
-    // if there is no need to load player bundler scripts
     if (
       playerBundleStatus === PlayerBundleStatuses.Error ||
       playerBundleStatus === PlayerBundleStatuses.Loaded
@@ -99,39 +91,56 @@ export const useLoadPlayerBundler = (options: {
       return;
     }
 
-    // hot loading player bundler scripts
-    if (playerBundleStatus === PlayerBundleStatuses.Initial && autoLoad) {
-      updateStatus({ type: PlayerBundleStatuses.Loading });
-      return;
-    }
-
-    const playerBundlerUrl = `${playerBundleConfig.bundlerUrl}/p/${
-      playerBundleConfig.partnerId
-    }/embedPlaykitJs/uiconf_id/${playerBundleConfig.uiConfId}`;
-
-    if (playerBundleStatus === PlayerBundleStatuses.Loading) {
-      if (currentPlayerBundlerUrl && currentPlayerBundlerUrl !== playerBundlerUrl) {
-        updateStatus({ type: PlayerBundleStatuses.Error });
-        console.warn(`It is not allowed to create multiple players'
-         bundlers with different bundler urls. Did you create more than one
-         provider ?`);
+    if (playerBundleStatus === PlayerBundleStatuses.Initial) {
+      if (
+        !playerBundleConfig ||
+        !playerBundleConfig.partnerId ||
+        !playerBundleConfig.uiConfId ||
+        !playerBundleConfig.bundlerUrl
+      ) {
+        console.warn(`cannot load kaltura player bundler into session,
+        missing parameters (did you remember to provide partnerId,
+        uiConfId and playerBundleUrl?`);
+        setPlayerBundleStatus(PlayerBundleStatuses.Error);
         return;
       }
 
-      currentPlayerBundlerUrl = playerBundlerUrl;
-
-      loadPlayerIntoSession(
-        currentPlayerBundlerUrl,
-        (playerBundleStatus: PlayerBundleStatuses) => {
-          if (!unmounted.current) updateStatus({ type: playerBundleStatus });
-        }
-      );
+      setPlayerBundleStatus(PlayerBundleStatuses.Loading);
+      return;
     }
-  }, [autoLoad, playerBundleConfig, playerBundleStatus, updateStatus]);
 
-  const loadPlayerBundler = useCallback(() => {
-    updateStatus({ type: PlayerBundleStatuses.Loading });
-  }, []);
+    const playerBundlerUrl = `${playerBundleConfig.bundlerUrl}/p/${playerBundleConfig.partnerId}/embedPlaykitJs/uiconf_id/${playerBundleConfig.uiConfId}`;
 
-  return {playerBundleStatus, loadPlayerBundler};
+    if (!injectedScriptUrl) {
+      addInjectCallback(handleLateBundleCallback);
+      injectScriptIntoPage(playerBundlerUrl);
+      return;
+    }
+
+    if (injectedScriptUrl !== playerBundlerUrl) {
+      setPlayerBundleStatus(PlayerBundleStatuses.Error);
+      console.warn(`It is not allowed to create multiple players'
+       bundlers with different bundler urls. Did you create more than one
+       provider ?`);
+      return;
+    }
+
+    switch (injectStatus) {
+      case 'loaded':
+        setPlayerBundleStatus(PlayerBundleStatuses.Loaded);
+        break;
+      case 'loading':
+        addInjectCallback(handleLateBundleCallback);
+        break;
+      default:
+        setPlayerBundleStatus(PlayerBundleStatuses.Error);
+        break;
+    }
+    return () => {
+      removeInjectCallback(handleLateBundleCallback);
+    }
+
+  }, [playerBundleStatus]);
+
+  return {playerBundleStatus};
 };
