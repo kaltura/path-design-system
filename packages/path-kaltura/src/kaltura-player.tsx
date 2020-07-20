@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
 import {useLoadPlayer} from "./use-load-player";
-import {PlayerBundleLoadingStatuses} from "./kaltura-player-context";
+import {PlayerStatuses} from "./kaltura-player-context";
 
 export interface KalturaPlayerProps {
   /**
@@ -68,7 +68,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   }
 }),  { theming });
 
-export const LadingBundlerErrorMsg = 'Oops, failed to load kaltura player bundler';
+export const PlayerErrorMessage = 'Oops, failed to load the player';
 
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
@@ -86,9 +86,9 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
   return (
     <>
-      {playerStatus === PlayerBundleLoadingStatuses.Error
+      {playerStatus === PlayerStatuses.Error
         ? (<div className={classes.scriptErrorContainer}>
-          <div className={classes.scriptsErrorMsg}>{LadingBundlerErrorMsg}</div>
+          <div className={classes.scriptsErrorMsg}>{PlayerErrorMessage}</div>
         </div>)
 
         : (<div id={playerId} className={classes.kalturaPlayer}></div>)

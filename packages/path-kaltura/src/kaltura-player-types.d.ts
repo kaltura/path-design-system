@@ -2,56 +2,46 @@ interface FakeEvent {}
 
 type CoreEventListener = (event: FakeEvent) => boolean | void;
 
-type PlayerEventTypes = "timeupdate" | "playerstatechanged" | "firstplaying";
-
-type PlayerStateTypes =
-  | "paused"
-  | "playing"
-  | "loading"
-  | "idle"
-  | "buffering"
-  | "error";
-
-type PlayerStateChangeEvent = {
+ type PlayerStateChangeEvent = {
   payload: {
     newState: {
-      type: PlayerStateTypes;
+      type: string;
     };
     oldState: {
-      type: PlayerStateTypes;
+      type: string;
     };
   };
 };
 
-type KalturaPlayerManager = {
+ type KalturaPlayerManager = {
   setup: (KalturaPlayerConfig) => Player;
 };
 
-export interface KalturaPlayerConfig {
+ interface KalturaPlayerConfig {
   targetId: string;
   playback: PlaybackConfig;
   provider: ProviderOptionsObject;
 }
 
-export interface PlaybackConfig {
+ interface PlaybackConfig {
   autoplay: boolean;
 }
 
-export interface ProviderOptionsObject {
+ interface ProviderOptionsObject {
   partnerId: string;
   ks: string;
   uiConfId: string;
 }
 
-export interface MediaInfoObject {
+ interface MediaInfoObject {
   entryId: string;
   ks?: string;
 }
 
-export interface Player {
+ interface Player {
   addEventListener(type: PlayerEventTypes, listener: CoreEventListener): void;
   removeEventListener: (
-    type: PlayerEventTypes,
+    type: string,
     listener: CoreEventListener
   ) => void;
   currentTime: number;

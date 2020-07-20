@@ -6,7 +6,7 @@ import {
   PlayerActionTypes,
   PlayerEvents,
   SeekOptions,
-  PlayerStates, KalturaPlayerBundleConfig,
+  PlaybackStatuses, KalturaPlayerBundleConfig,
 } from './kaltura-player-context';
 import { useLoadPlayerBundler } from "./use-load-player-bundler";
 import { Observable, Subject, throwError } from "rxjs";
@@ -27,7 +27,7 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       string,
       {
         currentTime$: Observable<number>;
-        playerState$: Observable<PlayerStates>;
+        playerState$: Observable<PlaybackStatuses>;
         playerEvents$: Observable<PlayerEvents>;
         getPlayerInstance: () => any;
         doAction: Subject<PlayerAction>;
@@ -39,7 +39,7 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
     const registerPlayer = (
       playerId: string,
       currentTime$: Observable<number>,
-      playerState$: Observable<PlayerStates>,
+      playerState$: Observable<PlaybackStatuses>,
       playerEvents$: Observable<PlayerEvents>
     ) => {
       _playersRef.current[playerId] = {

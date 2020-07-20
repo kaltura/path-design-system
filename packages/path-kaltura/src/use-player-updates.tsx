@@ -1,10 +1,10 @@
 import { useContext, useEffect, useMemo, useRef } from 'react';
-import {KalturaPlayerContext, PlayerStates, PlayerEvents} from "./kaltura-player-context";
+import {KalturaPlayerContext, PlaybackStatuses, PlayerEvents} from "./kaltura-player-context";
 import {BehaviorSubject, Subject} from 'rxjs';
 
 export const usePlayerUpdates = (playerId: string) => {
   const {getPlayerState$, getPlayerCurrentTime$, getPlayerEvents$} = useContext(KalturaPlayerContext);
-  const playerStateRef = useRef(new BehaviorSubject(PlayerStates.idle));
+  const playerStateRef = useRef(new BehaviorSubject(PlaybackStatuses.Idle));
   const playerEventsRef = useRef(new Subject<PlayerEvents>());
   const playerTimeRef = useRef(new BehaviorSubject(0));
 

@@ -1,9 +1,23 @@
 import * as React from "react";
 import { Observable, throwError } from "rxjs";
 
-export enum PlayerBundleLoadingStatuses {
+export enum PlayerBundleStatuses {
   Loaded = "Loaded",
   Loading = "Loading",
+  Error = "Error",
+  Initial = "Initial",
+}
+
+export enum MediaStatuses {
+  Loaded = "Loaded",
+  Loading = "Loading",
+  Error = "Error",
+  Initial = "Initial",
+  Destroyed = "Destroyed"
+}
+
+export enum PlayerStatuses {
+  Loaded = "Loaded",
   Error = "Error",
   Initial = "Initial",
   Destroyed = "Destroyed"
@@ -15,13 +29,16 @@ export enum PlayerActionTypes {
   Seek = "Seek"
 }
 
-export enum PlayerStates {
-  paused = "paused",
-  playing = "playing",
-  loading = "loading",
-  idle = "idle",
-  buffering = "buffering",
-  error = "error"
+/*
+Those statuses were taken from the player event documentation
+ */
+export enum PlaybackStatuses {
+  Paused = "paused",
+  Playing = "playing",
+  Loading = "loading",
+  Idle = "idle",
+  Buffering = "buffering",
+  Error = "error"
 }
 
 export enum PlayerEventsTypes {
@@ -66,11 +83,11 @@ export interface KalturaPlayerBundleConfig {
 
 
 export interface PlayerContextValue {
-  bundleLoadingStatus: PlayerBundleLoadingStatuses;
+  bundleLoadingStatus: PlayerBundleStatuses;
   bundleConfig: KalturaPlayerBundleConfig,
   loadPlayerBundler: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
-  getPlayerState$: (playerId: string) => Observable<PlayerStates>;
+  getPlayerState$: (playerId: string) => Observable<PlaybackStatuses>;
   getPlayerEvents$: (playerId: string) => Observable<PlayerEvents>;
   seek: (playerId: string, options: SeekOptions) => void;
   play: (playerId: string) => void;
@@ -79,13 +96,13 @@ export interface PlayerContextValue {
   registerPlayer: (
     playerId: string,
     currentTime$: Observable<number>,
-    playerState$: Observable<PlayerStates>,
+    playerState$: Observable<PlaybackStatuses>,
     playerEvents$: Observable<PlayerEvents>
   ) => { action$: Observable<PlayerAction>; onRemove: () => void };
 }
 
 export const defaultPlayerContext: PlayerContextValue = {
-  bundleLoadingStatus: PlayerBundleLoadingStatuses.Error,
+  bundleLoadingStatus: PlayerBundleStatuses.Error,
   bundleConfig: {},
   loadPlayerBundler: () => {},
   getPlayerState$: () =>

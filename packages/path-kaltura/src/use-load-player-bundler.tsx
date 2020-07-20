@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useReducer, useRef } from "react";
 import { KalturaPlayerBundleConfig } from "./kaltura-player-context";
-import { PlayerBundleLoadingStatuses } from "./kaltura-player-context";
+import { PlayerBundleStatuses } from "./kaltura-player-context";
 
 let currentPlayerBundlerUrl: string | null = null;
 
 const playerStatusReducer = (
-  bundleLoadingStatus: PlayerBundleLoadingStatuses,
+  bundleLoadingStatus: PlayerBundleStatuses,
   action: {
-    type: PlayerBundleLoadingStatuses;
+    type: PlayerBundleStatuses;
   }
-): PlayerBundleLoadingStatuses => {
-  if (action.type === PlayerBundleLoadingStatuses.Loading) {
-    if (bundleLoadingStatus === PlayerBundleLoadingStatuses.Initial) {
-      return PlayerBundleLoadingStatuses.Loading;
+): PlayerBundleStatuses => {
+  if (action.type === PlayerBundleStatuses.Loading) {
+    if (bundleLoadingStatus === PlayerBundleStatuses.Initial) {
+      return PlayerBundleStatuses.Loading;
     } else {
       console.warn(`Changing player loading state to 'loading' is
        permitted only from an 'initial' state. Ignoring state changes request`);
@@ -24,20 +24,20 @@ const playerStatusReducer = (
 
 export const loadPlayerIntoSession = (
   playerBundlerUrl: string | undefined,
-  callback: (newState: PlayerBundleLoadingStatuses) => void
+  callback: (newState: PlayerBundleStatuses) => void
 ) => {
   if (!playerBundlerUrl) {
     console.warn(
       "Failed to load player into session," +
       " did you forget to provide a player bundler url?"
     );
-    callback(PlayerBundleLoadingStatuses.Error);
+    callback(PlayerBundleStatuses.Error);
     return;
   }
 
   // @ts-ignore
   if (!!window["KalturaPlayer"] && window["KalturaPlayer"].setup) {
-    callback(PlayerBundleLoadingStatuses.Loaded);
+    callback(PlayerBundleStatuses.Loaded);
     return;
   }
 
@@ -47,15 +47,16 @@ export const loadPlayerIntoSession = (
     scriptElement.type = "text/javascript";
     scriptElement.src = playerBundlerUrl;
     scriptElement.onload = () => {
-      callback(PlayerBundleLoadingStatuses.Loaded);
+      callback(PlayerBundleStatuses.Loaded);
     };
-    scriptElement.onerror = () => {
-      callback(PlayerBundleLoadingStatuses.Error);
+    scriptElement.onerror = (e) => {
+      console.warn(`Failed to load kaltura player bundler script.`, e);
+      callback(PlayerBundleStatuses.Error);
     };
     head.appendChild(scriptElement);
   } catch (e) {
-    console.warn(`Failed to add player bundler to page.`, e);
-    callback(PlayerBundleLoadingStatuses.Error);
+    console.warn(`Failed to load kaltura player bundler script.`, e);
+    callback(PlayerBundleStatuses.Error);
   }
 };
 
@@ -67,7 +68,7 @@ export const useLoadPlayerBundler = (options: {
   const unmounted = useRef(false);
   const [bundleLoadingStatus, updateStatus] = useReducer(
     playerStatusReducer,
-    PlayerBundleLoadingStatuses.Initial
+    PlayerBundleStatuses.Initial
   );
 
   useEffect(() => {
@@ -86,21 +87,21 @@ export const useLoadPlayerBundler = (options: {
       console.warn(`cannot load kaltura player bundler into session,
         missing parameters (did you remember to provide partnerId,
         uiConfId and playerBundleUrl?`);
-      updateStatus({ type: PlayerBundleLoadingStatuses.Error });
+      updateStatus({ type: PlayerBundleStatuses.Error });
       return;
     }
 
     // if there is no need to load player bundler scripts
     if (
-      bundleLoadingStatus === PlayerBundleLoadingStatuses.Error ||
-      bundleLoadingStatus === PlayerBundleLoadingStatuses.Loaded
+      bundleLoadingStatus === PlayerBundleStatuses.Error ||
+      bundleLoadingStatus === PlayerBundleStatuses.Loaded
     ) {
       return;
     }
 
     // hot loading player bundler scripts
-    if (bundleLoadingStatus === PlayerBundleLoadingStatuses.Initial && autoLoad) {
-      updateStatus({ type: PlayerBundleLoadingStatuses.Loading });
+    if (bundleLoadingStatus === PlayerBundleStatuses.Initial && autoLoad) {
+      updateStatus({ type: PlayerBundleStatuses.Loading });
       return;
     }
 
@@ -108,9 +109,9 @@ export const useLoadPlayerBundler = (options: {
       bundleConfig.partnerId
     }/embedPlaykitJs/uiconf_id/${bundleConfig.uiConfId}`;
 
-    if (bundleLoadingStatus === PlayerBundleLoadingStatuses.Loading) {
+    if (bundleLoadingStatus === PlayerBundleStatuses.Loading) {
       if (currentPlayerBundlerUrl && currentPlayerBundlerUrl !== playerBundlerUrl) {
-        updateStatus({ type: PlayerBundleLoadingStatuses.Error });
+        updateStatus({ type: PlayerBundleStatuses.Error });
         console.warn(`It is not allowed to create multiple players'
          bundlers with different bundler urls. Did you create more than one
          provider ?`);
@@ -121,7 +122,7 @@ export const useLoadPlayerBundler = (options: {
 
       loadPlayerIntoSession(
         currentPlayerBundlerUrl,
-        (bundleLoadingStatus: PlayerBundleLoadingStatuses) => {
+        (bundleLoadingStatus: PlayerBundleStatuses) => {
           if (!unmounted.current) updateStatus({ type: bundleLoadingStatus });
         }
       );
@@ -129,7 +130,7 @@ export const useLoadPlayerBundler = (options: {
   }, [autoLoad, bundleConfig, bundleLoadingStatus, updateStatus]);
 
   const loadPlayerBundler = useCallback(() => {
-    updateStatus({ type: PlayerBundleLoadingStatuses.Loading });
+    updateStatus({ type: PlayerBundleStatuses.Loading });
   }, []);
 
   return {bundleLoadingStatus, loadPlayerBundler};
