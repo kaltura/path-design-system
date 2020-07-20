@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {
-  ChromePicker,
+  SketchPicker,
   Color,
   ColorResult,
   HSLColor,
@@ -169,7 +169,7 @@ export function ColorPicker(props: ColorPickerProps) {
   };
 
   const paletteContainer = (
-    <ChromePicker color={color} onChange={handleChange} />
+    <SketchPicker color={color} onChange={handleChange} />
   );
 
   return (
