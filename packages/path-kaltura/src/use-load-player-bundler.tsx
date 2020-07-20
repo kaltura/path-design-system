@@ -1,22 +1,22 @@
 import { useCallback, useEffect, useReducer, useRef } from "react";
-import { KalturaPlayerBundleConfig } from "./kaltura-player-context";
+import { PlayerBundleConfig } from "./kaltura-player-context";
 import { PlayerBundleStatuses } from "./kaltura-player-context";
 
 let currentPlayerBundlerUrl: string | null = null;
 
 const playerStatusReducer = (
-  bundleLoadingStatus: PlayerBundleStatuses,
+  playerBundleStatus: PlayerBundleStatuses,
   action: {
     type: PlayerBundleStatuses;
   }
 ): PlayerBundleStatuses => {
   if (action.type === PlayerBundleStatuses.Loading) {
-    if (bundleLoadingStatus === PlayerBundleStatuses.Initial) {
+    if (playerBundleStatus === PlayerBundleStatuses.Initial) {
       return PlayerBundleStatuses.Loading;
     } else {
       console.warn(`Changing player loading state to 'loading' is
        permitted only from an 'initial' state. Ignoring state changes request`);
-      return bundleLoadingStatus;
+      return playerBundleStatus;
     }
   }
   return action.type;
@@ -62,11 +62,11 @@ export const loadPlayerIntoSession = (
 
 export const useLoadPlayerBundler = (options: {
   autoLoad: boolean;
-  bundleConfig: KalturaPlayerBundleConfig;
+  playerBundleConfig: PlayerBundleConfig;
 }) => {
-  const { autoLoad, bundleConfig } = options;
+  const { autoLoad, playerBundleConfig } = options;
   const unmounted = useRef(false);
-  const [bundleLoadingStatus, updateStatus] = useReducer(
+  const [playerBundleStatus, updateStatus] = useReducer(
     playerStatusReducer,
     PlayerBundleStatuses.Initial
   );
@@ -79,10 +79,10 @@ export const useLoadPlayerBundler = (options: {
 
   useEffect(() => {
     if (
-      !bundleConfig ||
-      !bundleConfig.partnerId ||
-      !bundleConfig.uiConfId ||
-      !bundleConfig.bundlerUrl
+      !playerBundleConfig ||
+      !playerBundleConfig.partnerId ||
+      !playerBundleConfig.uiConfId ||
+      !playerBundleConfig.bundlerUrl
     ) {
       console.warn(`cannot load kaltura player bundler into session,
         missing parameters (did you remember to provide partnerId,
@@ -93,23 +93,23 @@ export const useLoadPlayerBundler = (options: {
 
     // if there is no need to load player bundler scripts
     if (
-      bundleLoadingStatus === PlayerBundleStatuses.Error ||
-      bundleLoadingStatus === PlayerBundleStatuses.Loaded
+      playerBundleStatus === PlayerBundleStatuses.Error ||
+      playerBundleStatus === PlayerBundleStatuses.Loaded
     ) {
       return;
     }
 
     // hot loading player bundler scripts
-    if (bundleLoadingStatus === PlayerBundleStatuses.Initial && autoLoad) {
+    if (playerBundleStatus === PlayerBundleStatuses.Initial && autoLoad) {
       updateStatus({ type: PlayerBundleStatuses.Loading });
       return;
     }
 
-    const playerBundlerUrl = `${bundleConfig.bundlerUrl}/p/${
-      bundleConfig.partnerId
-    }/embedPlaykitJs/uiconf_id/${bundleConfig.uiConfId}`;
+    const playerBundlerUrl = `${playerBundleConfig.bundlerUrl}/p/${
+      playerBundleConfig.partnerId
+    }/embedPlaykitJs/uiconf_id/${playerBundleConfig.uiConfId}`;
 
-    if (bundleLoadingStatus === PlayerBundleStatuses.Loading) {
+    if (playerBundleStatus === PlayerBundleStatuses.Loading) {
       if (currentPlayerBundlerUrl && currentPlayerBundlerUrl !== playerBundlerUrl) {
         updateStatus({ type: PlayerBundleStatuses.Error });
         console.warn(`It is not allowed to create multiple players'
@@ -122,16 +122,16 @@ export const useLoadPlayerBundler = (options: {
 
       loadPlayerIntoSession(
         currentPlayerBundlerUrl,
-        (bundleLoadingStatus: PlayerBundleStatuses) => {
-          if (!unmounted.current) updateStatus({ type: bundleLoadingStatus });
+        (playerBundleStatus: PlayerBundleStatuses) => {
+          if (!unmounted.current) updateStatus({ type: playerBundleStatus });
         }
       );
     }
-  }, [autoLoad, bundleConfig, bundleLoadingStatus, updateStatus]);
+  }, [autoLoad, playerBundleConfig, playerBundleStatus, updateStatus]);
 
   const loadPlayerBundler = useCallback(() => {
     updateStatus({ type: PlayerBundleStatuses.Loading });
   }, []);
 
-  return {bundleLoadingStatus, loadPlayerBundler};
+  return {playerBundleStatus, loadPlayerBundler};
 };

@@ -74,7 +74,7 @@ export interface SeekOptions {
   pause: boolean;
 }
 
-export interface KalturaPlayerBundleConfig {
+export interface PlayerBundleConfig {
   ks?: string;
   bundlerUrl?: string;
   partnerId?: string;
@@ -83,15 +83,15 @@ export interface KalturaPlayerBundleConfig {
 
 
 export interface PlayerContextValue {
-  bundleLoadingStatus: PlayerBundleStatuses;
-  bundleConfig: KalturaPlayerBundleConfig,
+  playerBundleStatus: PlayerBundleStatuses;
+  playerBundleConfig: PlayerBundleConfig,
   loadPlayerBundler: () => void;
   getPlayerCurrentTime$: (playerId: string) => Observable<number>;
   getPlayerState$: (playerId: string) => Observable<PlaybackStatuses>;
   getPlayerEvents$: (playerId: string) => Observable<PlayerEvents>;
+  getPlayerInstance: (playerId: string) => null | Record<string, any>;
   seek: (playerId: string, options: SeekOptions) => void;
   play: (playerId: string) => void;
-  getPlayerInstance: (playerId: string) => null | Record<string, any>;
   pause: (playerId: string) => void;
   registerPlayer: (
     playerId: string,
@@ -102,8 +102,8 @@ export interface PlayerContextValue {
 }
 
 export const defaultPlayerContext: PlayerContextValue = {
-  bundleLoadingStatus: PlayerBundleStatuses.Error,
-  bundleConfig: {},
+  playerBundleStatus: PlayerBundleStatuses.Error,
+  playerBundleConfig: {},
   loadPlayerBundler: () => {},
   getPlayerState$: () =>
     throwError(

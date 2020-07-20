@@ -6,7 +6,7 @@ import {
   PlayerActionTypes,
   PlayerEvents,
   SeekOptions,
-  PlaybackStatuses, KalturaPlayerBundleConfig,
+  PlaybackStatuses, PlayerBundleConfig,
 } from './kaltura-player-context';
 import { useLoadPlayerBundler } from "./use-load-player-bundler";
 import { Observable, Subject, throwError } from "rxjs";
@@ -14,13 +14,13 @@ import { Observable, Subject, throwError } from "rxjs";
 
 export interface KalturaPlayerProviderProps {
   autoLoad: boolean;
-  bundleConfig: KalturaPlayerBundleConfig;
+  playerBundleConfig: PlayerBundleConfig;
   children?: React.ReactChild;
 }
 
 export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
-  const { autoLoad, bundleConfig, children } = props;
-  const {bundleLoadingStatus, loadPlayerBundler} = useLoadPlayerBundler({ bundleConfig, autoLoad });
+  const { autoLoad, playerBundleConfig, children } = props;
+  const {playerBundleStatus, loadPlayerBundler} = useLoadPlayerBundler({ playerBundleConfig, autoLoad });
 
   const _playersRef = useRef<
     Record<
@@ -120,8 +120,8 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
     };
 
     return {
-      bundleLoadingStatus,
-      bundleConfig,
+      playerBundleStatus,
+      playerBundleConfig,
       loadPlayerBundler,
       registerPlayer,
       getPlayerCurrentTime$,
@@ -132,7 +132,7 @@ export const KalturaPlayerProvider = (props: KalturaPlayerProviderProps) => {
       pause,
       getPlayerInstance
     };
-  }, [bundleLoadingStatus, loadPlayerBundler]);
+  }, [playerBundleStatus, loadPlayerBundler]);
 
   return (
     <KalturaPlayerContext.Provider value={playerContextValue}>

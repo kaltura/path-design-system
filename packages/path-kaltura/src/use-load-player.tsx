@@ -52,7 +52,7 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
     onPlayerLoadingError
   } = options;
 
-  const { bundleLoadingStatus, bundleConfig, registerPlayer } = useContext(
+  const { playerBundleStatus, playerBundleConfig, registerPlayer } = useContext(
     KalturaPlayerContext
   );
 
@@ -279,9 +279,9 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
           targetId: playerState.playerId,
           provider: {
             ...config.provider,
-            uiConfId: bundleConfig.uiConfId,
-            partnerId: bundleConfig.partnerId,
-            ks: bundleConfig.ks
+            uiConfId: playerBundleConfig.uiConfId,
+            partnerId: playerBundleConfig.partnerId,
+            ks: playerBundleConfig.ks
           },
           plugins: {
             ...config.plugins,
@@ -340,7 +340,7 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
       }
     };
 
-    switch (bundleLoadingStatus) {
+    switch (playerBundleStatus) {
       case PlayerBundleStatuses.Loaded:
         loadPlayer();
         break;
@@ -352,7 +352,7 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
         }));
         break;
     }
-  }, [bundleLoadingStatus]);
+  }, [playerBundleStatus]);
 
   return playerState;
 };
