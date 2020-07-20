@@ -41,7 +41,6 @@ function getUniquePlayerId() {
   return `kaltura-player${uniqueIdIndex}`;
 }
 
-let bla: any = null;
 export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
   const {
     entryId,
@@ -73,11 +72,11 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
     onRemove: () => {}
   });
   const playerRef = useCallbackRef<any>(null, () => {
-    console.log('artem create');
-    bla = playerRef.current;
+
     if (!playerRef.current) {
       return;
     }
+
 
     const updatePlayerCurrentTime = () => {
       playerTimeSubjectRef.current.next(
@@ -143,7 +142,6 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
     );
 
     return () => {
-      console.log('artem destroy', { comp: bla === playerRef.current});
       if (!playerRef.current) return;
       playerRef.current.removeEventListener(
         "timeupdate",
