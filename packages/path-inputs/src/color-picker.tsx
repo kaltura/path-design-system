@@ -169,7 +169,7 @@ export function ColorPicker(props: ColorPickerProps) {
   };
 
   const paletteContainer = (
-    <SketchPicker color={color} onChange={handleChange} />
+    <SketchPicker width={250} color={color} onChange={handleChange} />
   );
 
   return (
