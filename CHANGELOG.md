@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.4](https://github.com/kaltura/path-design-system/compare/v3.19.3...v3.19.4) (2020-07-21)
+
+
+### Bug Fixes
+
+* kaltura player memory leak issues ([#175](https://github.com/kaltura/path-design-system/issues/175)) ([913e9dd](https://github.com/kaltura/path-design-system/commit/913e9dd1cc1e5268c3a650137ad1f306443367e3))
+
+
+
+
+
 ## [3.19.3](https://github.com/kaltura/path-design-system/compare/v3.19.2...v3.19.3) (2020-07-19)
 
 
