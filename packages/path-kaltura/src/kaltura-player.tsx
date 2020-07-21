@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createUseStyles, Theme, theming} from "@kaltura-react-ui-kits/path-theming";
-import {useLoadMedia} from "./use-load-media";
-import {PlayerLoadingStatuses} from "./kaltura-player-context";
+import {useLoadPlayer} from "./use-load-player";
+import {PlayerStatuses} from "./kaltura-player-context";
 
 export interface KalturaPlayerProps {
   /**
@@ -68,7 +68,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   }
 }),  { theming });
 
-export const LadingBundlerErrorMsg = 'Oops, failed to load kaltura player bundler';
+export const PlayerErrorMessage = 'Oops, failed to load the player';
 
 export const KalturaPlayer = (props: KalturaPlayerProps) => {
 
@@ -79,16 +79,16 @@ export const KalturaPlayer = (props: KalturaPlayerProps) => {
     customizeConfig,
     onMediaLoadingError, onMediaLoaded} = props;
 
-  const {playerId, playerStatus} = useLoadMedia(
+  const {playerId, playerStatus} = useLoadPlayer(
     {autoplay, entryId, onPlayerLoadingError,
       onPlayerLoaded, onMediaLoadingError, onMediaLoaded, customizeConfig
     });
 
   return (
     <>
-      {playerStatus === PlayerLoadingStatuses.Error
+      {playerStatus === PlayerStatuses.Error
         ? (<div className={classes.scriptErrorContainer}>
-          <div className={classes.scriptsErrorMsg}>{LadingBundlerErrorMsg}</div>
+          <div className={classes.scriptsErrorMsg}>{PlayerErrorMessage}</div>
         </div>)
 
         : (<div id={playerId} className={classes.kalturaPlayer}></div>)

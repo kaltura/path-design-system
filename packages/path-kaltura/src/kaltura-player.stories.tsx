@@ -33,7 +33,7 @@ export const Default: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider config={{
+    <KalturaPlayerProvider playerBundleConfig={{
       ks:ks,
       partnerId: partnerId,
       uiConfId: uiConfId,
@@ -60,8 +60,8 @@ export const KalturaPlayerAutoPlay: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -87,8 +87,8 @@ export const KalturaPlayerWithoutAutoPlay: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -117,8 +117,8 @@ export const kalturaPlayerErrorLoadingBundler: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -149,8 +149,8 @@ export const MultiplePlayersInPage: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -181,71 +181,19 @@ MultiplePlayersInPage.story = {
   }
 };
 
-const LoadPlayerBundlerComponent = (props: {label: string}) => {
-
-  const classes = useStyle();
-
-  const kalturaPlayer = useContext(KalturaPlayerContext);
-
-  const startLoadingBundler = () => {
-    if(kalturaPlayer.loadPlayer)
-      kalturaPlayer.loadPlayer();
-  };
-
-  return (
-    <Button className={classes.loadScriptsButton}
-            label={props.label}
-            onClick={startLoadingBundler}></Button>
-  );
-};
-
-export const ManuallyLoadPlayerBundlerScripts: Story = () => {
-  const classes = useStyle();
-
-  return (
-    <>
-      <KalturaPlayerProvider autoLoad={false}
-                             config={{
-                              ks:ks,
-                              partnerId: partnerId,
-                              uiConfId: uiConfId,
-                              bundlerUrl: bunderlUrl
-                            }}>
-        <>
-          <LoadPlayerBundlerComponent label={'load player bundler'}/>
-          <div className={classes.playerContainer}>
-            <KalturaPlayer entryId={entryId}
-                           autoplay={false}
-                           onMediaLoaded={(entryId) => console.log(entryId)}/>
-          </div>
-        </>
-      </KalturaPlayerProvider>
-    </>
-  )
-};
-
-ManuallyLoadPlayerBundlerScripts.story = {
-  parameters: {
-    docs: {
-      storyDescription: `Manually load Kaltura Player bundler scripts (kaltura player manager property)`
-    }
-  }
-};
-
-
 export const TwoIdenticalPlayerProviders: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
                             bundlerUrl: bunderlUrl
                           }}>
-      <KalturaPlayerProvider autoLoad={true}
-                             config={{
+      <KalturaPlayerProvider
+                             playerBundleConfig={{
                               ks:ks,
                               partnerId: partnerId,
                               uiConfId: uiConfId,
@@ -272,10 +220,11 @@ TwoIdenticalPlayerProviders.story = {
 
 export const TowDifferentPlayerProviders: Story = () => {
   const classes = useStyle();
+  const [showSecondary, setShowSecondary] = useState(false);
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                             ks:ks,
                             partnerId: partnerId,
                             uiConfId: uiConfId,
@@ -287,22 +236,28 @@ export const TowDifferentPlayerProviders: Story = () => {
                          autoplay={false}
                          onMediaLoaded={(entryId) => console.log(entryId)}/>
         </div>
-        <KalturaPlayerProvider autoLoad={false}
-                               config={{
-                                ks:ks,
-                                partnerId: partnerId,
-                                uiConfId: uiConfId,
-                                bundlerUrl: errorBundlerUrl
-                              }}>
-          <>
-            <LoadPlayerBundlerComponent label={'try to load player with different bundler url'}/>
-            <div className={classes.playerContainer}>
-              <KalturaPlayer entryId={entryId}
-                             autoplay={false}
-                             onMediaLoaded={(entryId) => console.log(entryId)}/>
-            </div>
-          </>
-        </KalturaPlayerProvider>
+        <Button className={classes.loadScriptsButton}
+                label={'try to load player with different bundler url'}
+                onClick={() => setShowSecondary(true)}></Button>
+        {
+          showSecondary && <KalturaPlayerProvider
+            playerBundleConfig={{
+              ks: ks,
+              partnerId: partnerId,
+              uiConfId: uiConfId,
+              bundlerUrl: errorBundlerUrl
+            }}>
+            <>
+
+              <div className={classes.playerContainer}>
+                <KalturaPlayer entryId={entryId}
+                               autoplay={false}
+                               onMediaLoaded={(entryId) => console.log(entryId)}/>
+              </div>
+            </>
+          </KalturaPlayerProvider>
+        }
+        }
       </>
     </KalturaPlayerProvider>
   )
@@ -379,8 +334,8 @@ export const MultiplePlayersWithTimeAndSeekInPage: Story = () => {
 
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                              ks:ks,
                              partnerId: partnerId,
                              uiConfId: uiConfId,
@@ -466,8 +421,8 @@ export const MultiplePlayersForPlayAndPauseActions: Story = () => {
 
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                              ks:ks,
                              partnerId: partnerId,
                              uiConfId: uiConfId,
@@ -542,8 +497,8 @@ export const MultiplePlayersForPlayerStateUpdate: Story = () => {
 
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                              ks:ks,
                              partnerId: partnerId,
                              uiConfId: uiConfId,
@@ -586,8 +541,8 @@ export const KalturaPlayerWorkshopForTesting: Story = () => {
   const classes = useStyle();
 
   return (
-    <KalturaPlayerProvider autoLoad={true}
-                           config={{
+    <KalturaPlayerProvider
+                           playerBundleConfig={{
                              ks:workshopKs,
                              partnerId: partnerId,
                              uiConfId: uiConfId,

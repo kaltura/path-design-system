@@ -2,56 +2,52 @@ interface FakeEvent {}
 
 type CoreEventListener = (event: FakeEvent) => boolean | void;
 
-type PlayerEventTypes = 'timeupdate' | 'playerstatechanged' | 'firstplaying';
-
-type PlayerStateTypes = 'paused' | 'playing' | 'loading' | 'idle' | 'buffering' | 'error';
-
-type PlayerStateChangeEvent = {
+ type PlayerStateChangeEvent = {
   payload: {
     newState: {
-      type: PlayerStateTypes
-    },
+      type: string;
+    };
     oldState: {
-      type: PlayerStateTypes
-    }
-  }
+      type: string;
+    };
+  };
+};
+
+ type KalturaPlayerManager = {
+  setup: (KalturaPlayerConfig) => Player;
+};
+
+ interface KalturaPlayerConfig {
+  targetId: string;
+  playback: PlaybackConfig;
+  provider: ProviderOptionsObject;
 }
 
-declare namespace KalturaPlayerTypes {
+ interface PlaybackConfig {
+  autoplay: boolean;
+}
 
-  export interface KalturaPlayerManager {
-    setup: (KalturaPlayerConfig) => Player;
-  }
+ interface ProviderOptionsObject {
+  partnerId: string;
+  ks: string;
+  uiConfId: string;
+}
 
-  export interface KalturaPlayerConfig {
-    targetId: string,
-    playback: PlaybackConfig,
-    provider: ProviderOptionsObject,
-  }
+ interface MediaInfoObject {
+  entryId: string;
+  ks?: string;
+}
 
-  export interface PlaybackConfig {
-    autoplay: boolean
-  }
-
-  export interface ProviderOptionsObject {
-    partnerId: string,
-    ks: string,
-    uiConfId: string
-  }
-
-  export interface MediaInfoObject {
-    entryId: string,
-    ks?: string
-  }
-
-  export interface Player {
-    addEventListener(type: PlayerEventTypes, listener: CoreEventListener): void;
-    removeEventListener: (type: PlayerEventTypes, listener: CoreEventListener) => void;
-    currentTime: number;
-    Event: Record<string, string>;
-    loadMedia(mediaInfo: MediaInfoObject): Promise;
-    pause(): void;
-    play(): void;
-    destroy(): void;
-  }
+ interface Player {
+  addEventListener(type: PlayerEventTypes, listener: CoreEventListener): void;
+  removeEventListener: (
+    type: string,
+    listener: CoreEventListener
+  ) => void;
+  currentTime: number;
+  Event: Record<string, string>;
+  loadMedia(mediaInfo: MediaInfoObject): Promise<any>;
+  pause(): void;
+  play(): void;
+  destroy(): void;
 }
