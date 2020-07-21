@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.5](https://github.com/kaltura/path-design-system/compare/v3.19.4...v3.19.5) (2020-07-21)
+
+
+### Bug Fixes
+
+* set rxjs as external dependency ([b6a672b](https://github.com/kaltura/path-design-system/commit/b6a672ba0986aafe8f328ab9af6b09858c6b73cb))
+
+
+
+
+
 ## [3.19.4](https://github.com/kaltura/path-design-system/compare/v3.19.3...v3.19.4) (2020-07-21)
 
 
