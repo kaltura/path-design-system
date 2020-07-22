@@ -39,7 +39,7 @@ type CoreEventListener = (event: FakeEvent) => boolean | void;
 }
 
  interface Player {
-  addEventListener(type: PlayerEventTypes, listener: CoreEventListener): void;
+  addEventListener(type: string, listener: CoreEventListener): void;
   removeEventListener: (
     type: string,
     listener: CoreEventListener
