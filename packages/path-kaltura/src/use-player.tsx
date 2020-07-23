@@ -53,9 +53,18 @@ export const usePlayer = (playerId: string) => {
           return;
         }
         playerContext.pause(playerIdRef.current)
+      },
+      getPlayerInstance: () => {
+        if (!validate()) {
+          return null;
+        }
+
+        return new KalturaPlayerUtils(
+          playerIdRef.current
+        ).getInstance();
       }
     }
-  }, [playerId]);
+  }, [playerContext]);
 
   return result;
 };

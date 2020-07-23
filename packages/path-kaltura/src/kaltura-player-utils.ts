@@ -17,6 +17,10 @@ export class KalturaPlayerUtils {
 
   }
 
+  getInstance() {
+    return this._getPlayerInstance();
+  }
+
   getVideoDimensions() : null | { width: number, height: number }{
     const playerInstance = this._getPlayerInstance();
 

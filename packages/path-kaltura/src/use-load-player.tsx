@@ -41,6 +41,8 @@ function getUniquePlayerId() {
   return `kaltura-player${uniqueIdIndex}`;
 }
 
+const acceptedPlaybackStatusesValues: string[] = Object.keys(PlaybackStatuses).map(key => (PlaybackStatuses as any)[key]);
+
 export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
   const {
     entryId,
@@ -86,7 +88,7 @@ export const useLoadPlayer = (options: UseLoadPlayerOptions): PlayerState => {
 
     const updatePlayerState = (e: PlayerStateChangeEvent) => {
       const playbackStatus = e.payload.newState.type;
-      if (!PlaybackStatuses[playbackStatus]) {
+      if (acceptedPlaybackStatusesValues.indexOf(playbackStatus) === -1) {
         console.warn(`Kaltura player emitted unknown state ${playbackStatus}. Ignoring the mentioned state`);
         return;
       }
