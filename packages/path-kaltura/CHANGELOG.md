@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.19.6](https://github.com/kaltura/path-design-system/compare/v3.19.5...v3.19.6) (2020-07-23)
+
+
+### Bug Fixes
+
+* emit player state changes ([14b19fc](https://github.com/kaltura/path-design-system/commit/14b19fc6f0eba2e0fd403f001b8bac8ea100e30d))
+
+
+
+
+
 ## [3.19.5](https://github.com/kaltura/path-design-system/compare/v3.19.4...v3.19.5) (2020-07-21)
 
 
