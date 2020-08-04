@@ -2,7 +2,8 @@ import * as React from 'react';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { CSSProperties, useEffect, useState } from 'react';
+import {CSSProperties, useEffect, useMemo, useState} from 'react';
+import {getDataOrAriaProps} from "./utils";
 
 const classNames = require('classnames');
 
@@ -52,6 +53,10 @@ export interface ButtonProps {
    * @default undefined
    */
   style?: CSSProperties;
+  /**
+   * Optional aria attributes
+   */
+  ariaAttributes: Record<string, string>
 }
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
@@ -232,7 +237,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
  */
 export function Button(props: ButtonProps) {
   const classes = useStyles(props);
-  const { label, disabled, onClick, icon, isProcessing, className, style, type } = props;
+  const { label, disabled, onClick, icon, isProcessing, className, style, type, ariaAttributes } = props;
   const isCTA = type === 'cta';
   const isBorderLess = type === 'borderless';
   const [isDisabled, setIsDisabled] = useState(false);
@@ -266,8 +271,19 @@ export function Button(props: ButtonProps) {
     [classes.fadeOut]: props.isProcessing,
   });
 
+  const ariaAttr = useMemo(() => {
+    return {
+      'aria-label': label,
+      ...getDataOrAriaProps(ariaAttributes)
+    }
+  }, [ariaAttributes]);
+
   return (
-    <AntButton className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
+    <AntButton className={btnClass}
+               disabled={isDisabled}
+               style={style}
+               onClick={onClick}
+               {...ariaAttr}>
       <div className={btnContentClass}>
         {icon ? withClassName(icon, iconClass) : null}
         {!isProcessing
@@ -275,16 +291,18 @@ export function Button(props: ButtonProps) {
           : isCTA && !isDisabled
             ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
             : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
-        <span className={labelClass}>{label}</span>
+        <span className={labelClass} aria-hidden={true}>{label}</span>
       </div>
     </AntButton>
   )
 }
 
 Button.defaultProps = {
+  label: '',
   disabled: false,
   type: 'default',
   isActive: false,
   isProcessing:false,
   layout:'horizontal',
+  ariaAttributes: {}
 };
