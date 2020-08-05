@@ -53,9 +53,13 @@ export interface ButtonProps {
    * @default undefined
    */
   style?: CSSProperties;
-}
 
-type AgregatedButtonProps = Omit<NativeButtonProps, keyof ButtonProps | 'children'> & ButtonProps;
+  /**
+   * Native HTMLButton Props
+   * @default undefined
+   */
+  nativeButtonProps?: NativeButtonProps;
+}
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
   return React.cloneElement(element, { className });
@@ -68,7 +72,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       'transition': 'none'
     }
   },
-  'btn': (props: AgregatedButtonProps) => ({
+  'btn': (props: ButtonProps) => ({
     height: props.layout === 'vertical' ? '60px' : '32px',
     minWidth: props.layout === 'vertical' ? '80px' : '34px',
     boxShadow: 'none',
@@ -78,7 +82,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
     fontWeight: theme.button.fontWeight,
     borderRadius: theme.button.borderRadius,
   }),
-  'btnDefault': (props: AgregatedButtonProps) => ({
+  'btnDefault': (props: ButtonProps) => ({
     '&:focus': {
       backgroundColor: '#ffffff',
       border: `thin solid ${theme.colors.grayscale4}`,
@@ -107,7 +111,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       backgroundColor: 'transparent'
     },
   }),
-  'btnCTA': (props: AgregatedButtonProps) => ({
+  'btnCTA': (props: ButtonProps) => ({
     boxShadow: 'none',
     color: '#ffffff',
     backgroundColor: '#008297',
@@ -138,7 +142,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
       backgroundColor: 'transparent'
     },
   }),
-  'btnBorderless': (props: AgregatedButtonProps) => ({
+  'btnBorderless': (props: ButtonProps) => ({
     color: theme.colors.grayscale1,
     backgroundColor: 'transparent',
     border: 'none',
@@ -204,7 +208,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
   'btnIconOnly': {
     padding: '0px 0px !important',
   },
-  'btnContent': (props: AgregatedButtonProps) => ({
+  'btnContent': (props: ButtonProps) => ({
     display: 'flex',
     flexDirection: props.layout === 'vertical' ? 'column' : 'row',
     alignItems: 'center',
@@ -233,9 +237,9 @@ const useStyles = createUseStyles((theme: Theme) => ({
 /**
  * A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
  */
-export function Button(props: AgregatedButtonProps) {
+export function Button(props: ButtonProps) {
   const classes = useStyles(props);
-  const { label, disabled, onClick, icon, isProcessing, className, style, type, ...buttonAttributes } = props;
+  const { label, disabled, onClick, icon, isProcessing, className, style, type, nativeButtonProps } = props;
   const isCTA = type === 'cta';
   const isBorderLess = type === 'borderless';
   const [isDisabled, setIsDisabled] = useState(false);
@@ -270,7 +274,7 @@ export function Button(props: AgregatedButtonProps) {
   });
 
   return (
-    <AntButton className={btnClass} disabled={isDisabled} style={style} onClick={onClick} {...buttonAttributes}>
+    <AntButton {...nativeButtonProps} className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
       <div className={btnContentClass}>
         {icon ? withClassName(icon, iconClass) : null}
         {!isProcessing
