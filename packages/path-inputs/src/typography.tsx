@@ -2,6 +2,8 @@ import * as React from 'react';
 import Paragraph from "antd/lib/typography/Paragraph";
 import 'antd/dist/antd.css';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
+import {useMemo} from "react";
+import {getDataOrAriaProps} from "./utils";
 const classNames = require('classnames');
 
 export enum TypographyTypes {
@@ -55,6 +57,11 @@ export interface TypographyProps {
    * Classname for external style
    */
   className?: string;
+  /**
+   * Optional aria attributes
+   */
+  ariaAttributes: Record<string, string>
+
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -147,14 +154,23 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
 export const Typography = (props: TypographyProps) => {
 
-  const {text, type, rows, ellipsis, expandable, className, allowUserSelect} = props;
+  const {text, type, rows, ellipsis, expandable, className, allowUserSelect, ariaAttributes} = props;
 
   const classes = useStyles(props);
 
   const ellipsisAttr = ellipsis ? {rows, expandable} : false;
 
+  const ariaAttr = useMemo(() => {
+    return {
+      'aria-label': text,
+      'role': 'text',
+      ...getDataOrAriaProps(ariaAttributes)
+    }
+  }, [ariaAttributes]);
+
   return (
     <Paragraph
+      {...ariaAttr}
       style={{
         userSelect: allowUserSelect ? 'auto': 'none'
       }}
@@ -180,6 +196,7 @@ export const Typography = (props: TypographyProps) => {
 };
 
 Typography.defaultProps = {
+  ariaAttributes: {},
   ellipsis: true,
   rows: 1,
   type: TypographyTypes.Label14,
