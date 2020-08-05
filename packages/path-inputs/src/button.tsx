@@ -3,7 +3,7 @@ import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-the
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { CSSProperties, useEffect, useState } from 'react';
-import { ButtonProps as AntButtonProps } from 'antd/lib/button';
+import { NativeButtonProps } from 'antd/lib/button/button';
 
 const classNames = require('classnames');
 
@@ -55,7 +55,7 @@ export interface ButtonProps {
   style?: CSSProperties;
 }
 
-type AgregatedButtonProps = Omit<AntButtonProps, keyof ButtonProps | 'children'> & ButtonProps;
+type AgregatedButtonProps = Omit<NativeButtonProps, keyof ButtonProps | 'children'> & ButtonProps;
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
   return React.cloneElement(element, { className });

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CSSProperties, useEffect, useState } from 'react';
 import { Button, ButtonProps } from './button';
-import { ButtonProps as AntButtonProps } from 'antd/lib/button';
+import { NativeButtonProps } from 'antd/lib/button/button';
 
 export type ToggleButtonProps = {
   /** Label of the button
@@ -48,7 +48,7 @@ export type ToggleButtonProps = {
 /**
  * Toggle buttons are buttons that are changing a binary state of a single parameter.
  */
-export function ToggleButton(props: Omit<AntButtonProps, keyof ButtonProps> & ToggleButtonProps) {
+export function ToggleButton(props: Omit<NativeButtonProps, keyof ButtonProps> & ToggleButtonProps) {
   const {isActive, defaultActive, onChange, disabled} = props;
   const [isControlled] = useState(typeof isActive === 'boolean');
   const [active, setActive] = useState(
