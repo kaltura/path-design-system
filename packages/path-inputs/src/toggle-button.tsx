@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { CSSProperties, useEffect, useState } from 'react';
-import {Button} from './button';
+import { Button } from './button';
+import { NativeButtonProps } from 'antd/lib/button/button';
 
 export type ToggleButtonProps = {
   /** Label of the button
@@ -42,6 +43,12 @@ export type ToggleButtonProps = {
    * Optional styles of the button
    */
   style?: CSSProperties;
+
+  /**
+   * Native HTMLButton Props
+   * @default undefined
+   */
+  nativeButtonProps?: NativeButtonProps;
 };
 
 /**
@@ -54,11 +61,11 @@ export function ToggleButton(props: ToggleButtonProps) {
     (typeof isActive === 'boolean' ? isActive : defaultActive) || false
   );
 
-  useEffect(() => {  
+  useEffect(() => {
     if (!isControlled) {
       return;
     }
-    
+
     setActive(isActive || false);
   }, [isActive]);
 

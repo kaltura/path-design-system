@@ -3,6 +3,7 @@ import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-the
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
 import { CSSProperties, useEffect, useState } from 'react';
+import { NativeButtonProps } from 'antd/lib/button/button';
 
 const classNames = require('classnames');
 
@@ -52,6 +53,12 @@ export interface ButtonProps {
    * @default undefined
    */
   style?: CSSProperties;
+
+  /**
+   * Native HTMLButton Props
+   * @default undefined
+   */
+  nativeButtonProps?: NativeButtonProps;
 }
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
@@ -232,7 +239,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
  */
 export function Button(props: ButtonProps) {
   const classes = useStyles(props);
-  const { label, disabled, onClick, icon, isProcessing, className, style, type } = props;
+  const { label, disabled, onClick, icon, isProcessing, className, style, type, nativeButtonProps } = props;
   const isCTA = type === 'cta';
   const isBorderLess = type === 'borderless';
   const [isDisabled, setIsDisabled] = useState(false);
@@ -267,7 +274,7 @@ export function Button(props: ButtonProps) {
   });
 
   return (
-    <AntButton className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
+    <AntButton {...nativeButtonProps} className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
       <div className={btnContentClass}>
         {icon ? withClassName(icon, iconClass) : null}
         {!isProcessing
