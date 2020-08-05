@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.20.0](https://github.com/kaltura/path-design-system/compare/v3.19.6...v3.20.0) (2020-08-05)
+
+
+### Features
+
+* add extended buttons props for attributes capabilities ([#185](https://github.com/kaltura/path-design-system/issues/185)) ([13738e2](https://github.com/kaltura/path-design-system/commit/13738e2f007158beb88f5038f2a4121c23423255))
+
+
+
+
+
 ## [3.19.3](https://github.com/kaltura/path-design-system/compare/v3.19.2...v3.19.3) (2020-07-19)
 
 
