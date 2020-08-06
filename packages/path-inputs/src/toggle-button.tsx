@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { CSSProperties, useEffect, useState } from 'react';
-import { Button } from './button';
+import {Button} from './button';
 import { NativeButtonProps } from 'antd/lib/button/button';
 
-export type ToggleButtonProps = {
+export interface ToggleButtonBaseProps {
   /** Label of the button
    * */
   label?: string;
@@ -43,13 +43,15 @@ export type ToggleButtonProps = {
    * Optional styles of the button
    */
   style?: CSSProperties;
+}
 
+export interface ToggleButtonProps extends ToggleButtonBaseProps {
   /**
    * Native HTMLButton Props
    * @default undefined
    */
-  nativeButtonProps?: NativeButtonProps;
-};
+  nativeButtonProps?: Omit<NativeButtonProps, keyof ToggleButtonBaseProps>;
+}
 
 /**
  * Toggle buttons are buttons that are changing a binary state of a single parameter.

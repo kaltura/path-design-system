@@ -55,6 +55,10 @@ export interface TypographyProps {
    * Classname for external style
    */
   className?: string;
+  /**
+   * aria label attribute
+   */
+  ariaLabel?: string
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -147,7 +151,7 @@ const useStyles = createUseStyles((theme: Theme) => ({
 
 export const Typography = (props: TypographyProps) => {
 
-  const {text, type, rows, ellipsis, expandable, className, allowUserSelect} = props;
+  const {text, type, rows, ellipsis, expandable, className, allowUserSelect, ariaLabel} = props;
 
   const classes = useStyles(props);
 
@@ -158,6 +162,7 @@ export const Typography = (props: TypographyProps) => {
       style={{
         userSelect: allowUserSelect ? 'auto': 'none'
       }}
+      aria-label={ariaLabel}
       className={classNames(
         {
           [classes.fontStyle]: true,
