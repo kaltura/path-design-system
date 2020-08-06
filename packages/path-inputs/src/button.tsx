@@ -7,7 +7,7 @@ import { NativeButtonProps } from 'antd/lib/button/button';
 
 const classNames = require('classnames');
 
-export interface ButtonProps {
+export interface ButtonBaseProps {
   /** Label of the button
    * @default undefined
    * */
@@ -53,12 +53,14 @@ export interface ButtonProps {
    * @default undefined
    */
   style?: CSSProperties;
+}
 
+export interface ButtonProps extends ButtonBaseProps{
   /**
    * Native HTMLButton Props
    * @default undefined
    */
-  nativeButtonProps?: NativeButtonProps;
+  nativeButtonProps?: Omit<NativeButtonProps, keyof ButtonBaseProps>;
 }
 
 const withClassName = (element: React.ReactElement, className: string = '') => {
