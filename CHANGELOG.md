@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.21.0](https://github.com/kaltura/path-design-system/compare/v3.20.0...v3.21.0) (2020-08-06)
+
+
+### Features
+
+* add aria label to typography PATH-976 ([#187](https://github.com/kaltura/path-design-system/issues/187)) ([3d50aae](https://github.com/kaltura/path-design-system/commit/3d50aae90618818e982c0a6ca88efc628b5f0872))
+
+
+
+
+
 # [3.20.0](https://github.com/kaltura/path-design-system/compare/v3.19.6...v3.20.0) (2020-08-05)
 
 
