@@ -75,6 +75,10 @@ export interface SliderProps {
    * Additional className for styling of slider container
    */
   className?: string;
+  /**
+   * aria label attribute
+   */
+  ariaLabel?: string
 }
 
 const prefixCls = 'path-slider';
@@ -260,7 +264,8 @@ export const Slider: FunctionComponent<SliderProps> = (props: SliderProps) => {
     onChange,
     onAfterChange,
     showTooltip,
-    className
+    className,
+    ariaLabel
   } = props;
   const classes = useStyles();
   const sliderProps = {
@@ -281,7 +286,7 @@ export const Slider: FunctionComponent<SliderProps> = (props: SliderProps) => {
   }
 
   return (
-    <div className={classNames(classes.container, className)}>
+    <div className={classNames(classes.container, className)} aria-label={ariaLabel}>
       {affixContent && <div className={classes.affix}>{affixContent}</div>}
       {
         showTooltip
