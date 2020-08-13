@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.22.0](https://github.com/kaltura/path-design-system/compare/v3.21.0...v3.22.0) (2020-08-13)
+
+
+### Features
+
+* add icons for style presets ([64a1a69](https://github.com/kaltura/path-design-system/commit/64a1a6930899e94a5506c63f6b1085f0a8a606c1))
+
+
+
+
+
 # [3.19.0](https://github.com/kaltura/path-design-system/compare/v3.18.0...v3.19.0) (2020-07-01)
 
 
