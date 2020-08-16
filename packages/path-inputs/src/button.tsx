@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createUseStyles, theming, Theme } from '@kaltura-react-ui-kits/path-theming';
 import { Button as AntButton } from 'antd';
 import { SpinnerBright24Icon, SpinnerDark24Icon } from '@kaltura-react-ui-kits/path-icons';
-import { CSSProperties, useEffect, useState } from 'react';
+import {CSSProperties, useEffect, useMemo, useState} from 'react';
 import { NativeButtonProps } from 'antd/lib/button/button';
 
 const classNames = require('classnames');
@@ -275,8 +275,14 @@ export function Button(props: ButtonProps) {
     [classes.fadeOut]: props.isProcessing,
   });
 
+  const buttonAriaLabel = useMemo(() => {
+    if (!nativeButtonProps) return label;
+    const {'aria-label' : nativeAriaLabel } = nativeButtonProps;
+    return nativeAriaLabel ? nativeAriaLabel : label;
+  }, [label, nativeButtonProps]);
+
   return (
-    <AntButton {...nativeButtonProps} className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
+    <AntButton {...nativeButtonProps} aria-label={buttonAriaLabel} className={btnClass} disabled={isDisabled} style={style} onClick={onClick}>
       <div className={btnContentClass}>
         {icon ? withClassName(icon, iconClass) : null}
         {!isProcessing
@@ -284,7 +290,7 @@ export function Button(props: ButtonProps) {
           : isCTA && !isDisabled
             ? <SpinnerDark24Icon className={spinnerIconClass} spin/>
             : <SpinnerBright24Icon className={spinnerIconClass} spin/>}
-        <span className={labelClass}>{label}</span>
+        <span aria-hidden={"true"} className={labelClass}>{label}</span>
       </div>
     </AntButton>
   )
