@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.23.0](https://github.com/kaltura/path-design-system/compare/v3.22.0...v3.23.0) (2020-08-16)
+
+
+### Features
+
+* add aria label support for slider text input and time input PATH-983 ([#190](https://github.com/kaltura/path-design-system/issues/190)) ([351b766](https://github.com/kaltura/path-design-system/commit/351b766e99f1b5800d539dc0767d5187df7dcf6d))
+* adjust button aria label for screen readers PATH-976 ([#189](https://github.com/kaltura/path-design-system/issues/189)) ([69d90f1](https://github.com/kaltura/path-design-system/commit/69d90f1f6d25678fd7754b62778bcea0cc687346))
+
+
+
+
+
 # [3.22.0](https://github.com/kaltura/path-design-system/compare/v3.21.0...v3.22.0) (2020-08-13)
 
 **Note:** Version bump only for package @kaltura-react-ui-kits/path-inputs
