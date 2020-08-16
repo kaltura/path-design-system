@@ -90,6 +90,10 @@ export interface TextInputProps {
    * Event callback which is triggered after a user have blur the input field
    * */
   onBlur?: () => void;
+  /**
+   * aria label attribute
+   */
+  ariaLabel?: string
 }
 
 const useStyles = createUseStyles((theme: Theme) => ({
@@ -220,6 +224,7 @@ export const TextInput = (props: TextInputProps) => {
     hasError = false,
     onFocus,
     onBlur,
+    ariaLabel
   } = props;
   const classes = useStyles(props);
   const innerRef = useRef<Input | null>(null);
@@ -297,6 +302,7 @@ export const TextInput = (props: TextInputProps) => {
              placeholder={placeholder}
              onFocus={onFocusHandler}
              onBlur={onBlurHandler}
+             aria-label={ariaLabel}
              onChange={onChange}/>
       {renderAffix({ element: postContent, className: suffixClass })}
         </span>

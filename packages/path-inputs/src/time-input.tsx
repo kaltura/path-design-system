@@ -285,6 +285,10 @@ export interface TimeInputProps {
    * @default 'large'
    */
   size?: 'large' | 'small';
+  /**
+   * aria label attribute
+   */
+  ariaLabel?: string
 }
 
 export const TimeInput = (props: TimeInputProps) => {
