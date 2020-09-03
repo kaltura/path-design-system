@@ -4,8 +4,8 @@
     "outDir": "dist"
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "../../libs/path-inputs/src/**/*.ts",
+    "../../libs/path-inputs/src/**/*.tsx",
     "../../typings.d.ts"
   ]
 }

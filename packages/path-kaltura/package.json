@@ -24,8 +24,8 @@
     "test:watch": "react-scripts-ts test --env=jsdom",
     "build": "rimraf dist && rollup -c",
     "start": "rollup -c -w",
-    "lint:js": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
-    "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"
+    "lint:js": "tsc --noEmit && eslint ../../libs/path-kaltura/src --ext .ts,.tsx",
+    "lint:js:fix": "tsc --noEmit && eslint ../../libs/path-kaltura/src --ext .ts,.tsx --fix"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",

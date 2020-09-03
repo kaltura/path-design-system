@@ -6,7 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import {Button} from "@kaltura-react-ui-kits/path-inputs";
 import {useContext, useEffect, useState} from "react";
 import {KalturaPlayerContext} from "./kaltura-player-context";
-import '../kaltura-player.css';
+import '../../../packages/path-kaltura/kaltura-player.css';
 
 
 const useStyle = createUseStyles({

@@ -3,5 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "../../libs/path-icons/src/**/*.ts",
+    "../../libs/path-icons/src/**/*.tsx"
+  ]
 }

@@ -22,12 +22,12 @@
     "analyze": "npm run build && npx source-map-explorer dist/index.js",
     "build": "rimraf dist && rollup -c",
     "start": "rollup -c -w",
-    "build:icons": "rimraf src && npm run build:icons:flat && npm run build:icons:twoTones && npm run build:icons:storybook",
-    "build:icons:flat": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/flat --is-flat",
-    "build:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ./src --svg-dir ./assets/svgs/twoTone",
-    "build:icons:storybook": "babel-node --config-file ./babel-builder.config.js builder/builder-story.js --output-dir ./src --icons-dir ./src",
-    "lint:js": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
-    "lint:js:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix"
+    "build:icons": "rimraf ../../libs/path-icons/src && npm run build:icons:flat && npm run build:icons:twoTones && npm run build:icons:storybook",
+    "build:icons:flat": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ../../libs/path-icons/src --svg-dir ../../libs/path-icons/assets/svgs/flat --is-flat",
+    "build:icons:twoTones": "babel-node --config-file ./babel-builder.config.js builder/builder.js --output-dir ../../libs/path-icons/src --svg-dir ../../libs/path-icons/assets/svgs/twoTone",
+    "build:icons:storybook": "babel-node --config-file ./babel-builder.config.js ../../libs/path-icons/builder/builder-story.js --output-dir ../../libs/path-icons/src --icons-dir ./src",
+    "lint:js": "tsc --noEmit && eslint ../../libs/path-icons/src --ext .ts,.tsx",
+    "lint:js:fix": "tsc --noEmit && eslint ../../libs/path-icons/src --ext .ts,.tsx --fix"
   },
   "peerDependencies": {
     "antd": "3.25.0",
