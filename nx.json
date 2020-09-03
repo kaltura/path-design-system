@@ -1,0 +1,48 @@
+{
+  "npmScope": "kaltura-path-ui-kit",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "NGZmN2U5OWUtYjVjNS00NmVjLThlYTMtZWRiMTNiY2U5YzRmfHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "kaltura-path": {
+      "tags": []
+    },
+    "kaltura-path-e2e": {
+      "tags": [],
+      "implicitDependencies": ["kaltura-path"]
+    },
+    "path-inputs": {
+      "tags": []
+    },
+    "path-kaltura": {
+      "tags": []
+    },
+    "path-theming": {
+      "tags": []
+    },
+    "path-icons": {
+      "tags": []
+    }
+  }
+}

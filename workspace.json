@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "projects": {
+    "kaltura-path": {
+      "root": "apps/kaltura-path",
+      "sourceRoot": "apps/kaltura-path/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/kaltura-path",
+            "index": "apps/kaltura-path/src/index.html",
+            "main": "apps/kaltura-path/src/main.tsx",
+            "polyfills": "apps/kaltura-path/src/polyfills.ts",
+            "tsConfig": "apps/kaltura-path/tsconfig.app.json",
+            "assets": [
+              "apps/kaltura-path/src/favicon.ico",
+              "apps/kaltura-path/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/kaltura-path/src/environments/environment.ts",
+                  "with": "apps/kaltura-path/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "kaltura-path:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "kaltura-path:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/kaltura-path/tsconfig.app.json",
+              "apps/kaltura-path/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/kaltura-path/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/kaltura-path/jest.config.js",
+            "tsConfig": "apps/kaltura-path/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "kaltura-path-e2e": {
+      "root": "apps/kaltura-path-e2e",
+      "sourceRoot": "apps/kaltura-path-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/kaltura-path-e2e/cypress.json",
+            "tsConfig": "apps/kaltura-path-e2e/tsconfig.e2e.json",
+            "devServerTarget": "kaltura-path:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "kaltura-path:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["apps/kaltura-path-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/kaltura-path-e2e/**/*"]
+          }
+        }
+      }
+    },
+    "path-inputs": {
+      "root": "libs/path-inputs",
+      "sourceRoot": "libs/path-inputs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/path-inputs/tsconfig.lib.json",
+              "libs/path-inputs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/path-inputs/**/*"]
+          }
+        },
+        "build": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/path-inputs",
+            "tsConfig": "libs/path-inputs/tsconfig.lib.json",
+            "project": "libs/path-inputs/package.json",
+            "entryFile": "libs/path-inputs/src/index.ts",
+            "external": ["react", "react-dom", "styled-jsx"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/path-inputs/jest.config.js",
+            "tsConfig": "libs/path-inputs/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "path-kaltura": {
+      "root": "libs/path-kaltura",
+      "sourceRoot": "libs/path-kaltura/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/path-kaltura/tsconfig.lib.json",
+              "libs/path-kaltura/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/path-kaltura/**/*"]
+          }
+        },
+        "build": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/path-kaltura",
+            "tsConfig": "libs/path-kaltura/tsconfig.lib.json",
+            "project": "libs/path-kaltura/package.json",
+            "entryFile": "libs/path-kaltura/src/index.ts",
+            "external": ["react", "react-dom", "styled-jsx"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/path-kaltura/jest.config.js",
+            "tsConfig": "libs/path-kaltura/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "path-theming": {
+      "root": "libs/path-theming",
+      "sourceRoot": "libs/path-theming/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/path-theming/tsconfig.lib.json",
+              "libs/path-theming/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/path-theming/**/*"]
+          }
+        },
+        "build": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/path-theming",
+            "tsConfig": "libs/path-theming/tsconfig.lib.json",
+            "project": "libs/path-theming/package.json",
+            "entryFile": "libs/path-theming/src/index.ts",
+            "external": ["react", "react-dom", "styled-jsx"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/path-theming/jest.config.js",
+            "tsConfig": "libs/path-theming/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "path-icons": {
+      "root": "libs/path-icons",
+      "sourceRoot": "libs/path-icons/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/path-icons/tsconfig.lib.json",
+              "libs/path-icons/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/path-icons/**/*"]
+          }
+        },
+        "build": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/path-icons",
+            "tsConfig": "libs/path-icons/tsconfig.lib.json",
+            "project": "libs/path-icons/package.json",
+            "entryFile": "libs/path-icons/src/index.ts",
+            "external": ["react", "react-dom", "styled-jsx"],
+            "babelConfig": "@nrwl/react/plugins/bundle-babel",
+            "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": ".",
+                "output": "."
+              }
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/path-icons/jest.config.js",
+            "tsConfig": "libs/path-icons/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "schematics": {
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-jsx",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "styled-jsx"
+      },
+      "library": {
+        "style": "styled-jsx",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "kaltura-path"
+}
